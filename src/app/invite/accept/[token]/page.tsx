@@ -20,7 +20,7 @@ export default async function AdminInviteAcceptPage({
           <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center text-white font-black text-2xl">
             旅
           </div>
-          <div className="text-white font-black text-xl">たびタネ 管理者サイト</div>
+          <div className="text-white font-black text-xl">しおりえ 管理者サイト</div>
         </div>
 
         <div className="bg-white rounded-[18px] p-8 px-7.5">

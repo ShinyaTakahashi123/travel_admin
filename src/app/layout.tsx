@@ -8,8 +8,8 @@ import "./globals.css";
 // フォールバックする構成にして、ビルド時のネットワーク依存をなくしている。
 
 export const metadata: Metadata = {
-  title: "たびタネ 管理者サイト",
-  description: "たびタネプラットフォームの内部運営ツール",
+  title: "しおりえ 管理者サイト",
+  description: "しおりえプラットフォームの内部運営ツール",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
