@@ -36,7 +36,7 @@ datasource db {
 // ============================================================
 
 model Area {
-  id           String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   name         String
   level        String // "prefecture" | "area"
   parentId     String? @map("parent_id") @db.Uuid
@@ -45,11 +45,12 @@ model Area {
   parent   Area?  @relation("AreaHierarchy", fields: [parentId], references: [id])
   children Area[] @relation("AreaHierarchy")
 
-  userAccountsHome    UserAccount[]        @relation("UserHomeArea")
-  plannerAccountsHome PlannerAccount[]     @relation("PlannerHomeArea")
-  userWishlistAreas   UserWishlistArea[]
-  plannerServiceAreas PlannerServiceArea[]
-  itineraryAreas      ItineraryArea[]
+  userAccountsHome     UserAccount[]        @relation("UserHomeArea")
+  plannerAccountsHome  PlannerAccount[]     @relation("PlannerHomeArea")
+  userWishlistAreas    UserWishlistArea[]
+  plannerServiceAreas  PlannerServiceArea[]
+  itineraryAreas       ItineraryArea[]
+  itinerariesAsPrimary Itinerary[]          @relation("ItineraryPrimaryArea")
 
   @@index([parentId])
   @@map("area")
@@ -255,6 +256,7 @@ model Itinerary {
   thumbnailUrl      String?   @map("thumbnail_url")
   viewCount         BigInt    @default(0) @map("view_count")
   likeCount         BigInt    @default(0) @map("like_count") // ログイン不要の「いいね」カウンタ（お気に入りFavoriteとは別概念）
+  primaryAreaId     String?   @map("primary_area_id") @db.Uuid // 主な都道府県（複数県にまたがる場合も1つ選択。都道府県レベルのArea.idを指す）
   submittedAt       DateTime? @map("submitted_at") @db.Timestamptz
   reviewedAt        DateTime? @map("reviewed_at") @db.Timestamptz
   reviewedByAdminId String?   @map("reviewed_by_admin_id") @db.Uuid
@@ -262,8 +264,9 @@ model Itinerary {
   createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
-  plannerAccount  PlannerAccount  @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
-  reviewedByAdmin Admin?          @relation(fields: [reviewedByAdminId], references: [id])
+  plannerAccount  PlannerAccount        @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+  primaryArea     Area?                 @relation("ItineraryPrimaryArea", fields: [primaryAreaId], references: [id])
+  reviewedByAdmin Admin?                @relation(fields: [reviewedByAdminId], references: [id])
   areas           ItineraryArea[]
   tags            ItineraryTag[]
   purposeTags     ItineraryPurposeTag[]
@@ -279,6 +282,7 @@ model Itinerary {
   @@index([status, createdAt(sort: Desc)])
   @@index([status, viewCount(sort: Desc)])
   @@index([status, likeCount(sort: Desc)])
+  @@index([primaryAreaId])
   @@map("itinerary")
 }
 
@@ -477,11 +481,11 @@ model PageView {
 }
 
 model DailyMetric {
-  id                         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  metricDate                 DateTime @unique @map("metric_date") @db.Date
-  totalUserAccounts          Int      @map("total_user_accounts")
-  totalPublishedItineraries  Int      @map("total_published_itineraries")
-  pvCount                    Int      @map("pv_count")
+  id                        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  metricDate                DateTime @unique @map("metric_date") @db.Date
+  totalUserAccounts         Int      @map("total_user_accounts")
+  totalPublishedItineraries Int      @map("total_published_itineraries")
+  pvCount                   Int      @map("pv_count")
 
   @@map("daily_metric")
 }
