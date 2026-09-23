@@ -65,6 +65,16 @@ const NAV_ITEMS = [
     ),
   },
   {
+    href: "/inquiries",
+    label: "お問い合わせ管理",
+    icon: (
+      <>
+        <path d="M4 5h16v11H8l-4 3.5V5z" />
+        <path d="M8 9h8M8 12h5" />
+      </>
+    ),
+  },
+  {
     href: "/master",
     label: "マスタ管理",
     icon: (

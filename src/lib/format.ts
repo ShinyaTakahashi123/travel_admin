@@ -40,3 +40,14 @@ export const REPORT_STATUS_LABEL: Record<string, { label: string; bg: string; fg
   resolved: { label: "対応済み", bg: "#F1F5F9", fg: "#64748B" },
   dismissed: { label: "却下", bg: "#F1F5F9", fg: "#64748B" },
 };
+
+export const INQUIRY_STATUS_LABEL: Record<string, { label: string; bg: string; fg: string }> = {
+  unread: { label: "未読", bg: "#FEE2E2", fg: "#DC2626" },
+  read: { label: "既読", bg: "#FEF3C7", fg: "#B45309" },
+  responded: { label: "対応済み", bg: "#F1F5F9", fg: "#64748B" },
+};
+
+export const INQUIRY_SOURCE_LABEL: Record<string, string> = {
+  user: "ユーザーサイト",
+  planner: "プランナーサイト",
+};

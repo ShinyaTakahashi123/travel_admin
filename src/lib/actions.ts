@@ -227,6 +227,31 @@ export async function dismissReport(reportId: string) {
 }
 
 // ============================================================
+// お問い合わせ管理
+// ============================================================
+
+export async function markInquiryRead(inquiryId: string) {
+  await requireAdmin();
+  const inquiry = await prisma.inquiry.findUnique({ where: { id: inquiryId } });
+  if (inquiry?.status === "unread") {
+    await prisma.inquiry.update({ where: { id: inquiryId }, data: { status: "read" } });
+    revalidatePath("/inquiries");
+  }
+}
+
+export async function markInquiryResponded(inquiryId: string) {
+  await requireAdmin();
+  await prisma.inquiry.update({ where: { id: inquiryId }, data: { status: "responded" } });
+  revalidatePath("/inquiries");
+}
+
+export async function markInquiryUnresponded(inquiryId: string) {
+  await requireAdmin();
+  await prisma.inquiry.update({ where: { id: inquiryId }, data: { status: "read" } });
+  revalidatePath("/inquiries");
+}
+
+// ============================================================
 // マスタ管理（エリア・タグ）
 // ============================================================
 

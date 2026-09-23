@@ -278,6 +278,7 @@ model Itinerary {
   @@index([status])
   @@index([status, createdAt(sort: Desc)])
   @@index([status, viewCount(sort: Desc)])
+  @@index([status, likeCount(sort: Desc)])
   @@map("itinerary")
 }
 
@@ -413,6 +414,22 @@ model Report {
   @@index([status])
   @@index([targetType, targetId])
   @@map("report")
+}
+
+model Inquiry {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  sourceSite String   @map("source_site") // "user" | "planner"
+  category   String // 要望|質問|不具合の報告|アカウントについて|掲載内容について|その他
+  name       String
+  email      String
+  message    String
+  status     String   @default("unread") // unread|read|responded
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([status])
+  @@index([category])
+  @@index([sourceSite])
+  @@map("inquiry")
 }
 
 model ShareLog {
