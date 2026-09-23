@@ -20,9 +20,19 @@ import { prisma } from "../src/lib/prisma";
 import { listAllBlobs as listAll, referencedBlobUrls as referencedUrls, type BlobInfo } from "../src/lib/blob-cleanup";
 import { toWebJpeg } from "./lib/pilot-gen";
 
-const SEED_FOLDERS = ["batch2", "pilot-launch", "koyo-2026"];
-// これ以下のサイズの画像は縮小済みとみなして対象外にする
-const SIZE_THRESHOLD = 500 * 1024;
+const SEED_FOLDERS = [
+  "batch2",
+  "pilot-launch",
+  "koyo-2026",
+  "winter-2026",
+  "official-areas-01",
+  "official-areas-02",
+  "official-areas-03",
+  "official-areas-04",
+  "official-areas-05",
+];
+// これ以下のサイズの画像は縮小済みとみなして対象外にする（ユーザー指示の上限と合わせる）
+const SIZE_THRESHOLD = 400 * 1024;
 
 const mb = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MB`;
 
@@ -82,15 +92,13 @@ async function main() {
   }
   writeFileSync(cachePath, JSON.stringify(cache));
 
-  // 縮小中に参照が変わっている可能性があるため、削除直前に参照状況を取り直す
-  const latestRefs = await referencedUrls();
-  const latestOrphans = (await listAll()).filter((b) => inSeedFolder(b) && !latestRefs.has(b.url));
-  for (let i = 0; i < latestOrphans.length; i += 50) await del(latestOrphans.slice(i, i + 50).map((b) => b.url));
-  console.log(`未参照の画像を削除: ${latestOrphans.length}枚`);
-
+  // 縮小で不要になった元画像（未参照）は、ここでは削除しない。アップロード直後の画像を
+  // 誤って消してしまう事故が過去に起きたため、未参照画像の削除は管理者サイトのCron
+  // （毎日4:00、24時間以上前のものだけが対象）に任せる。
   const final = await listAll();
 
-  // 中断のタイミングによっては、削除済み画像のURLがキャッシュに残るため取り除く
+  // 中断のタイミングによっては、置き換え前の古いURLがキャッシュに残っている可能性があるため、
+  // 現存するBlobのURLと突き合わせて取り除く（削除はしていないので通常はほぼ変化しない）
   const existing = new Set(final.map((b) => b.url));
   const cleaned = Object.fromEntries(Object.entries(cache).filter(([, v]) => existing.has(v)));
   console.log(`写真キャッシュ: ${Object.keys(cache).length}件 → ${Object.keys(cleaned).length}件`);

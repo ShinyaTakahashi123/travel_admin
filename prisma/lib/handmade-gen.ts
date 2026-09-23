@@ -47,6 +47,12 @@ export type HandmadeItinerary = {
 const UA = "shiorie-seed/1.0 (contact: st.83.53.abcd@gmail.com)";
 // OSMの検索結果が、同じしおりの他スポットからこれ以上離れていたら別の場所とみなして採用しない
 const OSM_MAX_DISTANCE_KM = 30;
+// 確認モードで警告を出す閾値（同じ日の中で最寄りの他スポットからこれ以上離れていたら警告）。
+// 取得元を問わず（Wikipedia・OSM・手動指定すべて対象）、住所や検索ワードの取り違えに気づけるようにする。
+// 丹後半島や函館近郊など、車移動前提で実際に20km台の同日移動が発生するエリアもあるため、
+// 「別の都市を誤って拾った」典型例（今回の奈良町の誤ヒットは直線28km）だけを狙って25kmに設定している。
+// 20km台の警告が出た場合は、実際にその距離の移動が現実的か（同じ都道府県内か等）を必ず目視確認すること。
+const COORD_OUTLIER_KM = 25;
 
 // 1件ずつ問い合わせるとWikipedia APIのレート制限にかかるため、記事名をまとめて1回で取得する
 // （APIの上限は1リクエスト50件）。リダイレクト・表記正規化後の記事名も元の記事名に対応づける。
@@ -203,10 +209,28 @@ function printAndValidate(itineraries: HandmadeItinerary[], resolved: Map<Handma
         warnings++;
       }
     }
+    // 座標の取得元（Wikipedia/OSM/手動指定）を問わず、同じ日の中で最寄りの他スポットからも
+    // 大きく離れている場合は、住所や検索ワードの取り違えで違う場所を拾っている可能性が高い
+    for (const spots of it.days) {
+      if (spots.length < 2) continue;
+      for (const s of spots) {
+        const r = resolved.get(s)!;
+        const nearestKm = Math.min(
+          ...spots.filter((o) => o !== s).map((o) => { const or = resolved.get(o)!; return distanceKm(r.lat, r.lng, or.lat, or.lng); })
+        );
+        if (nearestKm > COORD_OUTLIER_KM) {
+          console.log(`  ⚠️座標が離れすぎ: ${s.name}（同じ日の他スポットから最短${nearestKm.toFixed(1)}km, 出典:${r.latLngSource}）`);
+          warnings++;
+        }
+      }
+    }
   }
 
   for (const it of itineraries) {
     for (const spots of it.days) {
+      if (spots[0]?.transit) {
+        throw new Error(`各日の1件目のスポットに移動情報(transit)は付けられません（移動元がありません）: ${it.title} / ${spots[0].name}`);
+      }
       for (const s of spots) {
         // DBのCHECK制約 spot_transit_line_only_for_train_bus と同じルール
         if (s.transit?.line && s.transit.mode !== "train" && s.transit.mode !== "bus") {

@@ -9,13 +9,28 @@ import { prisma } from "../../src/lib/prisma";
 /**
  * Wikipediaの元画像は1枚数MB〜十数MBあり、そのまま保存するとBlobの容量（Hobbyは1GB）を
  * すぐ使い切るうえ、ページ表示も重くなる。表示に十分な横幅1280pxのJPEGに縮小してから保存する。
+ * 長辺1280px・品質80だけではファイルサイズの上限を保証できないため、SIZE_LIMIT_BYTESを
+ * 超える場合は品質を段階的に下げ、それでも超える場合は横幅も縮めて必ず上限以下にする。
  */
+const SIZE_LIMIT_BYTES = 400 * 1024;
+
 export async function toWebJpeg(buf: Buffer): Promise<Buffer> {
-  return sharp(buf)
-    .rotate() // EXIFの向き情報を反映
-    .resize({ width: 1280, withoutEnlargement: true })
-    .jpeg({ quality: 80, mozjpeg: true })
-    .toBuffer();
+  const widths = [1280, 1024, 800];
+  const qualities = [80, 70, 60, 50];
+  let smallest: Buffer | null = null;
+  for (const width of widths) {
+    for (const quality of qualities) {
+      const out = await sharp(buf)
+        .rotate() // EXIFの向き情報を反映
+        .resize({ width, withoutEnlargement: true })
+        .jpeg({ quality, mozjpeg: true })
+        .toBuffer();
+      if (!smallest || out.byteLength < smallest.byteLength) smallest = out;
+      if (out.byteLength <= SIZE_LIMIT_BYTES) return out;
+    }
+  }
+  // どこまで下げても超える場合は、それまでで最小だったものを使う
+  return smallest!;
 }
 
 export type SpotSeed = {
