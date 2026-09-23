@@ -50,7 +50,7 @@
 }
 
 :root {
-  /* 旅しおり 管理者サイト配色（design/wireframes/AdminDashboard.dc.html等準拠） */
+  /* たびタネ 管理者サイト配色（design/wireframes/AdminDashboard.dc.html等準拠） */
   --background: #F8FAFC;
   --foreground: #1E293B;
   --card: oklch(1 0 0);

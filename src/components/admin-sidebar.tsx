@@ -90,7 +90,7 @@ export function AdminSidebar({ name, role }: { name: string; role: string }) {
         <div className="w-[30px] h-[30px] rounded-lg bg-primary flex items-center justify-center text-white font-black text-base">
           旅
         </div>
-        <span className="text-white font-bold text-base">旅しおり 管理者サイト</span>
+        <span className="text-white font-bold text-base">たびタネ 管理者サイト</span>
       </div>
       <nav className="flex flex-col flex-1">
         {NAV_ITEMS.map((item) => {
