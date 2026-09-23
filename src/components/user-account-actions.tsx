@@ -31,14 +31,14 @@ export function UserAccountActions({ userId, status }: { userId: string; status:
       <button
         onClick={handleToggleStatus}
         disabled={isPending}
-        className="bg-white border border-red-300 text-red-600 rounded-lg px-4.5 py-2.5 font-bold text-xs disabled:opacity-50"
+        className="bg-white border border-red-300 text-red-600 rounded-lg px-4.5 py-2.5 font-bold text-sm disabled:opacity-50"
       >
         {status === "active" ? "利用停止にする" : "利用停止を解除"}
       </button>
       <button
         onClick={handleDelete}
         disabled={isPending}
-        className="bg-white border border-border text-[#475569] rounded-lg px-4.5 py-2.5 font-bold text-xs disabled:opacity-50"
+        className="bg-white border border-border text-[#475569] rounded-lg px-4.5 py-2.5 font-bold text-sm disabled:opacity-50"
       >
         削除する
       </button>

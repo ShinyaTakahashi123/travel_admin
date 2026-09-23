@@ -20,10 +20,10 @@ export default async function AccountManagementPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-1.5">
-        <h1 className="text-lg font-black">アカウント管理</h1>
+        <h1 className="text-xl font-black">アカウント管理</h1>
         <InviteAdminDialog />
       </div>
-      <p className="text-xs text-muted-foreground mb-5">
+      <p className="text-sm text-muted-foreground mb-5">
         管理者サイトにログインできるアカウントを管理します。自己登録はできず、ここから招待されたアカウントのみログイン可能です。
       </p>
 
@@ -32,7 +32,7 @@ export default async function AccountManagementPage() {
           <thead>
             <tr>
               {["名前", "メールアドレス", "権限", "最終ログイン", "ステータス", ""].map((h) => (
-                <th key={h} className="text-left text-[11px] text-muted-foreground font-bold px-3.5 pb-2.5">
+                <th key={h} className="text-left text-sm text-muted-foreground font-bold px-3.5 pb-2.5">
                   {h}
                 </th>
               ))}
@@ -49,22 +49,22 @@ export default async function AccountManagementPage() {
                   : null;
               return (
                 <tr key={admin.id} className="border-t border-muted">
-                  <td className="text-[13px] px-3.5 py-3">{admin.name}</td>
-                  <td className="text-[13px] px-3.5 py-3">{admin.email}</td>
+                  <td className="text-base px-3.5 py-3">{admin.name}</td>
+                  <td className="text-base px-3.5 py-3">{admin.email}</td>
                   <td className="px-3.5 py-3">
                     <span
-                      className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+                      className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                       style={{ background: role.bg, color: role.fg }}
                     >
                       {role.label}
                     </span>
                   </td>
-                  <td className="text-[13px] px-3.5 py-3">
+                  <td className="text-base px-3.5 py-3">
                     {admin.status === "active" && admin.updatedAt ? formatDateTime(admin.updatedAt) : "—"}
                   </td>
                   <td className="px-3.5 py-3">
                     <span
-                      className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+                      className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                       style={{ background: status.bg, color: status.fg }}
                     >
                       {status.label}
@@ -75,7 +75,7 @@ export default async function AccountManagementPage() {
                     {admin.status === "invited" ? (
                       <ResendInviteButton adminId={admin.id} />
                     ) : (
-                      <Link href={`/accounts/${admin.id}/edit`} className="text-xs font-bold text-primary">
+                      <Link href={`/accounts/${admin.id}/edit`} className="text-sm font-bold text-primary">
                         編集
                       </Link>
                     )}

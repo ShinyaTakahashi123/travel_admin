@@ -65,7 +65,7 @@ export default async function ItineraryDetailAdminPage({
 
   return (
     <div>
-      <div className="text-xs text-muted-foreground mb-2">
+      <div className="text-sm text-muted-foreground mb-2">
         <Link href="/itineraries">しおり管理</Link> &gt;{" "}
         <span className="text-foreground font-bold">{itinerary.title}</span>
       </div>
@@ -73,20 +73,20 @@ export default async function ItineraryDetailAdminPage({
       <div className="flex items-start justify-between mb-5 flex-wrap gap-3">
         <div>
           <div className="flex items-center gap-2 mb-1.5 flex-wrap">
-            <div className="font-black text-lg">{itinerary.title}</div>
+            <div className="font-black text-xl">{itinerary.title}</div>
             <span
-              className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+              className="text-sm font-bold px-2.5 py-0.5 rounded-full"
               style={{ background: meta.bg, color: meta.fg }}
             >
               {meta.label}
             </span>
             {unreadReports.length > 0 && (
-              <span className="bg-red-100 text-red-600 text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+              <span className="bg-red-100 text-red-600 text-sm font-bold px-2.5 py-0.5 rounded-full">
                 通報 {unreadReports.length}件
               </span>
             )}
           </div>
-          <div className="text-xs text-muted-foreground">
+          <div className="text-sm text-muted-foreground">
             T-{itinerary.id.slice(0, 4).toUpperCase()} ・ 投稿者:{" "}
             <Link href={`/planners/${itinerary.plannerAccountId}`} className="text-primary font-bold underline">
               {itinerary.plannerAccount.name}
@@ -120,8 +120,8 @@ export default async function ItineraryDetailAdminPage({
           },
         ].map((kpi) => (
           <div key={kpi.label} className="bg-card border border-border rounded-2xl px-4.5 py-4 flex-1 min-w-[130px]">
-            <div className="text-[11px] text-muted-foreground font-bold mb-1">{kpi.label}</div>
-            <div className="text-xl font-black" style={{ color: kpi.color }}>
+            <div className="text-sm text-muted-foreground font-bold mb-1">{kpi.label}</div>
+            <div className="text-2xl font-black" style={{ color: kpi.color }}>
               {kpi.value}
             </div>
           </div>
@@ -140,15 +140,15 @@ export default async function ItineraryDetailAdminPage({
           />
           {itinerary.description && (
             <>
-              <div className="font-black text-sm mb-1.5">概要メモ</div>
-              <p className="text-xs text-[#475569] leading-relaxed mb-4">{itinerary.description}</p>
+              <div className="font-black text-base mb-1.5">概要メモ</div>
+              <p className="text-sm text-[#475569] leading-relaxed mb-4">{itinerary.description}</p>
             </>
           )}
 
           {isPending ? (
             <>
-              <div className="font-black text-sm mb-2.5">プランナーの過去実績</div>
-              <p className="text-xs text-[#475569] leading-relaxed">
+              <div className="font-black text-base mb-2.5">プランナーの過去実績</div>
+              <p className="text-sm text-[#475569] leading-relaxed">
                 過去の投稿数: {plannerPastCount}件
                 <br />
                 累計いいね数: {plannerTotalFavorites}
@@ -158,7 +158,7 @@ export default async function ItineraryDetailAdminPage({
             reports.length > 0 && (
               <>
                 <div className="h-px bg-muted my-4" />
-                <div className="font-black text-sm mb-2.5">通報履歴</div>
+                <div className="font-black text-base mb-2.5">通報履歴</div>
                 <div className="flex flex-col gap-2.5">
                   {reports.map((r) => (
                     <div
@@ -167,11 +167,11 @@ export default async function ItineraryDetailAdminPage({
                         r.status === "unread" ? "bg-red-50 border-red-100" : "bg-muted border-muted"
                       }`}
                     >
-                      <div className="flex justify-between text-xs font-bold mb-1">
+                      <div className="flex justify-between text-sm font-bold mb-1">
                         <span>{r.reason}</span>
                         <span className="text-muted-foreground font-normal">{formatDate(r.createdAt)}</span>
                       </div>
-                      <div className="text-[11px] text-[#64748B]">通報者: {r.reporterUserAccount.name}</div>
+                      <div className="text-sm text-[#64748B]">通報者: {r.reporterUserAccount.name}</div>
                     </div>
                   ))}
                 </div>
@@ -181,19 +181,19 @@ export default async function ItineraryDetailAdminPage({
         </div>
 
         <div className="bg-card border border-border rounded-2xl p-5 px-5.5 flex-[1.6]">
-          <div className="font-black text-sm mb-3">日程</div>
+          <div className="font-black text-base mb-3">日程</div>
           <AdminDayTabs days={days} />
         </div>
       </div>
 
       {itinerary.comments.length > 0 && (
         <div className="bg-card border border-border rounded-2xl p-5 px-5.5 mt-4">
-          <div className="font-black text-sm mb-3.5">コメント一覧</div>
+          <div className="font-black text-base mb-3.5">コメント一覧</div>
           <div className="flex flex-col gap-3">
             {itinerary.comments.map((c) => (
-              <div key={c.id} className="flex items-center gap-2 text-[13px]">
+              <div key={c.id} className="flex items-center gap-2 text-base">
                 <span className="font-bold">{c.userAccount.name}</span>
-                <span className="text-[11px] text-muted-foreground">{formatDate(c.createdAt)}</span>
+                <span className="text-sm text-muted-foreground">{formatDate(c.createdAt)}</span>
                 <span className="text-[#475569]">{c.body}</span>
               </div>
             ))}

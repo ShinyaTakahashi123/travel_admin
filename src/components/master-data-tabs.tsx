@@ -21,7 +21,7 @@ export function MasterDataTabs({ prefectures, tags }: { prefectures: Prefecture[
           <button
             key={t}
             onClick={() => setTab(t)}
-            className={`px-5 py-2.5 text-[13px] font-bold border-b-2 ${
+            className={`px-5 py-2.5 text-base font-bold border-b-2 ${
               tab === t ? "text-secondary-foreground border-primary" : "text-muted-foreground border-transparent"
             }`}
           >
@@ -79,7 +79,7 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
   return (
     <div className="flex gap-5 flex-col md:flex-row">
       <div className="flex-[1.3] bg-card border border-border rounded-2xl p-5">
-        <div className="font-black text-sm mb-3.5">都道府県 &gt; エリア</div>
+        <div className="font-black text-base mb-3.5">都道府県 &gt; エリア</div>
         {prefectures.map((pref) => (
           <div key={pref.id}>
             <button
@@ -88,7 +88,7 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
                 expanded === pref.id ? "bg-secondary" : ""
               }`}
             >
-              <span className="flex items-center gap-2 font-bold text-[13px]">
+              <span className="flex items-center gap-2 font-bold text-base">
                 <svg
                   width="14"
                   height="14"
@@ -106,12 +106,12 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
               <div className="pl-6.5 border-l-2 border-secondary ml-3.5 mb-2">
                 {pref.children.map((area) => (
                   <div key={area.id} className="flex items-center justify-between px-3.5 py-1.5">
-                    <span className="text-xs">{area.name}</span>
-                    <span className="text-[11px] text-muted-foreground">{area.itineraryCount}件</span>
+                    <span className="text-sm">{area.name}</span>
+                    <span className="text-sm text-muted-foreground">{area.itineraryCount}件</span>
                   </div>
                 ))}
                 {pref.children.length === 0 && (
-                  <div className="px-3.5 py-1.5 text-xs text-muted-foreground">エリア未登録</div>
+                  <div className="px-3.5 py-1.5 text-sm text-muted-foreground">エリア未登録</div>
                 )}
               </div>
             )}
@@ -123,12 +123,12 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
             value={newPrefName}
             onChange={(e) => setNewPrefName(e.target.value)}
             placeholder="新しい都道府県名"
-            className="flex-1 border border-input rounded-lg px-3 py-2 text-xs"
+            className="flex-1 border border-input rounded-lg px-3 py-2 text-sm"
           />
           <button
             type="submit"
             disabled={isPending || !newPrefName.trim()}
-            className="bg-primary text-white rounded-lg px-3.5 py-2 font-bold text-xs disabled:opacity-50"
+            className="bg-primary text-white rounded-lg px-3.5 py-2 font-bold text-sm disabled:opacity-50"
           >
             都道府県を追加
           </button>
@@ -136,14 +136,14 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
       </div>
 
       <div className="flex-1 bg-card border border-border rounded-2xl p-5">
-        <div className="font-black text-sm mb-3">エリア新規追加</div>
+        <div className="font-black text-base mb-3">エリア新規追加</div>
         <form onSubmit={handleAddArea} className="flex flex-col gap-3.5">
           <div>
-            <div className="text-[11px] font-bold text-muted-foreground mb-1.5">都道府県</div>
+            <div className="text-sm font-bold text-muted-foreground mb-1.5">都道府県</div>
             <select
               value={targetPrefId}
               onChange={(e) => setTargetPrefId(e.target.value)}
-              className="w-full border border-input rounded-lg px-3 py-2 text-sm bg-white"
+              className="w-full border border-input rounded-lg px-3 py-2 text-base bg-white"
             >
               {prefectures.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -153,19 +153,19 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
             </select>
           </div>
           <div>
-            <div className="text-[11px] font-bold text-muted-foreground mb-1.5">エリア名</div>
+            <div className="text-sm font-bold text-muted-foreground mb-1.5">エリア名</div>
             <input
               value={newAreaName}
               onChange={(e) => setNewAreaName(e.target.value)}
               placeholder="例: 銀閣寺・岡崎エリア"
-              className="w-full border border-input rounded-lg px-3 py-2 text-sm"
+              className="w-full border border-input rounded-lg px-3 py-2 text-base"
             />
           </div>
-          {error && <div className="text-xs text-red-600 font-bold">{error}</div>}
+          {error && <div className="text-sm text-red-600 font-bold">{error}</div>}
           <button
             type="submit"
             disabled={isPending || !newAreaName.trim()}
-            className="bg-primary text-white rounded-lg py-2.5 font-bold text-sm disabled:opacity-50"
+            className="bg-primary text-white rounded-lg py-2.5 font-bold text-base disabled:opacity-50"
           >
             追加する
           </button>
@@ -198,29 +198,29 @@ function TagMaster({ tags }: { tags: Tag[] }) {
   return (
     <div className="flex gap-5 flex-col md:flex-row">
       <div className="flex-[1.3] bg-card border border-border rounded-2xl p-5">
-        <div className="font-black text-sm mb-3.5">タグ一覧</div>
+        <div className="font-black text-base mb-3.5">タグ一覧</div>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
-            <span key={tag.id} className="bg-muted text-[#475569] text-xs font-bold px-3 py-1.5 rounded-full">
+            <span key={tag.id} className="bg-muted text-[#475569] text-sm font-bold px-3 py-1.5 rounded-full">
               {tag.name}
             </span>
           ))}
         </div>
       </div>
       <div className="flex-1 bg-card border border-border rounded-2xl p-5">
-        <div className="font-black text-sm mb-3">タグ新規追加</div>
+        <div className="font-black text-base mb-3">タグ新規追加</div>
         <form onSubmit={handleAddTag} className="flex flex-col gap-3.5">
           <input
             value={newTagName}
             onChange={(e) => setNewTagName(e.target.value)}
             placeholder="例: 秘境"
-            className="w-full border border-input rounded-lg px-3 py-2 text-sm"
+            className="w-full border border-input rounded-lg px-3 py-2 text-base"
           />
-          {error && <div className="text-xs text-red-600 font-bold">{error}</div>}
+          {error && <div className="text-sm text-red-600 font-bold">{error}</div>}
           <button
             type="submit"
             disabled={isPending || !newTagName.trim()}
-            className="bg-primary text-white rounded-lg py-2.5 font-bold text-sm disabled:opacity-50"
+            className="bg-primary text-white rounded-lg py-2.5 font-bold text-base disabled:opacity-50"
           >
             追加する
           </button>

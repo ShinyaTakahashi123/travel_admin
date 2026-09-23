@@ -47,14 +47,14 @@ export default async function ItineraryManagementPage({
 
   return (
     <div>
-      <h1 className="text-lg font-black mb-4.5">しおり管理</h1>
+      <h1 className="text-xl font-black mb-4.5">しおり管理</h1>
 
       <div className="flex items-center gap-2.5 mb-4.5 flex-wrap">
         {FILTERS.map((f) => (
           <Link
             key={f.label}
             href={f.key ? `/itineraries?status=${f.key}` : "/itineraries"}
-            className={`text-xs font-medium px-4 py-1.5 rounded-full border flex items-center gap-1.5 ${
+            className={`text-sm font-medium px-4 py-1.5 rounded-full border flex items-center gap-1.5 ${
               (status ?? undefined) === f.key
                 ? "bg-secondary border-[#C7CBFA] text-secondary-foreground font-bold"
                 : f.key === "pending"
@@ -66,7 +66,7 @@ export default async function ItineraryManagementPage({
           >
             {f.label}
             {f.key === "pending" && pendingCount > 0 && (
-              <span className="bg-[#EA580C] text-white text-[10px] font-black px-1.5 py-0.5 rounded-full">
+              <span className="bg-[#EA580C] text-white text-xs font-black px-1.5 py-0.5 rounded-full">
                 {pendingCount}
               </span>
             )}
@@ -83,7 +83,7 @@ export default async function ItineraryManagementPage({
             name="q"
             defaultValue={q}
             placeholder="タイトルで検索"
-            className="text-xs outline-none placeholder:text-muted-foreground"
+            className="text-sm outline-none placeholder:text-muted-foreground"
           />
         </form>
       </div>
@@ -93,7 +93,7 @@ export default async function ItineraryManagementPage({
           <thead>
             <tr>
               {["ID", "タイトル", "投稿者", "エリア", "公開日", "閲覧数", "ステータス", ""].map((h) => (
-                <th key={h} className="text-left text-[11px] text-muted-foreground font-bold px-3.5 pb-2.5">
+                <th key={h} className="text-left text-sm text-muted-foreground font-bold px-3.5 pb-2.5">
                   {h}
                 </th>
               ))}
@@ -105,21 +105,21 @@ export default async function ItineraryManagementPage({
               const isPending = item.status === "pending";
               return (
                 <tr key={item.id} className={`border-t border-muted ${isPending ? "bg-amber-50" : ""}`}>
-                  <td className="text-[13px] px-3.5 py-3">T-{item.id.slice(0, 4).toUpperCase()}</td>
-                  <td className="text-[13px] px-3.5 py-3">{item.title}</td>
-                  <td className="text-[13px] px-3.5 py-3">{item.plannerAccount.name}</td>
-                  <td className="text-[13px] px-3.5 py-3">{item.areas[0]?.area.name ?? "—"}</td>
-                  <td className="text-[13px] px-3.5 py-3">
+                  <td className="text-base px-3.5 py-3">T-{item.id.slice(0, 4).toUpperCase()}</td>
+                  <td className="text-base px-3.5 py-3">{item.title}</td>
+                  <td className="text-base px-3.5 py-3">{item.plannerAccount.name}</td>
+                  <td className="text-base px-3.5 py-3">{item.areas[0]?.area.name ?? "—"}</td>
+                  <td className="text-base px-3.5 py-3">
                     {isPending
                       ? `申請 ${formatDate(item.submittedAt ?? item.updatedAt)}`
                       : item.reviewedAt
                         ? formatDate(item.reviewedAt)
                         : "—"}
                   </td>
-                  <td className="text-[13px] px-3.5 py-3">{item.viewCount.toLocaleString()}</td>
+                  <td className="text-base px-3.5 py-3">{item.viewCount.toLocaleString()}</td>
                   <td className="px-3.5 py-3">
                     <span
-                      className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+                      className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                       style={{ background: meta.bg, color: meta.fg }}
                     >
                       {meta.label}
@@ -128,7 +128,7 @@ export default async function ItineraryManagementPage({
                   <td className="px-3.5 py-3">
                     <Link
                       href={`/itineraries/${item.id}`}
-                      className={`text-xs font-bold ${isPending ? "text-secondary-foreground font-black" : "text-primary"}`}
+                      className={`text-sm font-bold ${isPending ? "text-secondary-foreground font-black" : "text-primary"}`}
                     >
                       {isPending ? "確認する" : "詳細"}
                     </Link>
@@ -138,7 +138,7 @@ export default async function ItineraryManagementPage({
             })}
             {itineraries.length === 0 && (
               <tr>
-                <td colSpan={8} className="text-center text-sm text-muted-foreground py-8">
+                <td colSpan={8} className="text-center text-base text-muted-foreground py-8">
                   該当するしおりはありません。
                 </td>
               </tr>

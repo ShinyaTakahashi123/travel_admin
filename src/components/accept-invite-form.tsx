@@ -49,29 +49,29 @@ export function AcceptInviteForm({
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-3.5">
       <div>
-        <div className="text-[11px] font-bold text-[#64748B] mb-1.5">メールアドレス</div>
-        <div className="border border-input rounded-[10px] px-3.5 py-3 text-sm bg-muted text-muted-foreground">
+        <div className="text-sm font-bold text-[#64748B] mb-1.5">メールアドレス</div>
+        <div className="border border-input rounded-[10px] px-3.5 py-3 text-base bg-muted text-muted-foreground">
           {email}
         </div>
       </div>
       <div>
-        <div className="text-[11px] font-bold text-[#64748B] mb-1.5">権限</div>
-        <div className="border border-input rounded-[10px] px-3.5 py-3 text-sm bg-muted text-muted-foreground">
+        <div className="text-sm font-bold text-[#64748B] mb-1.5">権限</div>
+        <div className="border border-input rounded-[10px] px-3.5 py-3 text-base bg-muted text-muted-foreground">
           {roleLabel}
         </div>
       </div>
       <div>
-        <div className="text-[11px] font-bold text-[#64748B] mb-1.5">名前</div>
+        <div className="text-sm font-bold text-[#64748B] mb-1.5">名前</div>
         <input
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="例: 運営 花子"
-          className="w-full border border-input rounded-[10px] px-3.5 py-3 text-sm"
+          className="w-full border border-input rounded-[10px] px-3.5 py-3 text-base"
         />
       </div>
       <div>
-        <div className="text-[11px] font-bold text-[#64748B] mb-1.5">パスワード</div>
+        <div className="text-sm font-bold text-[#64748B] mb-1.5">パスワード</div>
         <input
           required
           type="password"
@@ -79,11 +79,11 @@ export function AcceptInviteForm({
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="8文字以上"
-          className="w-full border border-input rounded-[10px] px-3.5 py-3 text-sm"
+          className="w-full border border-input rounded-[10px] px-3.5 py-3 text-base"
         />
       </div>
       <div>
-        <div className="text-[11px] font-bold text-[#64748B] mb-1.5">パスワード（確認）</div>
+        <div className="text-sm font-bold text-[#64748B] mb-1.5">パスワード（確認）</div>
         <input
           required
           type="password"
@@ -91,16 +91,16 @@ export function AcceptInviteForm({
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
           placeholder="もう一度入力してください"
-          className="w-full border border-input rounded-[10px] px-3.5 py-3 text-sm"
+          className="w-full border border-input rounded-[10px] px-3.5 py-3 text-base"
         />
       </div>
 
-      {error && <div className="text-xs text-red-600 font-bold">{error}</div>}
+      {error && <div className="text-sm text-red-600 font-bold">{error}</div>}
 
       <button
         type="submit"
         disabled={loading}
-        className="bg-primary text-white rounded-[10px] py-3.5 font-black text-sm mt-1 disabled:opacity-60"
+        className="bg-primary text-white rounded-[10px] py-3.5 font-black text-base mt-1 disabled:opacity-60"
       >
         アカウントを有効化する
       </button>

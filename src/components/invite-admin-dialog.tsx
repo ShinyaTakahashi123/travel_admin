@@ -49,7 +49,7 @@ export function InviteAdminDialog() {
         }
       }}
     >
-      <DialogTrigger className="flex items-center gap-2 bg-primary text-white rounded-lg px-4.5 py-2.5 font-bold text-[13px]">
+      <DialogTrigger className="flex items-center gap-2 bg-primary text-white rounded-lg px-4.5 py-2.5 font-bold text-base">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2">
           <path d="M12 5v14M5 12h14" />
         </svg>
@@ -65,21 +65,21 @@ export function InviteAdminDialog() {
 
         {inviteLink ? (
           <div className="flex flex-col gap-3">
-            <p className="text-sm">
+            <p className="text-base">
               招待を作成しました。下記のリンクを{email}さんに直接共有してください
               （メール送信機能は未実装のため、リンクの送付は手動で行ってください）。
             </p>
-            <div className="bg-muted rounded-lg px-3 py-2.5 text-xs break-all select-all">
+            <div className="bg-muted rounded-lg px-3 py-2.5 text-sm break-all select-all">
               {inviteLink}
             </div>
-            <p className="text-[11px] text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               このリンクの有効期限は発行から72時間です。
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
-              <div className="text-[11px] font-bold text-muted-foreground mb-1.5">
+              <div className="text-sm font-bold text-muted-foreground mb-1.5">
                 招待するメールアドレス
               </div>
               <input
@@ -87,12 +87,12 @@ export function InviteAdminDialog() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-input rounded-lg px-3 py-2.5 text-sm"
+                className="w-full border border-input rounded-lg px-3 py-2.5 text-base"
               />
             </div>
 
             <div>
-              <div className="text-[11px] font-bold text-muted-foreground mb-1.5">権限</div>
+              <div className="text-sm font-bold text-muted-foreground mb-1.5">権限</div>
               <div className="flex gap-2.5">
                 {(
                   [
@@ -116,25 +116,25 @@ export function InviteAdminDialog() {
                       >
                         {role === opt.value && <div className="w-2 h-2 rounded-full bg-primary" />}
                       </div>
-                      <span className="font-bold text-[13px]">{opt.title}</span>
+                      <span className="font-bold text-base">{opt.title}</span>
                     </div>
-                    <div className="text-[10px] text-muted-foreground ml-6">{opt.desc}</div>
+                    <div className="text-xs text-muted-foreground ml-6">{opt.desc}</div>
                   </button>
                 ))}
               </div>
             </div>
 
-            <div className="bg-muted rounded-lg px-3.5 py-3 text-[11px] text-muted-foreground leading-relaxed">
+            <div className="bg-muted rounded-lg px-3.5 py-3 text-sm text-muted-foreground leading-relaxed">
               招待リンクの有効期限は<b>発行から72時間</b>です。期限切れの場合はアカウント管理の一覧から再発行できます。
             </div>
 
-            {error && <div className="text-xs text-red-600 font-bold">{error}</div>}
+            {error && <div className="text-sm text-red-600 font-bold">{error}</div>}
 
             <DialogFooter>
               <button
                 type="submit"
                 disabled={isPending}
-                className="bg-primary text-white rounded-lg px-5.5 py-2.5 font-bold text-[13px] disabled:opacity-50"
+                className="bg-primary text-white rounded-lg px-5.5 py-2.5 font-bold text-base disabled:opacity-50"
               >
                 招待を作成
               </button>

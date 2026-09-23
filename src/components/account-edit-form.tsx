@@ -40,16 +40,16 @@ export function AccountEditForm({
   return (
     <>
       <div>
-        <div className="text-[11px] font-bold text-muted-foreground mb-1.5">名前</div>
+        <div className="text-sm font-bold text-muted-foreground mb-1.5">名前</div>
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="w-full border border-input rounded-lg px-3 py-2.5 text-sm"
+          className="w-full border border-input rounded-lg px-3 py-2.5 text-base"
         />
       </div>
 
       <div>
-        <div className="text-[11px] font-bold text-muted-foreground mb-1.5">権限</div>
+        <div className="text-sm font-bold text-muted-foreground mb-1.5">権限</div>
         <div className="flex gap-2.5">
           {(
             [
@@ -74,13 +74,13 @@ export function AccountEditForm({
                 >
                   {role === opt.value && <div className="w-2 h-2 rounded-full bg-primary" />}
                 </div>
-                <span className="font-bold text-[13px]">{opt.title}</span>
+                <span className="font-bold text-base">{opt.title}</span>
               </div>
             </button>
           ))}
         </div>
         {isSelf && (
-          <p className="text-[10px] text-muted-foreground mt-1.5">自分自身の権限は変更できません</p>
+          <p className="text-xs text-muted-foreground mt-1.5">自分自身の権限は変更できません</p>
         )}
       </div>
 
@@ -91,7 +91,7 @@ export function AccountEditForm({
           <button
             onClick={handleDisable}
             disabled={isPending}
-            className="bg-white border border-red-300 text-red-600 rounded-lg px-4.5 py-2.5 font-bold text-xs disabled:opacity-50"
+            className="bg-white border border-red-300 text-red-600 rounded-lg px-4.5 py-2.5 font-bold text-sm disabled:opacity-50"
           >
             このアカウントを無効化する
           </button>
@@ -101,14 +101,14 @@ export function AccountEditForm({
         <div className="flex gap-2.5">
           <button
             onClick={() => router.push("/accounts")}
-            className="bg-white border border-border rounded-lg px-5 py-2.5 font-bold text-[13px]"
+            className="bg-white border border-border rounded-lg px-5 py-2.5 font-bold text-base"
           >
             キャンセル
           </button>
           <button
             onClick={handleSave}
             disabled={isPending}
-            className="bg-primary text-white rounded-lg px-5.5 py-2.5 font-bold text-[13px] disabled:opacity-50"
+            className="bg-primary text-white rounded-lg px-5.5 py-2.5 font-bold text-base disabled:opacity-50"
           >
             保存する
           </button>

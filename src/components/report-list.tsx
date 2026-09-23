@@ -54,13 +54,13 @@ export function ReportList({
   return (
     <div className="flex gap-6 items-start flex-col lg:flex-row">
       <div className="flex-1 w-full">
-        <div className="text-lg font-black mb-5">
+        <div className="text-xl font-black mb-5">
           通報管理{" "}
-          {unreadCount > 0 && <span className="text-sm font-bold text-red-600">未対応 {unreadCount}件</span>}
+          {unreadCount > 0 && <span className="text-base font-bold text-red-600">未対応 {unreadCount}件</span>}
         </div>
 
         {reports.length === 0 ? (
-          <p className="text-sm text-muted-foreground">通報はありません。</p>
+          <p className="text-base text-muted-foreground">通報はありません。</p>
         ) : (
           <div className="flex flex-col gap-2.5">
             {reports.map((r) => {
@@ -86,14 +86,14 @@ export function ReportList({
                     <path d="M9.5 19a2.5 2.5 0 0 0 5 0" />
                   </svg>
                   <div className="flex-1 min-w-0">
-                    <div className="font-bold text-[13px] truncate">{r.targetTitle}</div>
-                    <div className="text-[11px] text-muted-foreground">
+                    <div className="font-bold text-base truncate">{r.targetTitle}</div>
+                    <div className="text-sm text-muted-foreground">
                       対象: {r.targetType === "itinerary" ? "しおり" : "コメント"} ・ 通報者: {r.reporterName} ・{" "}
                       {formatDate(new Date(r.createdAt))}
                     </div>
                   </div>
                   <span
-                    className="text-[11px] font-bold px-2.5 py-0.5 rounded-full whitespace-nowrap"
+                    className="text-sm font-bold px-2.5 py-0.5 rounded-full whitespace-nowrap"
                     style={{ background: badge.bg, color: badge.fg }}
                   >
                     {badge.label}
@@ -107,10 +107,10 @@ export function ReportList({
 
       {selected && (
         <div className="w-full lg:w-[340px] flex-shrink-0 bg-card border border-border rounded-2xl p-5">
-          <div className="text-[11px] font-bold text-muted-foreground mb-1.5">通報詳細</div>
-          <div className="font-black text-sm mb-2.5">{selected.targetTitle}</div>
-          <div className="text-xs text-[#64748B] mb-3.5 leading-relaxed">通報理由: {selected.reason}</div>
-          <div className="text-[11px] text-muted-foreground mb-4">
+          <div className="text-sm font-bold text-muted-foreground mb-1.5">通報詳細</div>
+          <div className="font-black text-base mb-2.5">{selected.targetTitle}</div>
+          <div className="text-sm text-[#64748B] mb-3.5 leading-relaxed">通報理由: {selected.reason}</div>
+          <div className="text-sm text-muted-foreground mb-4">
             {selected.targetAuthor && <>投稿者: {selected.targetAuthor} ・ </>}
             通報者: {selected.reporterName} ・ 通報日: {formatDate(new Date(selected.createdAt))}
           </div>
@@ -120,7 +120,7 @@ export function ReportList({
                 <button
                   onClick={handleHide}
                   disabled={isPending}
-                  className="bg-red-600 text-white rounded-lg py-2.5 font-bold text-[13px] disabled:opacity-50"
+                  className="bg-red-600 text-white rounded-lg py-2.5 font-bold text-base disabled:opacity-50"
                 >
                   対象のしおりを非公開にする
                 </button>
@@ -128,7 +128,7 @@ export function ReportList({
               {selected.targetType === "itinerary" && (
                 <Link
                   href={`/itineraries/${selected.targetId}`}
-                  className="text-center bg-white border border-border rounded-lg py-2.5 font-bold text-[13px]"
+                  className="text-center bg-white border border-border rounded-lg py-2.5 font-bold text-base"
                 >
                   しおりの詳細を見る
                 </Link>
@@ -136,7 +136,7 @@ export function ReportList({
               <button
                 onClick={handleDismiss}
                 disabled={isPending}
-                className="bg-white border border-border rounded-lg py-2.5 font-bold text-[13px] text-muted-foreground disabled:opacity-50"
+                className="bg-white border border-border rounded-lg py-2.5 font-bold text-base text-muted-foreground disabled:opacity-50"
               >
                 問題なし（却下する）
               </button>

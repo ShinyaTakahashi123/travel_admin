@@ -27,7 +27,7 @@ export default async function UserManagementPage({
   return (
     <div>
       <div className="flex items-center justify-between mb-1.5">
-        <h1 className="text-lg font-black">ユーザー一覧</h1>
+        <h1 className="text-xl font-black">ユーザー一覧</h1>
         <form action="/users" className="flex items-center gap-2 bg-card border border-border rounded-lg px-3 py-1.5">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" strokeWidth="2">
             <circle cx="11" cy="11" r="7" />
@@ -37,11 +37,11 @@ export default async function UserManagementPage({
             name="q"
             defaultValue={q}
             placeholder="ユーザーを検索"
-            className="text-xs outline-none placeholder:text-muted-foreground"
+            className="text-sm outline-none placeholder:text-muted-foreground"
           />
         </form>
       </div>
-      <p className="text-xs text-muted-foreground mb-3.5">
+      <p className="text-sm text-muted-foreground mb-3.5">
         ユーザーサイトのアカウント一覧です（しおりを投稿するプランナーサイトのアカウントとは別管理です）。
       </p>
 
@@ -54,7 +54,7 @@ export default async function UserManagementPage({
           <Link
             key={opt.label}
             href={opt.key ? `/users?plan=${opt.key}` : "/users"}
-            className={`text-xs font-bold px-4 py-1.5 rounded-full border ${
+            className={`text-sm font-bold px-4 py-1.5 rounded-full border ${
               (plan ?? undefined) === opt.key
                 ? "bg-secondary border-[#C7CBFA] text-secondary-foreground"
                 : "bg-white border-border text-foreground"
@@ -70,7 +70,7 @@ export default async function UserManagementPage({
           <thead>
             <tr>
               {["ID", "名前", "メールアドレス", "登録日", "お気に入り数", "会員種別", "ステータス", ""].map((h) => (
-                <th key={h} className="text-left text-[11px] text-muted-foreground font-bold px-3.5 pb-2.5">
+                <th key={h} className="text-left text-sm text-muted-foreground font-bold px-3.5 pb-2.5">
                   {h}
                 </th>
               ))}
@@ -82,14 +82,14 @@ export default async function UserManagementPage({
               const status = ACCOUNT_STATUS_LABEL[user.status];
               return (
                 <tr key={user.id} className="border-t border-muted">
-                  <td className="text-[13px] px-3.5 py-3">U-{user.id.slice(0, 4).toUpperCase()}</td>
-                  <td className="text-[13px] px-3.5 py-3">{user.name}</td>
-                  <td className="text-[13px] px-3.5 py-3">{user.email}</td>
-                  <td className="text-[13px] px-3.5 py-3">{formatDate(user.createdAt)}</td>
-                  <td className="text-[13px] px-3.5 py-3">{user._count.favorites}</td>
+                  <td className="text-base px-3.5 py-3">U-{user.id.slice(0, 4).toUpperCase()}</td>
+                  <td className="text-base px-3.5 py-3">{user.name}</td>
+                  <td className="text-base px-3.5 py-3">{user.email}</td>
+                  <td className="text-base px-3.5 py-3">{formatDate(user.createdAt)}</td>
+                  <td className="text-base px-3.5 py-3">{user._count.favorites}</td>
                   <td className="px-3.5 py-3">
                     <span
-                      className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+                      className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                       style={
                         isPremium
                           ? { background: "#FFF1E0", color: "#C98A2E" }
@@ -101,14 +101,14 @@ export default async function UserManagementPage({
                   </td>
                   <td className="px-3.5 py-3">
                     <span
-                      className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+                      className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                       style={{ background: status.bg, color: status.fg }}
                     >
                       {status.label}
                     </span>
                   </td>
                   <td className="px-3.5 py-3">
-                    <Link href={`/users/${user.id}`} className="text-xs font-bold text-primary">
+                    <Link href={`/users/${user.id}`} className="text-sm font-bold text-primary">
                       詳細
                     </Link>
                   </td>

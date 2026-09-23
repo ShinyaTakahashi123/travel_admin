@@ -15,14 +15,14 @@ export function ResendInviteButton({ adminId }: { adminId: string }) {
   }
 
   if (link) {
-    return <span className="text-[11px] text-muted-foreground break-all">{link}</span>;
+    return <span className="text-sm text-muted-foreground break-all">{link}</span>;
   }
 
   return (
     <button
       onClick={handleClick}
       disabled={isPending}
-      className="text-xs font-bold text-primary disabled:opacity-50"
+      className="text-sm font-bold text-primary disabled:opacity-50"
     >
       招待を再送信
     </button>

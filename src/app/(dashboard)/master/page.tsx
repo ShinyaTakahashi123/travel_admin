@@ -26,7 +26,7 @@ export default async function MasterDataManagementPage() {
 
   return (
     <div>
-      <h1 className="text-lg font-black mb-4.5">マスタ管理</h1>
+      <h1 className="text-xl font-black mb-4.5">マスタ管理</h1>
       <MasterDataTabs
         prefectures={plainPrefectures}
         tags={tags.map((t) => ({ id: t.id, name: t.name }))}

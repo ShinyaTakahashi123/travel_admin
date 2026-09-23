@@ -51,7 +51,7 @@ export default async function UserAccountDetailPage({
 
   return (
     <div>
-      <div className="text-xs text-muted-foreground mb-2">
+      <div className="text-sm text-muted-foreground mb-2">
         <Link href="/users">ユーザー一覧</Link> &gt; <span className="text-foreground font-bold">{user.name}</span>
       </div>
 
@@ -60,9 +60,9 @@ export default async function UserAccountDetailPage({
           <div className="w-14 h-14 rounded-full bg-[#D6EEFB] flex-shrink-0" />
           <div>
             <div className="flex items-center gap-2 flex-wrap">
-              <div className="font-black text-lg">{user.name}</div>
+              <div className="font-black text-xl">{user.name}</div>
               <span
-                className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+                className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                 style={
                   isPremium ? { background: "#FFF1E0", color: "#C98A2E" } : { background: "#F1F5F9", color: "#64748B" }
                 }
@@ -70,13 +70,13 @@ export default async function UserAccountDetailPage({
                 {isPremium ? "プレミアム会員" : "一般会員"}
               </span>
               <span
-                className="text-[11px] font-bold px-2.5 py-0.5 rounded-full"
+                className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                 style={{ background: status.bg, color: status.fg }}
               >
                 {status.label}
               </span>
             </div>
-            <div className="text-xs text-muted-foreground">
+            <div className="text-sm text-muted-foreground">
               U-{user.id.slice(0, 4).toUpperCase()} ・ {user.email} ・ 登録日 {formatDate(user.createdAt)}
             </div>
           </div>
@@ -91,16 +91,16 @@ export default async function UserAccountDetailPage({
           { label: "送信したリクエスト", value: user._count.sentRequests },
         ].map((kpi) => (
           <div key={kpi.label} className="bg-card border border-border rounded-2xl px-4.5 py-4 flex-1 min-w-[140px]">
-            <div className="text-[11px] text-muted-foreground font-bold mb-1">{kpi.label}</div>
-            <div className="text-xl font-black">{kpi.value}</div>
+            <div className="text-sm text-muted-foreground font-bold mb-1">{kpi.label}</div>
+            <div className="text-2xl font-black">{kpi.value}</div>
           </div>
         ))}
       </div>
 
       <div className="flex gap-4 flex-col md:flex-row">
         <div className="bg-card border border-border rounded-2xl p-5 px-5.5 flex-1">
-          <div className="font-black text-sm mb-3.5">プロフィール情報</div>
-          <div className="flex flex-col gap-2.5 text-[13px] mb-3.5">
+          <div className="font-black text-base mb-3.5">プロフィール情報</div>
+          <div className="flex flex-col gap-2.5 text-base mb-3.5">
             <div className="flex justify-between">
               <span className="text-muted-foreground">性別</span>
               <span>{user.gender ?? "未設定"}</span>
@@ -115,20 +115,20 @@ export default async function UserAccountDetailPage({
             </div>
           </div>
           <div className="h-px bg-muted my-3.5" />
-          <div className="text-[11px] font-bold text-muted-foreground mb-2">興味があるジャンル・テーマ</div>
+          <div className="text-sm font-bold text-muted-foreground mb-2">興味があるジャンル・テーマ</div>
           <div className="flex gap-1.5 flex-wrap mb-3.5">
-            {user.interestTags.length === 0 && <span className="text-xs text-muted-foreground">未設定</span>}
+            {user.interestTags.length === 0 && <span className="text-sm text-muted-foreground">未設定</span>}
             {user.interestTags.map((t) => (
-              <span key={t.tagId} className="bg-muted text-[#475569] text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+              <span key={t.tagId} className="bg-muted text-[#475569] text-sm font-bold px-2.5 py-0.5 rounded-full">
                 {t.tag.name}
               </span>
             ))}
           </div>
-          <div className="text-[11px] font-bold text-muted-foreground mb-2">行ってみたい都道府県</div>
+          <div className="text-sm font-bold text-muted-foreground mb-2">行ってみたい都道府県</div>
           <div className="flex gap-1.5 flex-wrap">
-            {user.wishlistAreas.length === 0 && <span className="text-xs text-muted-foreground">未設定</span>}
+            {user.wishlistAreas.length === 0 && <span className="text-sm text-muted-foreground">未設定</span>}
             {user.wishlistAreas.map((a) => (
-              <span key={a.areaId} className="bg-muted text-[#475569] text-[11px] font-bold px-2.5 py-0.5 rounded-full">
+              <span key={a.areaId} className="bg-muted text-[#475569] text-sm font-bold px-2.5 py-0.5 rounded-full">
                 {a.area.name}
               </span>
             ))}
@@ -136,13 +136,13 @@ export default async function UserAccountDetailPage({
         </div>
 
         <div className="bg-card border border-border rounded-2xl p-5 px-5.5 flex-[1.4]">
-          <div className="font-black text-sm mb-3.5">最近のアクティビティ</div>
+          <div className="font-black text-base mb-3.5">最近のアクティビティ</div>
           <div className="flex flex-col gap-3">
-            {activity.length === 0 && <p className="text-xs text-muted-foreground">まだ活動履歴がありません。</p>}
+            {activity.length === 0 && <p className="text-sm text-muted-foreground">まだ活動履歴がありません。</p>}
             {activity.map((a, i) => (
               <div key={i} className="flex justify-between items-center gap-2.5">
-                <div className="text-[13px]">{a.text}</div>
-                <div className="text-[11px] text-muted-foreground whitespace-nowrap">{formatDate(a.date)}</div>
+                <div className="text-base">{a.text}</div>
+                <div className="text-sm text-muted-foreground whitespace-nowrap">{formatDate(a.date)}</div>
               </div>
             ))}
           </div>

@@ -38,7 +38,7 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
   return (
     <div className="flex gap-2.5">
       <Dialog>
-        <DialogTrigger className="bg-white border border-red-300 text-red-600 rounded-lg px-5 py-2.5 font-bold text-[13px]">
+        <DialogTrigger className="bg-white border border-red-300 text-red-600 rounded-lg px-5 py-2.5 font-bold text-base">
           却下する
         </DialogTrigger>
         <DialogContent className="sm:max-w-[480px]">
@@ -50,7 +50,7 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
           </DialogHeader>
           <div className="flex flex-col gap-4">
             <div>
-              <div className="text-[11px] font-bold text-muted-foreground mb-2">
+              <div className="text-sm font-bold text-muted-foreground mb-2">
                 却下理由（よく使う理由）
               </div>
               <div className="flex gap-2 flex-wrap">
@@ -59,7 +59,7 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
                     key={r}
                     type="button"
                     onClick={() => setReason(r)}
-                    className={`text-xs font-bold px-3.5 py-1.5 rounded-full border ${
+                    className={`text-sm font-bold px-3.5 py-1.5 rounded-full border ${
                       reason === r ? "bg-secondary border-[#C7CBFA] text-secondary-foreground" : "border-border bg-white"
                     }`}
                   >
@@ -69,21 +69,21 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
               </div>
             </div>
             <div>
-              <div className="text-[11px] font-bold text-muted-foreground mb-2">
+              <div className="text-sm font-bold text-muted-foreground mb-2">
                 却下理由（プランナーに表示されます）
               </div>
               <textarea
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
                 rows={4}
-                className="w-full border border-input rounded-lg px-3 py-2.5 text-sm"
+                className="w-full border border-input rounded-lg px-3 py-2.5 text-base"
               />
             </div>
             <DialogFooter>
               <button
                 onClick={handleReject}
                 disabled={isPending || !reason.trim()}
-                className="bg-red-600 text-white rounded-lg px-5.5 py-2.5 font-bold text-[13px] disabled:opacity-50"
+                className="bg-red-600 text-white rounded-lg px-5.5 py-2.5 font-bold text-base disabled:opacity-50"
               >
                 却下を確定する
               </button>
@@ -94,7 +94,7 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
       <button
         onClick={handleApprove}
         disabled={isPending}
-        className="bg-green-600 text-white rounded-lg px-5.5 py-2.5 font-black text-[13px] disabled:opacity-50"
+        className="bg-green-600 text-white rounded-lg px-5.5 py-2.5 font-black text-base disabled:opacity-50"
       >
         承認する
       </button>

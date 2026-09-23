@@ -36,7 +36,7 @@ export function ItineraryModerationActions({
         <button
           onClick={handleHide}
           disabled={isPending}
-          className="bg-red-600 text-white rounded-lg px-4.5 py-2.5 font-bold text-xs disabled:opacity-50"
+          className="bg-red-600 text-white rounded-lg px-4.5 py-2.5 font-bold text-sm disabled:opacity-50"
         >
           非公開にする
         </button>
@@ -44,7 +44,7 @@ export function ItineraryModerationActions({
       <button
         onClick={handleDelete}
         disabled={isPending}
-        className="bg-white border border-red-300 text-red-600 rounded-lg px-4.5 py-2.5 font-bold text-xs disabled:opacity-50"
+        className="bg-white border border-red-300 text-red-600 rounded-lg px-4.5 py-2.5 font-bold text-sm disabled:opacity-50"
       >
         削除する
       </button>

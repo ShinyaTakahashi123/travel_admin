@@ -26,7 +26,7 @@ export function AdminDayTabs({ days }: { days: AdminDayData[] }) {
           <button
             key={day.id}
             onClick={() => setActive(day.dayNumber)}
-            className={`px-4.5 py-2 rounded-full font-bold text-xs ${
+            className={`px-4.5 py-2 rounded-full font-bold text-sm ${
               day.dayNumber === active ? "bg-primary text-white" : "bg-muted text-[#475569]"
             }`}
           >
@@ -38,12 +38,12 @@ export function AdminDayTabs({ days }: { days: AdminDayData[] }) {
         {current?.spots.map((spot) => (
           <div key={spot.id} className="border border-muted rounded-lg px-3 py-2.5 flex gap-2.5">
             {spot.visitTimeLabel && (
-              <span className="text-[11px] font-bold text-primary whitespace-nowrap">{spot.visitTimeLabel}</span>
+              <span className="text-sm font-bold text-primary whitespace-nowrap">{spot.visitTimeLabel}</span>
             )}
             <div>
-              <div className="text-[13px] font-bold">{spot.name}</div>
+              <div className="text-base font-bold">{spot.name}</div>
               {spot.stayDurationMin != null && (
-                <div className="text-[11px] text-muted-foreground">滞在 約{spot.stayDurationMin}分</div>
+                <div className="text-sm text-muted-foreground">滞在 約{spot.stayDurationMin}分</div>
               )}
             </div>
           </div>

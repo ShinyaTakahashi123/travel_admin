@@ -27,8 +27,8 @@ function TrendCard({
 
   return (
     <div className="bg-card border border-border rounded-2xl p-4.5 px-5 flex-1">
-      <div className="text-[11px] text-muted-foreground font-bold mb-0.5">{label}</div>
-      <div className="text-xl font-black mb-2.5">{value}</div>
+      <div className="text-sm text-muted-foreground font-bold mb-0.5">{label}</div>
+      <div className="text-2xl font-black mb-2.5">{value}</div>
       {points.length > 1 ? (
         <>
           <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="90" preserveAspectRatio="none">
@@ -45,14 +45,14 @@ function TrendCard({
               strokeLinejoin="round"
             />
           </svg>
-          <div className="flex justify-between text-[10px] text-muted-foreground mt-1">
+          <div className="flex justify-between text-xs text-muted-foreground mt-1">
             <span>{dates[0]}</span>
             <span>{dates[Math.floor(dates.length / 2)]}</span>
             <span>{dates[dates.length - 1]}</span>
           </div>
         </>
       ) : (
-        <div className="h-[90px] flex items-center justify-center text-[11px] text-muted-foreground">
+        <div className="h-[90px] flex items-center justify-center text-sm text-muted-foreground">
           日次データはまだありません（夜間バッチ集計はPhase2で実装予定）
         </div>
       )}
@@ -78,7 +78,7 @@ export default async function DashboardPage() {
 
   return (
     <div>
-      <h1 className="text-lg font-black mb-5">ダッシュボード</h1>
+      <h1 className="text-xl font-black mb-5">ダッシュボード</h1>
 
       <div className="flex gap-4 mb-7 flex-wrap">
         {[
@@ -97,7 +97,7 @@ export default async function DashboardPage() {
           },
         ].map((kpi) => (
           <div key={kpi.label} className="bg-card border border-border rounded-2xl px-5 py-4.5 flex-1 min-w-[150px]">
-            <div className="text-[11px] text-muted-foreground font-bold mb-1.5">{kpi.label}</div>
+            <div className="text-sm text-muted-foreground font-bold mb-1.5">{kpi.label}</div>
             <div className="text-2xl font-black" style={{ color: kpi.color }}>
               {kpi.value}
             </div>
@@ -105,7 +105,7 @@ export default async function DashboardPage() {
         ))}
       </div>
 
-      <h2 className="text-base font-black mb-3">日次推移（直近14日）</h2>
+      <h2 className="text-lg font-black mb-3">日次推移（直近14日）</h2>
       <div className="flex gap-4 flex-col md:flex-row">
         <TrendCard
           label="登録ユーザー数"

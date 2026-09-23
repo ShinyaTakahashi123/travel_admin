@@ -254,6 +254,7 @@ model Itinerary {
   status            String    @default("draft") // draft|pending|published|rejected|private|deleted
   thumbnailUrl      String?   @map("thumbnail_url")
   viewCount         BigInt    @default(0) @map("view_count")
+  likeCount         BigInt    @default(0) @map("like_count") // ログイン不要の「いいね」カウンタ（お気に入りFavoriteとは別概念）
   submittedAt       DateTime? @map("submitted_at") @db.Timestamptz
   reviewedAt        DateTime? @map("reviewed_at") @db.Timestamptz
   reviewedByAdminId String?   @map("reviewed_by_admin_id") @db.Uuid

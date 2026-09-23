@@ -87,10 +87,10 @@ export function AdminSidebar({ name, role }: { name: string; role: string }) {
   return (
     <aside className="w-[230px] flex-shrink-0 bg-[#1E293B] py-5.5 flex flex-col justify-between h-full">
       <div className="flex items-center gap-2.5 px-6 pb-6.5">
-        <div className="w-[30px] h-[30px] rounded-lg bg-primary flex items-center justify-center text-white font-black text-sm">
+        <div className="w-[30px] h-[30px] rounded-lg bg-primary flex items-center justify-center text-white font-black text-base">
           旅
         </div>
-        <span className="text-white font-bold text-sm">旅しおり 管理者サイト</span>
+        <span className="text-white font-bold text-base">旅しおり 管理者サイト</span>
       </div>
       <nav className="flex flex-col flex-1">
         {NAV_ITEMS.map((item) => {
@@ -99,7 +99,7 @@ export function AdminSidebar({ name, role }: { name: string; role: string }) {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 px-6 py-2.5 text-[13px] font-medium ${
+              className={`flex items-center gap-3 px-6 py-2.5 text-base font-medium ${
                 active
                   ? "text-white bg-primary/[.18] border-r-[3px] border-primary"
                   : "text-muted-foreground"
@@ -116,17 +116,17 @@ export function AdminSidebar({ name, role }: { name: string; role: string }) {
 
       <div className="border-t border-white/10 px-6 pt-4">
         <div className="flex items-center gap-2.5 mb-3">
-          <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-[11px] font-black">
+          <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center text-white text-sm font-black">
             {name.charAt(0)}
           </div>
           <div>
-            <div className="text-white text-xs font-bold">{name}</div>
-            <div className="text-[#64748B] text-[10px]">{ROLE_LABEL[role] ?? role}</div>
+            <div className="text-white text-sm font-bold">{name}</div>
+            <div className="text-[#64748B] text-xs">{ROLE_LABEL[role] ?? role}</div>
           </div>
         </div>
         <button
           onClick={() => signOut({ callbackUrl: "/login" })}
-          className="flex items-center gap-2.5 text-muted-foreground text-xs font-bold pb-1"
+          className="flex items-center gap-2.5 text-muted-foreground text-sm font-bold pb-1"
         >
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
