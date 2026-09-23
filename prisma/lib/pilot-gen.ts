@@ -3,7 +3,20 @@
  * prisma/seed-pilot-launch.ts (パイロット3エリア) と、以降のバッチ用スクリプトから共有される。
  */
 import { put } from "@vercel/blob";
+import sharp from "sharp";
 import { prisma } from "../../src/lib/prisma";
+
+/**
+ * Wikipediaの元画像は1枚数MB〜十数MBあり、そのまま保存するとBlobの容量（Hobbyは1GB）を
+ * すぐ使い切るうえ、ページ表示も重くなる。表示に十分な横幅1280pxのJPEGに縮小してから保存する。
+ */
+export async function toWebJpeg(buf: Buffer): Promise<Buffer> {
+  return sharp(buf)
+    .rotate() // EXIFの向き情報を反映
+    .resize({ width: 1280, withoutEnlargement: true })
+    .jpeg({ quality: 80, mozjpeg: true })
+    .toBuffer();
+}
 
 export type SpotSeed = {
   name: string;
@@ -109,11 +122,9 @@ export async function fetchAndUploadImage(
 
     const imgRes = await fetch(imgUrl, { headers: { "User-Agent": UA } });
     if (!imgRes.ok) throw new Error(`image fetch ${imgRes.status}`);
-    const buf = Buffer.from(await imgRes.arrayBuffer());
-    const ext = imgUrl.split("?")[0].split(".").pop()?.toLowerCase() || "jpg";
-    const safeExt = ["jpg", "jpeg", "png", "webp"].includes(ext) ? ext : "jpg";
+    const buf = await toWebJpeg(Buffer.from(await imgRes.arrayBuffer()));
 
-    const blob = await put(`${blobPrefix}/${encodeURIComponent(spot.name)}.${safeExt}`, buf, {
+    const blob = await put(`${blobPrefix}/${encodeURIComponent(spot.name)}.jpg`, buf, {
       access: "public",
       addRandomSuffix: true,
     });
