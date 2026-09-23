@@ -197,7 +197,9 @@ export async function generateAreas(areas: AreaSeed[], imageCache: Map<string, s
         const day = await prisma.day.create({ data: { itineraryId: itinerary.id, dayNumber: d } });
         const spots = dayAssignments[d - 1];
 
-        let clock = new Date(2026, 0, 1, 9, 0, 0);
+        // visit_timeは@db.Time型で、Prismaは時刻部分をUTCとして保存し、表示側もgetUTCHours()で読む。
+        // ローカル時刻（JST）でDateを作ると9時間ずれて保存されるため、UTCで組み立てる。
+        let clock = new Date(Date.UTC(1970, 0, 1, 9, 0, 0));
         for (let idx = 0; idx < spots.length; idx++) {
           const spot = spots[idx];
           const stayDurationMin = 40 + ((idx * 17 + (nights + 1) * 5) % 60);
