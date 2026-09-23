@@ -30,13 +30,13 @@ async function getOrCreateOfficialPlanner() {
   if (!planner) {
     planner = await prisma.plannerAccount.create({
       data: {
-        name: "旅しおり編集部",
+        name: "しおりえ編集部",
         email: OFFICIAL_PLANNER_EMAIL,
         isOfficial: true,
         profile: "運営公式アカウントです。サンプルしおりを投稿しています。",
       },
     });
-    console.log("運営公式プランナーアカウント「旅しおり編集部」を作成しました");
+    console.log("運営公式プランナーアカウント「しおりえ編集部」を作成しました");
   }
   return planner;
 }
