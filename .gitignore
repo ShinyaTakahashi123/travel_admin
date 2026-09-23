@@ -43,3 +43,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# 一回限りのローカル用データ補正スクリプト（本番アプリには不要、削除はせずgit管理外のまま保持）
+prisma/fixup-batch2.ts
