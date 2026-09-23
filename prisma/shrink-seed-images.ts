@@ -15,35 +15,14 @@
  */
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { list, put, del } from "@vercel/blob";
+import { put, del } from "@vercel/blob";
 import { prisma } from "../src/lib/prisma";
+import { listAllBlobs as listAll, referencedBlobUrls as referencedUrls, type BlobInfo } from "../src/lib/blob-cleanup";
 import { toWebJpeg } from "./lib/pilot-gen";
 
 const SEED_FOLDERS = ["batch2", "pilot-launch", "koyo-2026"];
 // これ以下のサイズの画像は縮小済みとみなして対象外にする
 const SIZE_THRESHOLD = 500 * 1024;
-
-type BlobInfo = { url: string; pathname: string; size: number };
-
-async function listAll(): Promise<BlobInfo[]> {
-  const all: BlobInfo[] = [];
-  let cursor: string | undefined;
-  do {
-    const r = await list({ cursor, limit: 1000 });
-    all.push(...r.blobs);
-    cursor = r.hasMore ? r.cursor : undefined;
-  } while (cursor);
-  return all;
-}
-
-async function referencedUrls(): Promise<Set<string>> {
-  const refs = new Set<string>();
-  for (const p of await prisma.photo.findMany({ select: { url: true } })) refs.add(p.url);
-  for (const i of await prisma.itinerary.findMany({ select: { thumbnailUrl: true } })) if (i.thumbnailUrl) refs.add(i.thumbnailUrl);
-  for (const p of await prisma.plannerAccount.findMany({ select: { iconUrl: true } })) if (p.iconUrl) refs.add(p.iconUrl);
-  for (const u of await prisma.userAccount.findMany({ select: { iconUrl: true } })) if (u.iconUrl) refs.add(u.iconUrl);
-  return refs;
-}
 
 const mb = (bytes: number) => `${(bytes / 1048576).toFixed(1)} MB`;
 
