@@ -1,0 +1,469 @@
+// 旅しおり共有サービス Prismaスキーマ
+//
+// ⚠️ 重要: このスキーマは3リポジトリ（user-site / planner-site / admin-site）で
+// 同一のものを複製して保持する運用とする（共有DBのテーブル構造は完全に一致させる必要があるため）。
+// マイグレーション（`prisma migrate dev`）は admin-site リポジトリでのみ実行し、
+// 他の2リポジトリは `prisma generate` のみ行う（migrate は実行しない）こと。
+// スキーマを変更したら、必ず3リポジトリすべてに同じ内容を反映すること。
+//
+// 対応するDDL・ER図・設計判断の詳細は docs/database-design.md を参照。
+//
+// ⚠️ Prismaは任意のCHECK制約を直接表現できないため、database-design.md記載の
+// CHECK制約・pg_trgmインデックスは、prisma/migrations配下の生成済みSQLに
+// 手動で追記する運用とする（本ディレクトリの README.md 参照）。
+//
+// ⚠️ 開発機がWindows ARM64のため、Prisma Clientはネイティブのquery engineバイナリ
+// （x64専用ビルドで「not a valid Win32 application」エラーになる）ではなく、
+// driverAdapters（@prisma/adapter-pg）経由でDB接続する構成に固定している。
+// generator の `engineType = "client"` がこれに対応する設定で、これが無いと
+// adapterを渡してもクライアントは内部でネイティブengineのロードを試みてしまう
+// （2025年時点のPrisma 6の既知の挙動）。詳細は src/lib/prisma.ts 参照。
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+  engineType      = "client"
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgcrypto, pg_trgm]
+}
+
+// ============================================================
+// マスタ系
+// ============================================================
+
+model Area {
+  id           String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  level        String // "prefecture" | "area"
+  parentId     String? @map("parent_id") @db.Uuid
+  displayOrder Int     @default(0) @map("display_order")
+
+  parent   Area?  @relation("AreaHierarchy", fields: [parentId], references: [id])
+  children Area[] @relation("AreaHierarchy")
+
+  userAccountsHome    UserAccount[]        @relation("UserHomeArea")
+  plannerAccountsHome PlannerAccount[]     @relation("PlannerHomeArea")
+  userWishlistAreas   UserWishlistArea[]
+  plannerServiceAreas PlannerServiceArea[]
+  itineraryAreas      ItineraryArea[]
+
+  @@index([parentId])
+  @@map("area")
+}
+
+model PlaceMaster {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String
+  address   String?
+  lat       Decimal? @db.Decimal(9, 6)
+  lng       Decimal? @db.Decimal(9, 6)
+  category  String?
+  source    String // "ai_collected" | "user_submitted"
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  spots Spot[]
+
+  @@map("place_master")
+}
+
+model Tag {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  userInterestTags     UserInterestTag[]
+  plannerSpecialtyTags PlannerSpecialtyTag[]
+  itineraryTags        ItineraryTag[]
+
+  @@map("tag")
+}
+
+// 目的タグ（お寺・温泉・自然・グランピング等）。しおりの「テーマ・ジャンル」(Tag)とは
+// 別軸のマスタとして独立させている。しおり登録時は任意入力。
+model PurposeTag {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  itineraryPurposeTags ItineraryPurposeTag[]
+
+  @@map("purpose_tag")
+}
+
+// ============================================================
+// ユーザーサイト
+// ============================================================
+
+model UserAccount {
+  id                  String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String
+  email               String    @unique
+  passwordHash        String?   @map("password_hash") // Googleログインのみのアカウントはパスワード未設定のためNULL許容
+  googleId            String?   @unique @map("google_id")
+  iconUrl             String?   @map("icon_url")
+  profile             String?
+  gender              String?
+  age                 Int?
+  status              String    @default("active") // "active" | "suspended"
+  homeAreaId          String?   @map("home_area_id") @db.Uuid
+  resetToken          String?   @map("reset_token")
+  resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
+  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  homeArea      Area?              @relation("UserHomeArea", fields: [homeAreaId], references: [id])
+  wishlistAreas UserWishlistArea[]
+  interestTags  UserInterestTag[]
+  subscription  Subscription?
+  favorites     Favorite[]
+  comments      Comment[]
+  reports       Report[]
+  sentRequests  Request[]
+
+  @@index([homeAreaId])
+  @@map("user_account")
+}
+
+model UserWishlistArea {
+  userAccountId String @map("user_account_id") @db.Uuid
+  areaId        String @map("area_id") @db.Uuid
+
+  userAccount UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  area        Area        @relation(fields: [areaId], references: [id], onDelete: Cascade)
+
+  @@id([userAccountId, areaId])
+  @@map("user_wishlist_area")
+}
+
+model UserInterestTag {
+  userAccountId String @map("user_account_id") @db.Uuid
+  tagId         String @map("tag_id") @db.Uuid
+
+  userAccount UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  tag         Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([userAccountId, tagId])
+  @@map("user_interest_tag")
+}
+
+model Subscription {
+  id              String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userAccountId   String    @unique @map("user_account_id") @db.Uuid
+  plan            String    @default("free") // "free" | "premium"
+  startedAt       DateTime  @default(now()) @map("started_at") @db.Timestamptz
+  expiredAt       DateTime? @map("expired_at") @db.Timestamptz
+  paymentProvider String?   @map("payment_provider")
+  paymentRef      String?   @map("payment_ref")
+
+  userAccount UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+
+  @@map("subscription")
+}
+
+// ============================================================
+// プランナーサイト
+// ============================================================
+
+model PlannerAccount {
+  id                  String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String
+  email               String    @unique
+  passwordHash        String?   @map("password_hash") // Googleログインのみのアカウントはパスワード未設定のためNULL許容
+  googleId            String?   @unique @map("google_id")
+  iconUrl             String?   @map("icon_url")
+  profile             String? // 自己紹介文
+  isOfficial          Boolean   @default(false) @map("is_official")
+  gender              String?
+  age                 Int?
+  status              String    @default("active") // "active" | "suspended"
+  homeAreaId          String?   @map("home_area_id") @db.Uuid
+  resetToken          String?   @map("reset_token")
+  resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
+  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  homeArea         Area?                 @relation("PlannerHomeArea", fields: [homeAreaId], references: [id])
+  serviceAreas     PlannerServiceArea[]
+  specialtyTags    PlannerSpecialtyTag[]
+  itineraries      Itinerary[]
+  receivedRequests Request[]
+
+  @@index([homeAreaId])
+  @@map("planner_account")
+}
+
+model PlannerServiceArea {
+  plannerAccountId String @map("planner_account_id") @db.Uuid
+  areaId           String @map("area_id") @db.Uuid
+
+  plannerAccount PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+  area           Area           @relation(fields: [areaId], references: [id], onDelete: Cascade)
+
+  @@id([plannerAccountId, areaId])
+  @@map("planner_service_area")
+}
+
+model PlannerSpecialtyTag {
+  plannerAccountId String @map("planner_account_id") @db.Uuid
+  tagId            String @map("tag_id") @db.Uuid
+
+  plannerAccount PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+  tag            Tag            @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([plannerAccountId, tagId])
+  @@map("planner_specialty_tag")
+}
+
+// ============================================================
+// 管理者サイト
+// ============================================================
+
+model Admin {
+  id                  String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name                String
+  email               String    @unique
+  passwordHash        String?   @map("password_hash") // 招待中(status='invited')はNULL
+  role                String // "super" | "staff"
+  status              String    @default("invited") // "invited" | "active" | "disabled"
+  inviteToken         String?   @map("invite_token")
+  inviteExpiresAt     DateTime? @map("invite_expires_at") @db.Timestamptz
+  resetToken          String?   @map("reset_token")
+  resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
+  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  reviewedItineraries Itinerary[]
+
+  @@map("admin")
+}
+
+// ============================================================
+// しおり本体
+// ============================================================
+
+model Itinerary {
+  id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  plannerAccountId  String    @map("planner_account_id") @db.Uuid
+  title             String
+  description       String?
+  nights            Int       @default(0) // 0 = 日帰り
+  status            String    @default("draft") // draft|pending|published|rejected|private|deleted
+  thumbnailUrl      String?   @map("thumbnail_url")
+  viewCount         BigInt    @default(0) @map("view_count")
+  submittedAt       DateTime? @map("submitted_at") @db.Timestamptz
+  reviewedAt        DateTime? @map("reviewed_at") @db.Timestamptz
+  reviewedByAdminId String?   @map("reviewed_by_admin_id") @db.Uuid
+  rejectionReason   String?   @map("rejection_reason")
+  createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  plannerAccount  PlannerAccount  @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+  reviewedByAdmin Admin?          @relation(fields: [reviewedByAdminId], references: [id])
+  areas           ItineraryArea[]
+  tags            ItineraryTag[]
+  purposeTags     ItineraryPurposeTag[]
+  days            Day[]
+  favorites       Favorite[]
+  comments        Comment[]
+  shareLogs       ShareLog[]
+  requests        Request[]
+  pageViews       PageView[]
+
+  @@index([plannerAccountId])
+  @@index([status])
+  @@index([status, createdAt(sort: Desc)])
+  @@index([status, viewCount(sort: Desc)])
+  @@map("itinerary")
+}
+
+model ItineraryArea {
+  itineraryId String @map("itinerary_id") @db.Uuid
+  areaId      String @map("area_id") @db.Uuid
+
+  itinerary Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+  area      Area      @relation(fields: [areaId], references: [id])
+
+  @@id([itineraryId, areaId])
+  @@index([areaId])
+  @@map("itinerary_area")
+}
+
+model ItineraryTag {
+  itineraryId String @map("itinerary_id") @db.Uuid
+  tagId       String @map("tag_id") @db.Uuid
+
+  itinerary Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+  tag       Tag       @relation(fields: [tagId], references: [id])
+
+  @@id([itineraryId, tagId])
+  @@index([tagId])
+  @@map("itinerary_tag")
+}
+
+model ItineraryPurposeTag {
+  itineraryId  String @map("itinerary_id") @db.Uuid
+  purposeTagId String @map("purpose_tag_id") @db.Uuid
+
+  itinerary  Itinerary  @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+  purposeTag PurposeTag @relation(fields: [purposeTagId], references: [id])
+
+  @@id([itineraryId, purposeTagId])
+  @@index([purposeTagId])
+  @@map("itinerary_purpose_tag")
+}
+
+model Day {
+  id          String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  itineraryId String @map("itinerary_id") @db.Uuid
+  dayNumber   Int    @map("day_number")
+
+  itinerary Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+  spots     Spot[]
+
+  @@unique([itineraryId, dayNumber])
+  @@map("day")
+}
+
+model Spot {
+  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  dayId              String    @map("day_id") @db.Uuid
+  placeMasterId      String?   @map("place_master_id") @db.Uuid
+  orderNo            Int       @map("order_no")
+  name               String
+  address            String?
+  lat                Decimal?  @db.Decimal(9, 6)
+  lng                Decimal?  @db.Decimal(9, 6)
+  visitTime          DateTime? @map("visit_time") @db.Time
+  memo               String?
+  stayDurationMin    Int?      @map("stay_duration_min")
+  websiteUrl         String?   @map("website_url")
+  transitMode        String?   @map("transit_mode") // walk|train|bus|car|taxi|other
+  transitDurationMin Int?      @map("transit_duration_min")
+  transitLine        String?   @map("transit_line")
+
+  day         Day          @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  placeMaster PlaceMaster? @relation(fields: [placeMasterId], references: [id])
+  photos      Photo[]
+
+  @@unique([dayId, orderNo])
+  @@index([placeMasterId])
+  @@map("spot")
+}
+
+model Photo {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  spotId    String   @map("spot_id") @db.Uuid
+  url       String
+  caption   String?
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  spot Spot @relation(fields: [spotId], references: [id], onDelete: Cascade)
+
+  @@index([spotId])
+  @@map("photo")
+}
+
+// ============================================================
+// エンゲージメント
+// ============================================================
+
+model Favorite {
+  userAccountId String   @map("user_account_id") @db.Uuid
+  itineraryId   String   @map("itinerary_id") @db.Uuid
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  userAccount UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  itinerary   Itinerary   @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+
+  @@id([userAccountId, itineraryId])
+  @@index([itineraryId])
+  @@map("favorite")
+}
+
+model Comment {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  itineraryId   String   @map("itinerary_id") @db.Uuid
+  userAccountId String   @map("user_account_id") @db.Uuid
+  body          String
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  itinerary   Itinerary   @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+  userAccount UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+
+  @@index([itineraryId, createdAt(sort: Desc)])
+  @@map("comment")
+}
+
+model Report {
+  id                    String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  targetType            String   @map("target_type") // "itinerary" | "comment"
+  targetId              String   @map("target_id") @db.Uuid
+  reporterUserAccountId String   @map("reporter_user_account_id") @db.Uuid
+  reason                String
+  status                String   @default("unread") // unread|resolved|dismissed
+  createdAt             DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  reporterUserAccount UserAccount @relation(fields: [reporterUserAccountId], references: [id], onDelete: Cascade)
+
+  @@index([status])
+  @@index([targetType, targetId])
+  @@map("report")
+}
+
+model ShareLog {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  itineraryId String   @map("itinerary_id") @db.Uuid
+  platform    String // x|facebook|line|other
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  itinerary Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+
+  @@index([itineraryId, platform])
+  @@map("share_log")
+}
+
+model Request {
+  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  plannerAccountId    String   @map("planner_account_id") @db.Uuid
+  senderUserAccountId String   @map("sender_user_account_id") @db.Uuid
+  itineraryId         String?  @map("itinerary_id") @db.Uuid
+  message             String
+  status              String   @default("unread") // unread|read|responded
+  createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  plannerAccount    PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+  senderUserAccount UserAccount    @relation(fields: [senderUserAccountId], references: [id], onDelete: Cascade)
+  itinerary         Itinerary?     @relation(fields: [itineraryId], references: [id], onDelete: SetNull)
+
+  @@index([plannerAccountId, status])
+  @@map("request")
+}
+
+// ============================================================
+// 分析・集計
+// ============================================================
+
+model PageView {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  itineraryId String?  @map("itinerary_id") @db.Uuid
+  viewedAt    DateTime @default(now()) @map("viewed_at") @db.Timestamptz
+
+  itinerary Itinerary? @relation(fields: [itineraryId], references: [id], onDelete: SetNull)
+
+  @@index([viewedAt])
+  @@map("page_view")
+}
+
+model DailyMetric {
+  id                         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  metricDate                 DateTime @unique @map("metric_date") @db.Date
+  totalUserAccounts          Int      @map("total_user_accounts")
+  totalPublishedItineraries  Int      @map("total_published_itineraries")
+  pvCount                    Int      @map("pv_count")
+
+  @@map("daily_metric")
+}
