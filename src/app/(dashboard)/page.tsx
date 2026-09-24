@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { jstDateKeyDaysAgo, jstMidnightUtc } from "@/lib/format";
 
 function TrendCard({
   label,
@@ -61,8 +62,8 @@ function TrendCard({
 }
 
 export default async function DashboardPage() {
-  const todayStart = new Date();
-  todayStart.setHours(0, 0, 0, 0);
+  // 「本日」は日本時間の0時区切りで判定する
+  const todayStart = jstMidnightUtc(jstDateKeyDaysAgo(0));
 
   const [userCount, publishedCount, todayPvCount, pendingCount, unreadReportCount, dailyMetrics] =
     await Promise.all([
@@ -74,7 +75,7 @@ export default async function DashboardPage() {
       prisma.dailyMetric.findMany({ orderBy: { metricDate: "asc" }, take: 14 }),
     ]);
 
-  const dates = dailyMetrics.map((m) => `${m.metricDate.getMonth() + 1}/${m.metricDate.getDate()}`);
+  const dates = dailyMetrics.map((m) => `${m.metricDate.getUTCMonth() + 1}/${m.metricDate.getUTCDate()}`);
 
   return (
     <div>

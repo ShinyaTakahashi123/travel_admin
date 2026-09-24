@@ -1,13 +1,41 @@
+// サーバー(Vercel)はUTCで動作するため、getFullYear()等のローカル時刻系メソッドを
+// そのまま使うと日本時間の0〜9時台が前日の日付になってしまう。日本にはサマータイムが
+// ないため、常に+9時間した上でUTC系メソッドで読み出せば日本時間になる。
+const JST_OFFSET_MS = 9 * 60 * 60 * 1000;
+
+function toJst(date: Date): Date {
+  return new Date(date.getTime() + JST_OFFSET_MS);
+}
+
 export function formatDate(date: Date): string {
-  return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, "0")}/${String(
-    date.getDate()
+  const d = toJst(date);
+  return `${d.getUTCFullYear()}/${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(
+    d.getUTCDate()
   ).padStart(2, "0")}`;
 }
 
 export function formatDateTime(date: Date): string {
-  return `${formatDate(date)} ${String(date.getHours()).padStart(2, "0")}:${String(
-    date.getMinutes()
+  const d = toJst(date);
+  return `${formatDate(date)} ${String(d.getUTCHours()).padStart(2, "0")}:${String(
+    d.getUTCMinutes()
   ).padStart(2, "0")}`;
+}
+
+// 日次集計（本日のPV・日次推移）を日本時間の0時区切りにするためのヘルパー
+export function toJstDateKey(date: Date): string {
+  return toJst(date).toISOString().slice(0, 10);
+}
+
+// 今日（日本時間）からdaysAgo日前の日付キー（YYYY-MM-DD、日本時間基準）
+export function jstDateKeyDaysAgo(daysAgo: number): string {
+  const d = toJst(new Date());
+  d.setUTCDate(d.getUTCDate() - daysAgo);
+  return d.toISOString().slice(0, 10);
+}
+
+// 日本時間での日付キー（YYYY-MM-DD）が指す「その日の0時（日本時間）」に対応するUTC時刻
+export function jstMidnightUtc(dateKey: string): Date {
+  return new Date(`${dateKey}T00:00:00+09:00`);
 }
 
 export function formatNights(nights: number): string {
