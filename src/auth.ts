@@ -63,14 +63,21 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async jwt({ token, user }) {
       // 利用停止・無効化・権限変更・パスワード変更をログイン中の人にもすぐ効かせるため、
       // 毎回DBを確認する（存在しない・非activeならnullを返してログアウト扱いにする）
-      const email = user?.email ?? token.email;
-      if (!email) return token;
-      const admin = await prisma.admin.findUnique({ where: { email } });
+      // 初回サインイン時だけemailでアカウントを探し、以降はtoken内のIDで確認する
+      // (同じメールアドレスのAdminが作り直された場合に、古いJWTがつながらないようにするため)
+      if (user?.email) {
+        const admin = await prisma.admin.findUnique({ where: { email: user.email } });
+        if (!admin || admin.status !== "active") return null;
+        token.adminId = admin.id;
+        token.role = admin.role;
+        return token;
+      }
+      if (!token.adminId) return null;
+      const admin = await prisma.admin.findUnique({ where: { id: token.adminId as string } });
       if (!admin || admin.status !== "active") return null;
       if (admin.passwordChangedAt && token.iat && admin.passwordChangedAt.getTime() / 1000 > token.iat) {
         return null;
       }
-      token.adminId = admin.id;
       token.role = admin.role;
       return token;
     },

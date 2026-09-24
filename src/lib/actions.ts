@@ -310,6 +310,9 @@ export async function setPlannerAccountStatus(
   status: "active" | "suspended"
 ) {
   await requireAdmin();
+  const account = await prisma.plannerAccount.findUniqueOrThrow({ where: { id: plannerAccountId } });
+  // 公式プランナー(公式しおりの投稿元)は操作ミスによる利用停止を防ぐため対象外
+  if (account.isOfficial) throw new Error("公式プランナーアカウントは操作できません");
   await prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { status } });
   revalidatePath("/planners");
   revalidatePath(`/planners/${plannerAccountId}`);
@@ -327,6 +330,9 @@ export async function setPlannerAccountLegalHold(plannerAccountId: string, legal
 export async function deletePlannerAccount(plannerAccountId: string) {
   await requireAdmin();
   const account = await prisma.plannerAccount.findUniqueOrThrow({ where: { id: plannerAccountId } });
+
+  // 公式プランナー(公式しおりの投稿元)は操作ミス1回で公式しおりが全て消えるため、削除の対象外
+  if (account.isOfficial) throw new Error("公式プランナーアカウントは削除できません");
 
   const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
   const submissions = await prisma.itinerary.findMany({

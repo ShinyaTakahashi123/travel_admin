@@ -47,6 +47,14 @@ export default async function PlannerAccountDetailPage({
           <div>
             <div className="flex items-center gap-2 flex-wrap">
               <div className="font-black text-xl">{planner.name}</div>
+              {planner.isOfficial && (
+                <span
+                  className="text-sm font-bold px-2.5 py-0.5 rounded-full"
+                  style={{ background: "#EEF0FF", color: "#4F46E5" }}
+                >
+                  公式
+                </span>
+              )}
               <span
                 className="text-sm font-bold px-2.5 py-0.5 rounded-full"
                 style={{ background: status.bg, color: status.fg }}
@@ -71,6 +79,7 @@ export default async function PlannerAccountDetailPage({
           plannerId={planner.id}
           status={planner.status}
           legalHold={planner.legalHold}
+          isOfficial={planner.isOfficial}
           isSuperAdmin={admin?.role === "super"}
         />
       </div>
