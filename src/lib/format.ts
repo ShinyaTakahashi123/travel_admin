@@ -79,3 +79,32 @@ export const INQUIRY_SOURCE_LABEL: Record<string, string> = {
   user: "ユーザーサイト",
   planner: "プランナーサイト",
 };
+
+// AdminAuditLog.action の表示名
+export const AUDIT_LOG_ACTION_LABEL: Record<string, string> = {
+  approve: "承認",
+  reject: "却下",
+  hide: "非公開にする",
+  delete: "削除",
+  suspend: "利用停止",
+  unsuspend: "利用停止の解除",
+  legal_hold_on: "保全の印を付ける",
+  legal_hold_off: "保全の印を外す",
+  invite: "招待",
+  change_role: "権限の変更",
+  disable: "無効化",
+  resolve_hide: "対応(非公開にする)",
+  dismiss: "却下(通報)",
+  mark_responded: "対応済みにする",
+  mark_unresponded: "未対応に戻す",
+};
+
+// AdminAuditLog.targetType の表示名
+export const AUDIT_LOG_TARGET_TYPE_LABEL: Record<string, string> = {
+  itinerary: "しおり",
+  user_account: "ユーザー",
+  planner_account: "プランナー",
+  admin: "管理者",
+  report: "通報",
+  inquiry: "お問い合わせ",
+};

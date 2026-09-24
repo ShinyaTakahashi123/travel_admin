@@ -258,8 +258,32 @@ model Admin {
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
   reviewedItineraries Itinerary[]
+  auditLogs           AdminAuditLog[]
 
   @@map("admin")
+}
+
+// 管理者の操作の記録(承認・却下・利用停止・削除などの経緯)。画面から編集・削除はできない。
+// detailには、変更前後の状態・却下理由・しおりのタイトルなど「運営者が書いた文章」のみ入れる。
+// 利用者・プランナーのメールアドレス・名前・IPアドレス、通報やお問い合わせの本文は入れない
+// (対象はtargetIdで分かる)。保存期間は3年(Cronで削除。legalHold=trueのものは対象外)
+model AdminAuditLog {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  adminId    String   @map("admin_id") @db.Uuid
+  action     String
+  targetType String   @map("target_type") // itinerary|user_account|planner_account|admin|report|inquiry
+  targetId   String   @map("target_id") @db.Uuid
+  detail     Json?    @db.JsonB
+  // 裁判・開示請求の手続きが続いているなど、法務が保存を求めた記録は3年を過ぎても消さない。
+  // 付け外しはDBの直接操作でよく、画面は不要
+  legalHold  Boolean  @default(false) @map("legal_hold")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  admin Admin @relation(fields: [adminId], references: [id])
+
+  @@index([targetType, targetId])
+  @@index([createdAt])
+  @@map("admin_audit_log")
 }
 
 // ============================================================
