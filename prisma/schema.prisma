@@ -46,6 +46,8 @@ model Area {
   // 都道府県同士(parentIdがnullの行同士)の重複防止は、Prismaで表現できない部分一意インデックス
   // (parent_id IS NULL AND slug IS NOT NULLの範囲のみ対象)をマイグレーションで別途作成している
   slug         String?
+  // まとめページの導入文・meta descriptionに使う紹介文(100〜200字)。未設定なら自動生成の文言を使う
+  description  String?
 
   parent   Area?  @relation("AreaHierarchy", fields: [parentId], references: [id])
   children Area[] @relation("AreaHierarchy")
