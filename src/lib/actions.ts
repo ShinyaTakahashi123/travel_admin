@@ -5,8 +5,11 @@ import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { sendMail } from "@/lib/mail";
 
 const INVITE_EXPIRES_HOURS = 72;
+const USER_SITE_URL = process.env.USER_SITE_URL ?? "https://shiorietrip.com";
+const PLANNER_SITE_URL = process.env.PLANNER_SITE_URL ?? "https://planner.shiorietrip.com";
 
 async function requireAdmin() {
   const session = await auth();
@@ -126,7 +129,7 @@ export async function acceptInvite({
 
 export async function approveItinerary(itineraryId: string) {
   const user = await requireAdmin();
-  await prisma.itinerary.update({
+  const itinerary = await prisma.itinerary.update({
     where: { id: itineraryId },
     data: {
       status: "published",
@@ -134,9 +137,39 @@ export async function approveItinerary(itineraryId: string) {
       reviewedByAdminId: user.id,
       rejectionReason: null,
     },
+    include: { plannerAccount: { select: { email: true, isOfficial: true } } },
   });
   revalidatePath("/itineraries");
   revalidatePath(`/itineraries/${itineraryId}`);
+
+  // メール送信に失敗しても、承認処理自体は成功させる
+  try {
+    if (!itinerary.plannerAccount.isOfficial) {
+      const url = `${USER_SITE_URL}/itinerary/${itinerary.id}`;
+      await sendMail({
+        to: itinerary.plannerAccount.email,
+        subject: "【しおりえ】しおりが公開されました",
+        text: [
+          `「${itinerary.title}」が公開されました。`,
+          "",
+          "以下のURLからご確認いただけます。",
+          url,
+          "",
+          "ぜひSNSでシェアして、多くの方に見てもらいましょう。",
+          "（しおり詳細ページの共有ボタンから、X・Facebook・LINEなどにシェアできます）",
+          "",
+          "引き続き、しおりえをよろしくお願いいたします。",
+          "",
+          "---",
+          "しおりえ",
+          USER_SITE_URL,
+          "※このメールは送信専用です。",
+        ].join("\n"),
+      });
+    }
+  } catch (err) {
+    console.error("[approveItinerary] 通知メールの送信に失敗しました:", err);
+  }
 }
 
 export async function rejectItinerary(itineraryId: string, reason: string) {
@@ -144,7 +177,7 @@ export async function rejectItinerary(itineraryId: string, reason: string) {
   const trimmed = reason.trim();
   if (!trimmed) throw new Error("却下理由を入力してください");
 
-  await prisma.itinerary.update({
+  const itinerary = await prisma.itinerary.update({
     where: { id: itineraryId },
     data: {
       status: "rejected",
@@ -152,9 +185,40 @@ export async function rejectItinerary(itineraryId: string, reason: string) {
       reviewedByAdminId: user.id,
       rejectionReason: trimmed,
     },
+    include: { plannerAccount: { select: { email: true, isOfficial: true } } },
   });
   revalidatePath("/itineraries");
   revalidatePath(`/itineraries/${itineraryId}`);
+
+  // メール送信に失敗しても、却下処理自体は成功させる
+  try {
+    if (!itinerary.plannerAccount.isOfficial) {
+      const editUrl = `${PLANNER_SITE_URL}/itineraries/${itinerary.id}/edit`;
+      await sendMail({
+        to: itinerary.plannerAccount.email,
+        subject: "【しおりえ】しおりの公開申請について",
+        text: [
+          `「${itinerary.title}」の公開申請について、今回は掲載を見送らせていただきました。`,
+          "",
+          "理由:",
+          trimmed,
+          "",
+          "内容を修正のうえ、再度公開申請していただくことができます。",
+          "以下のURLから編集画面を開けます。",
+          editUrl,
+          "",
+          "ご不明な点があれば、お問い合わせページからご連絡ください。",
+          "",
+          "---",
+          "しおりえ",
+          PLANNER_SITE_URL,
+          "※このメールは送信専用です。",
+        ].join("\n"),
+      });
+    }
+  } catch (err) {
+    console.error("[rejectItinerary] 通知メールの送信に失敗しました:", err);
+  }
 }
 
 export async function hideItinerary(itineraryId: string) {
