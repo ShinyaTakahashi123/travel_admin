@@ -12,11 +12,21 @@
  *   --commit      … 登録モード（同名のしおりが既にあればスキップ）
  *   --fill-photos … 登録済みしおりの写真が欠けているスポットに写真を補完
  */
-import { writeFileSync } from "node:fs";
+import { writeFileSync, existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { prisma } from "../../src/lib/prisma";
-import { fetchAndUploadImage, OFFICIAL_PLANNER_ID, ADMIN_ID, type SpotSeed } from "./pilot-gen";
+import { fetchAndUploadImage, OFFICIAL_PLANNER_ID, ADMIN_ID, type SpotSeed, type PhotoCredit } from "./pilot-gen";
 import existingPhotoCache from "../photo-cache.json";
+
+const CREDIT_CACHE_PATH = join(process.cwd(), "prisma", "photo-credit-cache.json");
+function loadCreditCache(): Map<string, PhotoCredit | null> {
+  if (!existsSync(CREDIT_CACHE_PATH)) return new Map();
+  const raw = JSON.parse(readFileSync(CREDIT_CACHE_PATH, "utf8")) as Record<string, PhotoCredit | null>;
+  return new Map(Object.entries(raw));
+}
+function saveCreditCache(creditCache: Map<string, PhotoCredit | null>) {
+  writeFileSync(CREDIT_CACHE_PATH, JSON.stringify(Object.fromEntries(creditCache.entries())));
+}
 
 export type Transit = { mode: "walk" | "train" | "bus" | "car" | "taxi" | "other"; min: number; line?: string };
 
@@ -262,6 +272,7 @@ function saveImageCache(imageCache: Map<string, string | null>) {
 
 async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map<HandmadeSpot, ResolvedSpot>, blobPrefix: string) {
   const imageCache = new Map<string, string | null>(Object.entries(existingPhotoCache as Record<string, string>));
+  const creditCache = loadCreditCache();
   const prefectures = await prisma.area.findMany({ where: { level: "prefecture" } });
 
   for (const it of itineraries) {
@@ -287,7 +298,7 @@ async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map
     for (const spot of it.days.flat()) {
       if (usedTitles.has(spot.wikiTitle)) continue;
       usedTitles.add(spot.wikiTitle);
-      photoBySpot.set(spot, await fetchAndUploadImage(imageCache, photoSeed(spot), blobPrefix));
+      photoBySpot.set(spot, await fetchAndUploadImage(imageCache, photoSeed(spot), blobPrefix, creditCache));
     }
     const now = new Date();
 
@@ -314,6 +325,7 @@ async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map
               create: spots.map((spot, idx) => {
                 const r = resolved.get(spot)!;
                 const photoUrl = photoBySpot.get(spot);
+                const credit = creditCache.get(spot.wikiTitle);
                 return {
                   orderNo: idx + 1,
                   name: spot.name,
@@ -327,7 +339,20 @@ async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map
                   transitMode: spot.transit?.mode ?? null,
                   transitDurationMin: spot.transit?.min ?? null,
                   transitLine: spot.transit?.line ?? null,
-                  photos: photoUrl ? { create: [{ url: photoUrl, caption: spot.name }] } : undefined,
+                  photos: photoUrl
+                    ? {
+                        create: [
+                          {
+                            url: photoUrl,
+                            caption: spot.name,
+                            sourceUrl: credit?.sourceUrl ?? null,
+                            author: credit?.author ?? null,
+                            license: credit?.license ?? null,
+                            licenseUrl: credit?.licenseUrl ?? null,
+                          },
+                        ],
+                      }
+                    : undefined,
                 };
               }),
             },
@@ -337,6 +362,7 @@ async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map
     });
     console.log(`作成: ${it.title}`);
     saveImageCache(imageCache);
+    saveCreditCache(creditCache);
   }
   console.log("\n完了しました。");
 }
@@ -347,6 +373,7 @@ async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map
  */
 async function fillMissingPhotos(itineraries: HandmadeItinerary[], blobPrefix: string) {
   const imageCache = new Map<string, string | null>(Object.entries(existingPhotoCache as Record<string, string>));
+  const creditCache = loadCreditCache();
   for (const it of itineraries) {
     const itinerary = await prisma.itinerary.findFirst({
       where: { title: it.title, plannerAccountId: OFFICIAL_PLANNER_ID },
@@ -364,9 +391,20 @@ async function fillMissingPhotos(itineraries: HandmadeItinerary[], blobPrefix: s
         if (row.photos.length > 0) continue;
         const spot = it.days[day.dayNumber - 1]?.[row.orderNo - 1];
         if (!spot || spot.name !== row.name) continue;
-        const url = await fetchAndUploadImage(imageCache, photoSeed(spot), blobPrefix);
+        const url = await fetchAndUploadImage(imageCache, photoSeed(spot), blobPrefix, creditCache);
         if (url) {
-          await prisma.photo.create({ data: { spotId: row.id, url, caption: row.name } });
+          const credit = creditCache.get(spot.wikiTitle);
+          await prisma.photo.create({
+            data: {
+              spotId: row.id,
+              url,
+              caption: row.name,
+              sourceUrl: credit?.sourceUrl ?? null,
+              author: credit?.author ?? null,
+              license: credit?.license ?? null,
+              licenseUrl: credit?.licenseUrl ?? null,
+            },
+          });
           added++;
         }
       }
@@ -383,6 +421,7 @@ async function fillMissingPhotos(itineraries: HandmadeItinerary[], blobPrefix: s
     console.log(`写真補完: ${it.title}（${added}枚追加）`);
   }
   saveImageCache(imageCache);
+  saveCreditCache(creditCache);
 }
 
 /** 各seedスクリプトのエントリポイント。コマンドライン引数で確認／登録／写真補完を切り替える */

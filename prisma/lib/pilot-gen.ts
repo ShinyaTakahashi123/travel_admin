@@ -43,6 +43,89 @@ export type SpotSeed = {
   wikiTitle: string;
 };
 
+export type PhotoCredit = {
+  sourceUrl?: string | null;
+  author?: string | null;
+  license?: string | null;
+  licenseUrl?: string | null;
+};
+
+// 「フェアユース」「著作権法の引用規定」などを根拠にした無許諾の掲載は対象外。
+// それ以外（CC BY系・CC0・パブリックドメイン・Attribution・Copyrighted free use）は自由利用として扱う。
+// prisma/research-photo-credits.ts と同じ基準（docs/specs/20260924-photo-credits.md）。
+const REJECTED_LICENSE_HINTS = ["フェアユース", "fair use", "著作権法"];
+const FREE_LICENSES = [
+  "cc by", "cc-by", "cc0", "public domain",
+  "パブリックドメイン", "パブリック・ドメイン", "パブリック ドメイン",
+  "attribution", "copyrighted free use",
+];
+function isFreeLicense(licenseShortName: string | undefined): boolean {
+  if (!licenseShortName) return false;
+  const l = licenseShortName.toLowerCase();
+  if (REJECTED_LICENSE_HINTS.some((r) => l.includes(r.toLowerCase()))) return false;
+  return FREE_LICENSES.some((f) => l.includes(f));
+}
+
+function stripHtml(s: string | undefined): string | undefined {
+  if (!s) return s;
+  return s.replace(/<[^>]+>/g, "").trim() || undefined;
+}
+
+/**
+ * Wikipediaのoriginalimage.sourceはサムネイルURL（.../thumb/…/3840px-Foo.jpg）のことが多く、
+ * 元のファイル名は末尾ではなく「thumb」の次から数えて2つ手前のセグメントに入っている。
+ * prisma/research-photo-credits.ts と同じ抽出ロジック。
+ */
+function extractFileTitle(imageSourceUrl: string): string | null {
+  const withoutQuery = imageSourceUrl.split("?")[0];
+  const segments = decodeURIComponent(withoutQuery).split("/");
+  if (segments.includes("thumb") && segments.length >= 2) return segments[segments.length - 2];
+  const last = segments[segments.length - 1];
+  if (/\.(?:jpg|jpeg|png|gif|svg|webp)$/i.test(last)) return last;
+  return null;
+}
+
+/** スポットのWikipedia記事から、代表画像の出典（撮影者・ライセンス）を取得する。取得・判定に失敗した場合はnull。 */
+export async function fetchImageCredit(wikiTitle: string): Promise<PhotoCredit | null> {
+  const UA = "shiorie-photo-credit/1.0 (contact: st.83.53.abcd@gmail.com)";
+  try {
+    const summaryRes = await fetch(
+      `https://ja.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(wikiTitle)}`,
+      { headers: { "User-Agent": UA } }
+    );
+    if (!summaryRes.ok) return null;
+    const summary = await summaryRes.json();
+    const imgUrl: string | undefined = summary.originalimage?.source;
+    if (!imgUrl) return null;
+
+    const fileTitle = extractFileTitle(imgUrl);
+    if (!fileTitle) return null;
+
+    const infoRes = await fetch(
+      `https://ja.wikipedia.org/w/api.php?action=query&prop=imageinfo&iiprop=url|extmetadata&titles=${encodeURIComponent(`File:${fileTitle}`)}&format=json`,
+      { headers: { "User-Agent": UA } }
+    );
+    if (!infoRes.ok) return null;
+    const infoJson = await infoRes.json();
+    const page: any = Object.values(infoJson.query?.pages ?? {})[0];
+    const ii = page?.imageinfo?.[0];
+    if (!ii) return null;
+
+    const meta = ii.extmetadata ?? {};
+    const license = meta.LicenseShortName?.value as string | undefined;
+    if (!isFreeLicense(license)) return null;
+
+    return {
+      sourceUrl: ii.descriptionurl as string | undefined,
+      author: stripHtml(meta.Artist?.value)?.slice(0, 100),
+      license,
+      licenseUrl: meta.LicenseUrl?.value as string | undefined,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export type AreaSeed = {
   key: string;
   areaId: string;
@@ -121,9 +204,15 @@ export function buildDayAssignments(pool: SpotSeed[], seedKey: string, dayCount:
 export async function fetchAndUploadImage(
   imageCache: Map<string, string | null>,
   spot: SpotSeed,
-  blobPrefix: string
+  blobPrefix: string,
+  creditCache?: Map<string, PhotoCredit | null>
 ): Promise<string | null> {
-  if (imageCache.has(spot.name)) return imageCache.get(spot.name)!;
+  if (imageCache.has(spot.name)) {
+    if (creditCache && !creditCache.has(spot.name)) {
+      creditCache.set(spot.name, await fetchImageCredit(spot.wikiTitle));
+    }
+    return imageCache.get(spot.name)!;
+  }
   const UA = "tabishiori-pilot/1.0 (contact: st.83.53.abcd@gmail.com)";
   try {
     const summaryRes = await fetch(
@@ -145,10 +234,12 @@ export async function fetchAndUploadImage(
     });
     imageCache.set(spot.name, blob.url);
     console.log(`  画像取得OK: ${spot.name} -> ${blob.url}`);
+    if (creditCache) creditCache.set(spot.name, await fetchImageCredit(spot.wikiTitle));
     return blob.url;
   } catch (e) {
     console.warn(`  画像取得失敗: ${spot.name} (${(e as Error).message})`);
     imageCache.set(spot.name, null);
+    if (creditCache) creditCache.set(spot.name, null);
     return null;
   }
 }
