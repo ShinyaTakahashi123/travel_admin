@@ -18,7 +18,11 @@ export function AdminLoginForm() {
     const result = await signIn("credentials", { email, password, redirect: false });
     setLoading(false);
     if (result?.error) {
-      setError("メールアドレスまたはパスワードが正しくないか、このアカウントは無効です");
+      setError(
+        result.code === "rate_limited"
+          ? "しばらく時間をおいてから、もう一度お試しください。"
+          : "メールアドレスまたはパスワードが正しくないか、このアカウントは無効です"
+      );
       return;
     }
     router.push("/");

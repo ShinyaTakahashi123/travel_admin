@@ -121,6 +121,8 @@ model UserAccount {
   homeAreaId          String?   @map("home_area_id") @db.Uuid
   resetToken          String?   @map("reset_token")
   resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
+  // パスワードを変更した時刻。これより前に発行されたログイン情報(JWT)は無効にする
+  passwordChangedAt   DateTime? @map("password_changed_at") @db.Timestamptz
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
@@ -192,6 +194,8 @@ model PlannerAccount {
   homeAreaId          String?   @map("home_area_id") @db.Uuid
   resetToken          String?   @map("reset_token")
   resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
+  // パスワードを変更した時刻。これより前に発行されたログイン情報(JWT)は無効にする
+  passwordChangedAt   DateTime? @map("password_changed_at") @db.Timestamptz
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
@@ -242,6 +246,8 @@ model Admin {
   inviteExpiresAt     DateTime? @map("invite_expires_at") @db.Timestamptz
   resetToken          String?   @map("reset_token")
   resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
+  // パスワードを変更した時刻。これより前に発行されたログイン情報(JWT)は無効にする
+  passwordChangedAt   DateTime? @map("password_changed_at") @db.Timestamptz
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
@@ -496,4 +502,21 @@ model DailyMetric {
   pvCount                   Int      @map("pv_count")
 
   @@map("daily_metric")
+}
+
+// ============================================================
+// 回数制限
+// ============================================================
+
+// ログイン失敗・会員登録・お問い合わせ等の回数制限用の記録。keyは「種類:対象」
+// (例: "admin-login:email:xxx"、"user-login:ip:<ハッシュ>")形式の文字列で、
+// 対象ごとの直近の件数を数えるのに使う。IPアドレスは平文で保存せずハッシュ化する。
+// 24時間より古い記録は管理者サイトの日次Cronで削除する
+model RateLimitEvent {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  key       String
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  @@index([key, createdAt])
+  @@map("rate_limit_event")
 }

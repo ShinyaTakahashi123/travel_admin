@@ -3,18 +3,18 @@
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
-import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { sendMail } from "@/lib/mail";
+import { getActiveAdmin } from "@/lib/admin-guard";
 
 const INVITE_EXPIRES_HOURS = 72;
 const USER_SITE_URL = process.env.USER_SITE_URL ?? "https://shiorietrip.com";
 const PLANNER_SITE_URL = process.env.PLANNER_SITE_URL ?? "https://planner.shiorietrip.com";
 
 async function requireAdmin() {
-  const session = await auth();
-  if (!session?.user) throw new Error("ログインが必要です");
-  return session.user;
+  const admin = await getActiveAdmin();
+  if (!admin) throw new Error("ログインが必要です");
+  return admin;
 }
 
 async function requireSuperAdmin() {
@@ -119,6 +119,7 @@ export async function acceptInvite({
       status: "active",
       inviteToken: null,
       inviteExpiresAt: null,
+      passwordChangedAt: new Date(),
     },
   });
 }

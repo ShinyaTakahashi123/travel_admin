@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+import { getActiveAdmin } from "@/lib/admin-guard";
 import { prisma } from "@/lib/prisma";
 import { formatDateTime, ADMIN_STATUS_LABEL } from "@/lib/format";
 import { InviteAdminDialog } from "@/components/invite-admin-dialog";
@@ -12,8 +12,8 @@ const ROLE_LABEL: Record<string, { label: string; bg: string; fg: string }> = {
 };
 
 export default async function AccountManagementPage() {
-  const session = await auth();
-  if (session?.user.role !== "super") redirect("/");
+  const admin = await getActiveAdmin();
+  if (admin?.role !== "super") redirect("/");
 
   const admins = await prisma.admin.findMany({ orderBy: { createdAt: "asc" } });
 

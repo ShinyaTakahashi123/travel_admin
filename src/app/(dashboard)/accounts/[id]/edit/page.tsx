@@ -1,14 +1,14 @@
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
-import { auth } from "@/auth";
+import { getActiveAdmin } from "@/lib/admin-guard";
 import { prisma } from "@/lib/prisma";
 import { formatDate, formatDateTime, ADMIN_STATUS_LABEL } from "@/lib/format";
 import { AccountEditForm } from "@/components/account-edit-form";
 
 export default async function AccountEditPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const session = await auth();
-  if (session?.user.role !== "super") redirect("/");
+  const currentAdmin = await getActiveAdmin();
+  if (currentAdmin?.role !== "super") redirect("/");
 
   const admin = await prisma.admin.findUnique({ where: { id } });
   if (!admin) notFound();
@@ -65,7 +65,7 @@ export default async function AccountEditPage({ params }: { params: Promise<{ id
           adminId={admin.id}
           initialName={admin.name}
           initialRole={admin.role as "super" | "staff"}
-          isSelf={session.user.id === admin.id}
+          isSelf={currentAdmin.id === admin.id}
           disabled={admin.status === "disabled"}
         />
       </div>
