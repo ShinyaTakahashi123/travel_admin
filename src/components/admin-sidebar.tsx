@@ -86,6 +86,20 @@ const NAV_ITEMS = [
   },
 ];
 
+// スーパー管理者のみ表示するナビ項目
+const SUPER_ONLY_NAV_ITEMS = [
+  {
+    href: "/audit-log",
+    label: "操作の記録",
+    icon: (
+      <>
+        <path d="M6 3h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+        <path d="M14 3v5h5M8 13h8M8 17h5" />
+      </>
+    ),
+  },
+];
+
 const ROLE_LABEL: Record<string, string> = {
   super: "スーパー管理者",
   staff: "一般管理者",
@@ -93,6 +107,7 @@ const ROLE_LABEL: Record<string, string> = {
 
 export function AdminSidebar({ name, role }: { name: string; role: string }) {
   const pathname = usePathname();
+  const navItems = role === "super" ? [...NAV_ITEMS, ...SUPER_ONLY_NAV_ITEMS] : NAV_ITEMS;
 
   return (
     <aside className="w-[230px] flex-shrink-0 bg-[#1E293B] py-5.5 flex flex-col justify-between h-full">
@@ -103,7 +118,7 @@ export function AdminSidebar({ name, role }: { name: string; role: string }) {
         <span className="text-white font-bold text-base">しおりえ 管理者サイト</span>
       </div>
       <nav className="flex flex-col flex-1">
-        {NAV_ITEMS.map((item) => {
+        {navItems.map((item) => {
           const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
           return (
             <Link

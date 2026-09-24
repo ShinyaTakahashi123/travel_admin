@@ -7,6 +7,10 @@ export type AdminDaySpot = {
   name: string;
   visitTimeLabel: string | null;
   stayDurationMin: number | null;
+  address: string | null;
+  memo: string | null;
+  websiteUrl: string | null;
+  hasLocation: boolean;
 };
 
 export type AdminDayData = {
@@ -40,10 +44,29 @@ export function AdminDayTabs({ days }: { days: AdminDayData[] }) {
             {spot.visitTimeLabel && (
               <span className="text-sm font-bold text-primary whitespace-nowrap">{spot.visitTimeLabel}</span>
             )}
-            <div>
-              <div className="text-base font-bold">{spot.name}</div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="text-base font-bold">{spot.name}</div>
+                {!spot.hasLocation && (
+                  <span className="text-xs font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                    位置未設定
+                  </span>
+                )}
+              </div>
               {spot.stayDurationMin != null && (
                 <div className="text-sm text-muted-foreground">滞在 約{spot.stayDurationMin}分</div>
+              )}
+              {spot.address && <div className="text-sm text-[#475569]">{spot.address}</div>}
+              {spot.memo && <div className="text-sm text-[#475569] whitespace-pre-wrap">{spot.memo}</div>}
+              {spot.websiteUrl && (
+                <a
+                  href={spot.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-primary underline break-all"
+                >
+                  {spot.websiteUrl}
+                </a>
               )}
             </div>
           </div>

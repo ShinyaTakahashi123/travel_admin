@@ -24,6 +24,12 @@ async function run<T>(fn: () => Promise<T>): Promise<ActionResult<T>> {
   }
 }
 
+// 管理者の操作の記録。本体の処理と同じトランザクションで記録する(tx.adminAuditLog.createを
+// 直接呼ぶ。共通のヘルパー関数にすると、$extends()で拡張したprismaクライアントの
+// トランザクションコールバックの型とPrismaのExact<>制約が衝突しコンパイルエラーになるため)。
+// detailには、変更前後の状態・却下理由・しおりのタイトルなど「運営者が書いた文章」のみ入れる。
+// 利用者・プランナーのメールアドレス・名前・IPアドレス、通報・お問い合わせの本文は入れない
+
 async function requireAdmin() {
   const admin = await getActiveAdmin();
   if (!admin) fail("ログインが必要です");
@@ -42,7 +48,7 @@ async function requireSuperAdmin() {
 
 export async function inviteAdmin(email: string, role: "super" | "staff"): Promise<ActionResult<{ inviteToken: string }>> {
   return run(async () => {
-    await requireSuperAdmin();
+    const currentAdmin = await requireSuperAdmin();
     const trimmedEmail = email.trim().toLowerCase();
     if (!trimmedEmail) fail("メールアドレスを入力してください");
 
@@ -52,15 +58,27 @@ export async function inviteAdmin(email: string, role: "super" | "staff"): Promi
     const inviteToken = crypto.randomBytes(32).toString("hex");
     const inviteExpiresAt = new Date(Date.now() + INVITE_EXPIRES_HOURS * 60 * 60 * 1000);
 
-    await prisma.admin.create({
-      data: {
-        name: trimmedEmail,
-        email: trimmedEmail,
-        role,
-        status: "invited",
-        inviteToken,
-        inviteExpiresAt,
-      },
+    await prisma.$transaction(async (tx) => {
+      const created = await tx.admin.create({
+        data: {
+          name: trimmedEmail,
+          email: trimmedEmail,
+          role,
+          status: "invited",
+          inviteToken,
+          inviteExpiresAt,
+        },
+      });
+      // 招待先のメールアドレスはdetailに入れない(対象はtargetIdで分かる)
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: currentAdmin.id,
+          action: "invite",
+          targetType: "admin",
+          targetId: created.id,
+          detail: { role },
+        },
+      });
     });
 
     revalidatePath("/accounts");
@@ -93,10 +111,24 @@ export async function updateAdminAccount({
   role: "super" | "staff";
 }): Promise<ActionResult> {
   return run(async () => {
-    await requireSuperAdmin();
-    await prisma.admin.update({
-      where: { id: adminId },
-      data: { name: name.trim() || undefined, role },
+    const currentAdmin = await requireSuperAdmin();
+    await prisma.$transaction(async (tx) => {
+      const before = await tx.admin.findUniqueOrThrow({ where: { id: adminId }, select: { role: true } });
+      await tx.admin.update({
+        where: { id: adminId },
+        data: { name: name.trim() || undefined, role },
+      });
+      if (before.role !== role) {
+        await tx.adminAuditLog.create({
+          data: {
+            adminId: currentAdmin.id,
+            action: "change_role",
+            targetType: "admin",
+            targetId: adminId,
+            detail: { fromRole: before.role, toRole: role },
+          },
+        });
+      }
     });
     revalidatePath("/accounts");
     revalidatePath(`/accounts/${adminId}/edit`);
@@ -107,7 +139,18 @@ export async function disableAdmin(adminId: string): Promise<ActionResult> {
   return run(async () => {
     const currentUser = await requireSuperAdmin();
     if (currentUser.id === adminId) fail("自分自身は無効化できません");
-    await prisma.admin.update({ where: { id: adminId }, data: { status: "disabled" } });
+    await prisma.$transaction(async (tx) => {
+      await tx.admin.update({ where: { id: adminId }, data: { status: "disabled" } });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: currentUser.id,
+          action: "disable",
+          targetType: "admin",
+          targetId: adminId,
+          detail: {},
+        },
+      });
+    });
     revalidatePath("/accounts");
     revalidatePath(`/accounts/${adminId}/edit`);
   });
@@ -154,15 +197,27 @@ export async function acceptInvite({
 export async function approveItinerary(itineraryId: string): Promise<ActionResult> {
   return run(async () => {
     const user = await requireAdmin();
-    const itinerary = await prisma.itinerary.update({
-      where: { id: itineraryId },
-      data: {
-        status: "published",
-        reviewedAt: new Date(),
-        reviewedByAdminId: user.id,
-        rejectionReason: null,
-      },
-      include: { plannerAccount: { select: { email: true, isOfficial: true } } },
+    const itinerary = await prisma.$transaction(async (tx) => {
+      const updated = await tx.itinerary.update({
+        where: { id: itineraryId },
+        data: {
+          status: "published",
+          reviewedAt: new Date(),
+          reviewedByAdminId: user.id,
+          rejectionReason: null,
+        },
+        include: { plannerAccount: { select: { email: true, isOfficial: true } } },
+      });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: user.id,
+          action: "approve",
+          targetType: "itinerary",
+          targetId: itineraryId,
+          detail: { title: updated.title },
+        },
+      });
+      return updated;
     });
     revalidatePath("/itineraries");
     revalidatePath(`/itineraries/${itineraryId}`);
@@ -204,15 +259,28 @@ export async function rejectItinerary(itineraryId: string, reason: string): Prom
     const trimmed = reason.trim();
     if (!trimmed) fail("却下理由を入力してください");
 
-    const itinerary = await prisma.itinerary.update({
-      where: { id: itineraryId },
-      data: {
-        status: "rejected",
-        reviewedAt: new Date(),
-        reviewedByAdminId: user.id,
-        rejectionReason: trimmed,
-      },
-      include: { plannerAccount: { select: { email: true, isOfficial: true } } },
+    const itinerary = await prisma.$transaction(async (tx) => {
+      const updated = await tx.itinerary.update({
+        where: { id: itineraryId },
+        data: {
+          status: "rejected",
+          reviewedAt: new Date(),
+          reviewedByAdminId: user.id,
+          rejectionReason: trimmed,
+        },
+        include: { plannerAccount: { select: { email: true, isOfficial: true } } },
+      });
+      // 却下の理由は運営者が書いた文章(プランナーに送るものと同じ)なので記録してよい
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: user.id,
+          action: "reject",
+          targetType: "itinerary",
+          targetId: itineraryId,
+          detail: { title: updated.title, reason: trimmed },
+        },
+      });
+      return updated;
     });
     revalidatePath("/itineraries");
     revalidatePath(`/itineraries/${itineraryId}`);
@@ -251,8 +319,23 @@ export async function rejectItinerary(itineraryId: string, reason: string): Prom
 
 export async function hideItinerary(itineraryId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
-    await prisma.itinerary.update({ where: { id: itineraryId }, data: { status: "private" } });
+    const user = await requireAdmin();
+    await prisma.$transaction(async (tx) => {
+      const updated = await tx.itinerary.update({
+        where: { id: itineraryId },
+        data: { status: "private" },
+        select: { title: true },
+      });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: user.id,
+          action: "hide",
+          targetType: "itinerary",
+          targetId: itineraryId,
+          detail: { title: updated.title },
+        },
+      });
+    });
     revalidatePath("/itineraries");
     revalidatePath(`/itineraries/${itineraryId}`);
     revalidatePath("/reports");
@@ -261,8 +344,23 @@ export async function hideItinerary(itineraryId: string): Promise<ActionResult> 
 
 export async function deleteItineraryAsAdmin(itineraryId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
-    await prisma.itinerary.update({ where: { id: itineraryId }, data: { status: "deleted" } });
+    const user = await requireAdmin();
+    await prisma.$transaction(async (tx) => {
+      const updated = await tx.itinerary.update({
+        where: { id: itineraryId },
+        data: { status: "deleted" },
+        select: { title: true },
+      });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: user.id,
+          action: "delete",
+          targetType: "itinerary",
+          targetId: itineraryId,
+          detail: { title: updated.title },
+        },
+      });
+    });
     revalidatePath("/itineraries");
     revalidatePath(`/itineraries/${itineraryId}`);
   });
@@ -277,8 +375,20 @@ export async function setUserAccountStatus(
   status: "active" | "suspended"
 ): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
-    await prisma.userAccount.update({ where: { id: userAccountId }, data: { status } });
+    const admin = await requireAdmin();
+    await prisma.$transaction(async (tx) => {
+      const before = await tx.userAccount.findUniqueOrThrow({ where: { id: userAccountId }, select: { status: true } });
+      await tx.userAccount.update({ where: { id: userAccountId }, data: { status } });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: status === "suspended" ? "suspend" : "unsuspend",
+          targetType: "user_account",
+          targetId: userAccountId,
+          detail: { fromStatus: before.status, toStatus: status },
+        },
+      });
+    });
     revalidatePath("/users");
     revalidatePath(`/users/${userAccountId}`);
   });
@@ -287,8 +397,19 @@ export async function setUserAccountStatus(
 // 手続き中(権利侵害の申告・開示請求の対応中など)の保全の印。スーパー管理者のみ付け外しできる
 export async function setUserAccountLegalHold(userAccountId: string, legalHold: boolean): Promise<ActionResult> {
   return run(async () => {
-    await requireSuperAdmin();
-    await prisma.userAccount.update({ where: { id: userAccountId }, data: { legalHold } });
+    const admin = await requireSuperAdmin();
+    await prisma.$transaction(async (tx) => {
+      await tx.userAccount.update({ where: { id: userAccountId }, data: { legalHold } });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: legalHold ? "legal_hold_on" : "legal_hold_off",
+          targetType: "user_account",
+          targetId: userAccountId,
+          detail: { legalHold },
+        },
+      });
+    });
     revalidatePath(`/users/${userAccountId}`);
   });
 }
@@ -297,7 +418,7 @@ export async function setUserAccountLegalHold(userAccountId: string, legalHold: 
 // (利用者本人が画面から退会する場合と同じ扱い。user-site の deleteMyAccount と対応)
 export async function deleteUserAccount(userAccountId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
+    const admin = await requireAdmin();
     const account = await prisma.userAccount.findUniqueOrThrow({ where: { id: userAccountId } });
 
     const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
@@ -340,6 +461,9 @@ export async function deleteUserAccount(userAccountId: string): Promise<ActionRe
         },
       }),
       prisma.userAccount.delete({ where: { id: userAccountId } }),
+      prisma.adminAuditLog.create({
+        data: { adminId: admin.id, action: "delete", targetType: "user_account", targetId: userAccountId, detail: {} },
+      }),
     ]);
     revalidatePath("/users");
   });
@@ -350,11 +474,22 @@ export async function setPlannerAccountStatus(
   status: "active" | "suspended"
 ): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
+    const admin = await requireAdmin();
     const account = await prisma.plannerAccount.findUniqueOrThrow({ where: { id: plannerAccountId } });
     // 公式プランナー(公式しおりの投稿元)は操作ミスによる利用停止を防ぐため対象外
     if (account.isOfficial) fail("公式プランナーアカウントは操作できません");
-    await prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { status } });
+    await prisma.$transaction([
+      prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { status } }),
+      prisma.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: status === "suspended" ? "suspend" : "unsuspend",
+          targetType: "planner_account",
+          targetId: plannerAccountId,
+          detail: { fromStatus: account.status, toStatus: status },
+        },
+      }),
+    ]);
     revalidatePath("/planners");
     revalidatePath(`/planners/${plannerAccountId}`);
   });
@@ -363,8 +498,19 @@ export async function setPlannerAccountStatus(
 // 手続き中(権利侵害の申告・開示請求の対応中など)の保全の印。スーパー管理者のみ付け外しできる
 export async function setPlannerAccountLegalHold(plannerAccountId: string, legalHold: boolean): Promise<ActionResult> {
   return run(async () => {
-    await requireSuperAdmin();
-    await prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { legalHold } });
+    const admin = await requireSuperAdmin();
+    await prisma.$transaction([
+      prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { legalHold } }),
+      prisma.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: legalHold ? "legal_hold_on" : "legal_hold_off",
+          targetType: "planner_account",
+          targetId: plannerAccountId,
+          detail: { legalHold },
+        },
+      }),
+    ]);
     revalidatePath(`/planners/${plannerAccountId}`);
   });
 }
@@ -373,7 +519,7 @@ export async function setPlannerAccountLegalHold(plannerAccountId: string, legal
 // 移してから削除する(プランナー本人が画面から退会する場合と同じ扱い)
 export async function deletePlannerAccount(plannerAccountId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
+    const admin = await requireAdmin();
     const account = await prisma.plannerAccount.findUniqueOrThrow({ where: { id: plannerAccountId } });
 
     // 公式プランナー(公式しおりの投稿元)は操作ミス1回で公式しおりが全て消えるため、削除の対象外
@@ -404,6 +550,9 @@ export async function deletePlannerAccount(plannerAccountId: string): Promise<Ac
         },
       }),
       prisma.plannerAccount.delete({ where: { id: plannerAccountId } }),
+      prisma.adminAuditLog.create({
+        data: { adminId: admin.id, action: "delete", targetType: "planner_account", targetId: plannerAccountId, detail: {} },
+      }),
     ]);
     revalidatePath("/planners");
   });
@@ -415,12 +564,24 @@ export async function deletePlannerAccount(plannerAccountId: string): Promise<Ac
 
 export async function resolveReportHideItinerary(reportId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
-    const report = await prisma.report.findUniqueOrThrow({ where: { id: reportId } });
-    if (report.targetType === "itinerary") {
-      await prisma.itinerary.update({ where: { id: report.targetId }, data: { status: "private" } });
-    }
-    await prisma.report.update({ where: { id: reportId }, data: { status: "resolved" } });
+    const admin = await requireAdmin();
+    await prisma.$transaction(async (tx) => {
+      const report = await tx.report.findUniqueOrThrow({ where: { id: reportId } });
+      if (report.targetType === "itinerary") {
+        await tx.itinerary.update({ where: { id: report.targetId }, data: { status: "private" } });
+      }
+      await tx.report.update({ where: { id: reportId }, data: { status: "resolved" } });
+      // 通報の理由(Report.reason)は入れない(通報者が書いた文章で第三者の情報が含まれうるため)
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: "resolve_hide",
+          targetType: "report",
+          targetId: reportId,
+          detail: { reportTargetType: report.targetType, reportTargetId: report.targetId },
+        },
+      });
+    });
     revalidatePath("/reports");
     revalidatePath("/itineraries");
   });
@@ -428,8 +589,13 @@ export async function resolveReportHideItinerary(reportId: string): Promise<Acti
 
 export async function dismissReport(reportId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
-    await prisma.report.update({ where: { id: reportId }, data: { status: "dismissed" } });
+    const admin = await requireAdmin();
+    await prisma.$transaction([
+      prisma.report.update({ where: { id: reportId }, data: { status: "dismissed" } }),
+      prisma.adminAuditLog.create({
+        data: { adminId: admin.id, action: "dismiss", targetType: "report", targetId: reportId, detail: {} },
+      }),
+    ]);
     revalidatePath("/reports");
   });
 }
@@ -451,16 +617,26 @@ export async function markInquiryRead(inquiryId: string): Promise<ActionResult> 
 
 export async function markInquiryResponded(inquiryId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
-    await prisma.inquiry.update({ where: { id: inquiryId }, data: { status: "responded" } });
+    const admin = await requireAdmin();
+    await prisma.$transaction([
+      prisma.inquiry.update({ where: { id: inquiryId }, data: { status: "responded" } }),
+      prisma.adminAuditLog.create({
+        data: { adminId: admin.id, action: "mark_responded", targetType: "inquiry", targetId: inquiryId, detail: {} },
+      }),
+    ]);
     revalidatePath("/inquiries");
   });
 }
 
 export async function markInquiryUnresponded(inquiryId: string): Promise<ActionResult> {
   return run(async () => {
-    await requireAdmin();
-    await prisma.inquiry.update({ where: { id: inquiryId }, data: { status: "read" } });
+    const admin = await requireAdmin();
+    await prisma.$transaction([
+      prisma.inquiry.update({ where: { id: inquiryId }, data: { status: "read" } }),
+      prisma.adminAuditLog.create({
+        data: { adminId: admin.id, action: "mark_unresponded", targetType: "inquiry", targetId: inquiryId, detail: {} },
+      }),
+    ]);
     revalidatePath("/inquiries");
   });
 }

@@ -13,14 +13,32 @@ import {
 } from "@/components/ui/dialog";
 import { approveItinerary, rejectItinerary } from "@/lib/actions";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/lib/action-result";
+import { REJECTION_GREETING, REJECTION_CLOSING, REJECTION_TEMPLATES } from "@/lib/review-checklist";
 
-const QUICK_REASONS = ["転載・著作権の疑い", "情報の誤り", "不適切な写真", "スパム・宣伝目的"];
+function composeReason(selectedLabels: Set<string>): string {
+  const bodies = REJECTION_TEMPLATES.filter((t) => selectedLabels.has(t.label)).map((t) => t.body);
+  if (bodies.length === 0) return "";
+  return [REJECTION_GREETING, ...bodies, REJECTION_CLOSING].join("\n\n");
+}
 
 export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: string; title: string }) {
   const router = useRouter();
   const [reason, setReason] = useState("");
+  const [selectedTemplates, setSelectedTemplates] = useState<Set<string>>(new Set());
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
+
+  function toggleTemplate(label: string) {
+    setSelectedTemplates((prev) => {
+      const next = new Set(prev);
+      if (next.has(label)) next.delete(label);
+      else next.add(label);
+      // 選んだひな形から、書き出し・文面・締めをまとめて文面を組み立て直す
+      // (あとから自由に書き換えられるので、選び直すとその時点の内容で上書きする)
+      setReason(composeReason(next));
+      return next;
+    });
+  }
 
   function handleApprove() {
     if (!confirm("このしおりを承認して公開しますか？")) return;
@@ -61,7 +79,7 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
         <DialogTrigger className="bg-white border border-red-300 text-red-600 rounded-lg px-5 py-2.5 font-bold text-base">
           却下する
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[480px]">
+        <DialogContent className="sm:max-w-[560px]">
           <DialogHeader>
             <DialogTitle>しおりを却下する</DialogTitle>
             <DialogDescription>
@@ -71,31 +89,33 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
           <div className="flex flex-col gap-4">
             <div>
               <div className="text-sm font-bold text-muted-foreground mb-2">
-                却下理由（よく使う理由）
+                却下理由のひな形（複数選べます。選ぶと下の入力欄に文面が入ります）
               </div>
               <div className="flex gap-2 flex-wrap">
-                {QUICK_REASONS.map((r) => (
+                {REJECTION_TEMPLATES.map((t) => (
                   <button
-                    key={r}
+                    key={t.label}
                     type="button"
-                    onClick={() => setReason(r)}
+                    onClick={() => toggleTemplate(t.label)}
                     className={`text-sm font-bold px-3.5 py-1.5 rounded-full border ${
-                      reason === r ? "bg-secondary border-[#C7CBFA] text-secondary-foreground" : "border-border bg-white"
+                      selectedTemplates.has(t.label)
+                        ? "bg-secondary border-[#C7CBFA] text-secondary-foreground"
+                        : "border-border bg-white"
                     }`}
                   >
-                    {r}
+                    {t.label}
                   </button>
                 ))}
               </div>
             </div>
             <div>
               <div className="text-sm font-bold text-muted-foreground mb-2">
-                却下理由（プランナーに表示されます）
+                却下理由（プランナーに表示されます。「〇〇」の部分は書き換えてください）
               </div>
               <textarea
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
-                rows={4}
+                rows={8}
                 className="w-full border border-input rounded-lg px-3 py-2.5 text-base"
               />
             </div>
