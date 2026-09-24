@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatDate, ACCOUNT_STATUS_LABEL, ITINERARY_STATUS_LABEL } from "@/lib/format";
+import { getActiveAdmin } from "@/lib/admin-guard";
 import { PlannerAccountActions } from "@/components/planner-account-actions";
 
 export default async function PlannerAccountDetailPage({
@@ -10,6 +11,7 @@ export default async function PlannerAccountDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const admin = await getActiveAdmin();
 
   const planner = await prisma.plannerAccount.findUnique({
     where: { id },
@@ -51,13 +53,26 @@ export default async function PlannerAccountDetailPage({
               >
                 {status.label}
               </span>
+              {planner.legalHold && (
+                <span
+                  className="text-sm font-bold px-2.5 py-0.5 rounded-full"
+                  style={{ background: "#FEE2E2", color: "#B91C1C" }}
+                >
+                  手続き中(保全)
+                </span>
+              )}
             </div>
             <div className="text-sm text-muted-foreground">
               P-{planner.id.slice(0, 4).toUpperCase()} ・ {planner.email} ・ 登録日 {formatDate(planner.createdAt)}
             </div>
           </div>
         </div>
-        <PlannerAccountActions plannerId={planner.id} status={planner.status} />
+        <PlannerAccountActions
+          plannerId={planner.id}
+          status={planner.status}
+          legalHold={planner.legalHold}
+          isSuperAdmin={admin?.role === "super"}
+        />
       </div>
 
       <div className="flex gap-4 mb-5 flex-wrap">

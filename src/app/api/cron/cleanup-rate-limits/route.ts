@@ -7,7 +7,10 @@ import { prisma } from "@/lib/prisma";
 // 2. 権利侵害の申告・開示請求への対応のため記録しているIPアドレス
 //    （Comment.ipAddress / Request.ipAddress / Itinerary.submittedIp）のうち、
 //    記録から6か月を過ぎたものをnullにする（投稿・しおり本体は消さない）
-// ※ IPアドレスの値自体はログに出さない（件数のみ）
+// 3. 退会後の保存記録（DeletedAccountRecord）のうち、退会から6か月を過ぎ、
+//    legalHold(保全の印)が付いていないものは、明細(items)を削除しメール・名前をnullにする
+//    （件数用に利用者/プランナーの別・退会日時だけ残す）
+// ※ IPアドレスの値・メールアドレス・名前などの個人情報自体はログに出さない（件数のみ）
 export const maxDuration = 60;
 
 export async function GET(request: Request) {
@@ -18,6 +21,7 @@ export async function GET(request: Request) {
 
   const rateLimitCutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
   const ipCutoff = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
+  const deletedAccountCutoff = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
 
   const [rateLimitEvents, comments, requests, itineraries] = await Promise.all([
     prisma.rateLimitEvent.deleteMany({ where: { createdAt: { lt: rateLimitCutoff } } }),
@@ -35,9 +39,24 @@ export async function GET(request: Request) {
     }),
   ]);
 
+  const staleAccountRecords = await prisma.deletedAccountRecord.findMany({
+    where: { deletedAt: { lt: deletedAccountCutoff }, legalHold: false, email: { not: null } },
+    select: { id: true },
+  });
+  let deletedAccountRecordsPurged = 0;
+  if (staleAccountRecords.length > 0) {
+    const ids = staleAccountRecords.map((r) => r.id);
+    await prisma.$transaction([
+      prisma.deletedAccountRecordItem.deleteMany({ where: { recordId: { in: ids } } }),
+      prisma.deletedAccountRecord.updateMany({ where: { id: { in: ids } }, data: { email: null, name: null } }),
+    ]);
+    deletedAccountRecordsPurged = ids.length;
+  }
+
   const result = {
     rateLimitEvents: rateLimitEvents.count,
     ipCleared: { comments: comments.count, requests: requests.count, itineraries: itineraries.count },
+    deletedAccountRecordsPurged,
   };
   console.log("[cleanup-rate-limits]", JSON.stringify(result));
   return NextResponse.json(result);

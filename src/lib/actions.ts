@@ -248,9 +248,60 @@ export async function setUserAccountStatus(userAccountId: string, status: "activ
   revalidatePath(`/users/${userAccountId}`);
 }
 
+// 手続き中(権利侵害の申告・開示請求の対応中など)の保全の印。スーパー管理者のみ付け外しできる
+export async function setUserAccountLegalHold(userAccountId: string, legalHold: boolean) {
+  await requireSuperAdmin();
+  await prisma.userAccount.update({ where: { id: userAccountId }, data: { legalHold } });
+  revalidatePath(`/users/${userAccountId}`);
+}
+
+// 削除前6か月以内の投稿・送信を、退会後の保存記録(DeletedAccountRecord)に移してから削除する
+// (利用者本人が画面から退会する場合と同じ扱い。user-site の deleteMyAccount と対応)
 export async function deleteUserAccount(userAccountId: string) {
   await requireAdmin();
-  await prisma.userAccount.delete({ where: { id: userAccountId } });
+  const account = await prisma.userAccount.findUniqueOrThrow({ where: { id: userAccountId } });
+
+  const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
+  const [comments, requests] = await Promise.all([
+    prisma.comment.findMany({
+      where: { userAccountId, createdAt: { gte: sixMonthsAgo } },
+      select: { body: true, ipAddress: true, createdAt: true },
+    }),
+    prisma.request.findMany({
+      where: { senderUserAccountId: userAccountId, createdAt: { gte: sixMonthsAgo } },
+      select: { ipAddress: true, createdAt: true },
+    }),
+  ]);
+
+  await prisma.$transaction([
+    prisma.deletedAccountRecord.create({
+      data: {
+        accountType: "user",
+        originalAccountId: account.id,
+        email: account.email,
+        name: account.name,
+        legalHold: account.legalHold,
+        items: {
+          create: [
+            ...comments.map((c) => ({
+              kind: "comment",
+              body: c.body,
+              ipAddress: c.ipAddress,
+              occurredAt: c.createdAt,
+            })),
+            // リクエストは通信の秘密のため本文は移さない
+            ...requests.map((r) => ({
+              kind: "request",
+              body: null,
+              ipAddress: r.ipAddress,
+              occurredAt: r.createdAt,
+            })),
+          ],
+        },
+      },
+    }),
+    prisma.userAccount.delete({ where: { id: userAccountId } }),
+  ]);
   revalidatePath("/users");
 }
 
@@ -264,9 +315,45 @@ export async function setPlannerAccountStatus(
   revalidatePath(`/planners/${plannerAccountId}`);
 }
 
+// 手続き中(権利侵害の申告・開示請求の対応中など)の保全の印。スーパー管理者のみ付け外しできる
+export async function setPlannerAccountLegalHold(plannerAccountId: string, legalHold: boolean) {
+  await requireSuperAdmin();
+  await prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { legalHold } });
+  revalidatePath(`/planners/${plannerAccountId}`);
+}
+
+// 削除前6か月以内のしおり公開申請(タイトルのみ)を、退会後の保存記録(DeletedAccountRecord)に
+// 移してから削除する(プランナー本人が画面から退会する場合と同じ扱い)
 export async function deletePlannerAccount(plannerAccountId: string) {
   await requireAdmin();
-  await prisma.plannerAccount.delete({ where: { id: plannerAccountId } });
+  const account = await prisma.plannerAccount.findUniqueOrThrow({ where: { id: plannerAccountId } });
+
+  const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
+  const submissions = await prisma.itinerary.findMany({
+    where: { plannerAccountId, submittedAt: { gte: sixMonthsAgo }, submittedIp: { not: null } },
+    select: { title: true, submittedIp: true, submittedAt: true },
+  });
+
+  await prisma.$transaction([
+    prisma.deletedAccountRecord.create({
+      data: {
+        accountType: "planner",
+        originalAccountId: account.id,
+        email: account.email,
+        name: account.name,
+        legalHold: account.legalHold,
+        items: {
+          create: submissions.map((s) => ({
+            kind: "itinerary_submission",
+            body: s.title,
+            ipAddress: s.submittedIp,
+            occurredAt: s.submittedAt as Date,
+          })),
+        },
+      },
+    }),
+    prisma.plannerAccount.delete({ where: { id: plannerAccountId } }),
+  ]);
   revalidatePath("/planners");
 }
 

@@ -123,6 +123,9 @@ model UserAccount {
   resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
   // パスワードを変更した時刻。これより前に発行されたログイン情報(JWT)は無効にする
   passwordChangedAt   DateTime? @map("password_changed_at") @db.Timestamptz
+  // 権利侵害の申告・開示請求の対応中など、手続き中の保全の印(true=画面からの退会を止める)。
+  // 管理者サイトのアカウント詳細でスーパー管理者のみ付け外しできる
+  legalHold           Boolean   @default(false) @map("legal_hold")
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
@@ -196,6 +199,9 @@ model PlannerAccount {
   resetTokenExpiresAt DateTime? @map("reset_token_expires_at") @db.Timestamptz
   // パスワードを変更した時刻。これより前に発行されたログイン情報(JWT)は無効にする
   passwordChangedAt   DateTime? @map("password_changed_at") @db.Timestamptz
+  // 権利侵害の申告・開示請求の対応中など、手続き中の保全の印(true=画面からの退会を止める)。
+  // 管理者サイトのアカウント詳細でスーパー管理者のみ付け外しできる
+  legalHold           Boolean   @default(false) @map("legal_hold")
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
@@ -532,4 +538,42 @@ model RateLimitEvent {
 
   @@index([key, createdAt])
   @@map("rate_limit_event")
+}
+
+// ============================================================
+// 退会後の保存記録
+// ============================================================
+
+// 退会(アカウント削除)のとき(管理者サイトからの削除も同じ)に、削除前の情報を
+// ここへ移してから削除する。権利侵害の申告・開示請求への対応のための記録で、
+// 6か月経過後にCronで個人情報を削除する(legalHold=trueのまま削除された記録は対象外)。
+// 管理者サイトの画面には表示せず、Prismaのomitで既定では読み出さない
+model DeletedAccountRecord {
+  id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  accountType       String   @map("account_type") // "user" | "planner"
+  originalAccountId String   @map("original_account_id") @db.Uuid
+  email             String?
+  name              String?
+  legalHold         Boolean  @default(false) @map("legal_hold")
+  deletedAt         DateTime @default(now()) @map("deleted_at") @db.Timestamptz
+
+  items DeletedAccountRecordItem[]
+
+  @@index([deletedAt])
+  @@map("deleted_account_record")
+}
+
+// 退会前6か月以内の投稿・送信の明細。リクエストは通信の秘密のため本文を保存しない(body=null)
+model DeletedAccountRecordItem {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  recordId   String   @map("record_id") @db.Uuid
+  kind       String // "comment" | "itinerary_submission" | "request"
+  body       String?
+  ipAddress  String?  @map("ip_address")
+  occurredAt DateTime @map("occurred_at") @db.Timestamptz
+
+  record DeletedAccountRecord @relation(fields: [recordId], references: [id], onDelete: Cascade)
+
+  @@index([recordId])
+  @@map("deleted_account_record_item")
 }
