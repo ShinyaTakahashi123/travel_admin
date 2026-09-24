@@ -3,9 +3,11 @@ import { prisma } from "@/lib/prisma";
 
 export const RATE_LIMIT_MESSAGE = "しばらく時間をおいてから、もう一度お試しください。";
 
-// IPアドレスは平文で保存せずハッシュ化する
+// IPアドレスは平文で保存せずハッシュ化する。鍵なしのSHA-256だとIPv4は全数探索で
+// 復元できてしまうため、AUTH_SECRETを鍵にしたHMACにする(保存先のサイトが違えば
+// 鍵も違うため、サイトをまたいだハッシュ値の比較はできないが、レート制限の用途では問題ない)
 export function hashIp(ip: string): string {
-  return crypto.createHash("sha256").update(ip).digest("hex");
+  return crypto.createHmac("sha256", process.env.AUTH_SECRET ?? "").update(ip).digest("hex");
 }
 
 // Vercelのヘッダーからクライアントの IP を取り出す
