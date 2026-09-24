@@ -38,7 +38,11 @@ export function ReportList({
     if (!selected) return;
     if (!confirm("対象のしおりを非公開にしますか？")) return;
     startTransition(async () => {
-      await resolveReportHideItinerary(selected.id);
+      const result = await resolveReportHideItinerary(selected.id);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -46,7 +50,11 @@ export function ReportList({
   function handleDismiss() {
     if (!selected) return;
     startTransition(async () => {
-      await dismissReport(selected.id);
+      const result = await dismissReport(selected.id);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }

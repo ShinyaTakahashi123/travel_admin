@@ -13,7 +13,11 @@ export function UserAccountActions({ userId, status }: { userId: string; status:
     const message = next === "suspended" ? "このユーザーを利用停止にしますか？" : "利用停止を解除しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await setUserAccountStatus(userId, next);
+      const result = await setUserAccountStatus(userId, next);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -21,7 +25,11 @@ export function UserAccountActions({ userId, status }: { userId: string; status:
   function handleDelete() {
     if (!confirm("このユーザーアカウントを削除しますか？この操作は取り消せません。")) return;
     startTransition(async () => {
-      await deleteUserAccount(userId);
+      const result = await deleteUserAccount(userId);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.push("/users");
     });
   }

@@ -24,7 +24,11 @@ export function AccountEditForm({
 
   function handleSave() {
     startTransition(async () => {
-      await updateAdminAccount({ adminId, name, role });
+      const result = await updateAdminAccount({ adminId, name, role });
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.push("/accounts");
     });
   }
@@ -32,7 +36,11 @@ export function AccountEditForm({
   function handleDisable() {
     if (!confirm("このアカウントを無効化しますか？")) return;
     startTransition(async () => {
-      await disableAdmin(adminId);
+      const result = await disableAdmin(adminId);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.push("/accounts");
     });
   }

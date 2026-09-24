@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { createPrefecture, createArea, createTag } from "@/lib/actions";
+import { UNEXPECTED_ERROR_MESSAGE } from "@/lib/action-result";
 
 type Prefecture = {
   id: string;
@@ -49,11 +50,15 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
     setError(null);
     startTransition(async () => {
       try {
-        await createPrefecture(newPrefName);
+        const result = await createPrefecture(newPrefName);
+        if (!result.ok) {
+          setError(result.error);
+          return;
+        }
         setNewPrefName("");
         router.refresh();
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "追加に失敗しました");
+      } catch {
+        setError(UNEXPECTED_ERROR_MESSAGE);
       }
     });
   }
@@ -67,11 +72,15 @@ function AreaMaster({ prefectures }: { prefectures: Prefecture[] }) {
     }
     startTransition(async () => {
       try {
-        await createArea(targetPrefId, newAreaName);
+        const result = await createArea(targetPrefId, newAreaName);
+        if (!result.ok) {
+          setError(result.error);
+          return;
+        }
         setNewAreaName("");
         router.refresh();
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "追加に失敗しました");
+      } catch {
+        setError(UNEXPECTED_ERROR_MESSAGE);
       }
     });
   }
@@ -186,11 +195,15 @@ function TagMaster({ tags }: { tags: Tag[] }) {
     setError(null);
     startTransition(async () => {
       try {
-        await createTag(newTagName);
+        const result = await createTag(newTagName);
+        if (!result.ok) {
+          setError(result.error);
+          return;
+        }
         setNewTagName("");
         router.refresh();
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "追加に失敗しました");
+      } catch {
+        setError(UNEXPECTED_ERROR_MESSAGE);
       }
     });
   }

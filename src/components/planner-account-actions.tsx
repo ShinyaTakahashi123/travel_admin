@@ -13,7 +13,11 @@ export function PlannerAccountActions({ plannerId, status }: { plannerId: string
     const message = next === "suspended" ? "このプランナーを利用停止にしますか？" : "利用停止を解除しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await setPlannerAccountStatus(plannerId, next);
+      const result = await setPlannerAccountStatus(plannerId, next);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -21,7 +25,11 @@ export function PlannerAccountActions({ plannerId, status }: { plannerId: string
   function handleDelete() {
     if (!confirm("このプランナーアカウントを削除しますか？この操作は取り消せません。")) return;
     startTransition(async () => {
-      await deletePlannerAccount(plannerId);
+      const result = await deletePlannerAccount(plannerId);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.push("/planners");
     });
   }
