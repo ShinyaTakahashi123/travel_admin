@@ -272,6 +272,8 @@ model Itinerary {
   likeCount         BigInt    @default(0) @map("like_count") // ログイン不要の「いいね」カウンタ（お気に入りFavoriteとは別概念）
   primaryAreaId     String?   @map("primary_area_id") @db.Uuid // 主な都道府県（複数県にまたがる場合も1つ選択。都道府県レベルのArea.idを指す）
   submittedAt       DateTime? @map("submitted_at") @db.Timestamptz
+  // 権利侵害の申告・開示請求への対応のため公開申請時に記録(再申請のたびに上書き。6か月後にCronでnullにする)
+  submittedIp       String?   @map("submitted_ip")
   reviewedAt        DateTime? @map("reviewed_at") @db.Timestamptz
   reviewedByAdminId String?   @map("reviewed_by_admin_id") @db.Uuid
   rejectionReason   String?   @map("rejection_reason")
@@ -415,6 +417,8 @@ model Comment {
   itineraryId   String   @map("itinerary_id") @db.Uuid
   userAccountId String   @map("user_account_id") @db.Uuid
   body          String
+  // 権利侵害の申告・開示請求への対応のため投稿時に記録(6か月後にCronでnullにする)
+  ipAddress     String?  @map("ip_address")
   createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   itinerary   Itinerary   @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
@@ -475,6 +479,9 @@ model Request {
   itineraryId         String?  @map("itinerary_id") @db.Uuid
   message             String
   status              String   @default("unread") // unread|read|responded
+  // 権利侵害の申告・開示請求への対応のため送信時に記録(6か月後にCronでnullにする)。
+  // リクエスト機能の継続可否は別途判断中(docs/specs/20260924-legal-request-feature-telecom.md)
+  ipAddress           String?  @map("ip_address")
   createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   plannerAccount    PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)

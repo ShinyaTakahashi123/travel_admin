@@ -17,8 +17,18 @@ function isTransientConnectionError(error: unknown): boolean {
   return message.includes("Can't reach database server") || message.includes("P1001");
 }
 
+// 権利侵害の申告・開示請求への対応のためだけに記録しているIPアドレスは、
+// 誤ってRSC payload等で外部に漏らさないよう、明示的に取得しない限り既定で除外する
+// (取得する場合は `prisma.comment.findMany({ omit: { ipAddress: false } })` のように上書きする)
 function createPrismaClient() {
-  return new PrismaClient({ adapter }).$extends({
+  return new PrismaClient({
+    adapter,
+    omit: {
+      comment: { ipAddress: true },
+      request: { ipAddress: true },
+      itinerary: { submittedIp: true },
+    },
+  }).$extends({
     query: {
       async $allOperations({ args, query }) {
         try {
