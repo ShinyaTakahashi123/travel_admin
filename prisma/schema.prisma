@@ -375,11 +375,17 @@ model Spot {
 }
 
 model Photo {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  spotId    String   @map("spot_id") @db.Uuid
-  url       String
-  caption   String?
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  spotId     String   @map("spot_id") @db.Uuid
+  url        String
+  caption    String?
+  // 出典(Wikipedia/Wikimedia Commons等から取り込んだ画像のクレジット表示に使う)。
+  // すべて未設定なら出典表示は出さない(プランナーが自分で撮った写真など)
+  sourceUrl  String?  @map("source_url") // ファイルページのURL
+  author     String? // 撮影者・作者
+  license    String? // ライセンスの短い名前(例: "CC BY-SA 4.0"、"パブリックドメイン")
+  licenseUrl String?  @map("license_url") // ライセンスの説明ページのURL
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   spot Spot @relation(fields: [spotId], references: [id], onDelete: Cascade)
 
