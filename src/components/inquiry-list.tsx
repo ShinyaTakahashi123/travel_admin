@@ -37,7 +37,9 @@ export function InquiryList({
 
   useEffect(() => {
     if (selected && selected.status === "unread") {
-      startTransition(() => markInquiryRead(selected.id));
+      startTransition(async () => {
+        await markInquiryRead(selected.id);
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedId]);
@@ -176,7 +178,11 @@ export function InquiryList({
             {selected.status === "responded" ? (
               <button
                 disabled={isPending}
-                onClick={() => startTransition(() => markInquiryUnresponded(selected.id))}
+                onClick={() =>
+                  startTransition(async () => {
+                    await markInquiryUnresponded(selected.id);
+                  })
+                }
                 className="bg-white border border-border rounded-lg py-2.5 font-bold text-base disabled:opacity-50"
               >
                 未対応に戻す
@@ -184,7 +190,11 @@ export function InquiryList({
             ) : (
               <button
                 disabled={isPending}
-                onClick={() => startTransition(() => markInquiryResponded(selected.id))}
+                onClick={() =>
+                  startTransition(async () => {
+                    await markInquiryResponded(selected.id);
+                  })
+                }
                 className="bg-primary text-white rounded-lg py-2.5 font-bold text-base disabled:opacity-50"
               >
                 対応済みにする

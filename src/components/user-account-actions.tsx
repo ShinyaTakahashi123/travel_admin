@@ -23,7 +23,11 @@ export function UserAccountActions({
     const message = next === "suspended" ? "このユーザーを利用停止にしますか？" : "利用停止を解除しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await setUserAccountStatus(userId, next);
+      const result = await setUserAccountStatus(userId, next);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -35,7 +39,11 @@ export function UserAccountActions({
       : "手続き中(保全)の印を外しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await setUserAccountLegalHold(userId, next);
+      const result = await setUserAccountLegalHold(userId, next);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -46,7 +54,11 @@ export function UserAccountActions({
       : "このユーザーアカウントを削除しますか？この操作は取り消せません。";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await deleteUserAccount(userId);
+      const result = await deleteUserAccount(userId);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.push("/users");
     });
   }

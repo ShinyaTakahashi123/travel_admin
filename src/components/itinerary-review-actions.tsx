@@ -12,26 +12,46 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { approveItinerary, rejectItinerary } from "@/lib/actions";
+import { UNEXPECTED_ERROR_MESSAGE } from "@/lib/action-result";
 
 const QUICK_REASONS = ["転載・著作権の疑い", "情報の誤り", "不適切な写真", "スパム・宣伝目的"];
 
 export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: string; title: string }) {
   const router = useRouter();
   const [reason, setReason] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
 
   function handleApprove() {
     if (!confirm("このしおりを承認して公開しますか？")) return;
+    setError(null);
     startTransition(async () => {
-      await approveItinerary(itineraryId);
-      router.push("/itineraries");
+      try {
+        const result = await approveItinerary(itineraryId);
+        if (!result.ok) {
+          setError(result.error);
+          return;
+        }
+        router.push("/itineraries");
+      } catch {
+        setError(UNEXPECTED_ERROR_MESSAGE);
+      }
     });
   }
 
   function handleReject() {
+    setError(null);
     startTransition(async () => {
-      await rejectItinerary(itineraryId, reason);
-      router.push("/itineraries");
+      try {
+        const result = await rejectItinerary(itineraryId, reason);
+        if (!result.ok) {
+          setError(result.error);
+          return;
+        }
+        router.push("/itineraries");
+      } catch {
+        setError(UNEXPECTED_ERROR_MESSAGE);
+      }
     });
   }
 
@@ -79,6 +99,8 @@ export function ItineraryReviewActions({ itineraryId, title }: { itineraryId: st
                 className="w-full border border-input rounded-lg px-3 py-2.5 text-base"
               />
             </div>
+            {error && <p className="text-sm text-destructive">{error}</p>}
+
             <DialogFooter>
               <button
                 onClick={handleReject}

@@ -12,6 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { inviteAdmin } from "@/lib/actions";
+import { UNEXPECTED_ERROR_MESSAGE } from "@/lib/action-result";
 
 export function InviteAdminDialog() {
   const router = useRouter();
@@ -27,11 +28,15 @@ export function InviteAdminDialog() {
     setError(null);
     startTransition(async () => {
       try {
-        const { inviteToken } = await inviteAdmin(email, role);
-        setInviteLink(`${window.location.origin}/invite/accept/${inviteToken}`);
+        const result = await inviteAdmin(email, role);
+        if (!result.ok) {
+          setError(result.error);
+          return;
+        }
+        setInviteLink(`${window.location.origin}/invite/accept/${result.data.inviteToken}`);
         router.refresh();
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "招待に失敗しました");
+      } catch {
+        setError(UNEXPECTED_ERROR_MESSAGE);
       }
     });
   }

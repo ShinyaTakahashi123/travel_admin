@@ -25,7 +25,11 @@ export function PlannerAccountActions({
     const message = next === "suspended" ? "このプランナーを利用停止にしますか？" : "利用停止を解除しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await setPlannerAccountStatus(plannerId, next);
+      const result = await setPlannerAccountStatus(plannerId, next);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -37,7 +41,11 @@ export function PlannerAccountActions({
       : "手続き中(保全)の印を外しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await setPlannerAccountLegalHold(plannerId, next);
+      const result = await setPlannerAccountLegalHold(plannerId, next);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -48,7 +56,11 @@ export function PlannerAccountActions({
       : "このプランナーアカウントを削除しますか？この操作は取り消せません。";
     if (!confirm(message)) return;
     startTransition(async () => {
-      await deletePlannerAccount(plannerId);
+      const result = await deletePlannerAccount(plannerId);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.push("/planners");
     });
   }

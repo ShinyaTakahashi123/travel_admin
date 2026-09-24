@@ -17,7 +17,11 @@ export function ItineraryModerationActions({
   function handleHide() {
     if (!confirm("このしおりを非公開にしますか？ユーザーサイトに表示されなくなります。")) return;
     startTransition(async () => {
-      await hideItinerary(itineraryId);
+      const result = await hideItinerary(itineraryId);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.refresh();
     });
   }
@@ -25,7 +29,11 @@ export function ItineraryModerationActions({
   function handleDelete() {
     if (!confirm("このしおりを削除しますか？この操作は取り消せません。")) return;
     startTransition(async () => {
-      await deleteItineraryAsAdmin(itineraryId);
+      const result = await deleteItineraryAsAdmin(itineraryId);
+      if (!result.ok) {
+        alert(result.error);
+        return;
+      }
       router.push("/itineraries");
     });
   }

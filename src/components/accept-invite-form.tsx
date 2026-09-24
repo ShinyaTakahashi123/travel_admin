@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import { acceptInvite } from "@/lib/actions";
+import { UNEXPECTED_ERROR_MESSAGE } from "@/lib/action-result";
 
 export function AcceptInviteForm({
   token,
@@ -30,10 +31,15 @@ export function AcceptInviteForm({
     }
     setLoading(true);
     try {
-      await acceptInvite({ token, name, password });
-    } catch (err) {
+      const result = await acceptInvite({ token, name, password });
+      if (!result.ok) {
+        setLoading(false);
+        setError(result.error);
+        return;
+      }
+    } catch {
       setLoading(false);
-      setError(err instanceof Error ? err.message : "設定に失敗しました");
+      setError(UNEXPECTED_ERROR_MESSAGE);
       return;
     }
     const result = await signIn("credentials", { email, password, redirect: false });
