@@ -1,5 +1,8 @@
+import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { jstDateKeyDaysAgo, jstMidnightUtc } from "@/lib/format";
+
+const TAKEDOWN_INQUIRY_CATEGORY = "権利侵害・削除のご依頼";
 
 function TrendCard({
   label,
@@ -65,13 +68,14 @@ export default async function DashboardPage() {
   // 「本日」は日本時間の0時区切りで判定する
   const todayStart = jstMidnightUtc(jstDateKeyDaysAgo(0));
 
-  const [userCount, publishedCount, todayPvCount, pendingCount, unreadReportCount, dailyMetrics] =
+  const [userCount, publishedCount, todayPvCount, pendingCount, unreadReportCount, unreadTakedownCount, dailyMetrics] =
     await Promise.all([
       prisma.userAccount.count(),
       prisma.itinerary.count({ where: { status: "published" } }),
       prisma.pageView.count({ where: { viewedAt: { gte: todayStart } } }),
       prisma.itinerary.count({ where: { status: "pending" } }),
       prisma.report.count({ where: { status: "unread" } }),
+      prisma.inquiry.count({ where: { status: "unread", category: TAKEDOWN_INQUIRY_CATEGORY } }),
       prisma.dailyMetric.findMany({ orderBy: { metricDate: "asc" }, take: 14 }),
     ]);
 
@@ -104,6 +108,15 @@ export default async function DashboardPage() {
             </div>
           </div>
         ))}
+        <Link
+          href={`/inquiries?category=${encodeURIComponent(TAKEDOWN_INQUIRY_CATEGORY)}`}
+          className="bg-card border border-border rounded-2xl px-5 py-4.5 flex-1 min-w-[150px] hover:border-[#EF4444] transition-colors"
+        >
+          <div className="text-sm text-muted-foreground font-bold mb-1.5">未対応の権利侵害・削除依頼</div>
+          <div className="text-2xl font-black" style={{ color: unreadTakedownCount > 0 ? "#EF4444" : undefined }}>
+            {unreadTakedownCount.toLocaleString()}
+          </div>
+        </Link>
       </div>
 
       <h2 className="text-lg font-black mb-3">日次推移（直近14日）</h2>
