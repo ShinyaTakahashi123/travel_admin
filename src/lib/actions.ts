@@ -197,6 +197,10 @@ export async function acceptInvite({
 export async function approveItinerary(itineraryId: string): Promise<ActionResult> {
   return run(async () => {
     const user = await requireAdmin();
+    // コピーしたしおりは承認できない(そもそもpendingにならない想定だが、念のため
+    // 二重に防ぐ。DBのCHECK制約が最後の砦。セキュリティ確認A-5)
+    const target = await prisma.itinerary.findUnique({ where: { id: itineraryId }, select: { isCopy: true } });
+    if (target?.isCopy) fail("コピーしたしおりは承認できません");
     const itinerary = await prisma.$transaction(async (tx) => {
       const updated = await tx.itinerary.update({
         where: { id: itineraryId },
