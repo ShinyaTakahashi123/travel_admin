@@ -457,11 +457,14 @@ model Photo {
   createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   // 「コピーしてアレンジ」で複製した写真は、コピー元のPhoto行を指す(値は複製するが、
-  // 行としては元を指す形にする)。削除依頼で元のPhoto行を消すと、コピー側もまとめて消える
+  // 行としては元を指す形にする)。ON DELETE SET NULL: 公式しおりの保存し直し・制作の
+  // スクリプトで元の写真の行が作り直されるたびにコピー側が消えてしまわないよう、
+  // CASCADEにはしない(2026-09-26 企画運営の判断)。削除依頼の対応は「同じURLの
+  // 写真の行をすべて消す」手順で行う(このFKには頼らない)
   sourcePhotoId String? @map("source_photo_id") @db.Uuid
 
   spot         Spot    @relation(fields: [spotId], references: [id], onDelete: Cascade)
-  sourcePhoto  Photo?  @relation("PhotoCopy", fields: [sourcePhotoId], references: [id], onDelete: Cascade)
+  sourcePhoto  Photo?  @relation("PhotoCopy", fields: [sourcePhotoId], references: [id], onDelete: SetNull)
   copiedPhotos Photo[] @relation("PhotoCopy")
 
   @@index([spotId])
