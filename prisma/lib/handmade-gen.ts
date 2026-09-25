@@ -270,7 +270,7 @@ function saveImageCache(imageCache: Map<string, string | null>) {
   writeFileSync(join(process.cwd(), "prisma", "photo-cache.json"), JSON.stringify(cacheOut));
 }
 
-async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map<HandmadeSpot, ResolvedSpot>, blobPrefix: string) {
+async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map<HandmadeSpot, ResolvedSpot>, blobPrefix: string, pending: boolean) {
   const imageCache = new Map<string, string | null>(Object.entries(existingPhotoCache as Record<string, string>));
   const creditCache = loadCreditCache();
   const prefectures = await prisma.area.findMany({ where: { level: "prefecture" } });
@@ -309,12 +309,12 @@ async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map
         title: it.title,
         description: it.description,
         nights: it.nights,
-        status: "published",
+        status: pending ? "pending" : "published",
         thumbnailUrl: it.days.flat().map((s) => photoBySpot.get(s)).find(Boolean) ?? null,
         primaryAreaId: prefecture.id,
         submittedAt: now,
-        reviewedAt: now,
-        reviewedByAdminId: ADMIN_ID,
+        reviewedAt: pending ? null : now,
+        reviewedByAdminId: pending ? null : ADMIN_ID,
         areas: { create: [...subAreas.map((a) => ({ areaId: a.id })), { areaId: prefecture.id }] },
         tags: { create: tags.map((t) => ({ tagId: t.id })) },
         purposeTags: { create: purposeTags.map((p) => ({ purposeTagId: p.id })) },
@@ -425,7 +425,10 @@ async function fillMissingPhotos(itineraries: HandmadeItinerary[], blobPrefix: s
 }
 
 /** 各seedスクリプトのエントリポイント。コマンドライン引数で確認／登録／写真補完を切り替える */
-export async function runHandmadeSeed(itineraries: HandmadeItinerary[], { blobPrefix }: { blobPrefix: string }) {
+export async function runHandmadeSeed(
+  itineraries: HandmadeItinerary[],
+  { blobPrefix, pending = false }: { blobPrefix: string; pending?: boolean },
+) {
   try {
     if (process.argv.includes("--fill-photos")) {
       await fillMissingPhotos(itineraries, blobPrefix);
@@ -442,7 +445,7 @@ export async function runHandmadeSeed(itineraries: HandmadeItinerary[], { blobPr
       console.log("確認モードのため、ここで終了します。問題なければ --commit を付けて実行してください。");
       return;
     }
-    await insertItineraries(itineraries, resolved, blobPrefix);
+    await insertItineraries(itineraries, resolved, blobPrefix, pending);
   } catch (e) {
     console.error(e);
     process.exitCode = 1;
