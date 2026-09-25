@@ -456,9 +456,16 @@ model Photo {
   licenseUrl String?  @map("license_url") // ライセンスの説明ページのURL
   createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
 
-  spot Spot @relation(fields: [spotId], references: [id], onDelete: Cascade)
+  // 「コピーしてアレンジ」で複製した写真は、コピー元のPhoto行を指す(値は複製するが、
+  // 行としては元を指す形にする)。削除依頼で元のPhoto行を消すと、コピー側もまとめて消える
+  sourcePhotoId String? @map("source_photo_id") @db.Uuid
+
+  spot         Spot    @relation(fields: [spotId], references: [id], onDelete: Cascade)
+  sourcePhoto  Photo?  @relation("PhotoCopy", fields: [sourcePhotoId], references: [id], onDelete: Cascade)
+  copiedPhotos Photo[] @relation("PhotoCopy")
 
   @@index([spotId])
+  @@index([sourcePhotoId])
   @@map("photo")
 }
 
