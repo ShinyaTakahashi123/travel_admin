@@ -14,6 +14,7 @@ import { ItineraryModerationActions } from "@/components/itinerary-moderation-ac
 import { ItineraryPhotoGallery, type GalleryPhoto } from "@/components/itinerary-photo-gallery";
 import { REVIEW_CHECKLIST } from "@/lib/review-checklist";
 import { computeReviewWarnings, type ReviewSpot } from "@/lib/review-warnings";
+import { packingItemLabel, autoPackingItemIds } from "@/lib/packing-catalog";
 
 function formatSpotTime(time: Date | null): string | null {
   if (!time) return null;
@@ -52,6 +53,8 @@ export default async function ItineraryDetailAdminPage({
     include: {
       plannerAccount: true,
       areas: { include: { area: true } },
+      tags: { include: { tag: true } },
+      purposeTags: { include: { purposeTag: true } },
       days: {
         orderBy: { dayNumber: "asc" },
         include: {
@@ -106,6 +109,21 @@ export default async function ItineraryDetailAdminPage({
 
   const meta = ITINERARY_STATUS_LABEL[itinerary.status];
   const isPending = itinerary.status === "pending";
+
+  // 旅のじゅんび(持ち物): 選んだ選択肢を名前にする。どちらも未選択なら、印刷時と同じ
+  // 計算で自動提案される持ち物を参考として出す(実際には保存されていない)
+  const packingSelectedLabels = itinerary.packingItemIds
+    .map((id) => packingItemLabel(id))
+    .filter((l): l is string => Boolean(l));
+  const hasOwnPackingSelection = packingSelectedLabels.length > 0 || itinerary.packingCustomItems.length > 0;
+  const packingAutoSuggestedLabels = hasOwnPackingSelection
+    ? []
+    : autoPackingItemIds(
+        itinerary.tags.map((t) => t.tag.name),
+        itinerary.purposeTags.map((p) => p.purposeTag.name)
+      )
+        .map((id) => packingItemLabel(id))
+        .filter((l): l is string => Boolean(l));
   const unreadReports = reports.filter((r) => r.status === "unread");
 
   // 審査の手助け(承認待ちのときだけ計算する)
@@ -270,17 +288,40 @@ export default async function ItineraryDetailAdminPage({
             </>
           )}
 
-          {itinerary.packingCustomItems.length > 0 && (
-            <>
-              <div className="font-black text-base mb-1.5">旅のじゅんび(追加した言葉)</div>
-              <div className="flex flex-wrap gap-1.5 mb-4">
-                {itinerary.packingCustomItems.map((text, i) => (
-                  <span key={i} className="bg-muted text-[#475569] text-sm font-bold px-2.5 py-1 rounded-full">
-                    {text}
-                  </span>
-                ))}
-              </div>
-            </>
+          <div className="font-black text-base mb-1.5">旅のじゅんび</div>
+          {hasOwnPackingSelection ? (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {packingSelectedLabels.map((label, i) => (
+                <span key={`p-${i}`} className="bg-muted text-[#475569] text-sm font-bold px-2.5 py-1 rounded-full">
+                  {label}
+                </span>
+              ))}
+              {itinerary.packingCustomItems.map((text, i) => (
+                <span
+                  key={`c-${i}`}
+                  className="bg-amber-100 text-amber-900 border border-amber-300 text-sm font-bold px-2.5 py-1 rounded-full"
+                  title="プランナーが追加した言葉(審査の対象)"
+                >
+                  {text}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <div className="mb-4">
+              <p className="text-sm text-muted-foreground mb-1.5">未選択（印刷では旅のテーマから自動で出します）</p>
+              {packingAutoSuggestedLabels.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {packingAutoSuggestedLabels.map((label, i) => (
+                    <span
+                      key={i}
+                      className="bg-muted/50 text-muted-foreground text-sm px-2.5 py-1 rounded-full"
+                    >
+                      {label}
+                    </span>
+                  ))}
+                </div>
+              )}
+            </div>
           )}
 
           {isPending ? (
