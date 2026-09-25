@@ -46,7 +46,7 @@ export const REVIEW_CHECKLIST: { category: string; items: { code: string; text: 
       { code: "D4", text: "他の人のしおりや、しおりえ編集部のしおりをそのまま写していないか" },
       {
         code: "D5",
-        text: "旅のじゅんびの言葉が適切か(特定の商品名の宣伝・効き目の約束・人を傷つける言葉がないか)",
+        text: "旅のじゅんびの言葉が適切か(特定の商品名の宣伝・効き目の約束・人を傷つける言葉・個人の情報がないか)",
       },
     ],
   },
