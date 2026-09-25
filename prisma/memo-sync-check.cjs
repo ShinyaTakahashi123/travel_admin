@@ -1,0 +1,20 @@
+// read-only: compare record-file memo texts with DB Spot.memo for official published itineraries
+const path=require("path"),fs=require("fs");
+const {createRequire}=require("module");const r=createRequire(path.join(process.cwd(),"package.json"));
+r("dotenv").config();const {PrismaClient}=r("@prisma/client");const {PrismaPg}=r("@prisma/adapter-pg");
+const p=new PrismaClient({adapter:new PrismaPg({connectionString:process.env.DATABASE_URL})});
+const norm=s=>(s||"").replace(/\s+/g,"").replace(/（訪問時刻[^）]*）$/,"").replace(/[（(]/g,"(").replace(/[）)]/g,")").trim();
+(async()=>{
+ const dir=path.join(process.cwd(),"..","docs","content","spot-memo-sources");
+ for(const pref of process.argv.slice(2)){
+  const txt=fs.readFileSync(path.join(dir,pref+".md"),"utf8");
+  const rec=[];
+  for(const line of txt.split(/\r?\n/)){const m=line.match(/^(?:Day\d+: |　　)?([^|#(（][^(]*?)\((\d+)字[^)]*\): (.*)$/);if(m)rec.push({n:m[1].trim(),t:norm(m[3])});}
+  const rows=await p.$queryRawUnsafe(`select s.name::text n, s.memo::text m from spot s join day d on d.id=s.day_id join itinerary i on i.id=d.itinerary_id join area a on a.id=i.primary_area_id join planner_account pa on pa.id=i.planner_account_id where a.name=$1 and i.status='published' and pa.is_official`,pref);
+  const db=new Set(rows.map(x=>norm(x.m)));const rs=new Set(rec.map(x=>x.t));
+  const miss=rec.filter(x=>!db.has(x.t)).map(x=>x.n);
+  const extra=rows.filter(x=>!rs.has(norm(x.m))).map(x=>x.n);
+  console.log(`${pref}: record ${rec.length} / db ${rows.length} | record-not-in-db: ${miss.length}${miss.length?" ["+miss.join(",")+"]":""} | db-not-in-record: ${extra.length}${extra.length?" ["+extra.join(",")+"]":""}`);
+ }
+ await p.$disconnect();
+})();
