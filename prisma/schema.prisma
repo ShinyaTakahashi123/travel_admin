@@ -314,9 +314,23 @@ model Itinerary {
   createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
+  // 公式しおりの「コピーしてアレンジ」。コピーはpublished/pendingにできない
+  // (アプリ側に加え、DBのCHECK制約でも二重に防ぐ。マイグレーション参照)
+  isCopy       Boolean   @default(false) @map("is_copy")
+  copiedFromId String?   @map("copied_from_id") @db.Uuid
+
+  // 会員だけが見られる限定公開リンク。合言葉はハッシュ(SHA-256)だけを保存し、
+  // 生の値は保存しない(パスワード再設定のトークンと同じ扱い)。作り直すと置き換わる
+  // (前のリンクは使えなくなる)。consentAtは、作成時の同意チェックの記録
+  sharedLinkTokenHash String?   @unique @map("shared_link_token_hash")
+  sharedLinkCreatedAt DateTime? @map("shared_link_created_at") @db.Timestamptz
+  sharedLinkConsentAt DateTime? @map("shared_link_consent_at") @db.Timestamptz
+
   plannerAccount  PlannerAccount        @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
   primaryArea     Area?                 @relation("ItineraryPrimaryArea", fields: [primaryAreaId], references: [id])
   reviewedByAdmin Admin?                @relation(fields: [reviewedByAdminId], references: [id])
+  copiedFrom      Itinerary?            @relation("ItineraryCopy", fields: [copiedFromId], references: [id], onDelete: SetNull)
+  copies          Itinerary[]           @relation("ItineraryCopy")
   areas           ItineraryArea[]
   tags            ItineraryTag[]
   purposeTags     ItineraryPurposeTag[]
@@ -333,6 +347,7 @@ model Itinerary {
   @@index([status, viewCount(sort: Desc)])
   @@index([status, likeCount(sort: Desc)])
   @@index([primaryAreaId])
+  @@index([copiedFromId])
   @@map("itinerary")
 }
 
