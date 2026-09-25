@@ -44,6 +44,7 @@ export const REVIEW_CHECKLIST: { category: string; items: { code: string; text: 
       { code: "D2", text: "タイトル・エリア・タグが内容と合っているか" },
       { code: "D3", text: "誤字・脱字(多ければ承認後にお知らせ)" },
       { code: "D4", text: "他の人のしおりや、しおりえ編集部のしおりをそのまま写していないか" },
+      { code: "D5", text: "旅のじゅんび(持ち物)に追加した言葉が適切か(宣伝・連絡先・不適切な内容がないか)" },
     ],
   },
 ];

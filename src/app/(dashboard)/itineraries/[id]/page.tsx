@@ -251,6 +251,19 @@ export default async function ItineraryDetailAdminPage({
             </>
           )}
 
+          {itinerary.packingCustomItems.length > 0 && (
+            <>
+              <div className="font-black text-base mb-1.5">旅のじゅんび(追加した言葉)</div>
+              <div className="flex flex-wrap gap-1.5 mb-4">
+                {itinerary.packingCustomItems.map((text, i) => (
+                  <span key={i} className="bg-muted text-[#475569] text-sm font-bold px-2.5 py-1 rounded-full">
+                    {text}
+                  </span>
+                ))}
+              </div>
+            </>
+          )}
+
           {isPending ? (
             <>
               <div className="font-black text-base mb-2.5">プランナーの過去実績</div>

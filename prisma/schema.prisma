@@ -291,24 +291,28 @@ model AdminAuditLog {
 // ============================================================
 
 model Itinerary {
-  id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  plannerAccountId  String    @map("planner_account_id") @db.Uuid
-  title             String
-  description       String?
-  nights            Int       @default(0) // 0 = 日帰り
-  status            String    @default("draft") // draft|pending|published|rejected|private|deleted
-  thumbnailUrl      String?   @map("thumbnail_url")
-  viewCount         BigInt    @default(0) @map("view_count")
-  likeCount         BigInt    @default(0) @map("like_count") // ログイン不要の「いいね」カウンタ（お気に入りFavoriteとは別概念）
-  primaryAreaId     String?   @map("primary_area_id") @db.Uuid // 主な都道府県（複数県にまたがる場合も1つ選択。都道府県レベルのArea.idを指す）
-  submittedAt       DateTime? @map("submitted_at") @db.Timestamptz
+  id                 String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  plannerAccountId   String    @map("planner_account_id") @db.Uuid
+  title              String
+  description        String?
+  nights             Int       @default(0) // 0 = 日帰り
+  status             String    @default("draft") // draft|pending|published|rejected|private|deleted
+  thumbnailUrl       String?   @map("thumbnail_url")
+  viewCount          BigInt    @default(0) @map("view_count")
+  likeCount          BigInt    @default(0) @map("like_count") // ログイン不要の「いいね」カウンタ（お気に入りFavoriteとは別概念）
+  primaryAreaId      String?   @map("primary_area_id") @db.Uuid // 主な都道府県（複数県にまたがる場合も1つ選択。都道府県レベルのArea.idを指す）
+  submittedAt        DateTime? @map("submitted_at") @db.Timestamptz
   // 権利侵害の申告・開示請求への対応のため公開申請時に記録(再申請のたびに上書き。6か月後にCronでnullにする)
-  submittedIp       String?   @map("submitted_ip")
-  reviewedAt        DateTime? @map("reviewed_at") @db.Timestamptz
-  reviewedByAdminId String?   @map("reviewed_by_admin_id") @db.Uuid
-  rejectionReason   String?   @map("rejection_reason")
-  createdAt         DateTime  @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt         DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+  submittedIp        String?   @map("submitted_ip")
+  reviewedAt         DateTime? @map("reviewed_at") @db.Timestamptz
+  reviewedByAdminId  String?   @map("reviewed_by_admin_id") @db.Uuid
+  rejectionReason    String?   @map("rejection_reason")
+  // 旅のじゅんび(持ち物)。選択肢(プログラム内に用意したもの)のIDと、プランナーが
+  // テキストで追加した言葉(順番つき)。どちらも未選択なら印刷時にテーマ・目的タグから自動で出す
+  packingItemIds     String[]  @default([]) @map("packing_item_ids")
+  packingCustomItems String[]  @default([]) @map("packing_custom_items")
+  createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
   plannerAccount  PlannerAccount        @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
   primaryArea     Area?                 @relation("ItineraryPrimaryArea", fields: [primaryAreaId], references: [id])
