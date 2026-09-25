@@ -26,7 +26,7 @@ export function MasterDataTabs({ prefectures, tags }: { prefectures: Prefecture[
               tab === t ? "text-secondary-foreground border-primary" : "text-muted-foreground border-transparent"
             }`}
           >
-            {t === "area" ? "エリア" : "タグ"}
+            {t === "area" ? "エリア" : "旅のテーマ"}
           </button>
         ))}
       </div>
@@ -211,7 +211,7 @@ function TagMaster({ tags }: { tags: Tag[] }) {
   return (
     <div className="flex gap-5 flex-col md:flex-row">
       <div className="flex-[1.3] bg-card border border-border rounded-2xl p-5">
-        <div className="font-black text-base mb-3.5">タグ一覧</div>
+        <div className="font-black text-base mb-3.5">旅のテーマ一覧</div>
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (
             <span key={tag.id} className="bg-muted text-[#475569] text-sm font-bold px-3 py-1.5 rounded-full">
@@ -221,7 +221,7 @@ function TagMaster({ tags }: { tags: Tag[] }) {
         </div>
       </div>
       <div className="flex-1 bg-card border border-border rounded-2xl p-5">
-        <div className="font-black text-base mb-3">タグ新規追加</div>
+        <div className="font-black text-base mb-3">旅のテーマ新規追加</div>
         <form onSubmit={handleAddTag} className="flex flex-col gap-3.5">
           <input
             value={newTagName}

@@ -686,9 +686,9 @@ export async function createTag(name: string): Promise<ActionResult> {
   return run(async () => {
     await requireAdmin();
     const trimmed = name.trim();
-    if (!trimmed) fail("タグ名を入力してください");
+    if (!trimmed) fail("旅のテーマ名を入力してください");
     const existing = await prisma.tag.findUnique({ where: { name: trimmed } });
-    if (existing) fail("同名のタグが既に存在します");
+    if (existing) fail("同名の旅のテーマが既に存在します");
     await prisma.tag.create({ data: { name: trimmed } });
     revalidatePath("/master");
   });
