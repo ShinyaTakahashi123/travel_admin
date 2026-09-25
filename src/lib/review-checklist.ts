@@ -41,7 +41,7 @@ export const REVIEW_CHECKLIST: { category: string; items: { code: string; text: 
     category: "D. しおりとしての質",
     items: [
       { code: "D1", text: "中身がほとんどない(スポットが1か所で説明がない、日程が空など)" },
-      { code: "D2", text: "タイトル・エリア・タグが内容と合っているか" },
+      { code: "D2", text: "タイトル・エリア・旅のテーマが内容と合っているか" },
       { code: "D3", text: "誤字・脱字(多ければ承認後にお知らせ)" },
       { code: "D4", text: "他の人のしおりや、しおりえ編集部のしおりをそのまま写していないか" },
     ],
