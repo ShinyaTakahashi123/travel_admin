@@ -9,7 +9,9 @@ export type ReviewSpot = {
   lat: number | null;
   lng: number | null;
   visitTimeMinutes: number | null; // 0時からの分数(同じ日の中での前後判定用)
-  transitDurationMin: number | null; // このスポットの直前の移動にかかる時間
+  // このスポットを出発したあとの移動(乗り継ぎ。day-tabs.tsx・編集画面と同じ考え方:
+  // スポット自身の移動情報は「そこから次のスポットへの移動」を表す)
+  transitLegs: { transitDurationMin: number | null }[];
 };
 
 const FAR_DISTANCE_KM = 30;
@@ -103,13 +105,16 @@ export function computeReviewWarnings(params: {
   }
 
   // 移動時間が0分なのに、離れた場所に移動している
+  // (移動は出発する側=prevの持ち物。乗り継ぎがあるときは合計で見る)
   for (const daySpots of spotsByDay.values()) {
     const sorted = [...daySpots].sort((a, b) => a.orderNo - b.orderNo);
     for (let i = 1; i < sorted.length; i++) {
       const prev = sorted[i - 1];
       const cur = sorted[i];
+      const totalMin = prev.transitLegs.reduce((sum, l) => sum + (l.transitDurationMin ?? 0), 0);
       if (
-        cur.transitDurationMin === 0 &&
+        prev.transitLegs.length > 0 &&
+        totalMin === 0 &&
         prev.lat != null &&
         prev.lng != null &&
         cur.lat != null &&

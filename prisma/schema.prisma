@@ -397,17 +397,35 @@ model Spot {
   memo               String?
   stayDurationMin    Int?      @map("stay_duration_min")
   websiteUrl         String?   @map("website_url")
+  // 乗り継ぎ(SpotTransitLeg)に置き換え中の列。1つ目の移動の値と同じに保つ
+  // (乗り継ぎ機能より前のコードや、乗り継ぎがまだ1つだけのときの表示に使う)
   transitMode        String?   @map("transit_mode") // walk|train|bus|car|taxi|other
   transitDurationMin Int?      @map("transit_duration_min")
   transitLine        String?   @map("transit_line")
 
-  day         Day          @relation(fields: [dayId], references: [id], onDelete: Cascade)
-  placeMaster PlaceMaster? @relation(fields: [placeMasterId], references: [id])
+  day         Day              @relation(fields: [dayId], references: [id], onDelete: Cascade)
+  placeMaster PlaceMaster?     @relation(fields: [placeMasterId], references: [id])
   photos      Photo[]
+  transitLegs SpotTransitLeg[]
 
   @@unique([dayId, orderNo])
   @@index([placeMasterId])
   @@map("spot")
+}
+
+// スポットへの移動(乗り継ぎ)。1区間に最大4つ、順番つきで持てる
+model SpotTransitLeg {
+  id                 String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  spotId             String  @map("spot_id") @db.Uuid
+  orderNo            Int     @map("order_no")
+  transitMode        String  @map("transit_mode") // walk|train|bus|car|taxi|other
+  transitDurationMin Int?    @map("transit_duration_min")
+  transitLine        String? @map("transit_line")
+
+  spot Spot @relation(fields: [spotId], references: [id], onDelete: Cascade)
+
+  @@unique([spotId, orderNo])
+  @@map("spot_transit_leg")
 }
 
 model Photo {
