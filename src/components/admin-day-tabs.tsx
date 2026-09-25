@@ -58,6 +58,21 @@ export function AdminDayTabs({ days }: { days: AdminDayData[] }) {
       <div className="flex flex-col gap-2.5">
         {current?.spots.map((spot, i) => (
           <div key={spot.id}>
+            {/* このスポットに着くまでの移動(乗り継ぎ)。データの決まり: スポット自身の
+                移動情報は「前のスポットからそこへの移動」を表す */}
+            {i > 0 && spot.transitLegs.length > 0 && (
+              <div className="pl-3 py-1 flex items-center gap-1.5 flex-wrap text-sm text-[#8a5a32]">
+                <span className="text-xs font-bold text-muted-foreground">移動:</span>
+                {spot.transitLegs.map((leg, li) => (
+                  <span key={li}>
+                    {li > 0 && <span className="text-muted-foreground mr-1.5">→</span>}
+                    {TRANSIT_LABEL[leg.transitMode] ?? leg.transitMode}
+                    {leg.transitDurationMin != null && ` 約${leg.transitDurationMin}分`}
+                    {leg.transitLine ? `（${leg.transitLine}）` : ""}
+                  </span>
+                ))}
+              </div>
+            )}
             <div className="border border-muted rounded-lg px-3 py-2.5 flex gap-2.5">
               {spot.visitTimeLabel && (
                 <span className="text-sm font-bold text-primary whitespace-nowrap">{spot.visitTimeLabel}</span>
@@ -88,19 +103,6 @@ export function AdminDayTabs({ days }: { days: AdminDayData[] }) {
                 )}
               </div>
             </div>
-            {i < (current?.spots.length ?? 0) - 1 && spot.transitLegs.length > 0 && (
-              <div className="pl-3 py-1 flex items-center gap-1.5 flex-wrap text-sm text-[#8a5a32]">
-                <span className="text-xs font-bold text-muted-foreground">移動:</span>
-                {spot.transitLegs.map((leg, li) => (
-                  <span key={li}>
-                    {li > 0 && <span className="text-muted-foreground mr-1.5">→</span>}
-                    {TRANSIT_LABEL[leg.transitMode] ?? leg.transitMode}
-                    {leg.transitDurationMin != null && ` 約${leg.transitDurationMin}分`}
-                    {leg.transitLine ? `（${leg.transitLine}）` : ""}
-                  </span>
-                ))}
-              </div>
-            )}
           </div>
         ))}
       </div>

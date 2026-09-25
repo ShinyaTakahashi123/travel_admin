@@ -105,15 +105,15 @@ export function computeReviewWarnings(params: {
   }
 
   // 移動時間が0分なのに、離れた場所に移動している
-  // (移動は出発する側=prevの持ち物。乗り継ぎがあるときは合計で見る)
+  // (移動は着く側=curの持ち物。データの決まり。乗り継ぎがあるときは合計で見る)
   for (const daySpots of spotsByDay.values()) {
     const sorted = [...daySpots].sort((a, b) => a.orderNo - b.orderNo);
     for (let i = 1; i < sorted.length; i++) {
       const prev = sorted[i - 1];
       const cur = sorted[i];
-      const totalMin = prev.transitLegs.reduce((sum, l) => sum + (l.transitDurationMin ?? 0), 0);
+      const totalMin = cur.transitLegs.reduce((sum, l) => sum + (l.transitDurationMin ?? 0), 0);
       if (
-        prev.transitLegs.length > 0 &&
+        cur.transitLegs.length > 0 &&
         totalMin === 0 &&
         prev.lat != null &&
         prev.lng != null &&
