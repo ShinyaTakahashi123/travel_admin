@@ -97,6 +97,7 @@ export const AUDIT_LOG_ACTION_LABEL: Record<string, string> = {
   dismiss: "却下(通報)",
   mark_responded: "対応済みにする",
   mark_unresponded: "未対応に戻す",
+  revoke_shared_link: "限定公開リンクを止める",
 };
 
 // AdminAuditLog.targetType の表示名

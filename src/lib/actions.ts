@@ -366,6 +366,31 @@ export async function deleteItineraryAsAdmin(itineraryId: string): Promise<Actio
   });
 }
 
+// 限定公開リンクを管理者が止める(権利侵害などの申告への対応。docs/specs/20260925-copy-and-share.md)。
+// 今の「非公開にする」はもともと非公開のコピーには効かないため、別の操作として用意する
+export async function revokeSharedLinkAsAdmin(itineraryId: string): Promise<ActionResult> {
+  return run(async () => {
+    const user = await requireAdmin();
+    await prisma.$transaction(async (tx) => {
+      const updated = await tx.itinerary.update({
+        where: { id: itineraryId },
+        data: { sharedLinkTokenHash: null, sharedLinkCreatedAt: null, sharedLinkConsentAt: null },
+        select: { title: true },
+      });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: user.id,
+          action: "revoke_shared_link",
+          targetType: "itinerary",
+          targetId: itineraryId,
+          detail: { title: updated.title },
+        },
+      });
+    });
+    revalidatePath(`/itineraries/${itineraryId}`);
+  });
+}
+
 // ============================================================
 // ユーザー・プランナーアカウント管理
 // ============================================================

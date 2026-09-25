@@ -11,6 +11,7 @@ import {
 import { AdminDayTabs, type AdminDayData } from "@/components/admin-day-tabs";
 import { ItineraryReviewActions } from "@/components/itinerary-review-actions";
 import { ItineraryModerationActions } from "@/components/itinerary-moderation-actions";
+import { RevokeSharedLinkButton } from "@/components/revoke-shared-link-button";
 import { ItineraryPhotoGallery, type GalleryPhoto } from "@/components/itinerary-photo-gallery";
 import { REVIEW_CHECKLIST } from "@/lib/review-checklist";
 import { computeReviewWarnings, type ReviewSpot } from "@/lib/review-warnings";
@@ -185,6 +186,16 @@ export default async function ItineraryDetailAdminPage({
                 通報 {unreadReports.length}件
               </span>
             )}
+            {itinerary.isCopy && (
+              <span className="bg-sky-100 text-sky-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
+                コピー
+              </span>
+            )}
+            {itinerary.sharedLinkTokenHash && (
+              <span className="bg-amber-100 text-amber-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
+                限定公開リンクあり
+              </span>
+            )}
           </div>
           <div className="text-sm text-muted-foreground">
             T-{itinerary.id.slice(0, 4).toUpperCase()} ・ 投稿者:{" "}
@@ -201,11 +212,14 @@ export default async function ItineraryDetailAdminPage({
           </div>
         </div>
 
-        {isPending ? (
-          <ItineraryReviewActions itineraryId={itinerary.id} title={itinerary.title} />
-        ) : (
-          <ItineraryModerationActions itineraryId={itinerary.id} status={itinerary.status} />
-        )}
+        <div className="flex items-start gap-2.5 flex-wrap">
+          {itinerary.sharedLinkTokenHash && <RevokeSharedLinkButton itineraryId={itinerary.id} />}
+          {isPending ? (
+            <ItineraryReviewActions itineraryId={itinerary.id} title={itinerary.title} />
+          ) : (
+            <ItineraryModerationActions itineraryId={itinerary.id} status={itinerary.status} />
+          )}
+        </div>
       </div>
 
       {isPending && previousRejectionReason && (
