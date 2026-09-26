@@ -107,8 +107,8 @@ async function main() {
                       memo: spot.memo,
                       websiteUrl: spot.websiteUrl,
                       stayDurationMin: 60 + idx * 30,
-                      transitMode: idx === 0 ? undefined : "walk",
-                      transitDurationMin: idx === 0 ? undefined : 15,
+                      transitLegs:
+                        idx === 0 ? undefined : { create: [{ orderNo: 1, transitMode: "walk", transitDurationMin: 15 }] },
                     })),
                   },
                 };

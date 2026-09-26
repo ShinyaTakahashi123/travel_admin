@@ -28,19 +28,6 @@ function spotTimeMinutes(time: Date | null): number | null {
   return time.getUTCHours() * 60 + time.getUTCMinutes();
 }
 
-// スポットの乗り継ぎ一覧を求める(transitLegsが空でも、移行前の旧列に
-// transit_modeがあれば1つ目の移動として補う)
-function effectiveTransitLegs(spot: {
-  transitMode: string | null;
-  transitDurationMin: number | null;
-  transitLine: string | null;
-  transitLegs: { transitMode: string; transitDurationMin: number | null; transitLine: string | null }[];
-}): { transitMode: string; transitDurationMin: number | null; transitLine: string | null }[] {
-  if (spot.transitLegs.length > 0) return spot.transitLegs;
-  if (!spot.transitMode) return [];
-  return [{ transitMode: spot.transitMode, transitDurationMin: spot.transitDurationMin, transitLine: spot.transitLine }];
-}
-
 export default async function ItineraryDetailAdminPage({
   params,
 }: {
@@ -103,7 +90,7 @@ export default async function ItineraryDetailAdminPage({
       memo: spot.memo,
       websiteUrl: spot.websiteUrl,
       hasLocation: spot.lat != null && spot.lng != null,
-      transitLegs: effectiveTransitLegs(spot),
+      transitLegs: spot.transitLegs,
     })),
   }));
 
@@ -137,7 +124,7 @@ export default async function ItineraryDetailAdminPage({
       lat: spot.lat != null ? Number(spot.lat) : null,
       lng: spot.lng != null ? Number(spot.lng) : null,
       visitTimeMinutes: spotTimeMinutes(spot.visitTime),
-      transitLegs: effectiveTransitLegs(spot),
+      transitLegs: spot.transitLegs,
     }))
   );
   const warnings = isPending

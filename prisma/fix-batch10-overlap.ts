@@ -93,9 +93,9 @@ async function main() {
             memo: s.memo,
             stayDurationMin: s.stay,
             websiteUrl: s.websiteUrl || null,
-            transitMode: s.transit?.mode ?? null,
-            transitDurationMin: s.transit?.min ?? null,
-            transitLine: s.transit?.line ?? null,
+            transitLegs: s.transit
+              ? { create: [{ orderNo: 1, transitMode: s.transit.mode, transitDurationMin: s.transit.min ?? null, transitLine: s.transit.line ?? null }] }
+              : undefined,
           },
         });
         if (url) await prisma.photo.create({ data: { spotId: spotRow.id, url, caption: s.name } });

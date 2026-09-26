@@ -341,7 +341,11 @@ async function main() {
                 ? {}
                 : (() => {
                     const t = TRANSIT_PATTERN[(idx - 1) % TRANSIT_PATTERN.length];
-                    return { transitMode: t.mode, transitDurationMin: t.dur, transitLine: t.line ?? null };
+                    return {
+                      transitLegs: {
+                        create: [{ orderNo: 1, transitMode: t.mode, transitDurationMin: t.dur, transitLine: t.line ?? null }],
+                      },
+                    };
                   })()),
             },
           });
