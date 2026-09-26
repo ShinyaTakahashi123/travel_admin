@@ -311,6 +311,11 @@ model Itinerary {
   // テキストで追加した言葉(順番つき)。どちらも未選択なら印刷時にテーマ・目的タグから自動で出す
   packingItemIds     String[]  @default([]) @map("packing_item_ids")
   packingCustomItems String[]  @default([]) @map("packing_custom_items")
+  // おすすめの季節("spring"|"summer"|"autumn"|"winter"、重複なし)。「通年」の区分はなく、
+  // どの季節でも楽しめるしおりは4つすべてを持たせる。未設定(空配列)のしおりは、
+  // プランナーの既存のしおりなど運営がデータを書き換えないものも含め、
+  // どの季節のページにも出す(4つすべて選んだときと同じ扱い)
+  seasons            String[]  @default([]) @map("seasons")
   createdAt          DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt          DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
