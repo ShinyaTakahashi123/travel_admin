@@ -11,6 +11,9 @@
  */
 import { prisma } from "../src/lib/prisma";
 
+// 接続先(本番/開発)の表示と確かめ(企画運営2026-09-27)。Next.jsアプリ本体からは読み込まれない
+require("../scripts/assert-db-target.cjs");
+
 const OLD_TITLE_TO_DELETE = "白銀の青い池ライトアップ、冬の富良野・美瑛を楽しむプラン";
 
 const MEMO_FIXES: { itineraryTitle: string; spotName: string; newMemo: string }[] = [

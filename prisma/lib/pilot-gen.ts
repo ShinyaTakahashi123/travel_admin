@@ -6,6 +6,13 @@ import { put } from "@vercel/blob";
 import sharp from "sharp";
 import { prisma } from "../../src/lib/prisma";
 
+// DBに書き込むseedスクリプト共通の入口。ここで接続先(本番/開発)を表示し、
+// 目印(SHIORIE_TARGET=prod)と実際の接続先が食い違っていないかを確かめる
+// (企画運営2026-09-27、制作がnpm run prod -- を使わずに実行して表示が出なかったため)。
+// このファイルはNext.jsアプリ本体(src/app等)からは読み込まれないため、
+// Vercel上の本番アプリの起動には影響しない
+require("../../scripts/assert-db-target.cjs");
+
 /**
  * Wikipediaの元画像は1枚数MB〜十数MBあり、そのまま保存するとBlobの容量（Hobbyは1GB）を
  * すぐ使い切るうえ、ページ表示も重くなる。表示に十分な横幅1280pxのJPEGに縮小してから保存する。
@@ -223,6 +230,10 @@ export async function fetchAndUploadImage(
     const summary = await summaryRes.json();
     const imgUrl: string | undefined = summary.originalimage?.source ?? summary.thumbnail?.source;
     if (!imgUrl) throw new Error("no image in summary");
+    // Wikipediaのページに適切なサムネイルがないとき、Gthumb.svgなどの汎用アイコン(SVGをPNG化したもの)が
+    // 実際の写真の代わりに返ってくることがある(例: .../Gthumb.svg/langja-250px-Gthumb.svg.png)。
+    // 写真ではないため、URLにSVGファイル名が含まれる場合や、拡張子がsvgの場合は弾く
+    if (/\.svg(\?|$)|\.svg\//i.test(imgUrl)) throw new Error(`image is a placeholder svg: ${imgUrl}`);
 
     const imgRes = await fetch(imgUrl, { headers: { "User-Agent": UA } });
     if (!imgRes.ok) throw new Error(`image fetch ${imgRes.status}`);

@@ -9,6 +9,9 @@
  */
 import { prisma } from "../src/lib/prisma";
 
+// 接続先(本番/開発)の表示と確かめ(企画運営2026-09-27)。Next.jsアプリ本体からは読み込まれない
+require("../scripts/assert-db-target.cjs");
+
 const DESCRIPTIONS: Record<string, string> = {
   // ---- 都道府県（人気順、第1弾） ----
   "京都府":
