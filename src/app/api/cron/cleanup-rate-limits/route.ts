@@ -12,11 +12,14 @@ import { prisma } from "@/lib/prisma";
 //    （件数用に利用者/プランナーの別・退会日時だけ残す）
 // 4. 管理者の操作の記録（AdminAuditLog）のうち、3年を過ぎ、legalHold(保全の印)が
 //    付いていないものを削除する
-// 5. 「旅」(Trip/TripSpot)のうち、元のしおりが削除・非公開・プランナーの退会で
-//    見られなくなったものの、写した文章(description・スポットのメモ)を空にする
-//    (スポット名・住所・位置・チェックイン・スタンプは残す。法務2026-09-28決定B。
-//    会員が旅のページを開いたときにも同じ処理をするが、開かないまま放置された「旅」の
-//    文章も、削除依頼の実効性のためここで確実に消す)
+// 5. 「旅」(Trip/TripSpot)のうち、元のしおりが見られなくなったものの、写した文章
+//    (description・スポットのメモ)を空にする(スポット名・住所・位置・チェックイン・
+//    スタンプは残す。法務2026-09-28決定B。会員が旅のページを開いたときにも同じ処理を
+//    するが、開かないまま放置された「旅」の文章も、削除依頼の実効性のためここで確実に消す)。
+//    「見られなくなった」の基準はtrip.original_kindで種類ごとに違う
+//    (src/lib/trip-availability.tsのisOriginalAvailableと同じ判定をSQLで表現):
+//    published=statusがpublishedでなくなったら／copy=本人が削除するまで見られる／
+//    shared_link=削除・プランナーの利用停止で見られなくなった扱い(リンクを止めただけは対象外)
 // ※ IPアドレスの値・メールアドレス・名前などの個人情報自体はログに出さない（件数のみ）
 export const maxDuration = 60;
 
@@ -69,14 +72,33 @@ export async function GET(request: Request) {
     UPDATE trip
     SET description = NULL
     WHERE description IS NOT NULL
-      AND original_itinerary_id NOT IN (SELECT id FROM itinerary WHERE status = 'published')
+      AND NOT EXISTS (
+        SELECT 1 FROM itinerary i
+        JOIN planner_account p ON p.id = i.planner_account_id
+        WHERE i.id = trip.original_itinerary_id
+          AND (
+            (trip.original_kind = 'copy' AND i.status <> 'deleted')
+            OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended')
+            OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
+          )
+      )
   `;
   const tripSpotMemosCleared = await prisma.$executeRaw`
     UPDATE trip_spot
     SET memo = NULL
     WHERE memo IS NOT NULL
       AND trip_id IN (
-        SELECT id FROM trip WHERE original_itinerary_id NOT IN (SELECT id FROM itinerary WHERE status = 'published')
+        SELECT trip.id FROM trip
+        WHERE NOT EXISTS (
+          SELECT 1 FROM itinerary i
+          JOIN planner_account p ON p.id = i.planner_account_id
+          WHERE i.id = trip.original_itinerary_id
+            AND (
+              (trip.original_kind = 'copy' AND i.status <> 'deleted')
+              OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended')
+              OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
+            )
+        )
       )
   `;
 

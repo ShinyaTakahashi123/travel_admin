@@ -731,6 +731,14 @@ model Trip {
   // 元のしおりのID。元のしおりが削除されても空にしない(FK制約はあえて付けない。
   // 削除依頼の対応でどの「旅」に写っているか探すのに使う。法務2026-09-28決定)
   originalItineraryId String    @map("original_itinerary_id") @db.Uuid
+  // 元のしおりの種類(コピー時点で固定・あとで変わらない)。「見られなくなった」の判定基準が
+  // 種類によって違うため保持する(2026-09-28 企画運営の指摘への対応):
+  // "published"(公開中の公式・プランナーのしおり) = statusがpublishedでなくなったら見られなくなった扱い
+  // "copy"(会員が自分でアレンジしたコピー) = 本人が削除する(status="deleted")まで見られる扱い
+  //   (draft/privateはコピーの通常の状態であり、見られなくなった扱いにしない)
+  // "shared_link"(限定公開のリンクでもらったしおり) = 削除・プランナーの利用停止で見られなくなった扱い
+  //   (リンクを止めただけ=sharedLinkTokenHashがnullになっただけでは見られなくなった扱いにしない)
+  originalKind        String    @default("published") @map("original_kind")
   title               String // 写したときのしおり名
   description         String? // しおりの説明文。元が見られなくなったら空にする
   travelDate          DateTime? @map("travel_date") @db.Date // 旅した日(任意)
