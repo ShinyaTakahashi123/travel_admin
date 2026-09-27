@@ -12,6 +12,11 @@ import { prisma } from "@/lib/prisma";
 //    （件数用に利用者/プランナーの別・退会日時だけ残す）
 // 4. 管理者の操作の記録（AdminAuditLog）のうち、3年を過ぎ、legalHold(保全の印)が
 //    付いていないものを削除する
+// 5. 「旅」(Trip/TripSpot)のうち、元のしおりが削除・非公開・プランナーの退会で
+//    見られなくなったものの、写した文章(description・スポットのメモ)を空にする
+//    (スポット名・住所・位置・チェックイン・スタンプは残す。法務2026-09-28決定B。
+//    会員が旅のページを開いたときにも同じ処理をするが、開かないまま放置された「旅」の
+//    文章も、削除依頼の実効性のためここで確実に消す)
 // ※ IPアドレスの値・メールアドレス・名前などの個人情報自体はログに出さない（件数のみ）
 export const maxDuration = 60;
 
@@ -60,11 +65,27 @@ export async function GET(request: Request) {
     where: { createdAt: { lt: auditLogCutoff }, legalHold: false },
   });
 
+  const tripDescriptionsCleared = await prisma.$executeRaw`
+    UPDATE trip
+    SET description = NULL
+    WHERE description IS NOT NULL
+      AND original_itinerary_id NOT IN (SELECT id FROM itinerary WHERE status = 'published')
+  `;
+  const tripSpotMemosCleared = await prisma.$executeRaw`
+    UPDATE trip_spot
+    SET memo = NULL
+    WHERE memo IS NOT NULL
+      AND trip_id IN (
+        SELECT id FROM trip WHERE original_itinerary_id NOT IN (SELECT id FROM itinerary WHERE status = 'published')
+      )
+  `;
+
   const result = {
     rateLimitEvents: rateLimitEvents.count,
     ipCleared: { comments: comments.count, requests: requests.count, itineraries: itineraries.count },
     deletedAccountRecordsPurged,
     auditLogsPurged: auditLogsPurged.count,
+    tripContentCleared: { descriptions: tripDescriptionsCleared, spotMemos: tripSpotMemosCleared },
   };
   console.log("[cleanup-rate-limits]", JSON.stringify(result));
   return NextResponse.json(result);
