@@ -709,6 +709,8 @@ export type ThemeInput = {
   seasons: string[];
   tagIds: string[];
   purposeTagIds: string[];
+  // 新規作成時、URL用の名前欄に管理者が何か入力していれば、自動生成のヒントに使う
+  slugHint?: string;
 };
 
 function validateThemeInput(input: ThemeInput): { name: string; intro: string; seasons: string[] } {
@@ -728,10 +730,15 @@ export async function createTheme(input: ThemeInput): Promise<ActionResult<{ id:
     const admin = await requireAdmin();
     const { name, intro, seasons } = validateThemeInput(input);
 
-    const slug = await generateUniqueSlug(name, "theme", async (candidate) => {
-      const existing = await prisma.theme.findUnique({ where: { slug: candidate } });
-      return existing !== null;
-    });
+    const slug = await generateUniqueSlug(
+      name,
+      "theme",
+      async (candidate) => {
+        const existing = await prisma.theme.findUnique({ where: { slug: candidate } });
+        return existing !== null;
+      },
+      input.slugHint
+    );
     const maxOrder = await prisma.theme.aggregate({ _max: { displayOrder: true } });
 
     const theme = await prisma.$transaction(async (tx) => {
@@ -843,6 +850,8 @@ export type FeatureInput = {
   closing: string;
   displayFromMonth: number | null;
   displayToMonth: number | null;
+  // 新規作成時、URL用の名前欄に管理者が何か入力していれば、自動生成のヒントに使う
+  slugHint?: string;
 };
 
 function validateFeatureInput(input: FeatureInput): {
@@ -868,10 +877,15 @@ export async function createFeature(input: FeatureInput): Promise<ActionResult<{
     const admin = await requireAdmin();
     const { title, lead, description, closing } = validateFeatureInput(input);
 
-    const slug = await generateUniqueSlug(title, "feature", async (candidate) => {
-      const existing = await prisma.feature.findUnique({ where: { slug: candidate } });
-      return existing !== null;
-    });
+    const slug = await generateUniqueSlug(
+      title,
+      "feature",
+      async (candidate) => {
+        const existing = await prisma.feature.findUnique({ where: { slug: candidate } });
+        return existing !== null;
+      },
+      input.slugHint
+    );
 
     const feature = await prisma.$transaction(async (tx) => {
       const created = await tx.feature.create({

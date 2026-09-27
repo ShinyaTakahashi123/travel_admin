@@ -96,7 +96,7 @@ export function FeatureAdminPanel({ features }: { features: Feature[] }) {
     setError(null);
     startTransition(async () => {
       if (editingId === "new") {
-        const result = await createFeature(form);
+        const result = await createFeature({ ...form, slugHint: form.slug });
         if (!result.ok) {
           setError(result.error);
           return;

@@ -1,33 +1,25 @@
-import Kuroshiro from "kuroshiro";
-import KuromojiAnalyzer from "kuroshiro-analyzer-kuromoji";
-
-// kuromojiの辞書読み込みに時間がかかるため、サーバーの1インスタンス内で使い回す
-let kuroshiroPromise: Promise<Kuroshiro> | null = null;
-function getKuroshiro(): Promise<Kuroshiro> {
-  if (!kuroshiroPromise) {
-    kuroshiroPromise = (async () => {
-      const kuroshiro = new Kuroshiro();
-      await kuroshiro.init(new KuromojiAnalyzer());
-      return kuroshiro;
-    })();
-  }
-  return kuroshiroPromise;
-}
-
-// kuroshiroが長音を表すのに使うマクロン付き母音を、URLで使えるASCIIに落とす(kōyō→koyo)
-const MACRON_MAP: Record<string, string> = { ā: "a", ī: "i", ū: "u", ē: "e", ō: "o" };
+import * as wanakana from "wanakana";
 
 function toAsciiSlug(text: string): string {
-  const deMacroned = [...text].map((c) => MACRON_MAP[c] ?? c).join("");
-  return deMacroned.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return text.toLowerCase().replace(/[^a-z0-9]/g, "");
 }
 
-// 名前からURL用の名前(候補)を1つ作る。ローマ字にできない・短すぎるときはnull
-async function generateBaseSlug(name: string): Promise<string | null> {
+// 名前(または管理者が入力したヒント)からURL用の名前(候補)を1つ作る。
+// 漢字が含まれ自動で変換できないときはnull(呼び出し側で<prefix>-<番号>にする)。
+// kuroshiro+kuromoji(辞書が約17MBあり、Vercelの関数の大きさを増やす)は使わず、
+// かな→ローマ字だけの軽いwanakanaを使う(2026-09-28 企画運営の指摘で変更)
+function generateBaseSlug(name: string, hint?: string): string | null {
+  const trimmedHint = hint?.trim();
+  if (trimmedHint) {
+    const slug = /^[a-zA-Z0-9\s\-_]+$/.test(trimmedHint)
+      ? toAsciiSlug(trimmedHint)
+      : toAsciiSlug(wanakana.toRomaji(trimmedHint));
+    if (slug.length >= 2) return slug;
+  }
+
   const trimmed = name.trim();
   if (!trimmed) return null;
 
-  // 既に半角英数字主体の名前なら、変換せずそのまま使う
   if (/^[a-zA-Z0-9\s\-_]+$/.test(trimmed)) {
     const slug = trimmed
       .toLowerCase()
@@ -36,25 +28,24 @@ async function generateBaseSlug(name: string): Promise<string | null> {
     return slug.length >= 2 ? slug : null;
   }
 
-  try {
-    const kuroshiro = await getKuroshiro();
-    const romaji = await kuroshiro.convert(trimmed, { to: "romaji", mode: "spaced" });
-    const slug = toAsciiSlug(romaji);
-    return slug.length >= 2 ? slug : null;
-  } catch (e) {
-    console.error("generateBaseSlug: ローマ字変換に失敗", e instanceof Error ? e.name : e);
-    return null;
-  }
+  const romaji = wanakana.toRomaji(trimmed);
+  // wanakanaは漢字を変換できずそのまま残すため、非ASCII文字が残っていれば
+  // 変換できなかったと判断する
+  if (/[^\x00-\x7F]/.test(romaji)) return null;
+  const slug = toAsciiSlug(romaji);
+  return slug.length >= 2 ? slug : null;
 }
 
-// 名前から重複しないURL用の名前を作る。ローマ字化できない・全候補が重複しているときは
+// 名前から重複しないURL用の名前を作る。管理者が入力欄に何か書いていれば(hint)
+// それを優先する。ローマ字化できない・全候補が重複しているときは
 // <prefix>-<番号>にフォールバックする(docs/specs/20260927-admin-managed-themes-features.md)
 export async function generateUniqueSlug(
   name: string,
   prefix: "theme" | "feature",
-  isTaken: (slug: string) => Promise<boolean>
+  isTaken: (slug: string) => Promise<boolean>,
+  hint?: string
 ): Promise<string> {
-  const base = await generateBaseSlug(name);
+  const base = generateBaseSlug(name, hint);
   if (base && !(await isTaken(base))) return base;
   if (base) {
     for (let i = 2; i <= 50; i++) {

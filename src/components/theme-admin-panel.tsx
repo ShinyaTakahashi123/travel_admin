@@ -89,7 +89,7 @@ export function ThemeAdminPanel({
     setError(null);
     startTransition(async () => {
       if (editingId === "new") {
-        const result = await createTheme(form);
+        const result = await createTheme({ ...form, slugHint: form.slug });
         if (!result.ok) {
           setError(result.error);
           return;
