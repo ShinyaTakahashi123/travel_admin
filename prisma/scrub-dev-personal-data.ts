@@ -31,6 +31,8 @@
 // - DeletedAccountRecord.email / name、DeletedAccountRecordItem.body: ダミーへ
 // - 置き換えないもの(公開している情報): UserAccount.name・profile、
 //   PlannerAccount.name・profile、Comment.body、Itinerary本体、Adminのemail
+// - trip・trip_spot・checkin・prefecture_visit: 会員の行動の記録のため、ダミー値への
+//   置き換えではなく全件削除する(docs/specs/20260928-footprint-map-checkin.md 5節)
 
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -87,6 +89,9 @@ async function main() {
       where: { OR: [{ ipAddress: { not: null } }, { body: { not: null } }] },
     }),
     itinerarySubmittedIp: await prisma.itinerary.count({ where: { submittedIp: { not: null } } }),
+    trip: await prisma.trip.count(),
+    checkin: await prisma.checkin.count(),
+    prefectureVisit: await prisma.prefectureVisit.count(),
   };
   console.log("対象件数:", counts);
 
@@ -150,6 +155,11 @@ async function main() {
       SET email = 'deleted-' || id || '@example.invalid',
           name = '開発用ダミー'
     `;
+
+    // 足あと地図・現地チェックイン: 会員の行動の記録なので全件削除する
+    // (tripを消すとtrip_spot・checkinはonDelete: Cascadeで一緒に消える)
+    await tx.trip.deleteMany();
+    await tx.prefectureVisit.deleteMany();
   });
 
   console.log("");
