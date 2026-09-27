@@ -323,8 +323,8 @@ model Itinerary {
 
   // 公式しおりの「コピーしてアレンジ」。コピーはpublished/pendingにできない
   // (アプリ側に加え、DBのCHECK制約でも二重に防ぐ。マイグレーション参照)
-  isCopy       Boolean   @default(false) @map("is_copy")
-  copiedFromId String?   @map("copied_from_id") @db.Uuid
+  isCopy       Boolean @default(false) @map("is_copy")
+  copiedFromId String? @map("copied_from_id") @db.Uuid
 
   // 会員だけが見られる限定公開リンク。合言葉はハッシュ(SHA-256)だけを保存し、
   // 生の値は保存しない(パスワード再設定のトークンと同じ扱い)。作り直すと置き換わる
@@ -354,7 +354,6 @@ model Itinerary {
   @@index([status, createdAt(sort: Desc)])
   @@index([status, viewCount(sort: Desc)])
   @@index([status, likeCount(sort: Desc)])
-  @@index([copiedFromId])
   @@index([primaryAreaId])
   @@index([copiedFromId])
   @@map("itinerary")
