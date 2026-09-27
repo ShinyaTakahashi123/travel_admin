@@ -273,7 +273,7 @@ model AdminAuditLog {
   id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   adminId    String   @map("admin_id") @db.Uuid
   action     String
-  targetType String   @map("target_type") // itinerary|user_account|planner_account|admin|report|inquiry
+  targetType String   @map("target_type") // itinerary|user_account|planner_account|admin|report|inquiry|theme|feature
   targetId   String   @map("target_id") @db.Uuid
   detail     Json?    @db.JsonB
   // 裁判・開示請求の手続きが続いているなど、法務が保存を求めた記録は3年を過ぎても消さない。

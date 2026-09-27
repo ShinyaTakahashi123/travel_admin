@@ -84,6 +84,18 @@ const NAV_ITEMS = [
       </>
     ),
   },
+  {
+    href: "/themes-features",
+    label: "テーマ・特集",
+    icon: (
+      <>
+        <rect x="3" y="4" width="8" height="8" rx="1" />
+        <rect x="13" y="4" width="8" height="8" rx="1" />
+        <rect x="3" y="14" width="8" height="6" rx="1" />
+        <rect x="13" y="14" width="8" height="6" rx="1" />
+      </>
+    ),
+  },
 ];
 
 // スーパー管理者のみ表示するナビ項目

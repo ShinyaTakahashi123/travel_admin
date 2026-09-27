@@ -7,6 +7,8 @@ import { prisma } from "@/lib/prisma";
 import { sendMail } from "@/lib/mail";
 import { getActiveAdmin } from "@/lib/admin-guard";
 import { ActionResult, ActionError, fail } from "@/lib/action-result";
+import { generateUniqueSlug, isValidSlugFormat } from "@/lib/slug";
+import { assertValidThemeImageUrl } from "@/lib/validate-theme-image";
 
 const INVITE_EXPIRES_HOURS = 72;
 const USER_SITE_URL = process.env.USER_SITE_URL ?? "https://shiorietrip.com";
@@ -691,5 +693,364 @@ export async function createTag(name: string): Promise<ActionResult> {
     if (existing) fail("同名の旅のテーマが既に存在します");
     await prisma.tag.create({ data: { name: trimmed } });
     revalidatePath("/master");
+  });
+}
+
+// ============================================================
+// テーマ・特集管理 (docs/specs/20260927-admin-managed-themes-features.md)
+// ============================================================
+
+const VALID_SEASONS = ["spring", "summer", "autumn", "winter"];
+const THEME_FEATURE_PATH = "/themes-features";
+
+export type ThemeInput = {
+  name: string;
+  intro: string;
+  seasons: string[];
+  tagIds: string[];
+  purposeTagIds: string[];
+};
+
+function validateThemeInput(input: ThemeInput): { name: string; intro: string; seasons: string[] } {
+  const name = input.name.trim();
+  const intro = input.intro.trim();
+  if (!name) fail("名前を入力してください");
+  if (!intro) fail("紹介文を入力してください");
+  if (input.tagIds.length === 0 && input.purposeTagIds.length === 0) {
+    fail("対象の旅のテーマ・目的を1つ以上選んでください");
+  }
+  const seasons = input.seasons.filter((s) => VALID_SEASONS.includes(s));
+  return { name, intro, seasons };
+}
+
+export async function createTheme(input: ThemeInput): Promise<ActionResult<{ id: string }>> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const { name, intro, seasons } = validateThemeInput(input);
+
+    const slug = await generateUniqueSlug(name, "theme", async (candidate) => {
+      const existing = await prisma.theme.findUnique({ where: { slug: candidate } });
+      return existing !== null;
+    });
+    const maxOrder = await prisma.theme.aggregate({ _max: { displayOrder: true } });
+
+    const theme = await prisma.$transaction(async (tx) => {
+      const created = await tx.theme.create({
+        data: {
+          name,
+          slug,
+          intro,
+          seasons,
+          displayOrder: (maxOrder._max.displayOrder ?? 0) + 1,
+          tags: { create: input.tagIds.map((tagId) => ({ tagId })) },
+          purposeTags: { create: input.purposeTagIds.map((purposeTagId) => ({ purposeTagId })) },
+        },
+      });
+      await tx.adminAuditLog.create({
+        data: { adminId: admin.id, action: "create", targetType: "theme", targetId: created.id, detail: { name, slug } },
+      });
+      return created;
+    });
+
+    revalidatePath(THEME_FEATURE_PATH);
+    return { id: theme.id };
+  });
+}
+
+export async function updateTheme(
+  id: string,
+  input: ThemeInput & { slug: string; imageUrl: string | null }
+): Promise<ActionResult> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const existing = await prisma.theme.findUnique({ where: { id } });
+    if (!existing) fail("テーマが見つかりません");
+    const { name, intro, seasons } = validateThemeInput(input);
+
+    let slug = existing.slug;
+    const nextSlugRaw = input.slug.trim().toLowerCase();
+    if (nextSlugRaw !== existing.slug) {
+      if (existing.status === "published") fail("公開したあとはURL用の名前を変えられません");
+      if (!isValidSlugFormat(nextSlugRaw)) fail("URL用の名前は半角英小文字・数字・ハイフンで入力してください");
+      const dup = await prisma.theme.findUnique({ where: { slug: nextSlugRaw } });
+      if (dup && dup.id !== id) fail("そのURL用の名前は既に使われています");
+      slug = nextSlugRaw;
+    }
+
+    if (input.imageUrl && input.imageUrl !== existing.imageUrl) {
+      await assertValidThemeImageUrl(input.imageUrl);
+    }
+
+    await prisma.$transaction(async (tx) => {
+      await tx.themeTag.deleteMany({ where: { themeId: id } });
+      await tx.themePurposeTag.deleteMany({ where: { themeId: id } });
+      await tx.theme.update({
+        where: { id },
+        data: {
+          name,
+          slug,
+          intro,
+          seasons,
+          imageUrl: input.imageUrl,
+          tags: { create: input.tagIds.map((tagId) => ({ tagId })) },
+          purposeTags: { create: input.purposeTagIds.map((purposeTagId) => ({ purposeTagId })) },
+        },
+      });
+      await tx.adminAuditLog.create({
+        data: { adminId: admin.id, action: "update", targetType: "theme", targetId: id, detail: { name, slug } },
+      });
+    });
+
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export async function setThemeStatus(id: string, status: "draft" | "published"): Promise<ActionResult> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const existing = await prisma.theme.findUnique({ where: { id } });
+    if (!existing) fail("テーマが見つかりません");
+    await prisma.$transaction(async (tx) => {
+      await tx.theme.update({ where: { id }, data: { status } });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: status === "published" ? "publish" : "unpublish",
+          targetType: "theme",
+          targetId: id,
+          detail: { name: existing.name },
+        },
+      });
+    });
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export async function reorderThemes(orderedIds: string[]): Promise<ActionResult> {
+  return run(async () => {
+    await requireAdmin();
+    await prisma.$transaction(
+      orderedIds.map((id, index) => prisma.theme.update({ where: { id }, data: { displayOrder: index } }))
+    );
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export type FeatureInput = {
+  title: string;
+  lead: string;
+  description: string;
+  closing: string;
+  displayFromMonth: number | null;
+  displayToMonth: number | null;
+};
+
+function validateFeatureInput(input: FeatureInput): {
+  title: string;
+  lead: string;
+  description: string;
+  closing: string | null;
+} {
+  const title = input.title.trim();
+  const lead = input.lead.trim();
+  const description = input.description.trim();
+  if (!title) fail("タイトルを入力してください");
+  if (!lead) fail("はじめの文を入力してください");
+  if (!description) fail("説明を入力してください");
+  for (const m of [input.displayFromMonth, input.displayToMonth]) {
+    if (m !== null && (m < 1 || m > 12)) fail("出す時期は1〜12の月で指定してください");
+  }
+  return { title, lead, description, closing: input.closing.trim() || null };
+}
+
+export async function createFeature(input: FeatureInput): Promise<ActionResult<{ id: string }>> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const { title, lead, description, closing } = validateFeatureInput(input);
+
+    const slug = await generateUniqueSlug(title, "feature", async (candidate) => {
+      const existing = await prisma.feature.findUnique({ where: { slug: candidate } });
+      return existing !== null;
+    });
+
+    const feature = await prisma.$transaction(async (tx) => {
+      const created = await tx.feature.create({
+        data: {
+          title,
+          slug,
+          lead,
+          description,
+          closing,
+          displayFromMonth: input.displayFromMonth,
+          displayToMonth: input.displayToMonth,
+        },
+      });
+      await tx.adminAuditLog.create({
+        data: { adminId: admin.id, action: "create", targetType: "feature", targetId: created.id, detail: { title, slug } },
+      });
+      return created;
+    });
+
+    revalidatePath(THEME_FEATURE_PATH);
+    return { id: feature.id };
+  });
+}
+
+export async function updateFeature(id: string, input: FeatureInput & { slug: string }): Promise<ActionResult> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const existing = await prisma.feature.findUnique({ where: { id } });
+    if (!existing) fail("特集が見つかりません");
+    const { title, lead, description, closing } = validateFeatureInput(input);
+
+    let slug = existing.slug;
+    const nextSlugRaw = input.slug.trim().toLowerCase();
+    if (nextSlugRaw !== existing.slug) {
+      if (existing.status === "published") fail("公開したあとはURL用の名前を変えられません");
+      if (!isValidSlugFormat(nextSlugRaw)) fail("URL用の名前は半角英小文字・数字・ハイフンで入力してください");
+      const dup = await prisma.feature.findUnique({ where: { slug: nextSlugRaw } });
+      if (dup && dup.id !== id) fail("そのURL用の名前は既に使われています");
+      slug = nextSlugRaw;
+    }
+
+    await prisma.$transaction(async (tx) => {
+      await tx.feature.update({
+        where: { id },
+        data: {
+          title,
+          slug,
+          lead,
+          description,
+          closing,
+          displayFromMonth: input.displayFromMonth,
+          displayToMonth: input.displayToMonth,
+        },
+      });
+      await tx.adminAuditLog.create({
+        data: { adminId: admin.id, action: "update", targetType: "feature", targetId: id, detail: { title, slug } },
+      });
+    });
+
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export async function setFeatureStatus(id: string, status: "draft" | "published"): Promise<ActionResult> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const existing = await prisma.feature.findUnique({ where: { id } });
+    if (!existing) fail("特集が見つかりません");
+    await prisma.$transaction(async (tx) => {
+      await tx.feature.update({
+        where: { id },
+        data: {
+          status,
+          publishedAt: status === "published" && !existing.publishedAt ? new Date() : existing.publishedAt,
+        },
+      });
+      await tx.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: status === "published" ? "publish" : "unpublish",
+          targetType: "feature",
+          targetId: id,
+          detail: { title: existing.title },
+        },
+      });
+    });
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export type FeatureItinerarySearchResult = {
+  id: string;
+  title: string;
+  areaName: string | null;
+  nights: number;
+  status: string;
+  alreadyAdded: boolean;
+};
+
+export async function searchItinerariesForFeature(
+  featureId: string,
+  query: string
+): Promise<ActionResult<FeatureItinerarySearchResult[]>> {
+  return run(async () => {
+    await requireAdmin();
+    const q = query.trim();
+    if (q.length < 2) return [];
+
+    const [itineraries, existingItems] = await Promise.all([
+      prisma.itinerary.findMany({
+        where: {
+          status: "published",
+          OR: [
+            { title: { contains: q, mode: "insensitive" } },
+            { primaryArea: { name: { contains: q, mode: "insensitive" } } },
+            { days: { some: { spots: { some: { name: { contains: q, mode: "insensitive" } } } } } },
+          ],
+        },
+        orderBy: [{ favorites: { _count: "desc" } }, { likeCount: "desc" }],
+        take: 10,
+        select: { id: true, title: true, nights: true, status: true, primaryArea: { select: { name: true } } },
+      }),
+      prisma.featureItem.findMany({ where: { featureId }, select: { itineraryId: true } }),
+    ]);
+
+    const addedIds = new Set(existingItems.map((i) => i.itineraryId));
+    return itineraries.map((it) => ({
+      id: it.id,
+      title: it.title,
+      areaName: it.primaryArea?.name ?? null,
+      nights: it.nights,
+      status: it.status,
+      alreadyAdded: addedIds.has(it.id),
+    }));
+  });
+}
+
+export async function addFeatureItem(featureId: string, itineraryId: string): Promise<ActionResult> {
+  return run(async () => {
+    await requireAdmin();
+    const [feature, itinerary, existing] = await Promise.all([
+      prisma.feature.findUnique({ where: { id: featureId } }),
+      prisma.itinerary.findUnique({ where: { id: itineraryId }, select: { id: true } }),
+      prisma.featureItem.findUnique({ where: { featureId_itineraryId: { featureId, itineraryId } } }),
+    ]);
+    if (!feature) fail("特集が見つかりません");
+    if (!itinerary) fail("しおりが見つかりません");
+    if (existing) fail("そのしおりは既に追加されています");
+
+    const maxOrder = await prisma.featureItem.aggregate({ where: { featureId }, _max: { displayOrder: true } });
+    await prisma.featureItem.create({
+      data: { featureId, itineraryId, displayOrder: (maxOrder._max.displayOrder ?? 0) + 1 },
+    });
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export async function removeFeatureItem(itemId: string): Promise<ActionResult> {
+  return run(async () => {
+    await requireAdmin();
+    await prisma.featureItem.delete({ where: { id: itemId } });
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export async function updateFeatureItemCaption(itemId: string, caption: string): Promise<ActionResult> {
+  return run(async () => {
+    await requireAdmin();
+    await prisma.featureItem.update({ where: { id: itemId }, data: { caption: caption.trim() || null } });
+    revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+export async function reorderFeatureItems(orderedItemIds: string[]): Promise<ActionResult> {
+  return run(async () => {
+    await requireAdmin();
+    await prisma.$transaction(
+      orderedItemIds.map((id, index) => prisma.featureItem.update({ where: { id }, data: { displayOrder: index } }))
+    );
+    revalidatePath(THEME_FEATURE_PATH);
   });
 }
