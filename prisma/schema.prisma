@@ -87,6 +87,7 @@ model Tag {
   userInterestTags     UserInterestTag[]
   plannerSpecialtyTags PlannerSpecialtyTag[]
   itineraryTags        ItineraryTag[]
+  themeTags            ThemeTag[]
 
   @@map("tag")
 }
@@ -99,6 +100,7 @@ model PurposeTag {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   itineraryPurposeTags ItineraryPurposeTag[]
+  themePurposeTags     ThemePurposeTag[]
 
   @@map("purpose_tag")
 }
@@ -271,7 +273,7 @@ model AdminAuditLog {
   id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   adminId    String   @map("admin_id") @db.Uuid
   action     String
-  targetType String   @map("target_type") // itinerary|user_account|planner_account|admin|report|inquiry
+  targetType String   @map("target_type") // itinerary|user_account|planner_account|admin|report|inquiry|theme|feature
   targetId   String   @map("target_id") @db.Uuid
   detail     Json?    @db.JsonB
   // 裁判・開示請求の手続きが続いているなど、法務が保存を求めた記録は3年を過ぎても消さない。
@@ -345,12 +347,14 @@ model Itinerary {
   shareLogs       ShareLog[]
   requests        Request[]
   pageViews       PageView[]
+  featureItems    FeatureItem[]
 
   @@index([plannerAccountId])
   @@index([status])
   @@index([status, createdAt(sort: Desc)])
   @@index([status, viewCount(sort: Desc)])
   @@index([status, likeCount(sort: Desc)])
+  @@index([copiedFromId])
   @@index([primaryAreaId])
   @@index([copiedFromId])
   @@map("itinerary")
@@ -390,6 +394,116 @@ model ItineraryPurposeTag {
   @@id([itineraryId, purposeTagId])
   @@index([purposeTagId])
   @@map("itinerary_purpose_tag")
+}
+
+// ============================================================
+// テーマ・特集（管理者サイトで作成。docs/specs/20260927-admin-managed-themes-features.md）
+// ============================================================
+
+model Theme {
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String
+  // URL用の名前(/theme/{slug})。名前からローマ字で自動生成し、管理者が直せる。公開後は変更不可の運用
+  slug  String @unique
+  intro String
+
+  // 管理者サイトからアップロードした画像(Vercel Blob)のURL、または既存のpublic/themes/配下の
+  // SVGを指す相対パス(例: /themes/theme-koyo.svg)。未設定ならユーザーサイト側で既定の絵にフォールバック
+  imageUrl String? @map("image_url")
+
+  // この季節はトップで先頭に出す(任意・複数可・空でもよい)。"spring"|"summer"|"autumn"|"winter"
+  seasons String[] @default([]) @map("seasons")
+
+  displayOrder Int    @default(0) @map("display_order")
+  status       String @default("draft") @map("status") // "draft" | "published"
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  tags        ThemeTag[]
+  purposeTags ThemePurposeTag[]
+
+  @@index([status])
+  @@map("theme")
+}
+
+model ThemeTag {
+  themeId String @map("theme_id") @db.Uuid
+  tagId   String @map("tag_id") @db.Uuid
+
+  theme Theme @relation(fields: [themeId], references: [id], onDelete: Cascade)
+  tag   Tag   @relation(fields: [tagId], references: [id])
+
+  @@id([themeId, tagId])
+  @@index([tagId])
+  @@map("theme_tag")
+}
+
+model ThemePurposeTag {
+  themeId      String @map("theme_id") @db.Uuid
+  purposeTagId String @map("purpose_tag_id") @db.Uuid
+
+  theme      Theme      @relation(fields: [themeId], references: [id], onDelete: Cascade)
+  purposeTag PurposeTag @relation(fields: [purposeTagId], references: [id])
+
+  @@id([themeId, purposeTagId])
+  @@index([purposeTagId])
+  @@map("theme_purpose_tag")
+}
+
+model Feature {
+  id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  // URL用の名前(/feature/{slug})。公開後は変更不可の運用
+  slug        String  @unique
+  description String // 検索結果・meta descriptionに出す文
+  lead        String // はじめの文
+  closing     String? // おわりの文
+
+  status String @default("draft") @map("status") // "draft" | "published"
+
+  // 出す時期(任意・月の範囲。例: 9〜11月だけトップ・特集一覧に出す)。年をまたぐ範囲(例: 11〜2月)も許容し、
+  // 表示側でfrom<=toなら通常の範囲、from>toなら年またぎとして扱う。時期の外でもURLでは見られる
+  displayFromMonth Int? @map("display_from_month")
+  displayToMonth   Int? @map("display_to_month")
+
+  publishedAt DateTime? @map("published_at") @db.Timestamptz
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  items   FeatureItem[]
+  related FeatureRelatedLink[]
+
+  @@index([status])
+  @@map("feature")
+}
+
+model FeatureItem {
+  id           String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  featureId    String  @map("feature_id") @db.Uuid
+  itineraryId  String  @map("itinerary_id") @db.Uuid
+  // 紹介の一言(空ならユーザーサイト側でしおりの説明文の最初を使う)
+  caption      String?
+  displayOrder Int     @default(0) @map("display_order")
+
+  feature   Feature   @relation(fields: [featureId], references: [id], onDelete: Cascade)
+  itinerary Itinerary @relation(fields: [itineraryId], references: [id], onDelete: Cascade)
+
+  @@unique([featureId, itineraryId])
+  @@index([itineraryId])
+  @@map("feature_item")
+}
+
+model FeatureRelatedLink {
+  id           String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  featureId    String @map("feature_id") @db.Uuid
+  href         String
+  label        String
+  displayOrder Int    @default(0) @map("display_order")
+
+  feature Feature @relation(fields: [featureId], references: [id], onDelete: Cascade)
+
+  @@map("feature_related_link")
 }
 
 model Day {
