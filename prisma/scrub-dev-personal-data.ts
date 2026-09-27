@@ -17,9 +17,12 @@
 //
 // 置き換える内容(法務・セキュリティ2026-09-27の決定):
 // - UserAccount / PlannerAccount: email(id由来のダミーへ)、google_id(null)、
-//   reset_token・reset_token_expires_at(null)、password_hash(共通のダミーパスワードのハッシュへ)
-// - Admin: invite_token・reset_token(null)のみ。email・password_hashは、
-//   運営メンバー自身のログインに使うため置き換えない
+//   reset_token・reset_token_expires_at(null)、password_hash(共通のダミーパスワードのハッシュへ)、
+//   icon_url(null。Googleの写真のURL)
+// - Admin: invite_token・reset_token(null)、password_hash(管理者用の共通ダミーパスワードの
+//   ハッシュへ。本物のパスワードのハッシュが開発用DBに残ると、漏れたときに本番の管理者
+//   パスワードを試す手がかりになるため。セキュリティ2026-09-27)。emailだけは、
+//   運営メンバー自身が開発用の管理者サイトにログインするために置き換えない
 // - Comment.ip_address、Request.ip_address、DeletedAccountRecordItem.ip_address、
 //   Itinerary.submitted_ip: null
 // - Request.message: 空文字("")。通信の秘密にあたるため、開発用でも中身を残さない
@@ -27,7 +30,7 @@
 // - Inquiry.name / email / message: ダミーへ
 // - DeletedAccountRecord.email / name、DeletedAccountRecordItem.body: ダミーへ
 // - 置き換えないもの(公開している情報): UserAccount.name・profile、
-//   PlannerAccount.name・profile、Comment.body、Itinerary本体、Adminのemail・password_hash
+//   PlannerAccount.name・profile、Comment.body、Itinerary本体、Adminのemail
 
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -35,6 +38,9 @@ import bcrypt from "bcryptjs";
 import "dotenv/config";
 
 const DEV_DUMMY_PASSWORD = "shiorie-dev-password";
+// 管理者は最も強い権限を持つため、会員・プランナーとは別のダミーパスワードにする
+// (本番のパスワードと同じ文字列は使わない。セキュリティ2026-09-27)
+const DEV_DUMMY_ADMIN_PASSWORD = "shiorie-dev-admin-password";
 
 function assertDevDbOrExit(): string {
   const dbUrl = process.env.DATABASE_URL;
@@ -66,6 +72,7 @@ async function main() {
   const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
   const prisma = new PrismaClient({ adapter });
   const dummyPasswordHash = bcrypt.hashSync(DEV_DUMMY_PASSWORD, 10);
+  const dummyAdminPasswordHash = bcrypt.hashSync(DEV_DUMMY_ADMIN_PASSWORD, 10);
 
   const counts = {
     userAccount: await prisma.userAccount.count(),
@@ -89,14 +96,15 @@ async function main() {
   }
 
   await prisma.$transaction(async (tx) => {
-    // UserAccount: email・google_id・reset_token・password_hash
+    // UserAccount: email・google_id・reset_token・password_hash・icon_url
     await tx.$executeRaw`
       UPDATE user_account
       SET email = 'user-' || id || '@example.invalid',
           google_id = NULL,
           reset_token = NULL,
           reset_token_expires_at = NULL,
-          password_hash = ${dummyPasswordHash}
+          password_hash = ${dummyPasswordHash},
+          icon_url = NULL
     `;
     // PlannerAccount: 同様
     await tx.$executeRaw`
@@ -105,11 +113,19 @@ async function main() {
           google_id = NULL,
           reset_token = NULL,
           reset_token_expires_at = NULL,
-          password_hash = ${dummyPasswordHash}
+          password_hash = ${dummyPasswordHash},
+          icon_url = NULL
     `;
-    // Admin: emailとpassword_hashは運営メンバーのログインのため置き換えない。
-    // 招待・パスワード再設定のトークンだけ無効化する
-    await tx.admin.updateMany({ data: { inviteToken: null, resetToken: null, resetTokenExpiresAt: null } });
+    // Admin: emailは運営メンバーが開発用の管理者サイトにログインするため置き換えない。
+    // password_hashは管理者用の共通ダミーへ、招待・パスワード再設定のトークンは無効化する
+    await tx.admin.updateMany({
+      data: {
+        passwordHash: dummyAdminPasswordHash,
+        inviteToken: null,
+        resetToken: null,
+        resetTokenExpiresAt: null,
+      },
+    });
 
     // IPアドレス
     await tx.comment.updateMany({ data: { ipAddress: null } });
@@ -138,7 +154,8 @@ async function main() {
 
   console.log("");
   console.log("置き換えが完了しました。");
-  console.log(`開発用DBのアカウントは、共通のダミーパスワード「${DEV_DUMMY_PASSWORD}」でログインできます。`);
+  console.log(`会員・プランナーは共通のダミーパスワード「${DEV_DUMMY_PASSWORD}」でログインできます。`);
+  console.log(`管理者は共通のダミーパスワード「${DEV_DUMMY_ADMIN_PASSWORD}」でログインできます。`);
   await prisma.$disconnect();
 }
 
