@@ -9,6 +9,9 @@
 import { put } from "@vercel/blob";
 import { prisma } from "../src/lib/prisma";
 
+// 接続先(本番/開発)の表示と確かめ(企画運営2026-09-27)。Next.jsアプリ本体からは読み込まれない
+require("../scripts/assert-db-target.cjs");
+
 // name -> 代替候補を含むWikipediaタイトル候補リスト（先頭から試す）
 const RETRY_TITLES: Record<string, string[]> = {
   "鴨川": ["鴨川_(淀川水系)", "鴨川 (京都府)"],

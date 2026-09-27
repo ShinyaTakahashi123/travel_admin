@@ -9,6 +9,9 @@
  */
 import { prisma } from "../src/lib/prisma";
 
+// 接続先(本番/開発)の表示と確かめ(企画運営2026-09-27)。Next.jsアプリ本体からは読み込まれない
+require("../scripts/assert-db-target.cjs");
+
 async function main() {
   const commit = process.argv.includes("--commit");
   console.log(commit ? "削除モードで実行します" : "確認モードで実行します（DBには書き込みません）");
