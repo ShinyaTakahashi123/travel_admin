@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { upload } from "@vercel/blob/client";
 import { resizeThemeImageForUpload } from "@/lib/resize-theme-image";
+import { THEME_IMAGE_UPLOAD_PREFIX } from "@/lib/theme-image-constants";
 
 export function ThemeImagePicker({
   value,
@@ -24,7 +25,7 @@ export function ThemeImagePicker({
     setError(null);
     try {
       const resized = await resizeThemeImageForUpload(file);
-      const blob = await upload(`theme-covers/${Date.now()}-${resized.name}`, resized, {
+      const blob = await upload(`${THEME_IMAGE_UPLOAD_PREFIX}${Date.now()}-${resized.name}`, resized, {
         access: "public",
         handleUploadUrl: "/api/upload-theme-image",
         contentType: resized.type,
@@ -76,6 +77,9 @@ export function ThemeImagePicker({
           />
         </label>
         <span className="text-xs text-muted-foreground">PNG・JPEG・WebP、400KBまで。4:3で表示します</span>
+        <span className="text-xs text-muted-foreground">
+          使えるのは、しおりえで作った絵か、運営者が自分で撮った写真だけです。ネットで見つけた画像・フリー素材・人の顔がはっきり写った写真は使わないでください。
+        </span>
         {error && <span className="text-xs text-red-500">{error}</span>}
       </div>
     </div>
