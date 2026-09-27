@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_OPTIONS=--require=./scripts/assert-db-target.cjs next dev",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "eslint",
@@ -12,7 +12,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:seed:sample": "tsx prisma/seed-sample-itineraries.ts",
     "db:backfill:spot-details": "tsx prisma/backfill-spot-details.ts",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "prod": "cross-env SHIORIE_TARGET=prod dotenv -o -e .env.prod --"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
@@ -42,6 +43,8 @@
     "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "cross-env": "^10.1.0",
+    "dotenv-cli": "^11.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "prisma": "^6.19.3",
