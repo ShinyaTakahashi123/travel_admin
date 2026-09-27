@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatDate, ITINERARY_STATUS_LABEL } from "@/lib/format";
+import { buildPageInfo, ADMIN_PAGE_SIZE } from "@/lib/pagination";
+import { Pagination } from "@/components/ui/pagination";
 
 const FILTERS = [
   { key: undefined, label: "すべて" },
@@ -15,9 +17,9 @@ const FILTERS = [
 export default async function ItineraryManagementPage({
   searchParams,
 }: {
-  searchParams: Promise<{ status?: string; q?: string }>;
+  searchParams: Promise<{ status?: string; q?: string; page?: string }>;
 }) {
-  const { status, q } = await searchParams;
+  const { status, q, page: pageParam } = await searchParams;
 
   const pendingCount = await prisma.itinerary.count({ where: { status: "pending" } });
 
@@ -32,13 +34,24 @@ export default async function ItineraryManagementPage({
         ).map((r) => r.targetId)
       : undefined;
 
+  const where = {
+    status: status && status !== "reported" ? status : { not: "deleted" },
+    id: reportedItineraryIds ? { in: reportedItineraryIds } : undefined,
+    title: q ? { contains: q, mode: "insensitive" as const } : undefined,
+  };
+  const totalCount = await prisma.itinerary.count({ where });
+  const pageInfo = buildPageInfo(pageParam, totalCount, ADMIN_PAGE_SIZE);
+
+  const orderBy =
+    status === "pending"
+      ? [{ submittedAt: "asc" as const }, { id: "asc" as const }]
+      : [{ updatedAt: "desc" as const }, { id: "asc" as const }];
+
   const itineraries = await prisma.itinerary.findMany({
-    where: {
-      status: status && status !== "reported" ? status : { not: "deleted" },
-      id: reportedItineraryIds ? { in: reportedItineraryIds } : undefined,
-      title: q ? { contains: q, mode: "insensitive" } : undefined,
-    },
-    orderBy: status === "pending" ? { submittedAt: "asc" } : { updatedAt: "desc" },
+    where,
+    orderBy,
+    skip: pageInfo.skip,
+    take: pageInfo.take,
     include: {
       plannerAccount: { select: { name: true } },
       areas: { include: { area: true }, take: 1 },
@@ -146,6 +159,7 @@ export default async function ItineraryManagementPage({
           </tbody>
         </table>
       </div>
+      <Pagination basePath="/itineraries" searchParams={{ status, q }} {...pageInfo} />
     </div>
   );
 }

@@ -1,19 +1,27 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatDate, ACCOUNT_STATUS_LABEL } from "@/lib/format";
+import { buildPageInfo, ADMIN_PAGE_SIZE } from "@/lib/pagination";
+import { Pagination } from "@/components/ui/pagination";
 
 export default async function PlannerManagementPage({
   searchParams,
 }: {
-  searchParams: Promise<{ q?: string }>;
+  searchParams: Promise<{ q?: string; page?: string }>;
 }) {
-  const { q } = await searchParams;
+  const { q, page: pageParam } = await searchParams;
+
+  const where = q
+    ? { OR: [{ name: { contains: q, mode: "insensitive" as const } }, { email: { contains: q, mode: "insensitive" as const } }] }
+    : undefined;
+  const totalCount = await prisma.plannerAccount.count({ where });
+  const pageInfo = buildPageInfo(pageParam, totalCount, ADMIN_PAGE_SIZE);
 
   const planners = await prisma.plannerAccount.findMany({
-    where: q
-      ? { OR: [{ name: { contains: q, mode: "insensitive" } }, { email: { contains: q, mode: "insensitive" } }] }
-      : undefined,
-    orderBy: { createdAt: "desc" },
+    where,
+    orderBy: [{ createdAt: "desc" }, { id: "asc" }],
+    skip: pageInfo.skip,
+    take: pageInfo.take,
     include: {
       itineraries: { select: { id: true } },
       _count: { select: { itineraries: true } },
@@ -92,6 +100,7 @@ export default async function PlannerManagementPage({
           </tbody>
         </table>
       </div>
+      <Pagination basePath="/planners" searchParams={{ q }} {...pageInfo} />
     </div>
   );
 }

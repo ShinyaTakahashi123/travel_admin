@@ -1,28 +1,42 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { formatDate, ACCOUNT_STATUS_LABEL } from "@/lib/format";
+import { buildPageInfo, ADMIN_PAGE_SIZE } from "@/lib/pagination";
+import { Pagination } from "@/components/ui/pagination";
+import type { Prisma } from "@prisma/client";
 
 export default async function UserManagementPage({
   searchParams,
 }: {
-  searchParams: Promise<{ plan?: string; q?: string }>;
+  searchParams: Promise<{ plan?: string; q?: string; page?: string }>;
 }) {
-  const { plan, q } = await searchParams;
+  const { plan, q, page: pageParam } = await searchParams;
+
+  // プランの絞り込みはDBの条件で行う(全件読み込み後にプログラム内で絞ると、
+  // ページを分けたときに件数がずれるため。仕様書2026-09-27)
+  const planWhere: Prisma.UserAccountWhereInput =
+    plan === "premium"
+      ? { subscription: { plan: "premium" } }
+      : plan === "free"
+        ? { OR: [{ subscription: null }, { subscription: { plan: { not: "premium" } } }] }
+        : {};
+  const where: Prisma.UserAccountWhereInput = {
+    AND: [
+      q ? { OR: [{ name: { contains: q, mode: "insensitive" } }, { email: { contains: q, mode: "insensitive" } }] } : {},
+      planWhere,
+    ],
+  };
+
+  const totalCount = await prisma.userAccount.count({ where });
+  const pageInfo = buildPageInfo(pageParam, totalCount, ADMIN_PAGE_SIZE);
 
   const users = await prisma.userAccount.findMany({
-    where: q
-      ? { OR: [{ name: { contains: q, mode: "insensitive" } }, { email: { contains: q, mode: "insensitive" } }] }
-      : undefined,
-    orderBy: { createdAt: "desc" },
+    where,
+    orderBy: [{ createdAt: "desc" }, { id: "asc" }],
+    skip: pageInfo.skip,
+    take: pageInfo.take,
     include: { subscription: true, _count: { select: { favorites: true } } },
   });
-
-  const filtered =
-    plan === "premium"
-      ? users.filter((u) => u.subscription?.plan === "premium")
-      : plan === "free"
-        ? users.filter((u) => u.subscription?.plan !== "premium")
-        : users;
 
   return (
     <div>
@@ -77,7 +91,7 @@ export default async function UserManagementPage({
             </tr>
           </thead>
           <tbody>
-            {filtered.map((user) => {
+            {users.map((user) => {
               const isPremium = user.subscription?.plan === "premium";
               const status = ACCOUNT_STATUS_LABEL[user.status];
               return (
@@ -118,6 +132,7 @@ export default async function UserManagementPage({
           </tbody>
         </table>
       </div>
+      <Pagination basePath="/users" searchParams={{ plan, q }} {...pageInfo} />
     </div>
   );
 }
