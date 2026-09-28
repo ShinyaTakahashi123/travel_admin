@@ -18,6 +18,7 @@ const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.e
 const COMMIT = process.argv.includes("--commit");
 
 const TARGETS = [
+  // spotIdで特定するため data に address を含めれば住所も同時に直せる
   { spotId: "0b076aec-c58d-4a91-95d5-f1ef6d507816", name: "亀石", lat: 34.4710917, lng: 135.8115977 },
   { spotId: "19fc7936-fdcd-49de-b938-f10ed38491b0", name: "東京ビッグサイト", lat: 35.6297628, lng: 139.7939817 },
   { spotId: "3b227569-bd06-408a-ada8-70d515a8999c", name: "表参道", lat: 35.6695078, lng: 139.7033033 },
@@ -41,7 +42,7 @@ const TARGETS = [
   { spotId: "3c2be376-50cf-4d54-bed8-c8c1f6edc39d", name: "旧手宮線", lat: 43.2006959, lng: 141.0002232 },
   { spotId: "ab8567c8-825b-43c7-96be-edb361eff503", name: "旧手宮線", lat: 43.2006959, lng: 141.0002232 },
   { spotId: "5cf50b7b-6bdc-432a-b318-427110657d3c", name: "湯ノ湖", lat: 36.8005882, lng: 139.4236986 },
-  { spotId: "8d1cead2-cb8d-4aec-af22-16e9d51dab3d", name: "五箇山和紙の里", lat: 36.419006, lng: 136.873505 },
+  { spotId: "8d1cead2-cb8d-4aec-af22-16e9d51dab3d", name: "五箇山和紙の里", lat: 36.444843, lng: 136.971634, address: "南砺市東中江223" },
   { spotId: "a13e47b9-38e8-4db7-bea3-d35bf1f2895f", name: "富山県美術館", lat: 36.711494, lng: 137.211365 },
   { spotId: "737f6685-0b63-4904-8ee6-1cb533b3abe4", name: "奈良町（ならまち）", lat: 34.6781294, lng: 135.8313493 },
   { spotId: "f3cab405-9fc9-4132-aa33-d6a36dd3e5d4", name: "橘寺", lat: 34.4699277, lng: 135.8179119 },
@@ -68,10 +69,12 @@ const TARGETS = [
     });
     if (!spot) { console.log(`[NG] スポット見つからず spotId=${t.spotId} (${t.name})`); ngCount++; continue; }
     if (spot.name !== t.name) { console.log(`[NG] 名前不一致 spotId=${t.spotId}: DB="${spot.name}" 期待="${t.name}"`); ngCount++; continue; }
-    console.log(`[OK] 「${spot.day.itinerary.title}」(${spot.day.itinerary.status}) の「${spot.name}」: (${spot.lat},${spot.lng}) → (${t.lat},${t.lng})`);
+    console.log(`[OK] 「${spot.day.itinerary.title}」(${spot.day.itinerary.status}) の「${spot.name}」: (${spot.lat},${spot.lng}) → (${t.lat},${t.lng})${t.address ? ` / 住所も「${t.address}」に修正` : ""}`);
     okCount++;
     if (COMMIT) {
-      await p.spot.update({ where: { id: spot.id }, data: { lat: t.lat, lng: t.lng } });
+      const data = { lat: t.lat, lng: t.lng };
+      if (t.address) data.address = t.address;
+      await p.spot.update({ where: { id: spot.id }, data });
       console.log("      → 更新しました");
     }
   }
