@@ -8,8 +8,9 @@
  * isMemorial フィールドを知らないため PrismaClientValidationError で失敗します
  * （DBは壊れません）。
  *
- * 対象は、企画運営を通じて伝えられたユーザーの判断（2026-09-28 09:0x「よいです」）
- * にもとづく11か所・12件（飯盛山は2つのしおりに登場するため2件）。
+ * 対象は、企画運営を通じて伝えられたユーザーの判断（2026-09-28 09:0x「よいです」、
+ * および知覧特攻平和会館の追加 2026-09-28 12:5x「yoidesu」）にもとづく12か所・13件
+ * （飯盛山は2つのしおりに登場するため2件）。
  * しおりは作り直しでIDが変わることがあるため、しおりID＋スポット名で特定する。
  *
  * 実行方法:
@@ -36,6 +37,7 @@ const TARGETS = [
   { itineraryId: "0d8b6309-1776-44a6-906c-e98a8e99e538", spotName: "如意輪寺", note: "境内に後醍醐天皇陵（塔尾陵）" },
   { itineraryId: "b7de8da7-4621-4e87-bc5c-38071741fcba", spotName: "泉涌寺", note: "歴代天皇・皇后の陵墓がある御寺" },
   { itineraryId: "38dec57e-25dd-4351-8318-cb397713bc80", spotName: "神戸ルミナリエ", note: "阪神・淡路大震災の犠牲者への鎮魂が由来" },
+  { itineraryId: "11ac9b73-e139-4423-a4a0-5b32958f042d", spotName: "知覧特攻平和会館", note: "特攻隊員に関する資料館(2026-09-28追加)" },
 ];
 
 (async () => {
@@ -78,7 +80,7 @@ const TARGETS = [
     }
   }
 
-  console.log(`\n見つかった: ${okCount} / 12、見つからず: ${ngCount} / 12`);
+  console.log(`\n見つかった: ${okCount} / ${TARGETS.length}、見つからず: ${ngCount} / ${TARGETS.length}`);
   if (!COMMIT) {
     console.log("これは確認モードです。書き込みは行っていません。isMemorial列の追加後、--commit を付けて実行してください。");
   }
