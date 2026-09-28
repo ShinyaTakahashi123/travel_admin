@@ -13,11 +13,13 @@
  *   確認モード: node prisma/register-place-master.cjs
  *   登録(開発DBのみ): node prisma/register-place-master.cjs --commit
  *
- * 【2026-09-28追記】知覧特攻平和会館(id 8bb94ac7-2e72-4749-85bd-838fa2457ec7)を
- * is_memorial に追加(ユーザー了承 12:5x)。開発用DBの当該行は直接UPDATE済み。
+ * 【2026-09-28追記】知覧特攻平和会館(id 8bb94ac7-2e72-4749-85bd-838fa2457ec7)、
+ * 対馬丸記念館(id baa46908-2f4e-4333-8081-fe7ffd973272)を is_memorial に追加
+ * (ユーザー了承 12:5x・14:3x)。開発用DBの該当行はどちらも直接UPDATE済み。
  * 入力JSON(_temp-master-candidates.json)は削除済みのため、まとめ案を作り直して
  * このスクリプトを再実行する場合は、admin-site/prisma/fix-memorial-spots.cjs の
- * TARGETS一覧(12か所・13件、知覧特攻平和会館を含む)を正として反映すること。
+ * TARGETS一覧(13か所・14件、知覧特攻平和会館・対馬丸記念館を含む)を正として反映すること。
+ * 新倉山浅間公園・平和台公園は加えないと判断ずみ(2026-09-28)。
  */
 require("dotenv").config();
 const { PrismaClient } = require("@prisma/client");
