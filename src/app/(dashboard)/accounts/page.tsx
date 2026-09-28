@@ -42,7 +42,8 @@ export default async function AccountManagementPage({
       </p>
 
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
-        <table className="w-full border-collapse">
+        <div className="overflow-x-auto">
+        <table className="w-full border-collapse min-w-[720px]">
           <thead>
             <tr>
               {["名前", "メールアドレス", "権限", "最終ログイン", "ステータス", ""].map((h) => (
@@ -99,6 +100,7 @@ export default async function AccountManagementPage({
             })}
           </tbody>
         </table>
+        </div>
       </div>
       <Pagination basePath="/accounts" searchParams={{}} {...pageInfo} />
     </div>

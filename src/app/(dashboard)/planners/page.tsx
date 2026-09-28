@@ -56,7 +56,8 @@ export default async function PlannerManagementPage({
       </p>
 
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
-        <table className="w-full border-collapse">
+        <div className="overflow-x-auto">
+        <table className="w-full border-collapse min-w-[880px]">
           <thead>
             <tr>
               {["ID", "名前", "メールアドレス", "登録日", "投稿数", "累計いいね", "ステータス", ""].map((h) => (
@@ -99,6 +100,7 @@ export default async function PlannerManagementPage({
             })}
           </tbody>
         </table>
+        </div>
       </div>
       <Pagination basePath="/planners" searchParams={{ q }} {...pageInfo} />
     </div>
