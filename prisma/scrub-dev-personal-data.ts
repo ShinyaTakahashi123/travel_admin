@@ -92,6 +92,9 @@ async function main() {
     trip: await prisma.trip.count(),
     checkin: await prisma.checkin.count(),
     prefectureVisit: await prisma.prefectureVisit.count(),
+    accountLink: await prisma.accountLink.count(),
+    accountLinkNonce: await prisma.accountLinkNonce.count(),
+    accountLinkReceipt: await prisma.accountLinkReceipt.count(),
   };
   console.log("対象件数:", counts);
 
@@ -160,6 +163,12 @@ async function main() {
     // (tripを消すとtrip_spot・checkinはonDelete: Cascadeで一緒に消える)
     await tx.trip.deleteMany();
     await tx.prefectureVisit.deleteMany();
+
+    // アカウントの連携・合言葉・受け取りの印も全件削除する
+    // (docs/specs/20260928-account-link.md 3節)
+    await tx.accountLink.deleteMany();
+    await tx.accountLinkNonce.deleteMany();
+    await tx.accountLinkReceipt.deleteMany();
   });
 
   console.log("");

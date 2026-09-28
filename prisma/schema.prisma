@@ -132,17 +132,20 @@ model UserAccount {
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
-  homeArea         Area?              @relation("UserHomeArea", fields: [homeAreaId], references: [id])
-  wishlistAreas    UserWishlistArea[]
-  interestTags     UserInterestTag[]
-  subscription     Subscription?
-  favorites        Favorite[]
-  comments         Comment[]
-  reports          Report[]
-  sentRequests     Request[]
-  trips            Trip[]
-  checkins         Checkin[]
-  prefectureVisits PrefectureVisit[]
+  homeArea            Area?                @relation("UserHomeArea", fields: [homeAreaId], references: [id])
+  wishlistAreas       UserWishlistArea[]
+  interestTags        UserInterestTag[]
+  subscription        Subscription?
+  favorites           Favorite[]
+  comments            Comment[]
+  reports             Report[]
+  sentRequests        Request[]
+  trips               Trip[]
+  checkins            Checkin[]
+  prefectureVisits    PrefectureVisit[]
+  accountLink         AccountLink?
+  accountLinkNonces   AccountLinkNonce[]
+  accountLinkReceipts AccountLinkReceipt[]
 
   @@index([homeAreaId])
   @@map("user_account")
@@ -211,11 +214,13 @@ model PlannerAccount {
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
-  homeArea         Area?                 @relation("PlannerHomeArea", fields: [homeAreaId], references: [id])
-  serviceAreas     PlannerServiceArea[]
-  specialtyTags    PlannerSpecialtyTag[]
-  itineraries      Itinerary[]
-  receivedRequests Request[]
+  homeArea            Area?                 @relation("PlannerHomeArea", fields: [homeAreaId], references: [id])
+  serviceAreas        PlannerServiceArea[]
+  specialtyTags       PlannerSpecialtyTag[]
+  itineraries         Itinerary[]
+  receivedRequests    Request[]
+  accountLink         AccountLink?
+  accountLinkReceipts AccountLinkReceipt[]
 
   @@index([homeAreaId])
   @@map("planner_account")
@@ -828,6 +833,62 @@ model PrefectureVisit {
 
   @@unique([userAccountId, areaId])
   @@map("prefecture_visit")
+}
+
+// ============================================================
+// ユーザーサイトの会員とプランナーサイトのアカウントの連携
+// (docs/specs/20260928-account-link.md)
+// ============================================================
+
+// 連携の記録。1会員につき1プランナーアカウントまで(それぞれ@uniqueで一意)
+model AccountLink {
+  id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userAccountId    String   @unique @map("user_account_id") @db.Uuid
+  plannerAccountId String   @unique @map("planner_account_id") @db.Uuid
+  linkedAt         DateTime @default(now()) @map("linked_at") @db.Timestamptz
+
+  userAccount    UserAccount    @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  plannerAccount PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+
+  @@map("account_link")
+}
+
+// ユーザーサイトが発行する使い捨ての合言葉(10分・1回だけ有効)。値そのものではなく
+// ハッシュを保存する。使用済み(usedAt)は「未使用かつ期限内」を条件にした1回の更新で
+// 立てる(同時押しでも二重に進まないように。3節・1-2節)
+model AccountLinkNonce {
+  id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tokenHash     String    @unique @map("token_hash")
+  userAccountId String    @map("user_account_id") @db.Uuid
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  expiresAt     DateTime  @map("expires_at") @db.Timestamptz
+  usedAt        DateTime? @map("used_at") @db.Timestamptz
+
+  userAccount UserAccount @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+
+  @@index([userAccountId])
+  @@map("account_link_nonce")
+}
+
+// プランナーサイトで確認画面の「連携する」を押したときに発行する、短い期限(5分)・
+// 1回だけの受け取りの印。ユーザーサイトの受け取りページで、今ログイン中の会員が
+// userAccountIdと一致するときだけ連携を確定する(1-2節: 悪い人が自分の会員で合言葉を
+// 作り、プランナーに踏ませる手口を防ぐ)
+model AccountLinkReceipt {
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  tokenHash        String    @unique @map("token_hash")
+  userAccountId    String    @map("user_account_id") @db.Uuid
+  plannerAccountId String    @map("planner_account_id") @db.Uuid
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  expiresAt        DateTime  @map("expires_at") @db.Timestamptz
+  usedAt           DateTime? @map("used_at") @db.Timestamptz
+
+  userAccount    UserAccount    @relation(fields: [userAccountId], references: [id], onDelete: Cascade)
+  plannerAccount PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+
+  @@index([userAccountId])
+  @@index([plannerAccountId])
+  @@map("account_link_receipt")
 }
 
 // ============================================================

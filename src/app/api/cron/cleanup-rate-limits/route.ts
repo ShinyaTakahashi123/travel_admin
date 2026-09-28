@@ -27,6 +27,8 @@ import { prisma } from "@/lib/prisma";
 //    URLの参照のみで、元のPhotoが消えれば「旅」側は写真なし表示になる仕様のため
 //    (docs/specs/20260928-footprint-map-checkin.md 0節)。ここで含めてしまうと、本来削除
 //    してよい画像がいつまでも消せなくなる
+// 6. アカウントの連携(docs/specs/20260928-account-link.md)の使い捨ての合言葉(AccountLinkNonce)・
+//    受け取りの印(AccountLinkReceipt)のうち、期限切れのものを削除する(3節)
 // ※ IPアドレスの値・メールアドレス・名前などの個人情報自体はログに出さない（件数のみ）
 export const maxDuration = 60;
 
@@ -109,12 +111,19 @@ export async function GET(request: Request) {
       )
   `;
 
+  const now = new Date();
+  const [accountLinkNoncesPurged, accountLinkReceiptsPurged] = await Promise.all([
+    prisma.accountLinkNonce.deleteMany({ where: { expiresAt: { lt: now } } }),
+    prisma.accountLinkReceipt.deleteMany({ where: { expiresAt: { lt: now } } }),
+  ]);
+
   const result = {
     rateLimitEvents: rateLimitEvents.count,
     ipCleared: { comments: comments.count, requests: requests.count, itineraries: itineraries.count },
     deletedAccountRecordsPurged,
     auditLogsPurged: auditLogsPurged.count,
     tripContentCleared: { descriptions: tripDescriptionsCleared, spotContent: tripSpotContentCleared },
+    accountLinkExpiredPurged: { nonces: accountLinkNoncesPurged.count, receipts: accountLinkReceiptsPurged.count },
   };
   console.log("[cleanup-rate-limits]", JSON.stringify(result));
   return NextResponse.json(result);
