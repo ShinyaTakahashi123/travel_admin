@@ -12,6 +12,23 @@ import { prisma } from "@/lib/prisma";
 //    （件数用に利用者/プランナーの別・退会日時だけ残す）
 // 4. 管理者の操作の記録（AdminAuditLog）のうち、3年を過ぎ、legalHold(保全の印)が
 //    付いていないものを削除する
+// 5. 「旅」(Trip/TripSpot)のうち、元のしおりが見られなくなったものの、写した文章・写真
+//    (description・スポットのメモ・写真のURLと出典)を空にする(スポット名・住所・位置・
+//    チェックイン・スタンプは残す。法務2026-09-28決定B・同日の追加判断。会員が旅のページを
+//    開いたときにも同じ処理をするが、開かないまま放置された「旅」の文章も、削除依頼の
+//    実効性のためここで確実に消す)。「見られなくなった」の基準はtrip.original_kindで
+//    種類ごとに違う(src/lib/trip-availability.tsのisOriginalAvailableと同じ判定をSQLで表現):
+//    published=statusがpublishedでなくなったら／copy=本人が削除するまで見られる／
+//    shared_link=削除・プランナーの利用停止・リンクを止めた(shared_link_token_hashがnullに
+//    なった)のいずれかで見られなくなった扱い(2026-09-28セキュリティの指摘で
+//    「リンクを止めただけなら残す」から変更)
+//    ※ trip_spot.photo_urlは、Vercel Blobの「使われていない画像の削除」(cleanup-blobs、
+//    src/lib/blob-cleanup.ts)の「使用中」判定には含めない。写真は元のPhotoの複製ではなく
+//    URLの参照のみで、元のPhotoが消えれば「旅」側は写真なし表示になる仕様のため
+//    (docs/specs/20260928-footprint-map-checkin.md 0節)。ここで含めてしまうと、本来削除
+//    してよい画像がいつまでも消せなくなる
+// 6. アカウントの連携(docs/specs/20260928-account-link.md)の使い捨ての合言葉(AccountLinkNonce)・
+//    受け取りの印(AccountLinkReceipt)のうち、期限切れのものを削除する(3節)
 // ※ IPアドレスの値・メールアドレス・名前などの個人情報自体はログに出さない（件数のみ）
 export const maxDuration = 60;
 
@@ -60,11 +77,53 @@ export async function GET(request: Request) {
     where: { createdAt: { lt: auditLogCutoff }, legalHold: false },
   });
 
+  const tripDescriptionsCleared = await prisma.$executeRaw`
+    UPDATE trip
+    SET description = NULL
+    WHERE description IS NOT NULL
+      AND NOT EXISTS (
+        SELECT 1 FROM itinerary i
+        JOIN planner_account p ON p.id = i.planner_account_id
+        WHERE i.id = trip.original_itinerary_id
+          AND (
+            (trip.original_kind = 'copy' AND i.status <> 'deleted')
+            OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL)
+            OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
+          )
+      )
+  `;
+  const tripSpotContentCleared = await prisma.$executeRaw`
+    UPDATE trip_spot
+    SET memo = NULL, photo_url = NULL, photo_author = NULL, photo_license = NULL, photo_license_url = NULL, photo_source_url = NULL
+    WHERE (memo IS NOT NULL OR photo_url IS NOT NULL)
+      AND trip_id IN (
+        SELECT trip.id FROM trip
+        WHERE NOT EXISTS (
+          SELECT 1 FROM itinerary i
+          JOIN planner_account p ON p.id = i.planner_account_id
+          WHERE i.id = trip.original_itinerary_id
+            AND (
+              (trip.original_kind = 'copy' AND i.status <> 'deleted')
+              OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL)
+              OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
+            )
+        )
+      )
+  `;
+
+  const now = new Date();
+  const [accountLinkNoncesPurged, accountLinkReceiptsPurged] = await Promise.all([
+    prisma.accountLinkNonce.deleteMany({ where: { expiresAt: { lt: now } } }),
+    prisma.accountLinkReceipt.deleteMany({ where: { expiresAt: { lt: now } } }),
+  ]);
+
   const result = {
     rateLimitEvents: rateLimitEvents.count,
     ipCleared: { comments: comments.count, requests: requests.count, itineraries: itineraries.count },
     deletedAccountRecordsPurged,
     auditLogsPurged: auditLogsPurged.count,
+    tripContentCleared: { descriptions: tripDescriptionsCleared, spotContent: tripSpotContentCleared },
+    accountLinkExpiredPurged: { nonces: accountLinkNoncesPurged.count, receipts: accountLinkReceiptsPurged.count },
   };
   console.log("[cleanup-rate-limits]", JSON.stringify(result));
   return NextResponse.json(result);

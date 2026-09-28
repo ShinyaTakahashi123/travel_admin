@@ -14,6 +14,13 @@ export async function listAllBlobs(): Promise<BlobInfo[]> {
   return all;
 }
 
+// ⚠️ trip_spot.photo_url(「旅」に写したスポットの写真URL)は、あえてここに含めない。
+// 「旅」は元のPhotoのURLを参照するだけで複製しないため、元のPhotoが消えれば「旅」側は
+// 写真なし表示になる仕様(docs/specs/20260928-footprint-map-checkin.md 0節)。ここに含めると、
+// 元がとっくに削除されたしおりの画像が、trip_spotからの参照だけでいつまでも消せなくなる
+// (2026-09-28 法務・企画運営の確認)。元のしおりが見られなくなったときはtrip_spot.photo_url
+// 自体もnullにする(src/lib/trip-availability.ts・cleanup-rate-limits)ため、参照は
+// 「元がまだ見られる間」しか残らない
 /** DBから参照されている画像URL（スポット写真・しおりサムネイル・プランナー/ユーザーのアイコン） */
 export async function referencedBlobUrls(): Promise<Set<string>> {
   const [photos, itineraries, planners, users] = await Promise.all([
