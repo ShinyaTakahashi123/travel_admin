@@ -59,25 +59,64 @@ model Area {
   itineraryAreas       ItineraryArea[]
   itinerariesAsPrimary Itinerary[]          @relation("ItineraryPrimaryArea")
   prefectureVisits     PrefectureVisit[]
+  placeMasters         PlaceMaster[]        @relation("PlaceMasterPrefecture")
 
   @@unique([parentId, slug])
   @@index([parentId])
   @@map("area")
 }
 
+// スポットの台帳(docs/specs/20260928-spot-master.md)。しおりの保存のたびに全削除→
+// 作り直しになるSpotの行とは別に、同じ場所の印(種類・広い場所か・慰霊の場所か等)を
+// 保ち続けるための行。紹介文(メモ)は持たない(プランナーの規約第7条・法務2026-09-28確認:
+// 公式しおりの紹介文を写すと、書いた人が分からなくなるため)
 model PlaceMaster {
-  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name      String
-  address   String?
-  lat       Decimal? @db.Decimal(9, 6)
-  lng       Decimal? @db.Decimal(9, 6)
-  category  String?
-  source    String // "ai_collected" | "user_submitted"
-  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  id               String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name             String
+  reading          String? // 読み(任意)
+  address          String?
+  lat              Decimal?  @db.Decimal(9, 6)
+  lng              Decimal?  @db.Decimal(9, 6)
+  prefectureAreaId String?   @map("prefecture_area_id") @db.Uuid // 都道府県レベルのArea.id
+  // 種類。足あと地図のスタンプの種類と同じ一覧
+  // (castle|temple|shrine|mountain|water|beach|onsen|museum|townscape|park|gourmet|craft|view|sake_brewery|other)
+  category         String?
+  isWideArea       Boolean   @default(false) @map("is_wide_area") // 広い場所か(足あと地図のチェックイン判定に使う)
+  isMemorial       Boolean   @default(false) @map("is_memorial") // 慰霊の場所か。管理者だけが変えられる(プランナーからは変えられない)
+  stayDurationMin  Int?      @map("stay_duration_min") // ふつうの滞在時間の目安(分)
+  websiteUrl       String?   @map("website_url") // 公式サイトのURL(任意。http/httpsのみ)
+  photoUrl         String?   @map("photo_url") // 自分の保存場所(Vercel Blob)のURLのみ(テーマの絵と同じ確かめ)
+  photoAuthor      String?   @map("photo_author")
+  photoLicense     String?   @map("photo_license") // パブリックドメイン・CC0・CC BY・CC BY-SAのみ(NC・NDは入れない。法務確認)
+  photoLicenseUrl  String?   @map("photo_license_url")
+  photoSourceUrl   String?   @map("photo_source_url")
+  // このデータの出どころ("ai_collected"|"user_submitted"。台帳をどう作ったか)
+  source           String
+  // 位置(緯度経度)の出どころ("nominatim"|"gsi"|"manual"等。法務2026-09-28確認:
+  // OpenStreetMap/Nominatim由来はODbLの出典表示が必要なため、地図の隅の表示に使う)
+  positionSource   String?   @map("position_source")
+  verifiedAt       DateTime? @map("verified_at") @db.Date // 最後に確かめた日
+  createdAt        DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt        DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
-  spots Spot[]
+  prefectureArea Area?              @relation("PlaceMasterPrefecture", fields: [prefectureAreaId], references: [id])
+  aliases        PlaceMasterAlias[]
+  spots          Spot[]
 
+  @@index([prefectureAreaId])
   @@map("place_master")
+}
+
+// 台帳の別名(例: 金閣寺／鹿苑寺)。名前で見つからないときに、別名でも検索できるようにする
+model PlaceMasterAlias {
+  id            String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  placeMasterId String @map("place_master_id") @db.Uuid
+  alias         String
+
+  placeMaster PlaceMaster @relation(fields: [placeMasterId], references: [id], onDelete: Cascade)
+
+  @@index([placeMasterId])
+  @@map("place_master_alias")
 }
 
 model Tag {
