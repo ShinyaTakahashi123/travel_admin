@@ -1127,6 +1127,18 @@ export type PlaceMasterInput = {
   aliases: string[];
 };
 
+const MAX_PLACE_MASTER_URL_LENGTH = 2048;
+
+// 公式サイトURL・写真のライセンスURL・出典元URLの共通の確かめ(http/httpsのみ・長さの上限。
+// セキュリティ指摘2026-09-28)
+function validatePlaceMasterUrl(value: string, label: string): string | null {
+  const trimmed = value.trim();
+  if (!trimmed) return null;
+  if (!/^https?:\/\//.test(trimmed)) fail(`${label}はhttp/httpsのみです`);
+  if (trimmed.length > MAX_PLACE_MASTER_URL_LENGTH) fail(`${label}が長すぎます`);
+  return trimmed;
+}
+
 function validatePlaceMasterInput(input: PlaceMasterInput) {
   const name = input.name.trim().slice(0, 100);
   if (!name) fail("名前を入力してください");
@@ -1144,8 +1156,9 @@ function validatePlaceMasterInput(input: PlaceMasterInput) {
     fail("滞在時間の目安は0〜1440の整数で入力してください");
   }
 
-  const websiteUrl = input.websiteUrl.trim();
-  if (websiteUrl && !/^https?:\/\//.test(websiteUrl)) fail("公式サイトのURLはhttp/httpsのみです");
+  const websiteUrl = validatePlaceMasterUrl(input.websiteUrl, "公式サイトのURL");
+  const photoLicenseUrl = validatePlaceMasterUrl(input.photoLicenseUrl, "写真のライセンスURL");
+  const photoSourceUrl = validatePlaceMasterUrl(input.photoSourceUrl, "写真の出典元URL");
 
   const photoUrl = input.photoUrl.trim() || null;
   const photoLicense = input.photoLicense.trim() || null;
@@ -1169,12 +1182,12 @@ function validatePlaceMasterInput(input: PlaceMasterInput) {
     isWideArea: Boolean(input.isWideArea),
     isMemorial: Boolean(input.isMemorial),
     stayDurationMin,
-    websiteUrl: websiteUrl || null,
+    websiteUrl,
     photoUrl,
     photoAuthor: input.photoAuthor.trim().slice(0, 100) || null,
     photoLicense,
-    photoLicenseUrl: input.photoLicenseUrl.trim() || null,
-    photoSourceUrl: input.photoSourceUrl.trim() || null,
+    photoLicenseUrl,
+    photoSourceUrl,
     positionSource: input.positionSource.trim().slice(0, 50) || null,
     aliases,
   };
