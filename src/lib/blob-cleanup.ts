@@ -21,19 +21,23 @@ export async function listAllBlobs(): Promise<BlobInfo[]> {
 // (2026-09-28 法務・企画運営の確認)。元のしおりが見られなくなったときはtrip_spot.photo_url
 // 自体もnullにする(src/lib/trip-availability.ts・cleanup-rate-limits)ため、参照は
 // 「元がまだ見られる間」しか残らない
-/** DBから参照されている画像URL（スポット写真・しおりサムネイル・プランナー/ユーザーのアイコン） */
+/** DBから参照されている画像URL（スポット写真・しおりサムネイル・プランナー/ユーザーのアイコン・台帳の写真） */
 export async function referencedBlobUrls(): Promise<Set<string>> {
-  const [photos, itineraries, planners, users] = await Promise.all([
+  const [photos, itineraries, planners, users, placeMasters] = await Promise.all([
     prisma.photo.findMany({ select: { url: true } }),
     prisma.itinerary.findMany({ where: { thumbnailUrl: { not: null } }, select: { thumbnailUrl: true } }),
     prisma.plannerAccount.findMany({ where: { iconUrl: { not: null } }, select: { iconUrl: true } }),
     prisma.userAccount.findMany({ where: { iconUrl: { not: null } }, select: { iconUrl: true } }),
+    // 台帳(place_master)の写真。trip_spot.photo_urlとは違い、台帳は写真の複製元(参照先)
+    // そのものなので、通常のPhotoと同じく参照中として数える(docs/specs/20260928-spot-master.md 4節4)
+    prisma.placeMaster.findMany({ where: { photoUrl: { not: null } }, select: { photoUrl: true } }),
   ]);
   return new Set([
     ...photos.map((p) => p.url),
     ...itineraries.map((i) => i.thumbnailUrl!),
     ...planners.map((p) => p.iconUrl!),
     ...users.map((u) => u.iconUrl!),
+    ...placeMasters.map((p) => p.photoUrl!),
   ]);
 }
 

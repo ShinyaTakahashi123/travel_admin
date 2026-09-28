@@ -9,6 +9,8 @@ import { getActiveAdmin } from "@/lib/admin-guard";
 import { ActionResult, ActionError, fail } from "@/lib/action-result";
 import { generateUniqueSlug, isValidSlugFormat } from "@/lib/slug";
 import { assertValidThemeImageUrl } from "@/lib/validate-theme-image";
+import { assertValidPlaceMasterPhotoUrl, assertValidPlaceMasterPhotoLicense } from "@/lib/validate-place-master-image";
+import { PLACE_MASTER_CATEGORIES } from "@/lib/place-master-categories";
 
 const INVITE_EXPIRES_HOURS = 72;
 const USER_SITE_URL = process.env.USER_SITE_URL ?? "https://shiorietrip.com";
@@ -1095,5 +1097,186 @@ export async function reorderFeatureItems(orderedItemIds: string[]): Promise<Act
       orderedItemIds.map((id, index) => prisma.featureItem.update({ where: { id }, data: { displayOrder: index } }))
     );
     revalidatePath(THEME_FEATURE_PATH);
+  });
+}
+
+// ============================================================
+// スポットの台帳 (docs/specs/20260928-spot-master.md)
+// ============================================================
+
+const PLACE_MASTER_PATH = "/place-master";
+
+export type PlaceMasterInput = {
+  name: string;
+  reading: string;
+  address: string;
+  lat: string;
+  lng: string;
+  prefectureAreaId: string;
+  category: string;
+  isWideArea: boolean;
+  isMemorial: boolean;
+  stayDurationMin: string;
+  websiteUrl: string;
+  photoUrl: string;
+  photoAuthor: string;
+  photoLicense: string;
+  photoLicenseUrl: string;
+  photoSourceUrl: string;
+  positionSource: string;
+  aliases: string[];
+};
+
+function validatePlaceMasterInput(input: PlaceMasterInput) {
+  const name = input.name.trim().slice(0, 100);
+  if (!name) fail("名前を入力してください");
+
+  const lat = input.lat.trim() ? Number(input.lat) : null;
+  const lng = input.lng.trim() ? Number(input.lng) : null;
+  if (lat != null && (Number.isNaN(lat) || lat < -90 || lat > 90)) fail("緯度が不正です");
+  if (lng != null && (Number.isNaN(lng) || lng < -180 || lng > 180)) fail("経度が不正です");
+
+  const category = input.category.trim();
+  if (category && !PLACE_MASTER_CATEGORIES.includes(category)) fail("種類が不正です");
+
+  const stayDurationMin = input.stayDurationMin.trim() ? Number(input.stayDurationMin) : null;
+  if (stayDurationMin != null && (!Number.isInteger(stayDurationMin) || stayDurationMin < 0 || stayDurationMin > 1440)) {
+    fail("滞在時間の目安は0〜1440の整数で入力してください");
+  }
+
+  const websiteUrl = input.websiteUrl.trim();
+  if (websiteUrl && !/^https?:\/\//.test(websiteUrl)) fail("公式サイトのURLはhttp/httpsのみです");
+
+  const photoUrl = input.photoUrl.trim() || null;
+  const photoLicense = input.photoLicense.trim() || null;
+  assertValidPlaceMasterPhotoUrl(photoUrl);
+  assertValidPlaceMasterPhotoLicense(photoLicense);
+  // 出典のない写真は入れない(仕様書1節)
+  if (photoUrl && (!input.photoAuthor.trim() || !photoLicense)) {
+    fail("写真を入れる場合は、撮影者・ライセンスも入力してください");
+  }
+
+  const aliases = Array.from(new Set(input.aliases.map((a) => a.trim()).filter(Boolean))).slice(0, 20);
+
+  return {
+    name,
+    reading: input.reading.trim().slice(0, 100) || null,
+    address: input.address.trim().slice(0, 200) || null,
+    lat,
+    lng,
+    prefectureAreaId: input.prefectureAreaId || null,
+    category: category || null,
+    isWideArea: Boolean(input.isWideArea),
+    isMemorial: Boolean(input.isMemorial),
+    stayDurationMin,
+    websiteUrl: websiteUrl || null,
+    photoUrl,
+    photoAuthor: input.photoAuthor.trim().slice(0, 100) || null,
+    photoLicense,
+    photoLicenseUrl: input.photoLicenseUrl.trim() || null,
+    photoSourceUrl: input.photoSourceUrl.trim() || null,
+    positionSource: input.positionSource.trim().slice(0, 50) || null,
+    aliases,
+  };
+}
+
+export async function createPlaceMaster(input: PlaceMasterInput): Promise<ActionResult<{ id: string }>> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const data = validatePlaceMasterInput(input);
+
+    const place = await prisma.$transaction(async (tx) => {
+      const created = await tx.placeMaster.create({
+        data: {
+          name: data.name,
+          reading: data.reading,
+          address: data.address,
+          lat: data.lat,
+          lng: data.lng,
+          prefectureAreaId: data.prefectureAreaId,
+          category: data.category,
+          isWideArea: data.isWideArea,
+          isMemorial: data.isMemorial,
+          stayDurationMin: data.stayDurationMin,
+          websiteUrl: data.websiteUrl,
+          photoUrl: data.photoUrl,
+          photoAuthor: data.photoAuthor,
+          photoLicense: data.photoLicense,
+          photoLicenseUrl: data.photoLicenseUrl,
+          photoSourceUrl: data.photoSourceUrl,
+          positionSource: data.positionSource,
+          source: "user_submitted",
+          aliases: { create: data.aliases.map((alias) => ({ alias })) },
+        },
+      });
+      await tx.adminAuditLog.create({
+        data: { adminId: admin.id, action: "create", targetType: "place_master", targetId: created.id, detail: { name: data.name } },
+      });
+      return created;
+    });
+
+    revalidatePath(PLACE_MASTER_PATH);
+    return { id: place.id };
+  });
+}
+
+export async function updatePlaceMaster(id: string, input: PlaceMasterInput): Promise<ActionResult> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const existing = await prisma.placeMaster.findUnique({ where: { id } });
+    if (!existing) fail("台帳が見つかりません");
+    const data = validatePlaceMasterInput(input);
+
+    await prisma.$transaction(async (tx) => {
+      await tx.placeMasterAlias.deleteMany({ where: { placeMasterId: id } });
+      await tx.placeMaster.update({
+        where: { id },
+        data: {
+          name: data.name,
+          reading: data.reading,
+          address: data.address,
+          lat: data.lat,
+          lng: data.lng,
+          prefectureAreaId: data.prefectureAreaId,
+          category: data.category,
+          isWideArea: data.isWideArea,
+          isMemorial: data.isMemorial,
+          stayDurationMin: data.stayDurationMin,
+          websiteUrl: data.websiteUrl,
+          photoUrl: data.photoUrl,
+          photoAuthor: data.photoAuthor,
+          photoLicense: data.photoLicense,
+          photoLicenseUrl: data.photoLicenseUrl,
+          photoSourceUrl: data.photoSourceUrl,
+          positionSource: data.positionSource,
+          verifiedAt: new Date(),
+          aliases: { create: data.aliases.map((alias) => ({ alias })) },
+        },
+      });
+      await tx.adminAuditLog.create({
+        data: { adminId: admin.id, action: "update", targetType: "place_master", targetId: id, detail: { name: data.name } },
+      });
+    });
+
+    revalidatePath(PLACE_MASTER_PATH);
+  });
+}
+
+export async function deletePlaceMaster(id: string): Promise<ActionResult> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const existing = await prisma.placeMaster.findUnique({ where: { id }, select: { name: true } });
+    if (!existing) fail("台帳が見つかりません");
+
+    await prisma.$transaction(async (tx) => {
+      // つながっているSpotは、台帳の参照だけを外す(スポット自体・しおりは消さない)
+      await tx.spot.updateMany({ where: { placeMasterId: id }, data: { placeMasterId: null } });
+      await tx.placeMaster.delete({ where: { id } });
+      await tx.adminAuditLog.create({
+        data: { adminId: admin.id, action: "delete", targetType: "place_master", targetId: id, detail: { name: existing.name } },
+      });
+    });
+
+    revalidatePath(PLACE_MASTER_PATH);
   });
 }
