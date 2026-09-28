@@ -215,10 +215,20 @@ export async function fetchAndUploadImage(
   creditCache?: Map<string, PhotoCredit | null>
 ): Promise<string | null> {
   if (imageCache.has(spot.name)) {
-    if (creditCache && !creditCache.has(spot.name)) {
-      creditCache.set(spot.name, await fetchImageCredit(spot.wikiTitle));
+    // 控え(photo-cache.json/photo-credit-cache.json)は、svgチェックが入る前の古い取得結果を
+    // そのまま持っていることがある(実体が地図や記号のsvgだったケース)。出典(sourceUrl)が
+    // わかっている場合は、返す前にsvg由来かどうかをもう一度確認し、該当すれば控えを無効化して
+    // 再取得する(2026-09-28追加。「尾道市街地～向島」がSHIMANAMI_EXP(E76).svgを掴んでいた件)
+    const cachedCredit = creditCache?.get(spot.name);
+    const cachedIsSvg = cachedCredit?.sourceUrl && /\.svg(\?|$)|\.svg\//i.test(cachedCredit.sourceUrl);
+    if (!cachedIsSvg) {
+      if (creditCache && !creditCache.has(spot.name)) {
+        creditCache.set(spot.name, await fetchImageCredit(spot.wikiTitle));
+      }
+      return imageCache.get(spot.name)!;
     }
-    return imageCache.get(spot.name)!;
+    imageCache.delete(spot.name);
+    creditCache?.delete(spot.name);
   }
   const UA = "tabishiori-pilot/1.0 (contact: st.83.53.abcd@gmail.com)";
   try {
