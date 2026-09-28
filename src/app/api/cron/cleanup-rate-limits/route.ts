@@ -20,8 +20,9 @@ import { prisma } from "@/lib/prisma";
 //    種類ごとに違う(src/lib/trip-availability.tsのisOriginalAvailableと同じ判定をSQLで表現):
 //    published=statusがpublishedでなくなったら／copy=本人が削除するまで見られる／
 //    shared_link=削除・プランナーの利用停止・リンクを止めた(shared_link_token_hashがnullに
-//    なった)のいずれかで見られなくなった扱い(2026-09-28セキュリティの指摘で
-//    「リンクを止めただけなら残す」から変更)
+//    なった)・リンクを作り直した(ハッシュがtrip.original_shared_link_token_hashと違う)の
+//    いずれかで見られなくなった扱い(2026-09-28セキュリティの指摘で「リンクを止めただけなら
+//    残す」から変更・作り直しの検知を追加)
 //    ※ trip_spot.photo_urlは、Vercel Blobの「使われていない画像の削除」(cleanup-blobs、
 //    src/lib/blob-cleanup.ts)の「使用中」判定には含めない。写真は元のPhotoの複製ではなく
 //    URLの参照のみで、元のPhotoが消えれば「旅」側は写真なし表示になる仕様のため
@@ -87,7 +88,7 @@ export async function GET(request: Request) {
         WHERE i.id = trip.original_itinerary_id
           AND (
             (trip.original_kind = 'copy' AND i.status <> 'deleted')
-            OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL)
+            OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
             OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
           )
       )
@@ -104,7 +105,7 @@ export async function GET(request: Request) {
           WHERE i.id = trip.original_itinerary_id
             AND (
               (trip.original_kind = 'copy' AND i.status <> 'deleted')
-              OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL)
+              OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
               OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
             )
         )
