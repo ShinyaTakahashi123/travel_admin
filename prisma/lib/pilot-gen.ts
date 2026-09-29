@@ -6,6 +6,15 @@ import { put } from "@vercel/blob";
 import sharp from "sharp";
 import { prisma } from "../../src/lib/prisma";
 
+async function isUrlAlive(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, { method: "HEAD" });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 // DBに書き込むseedスクリプト共通の入口。ここで接続先(本番/開発)を表示し、
 // 目印(SHIORIE_TARGET=prod)と実際の接続先が食い違っていないかを確かめる
 // (企画運営2026-09-27、制作がnpm run prod -- を使わずに実行して表示が出なかったため)。
@@ -221,11 +230,16 @@ export async function fetchAndUploadImage(
     // 再取得する(2026-09-28追加。「尾道市街地～向島」がSHIMANAMI_EXP(E76).svgを掴んでいた件)
     const cachedCredit = creditCache?.get(spot.name);
     const cachedIsSvg = cachedCredit?.sourceUrl && /\.svg(\?|$)|\.svg\//i.test(cachedCredit.sourceUrl);
-    if (!cachedIsSvg) {
+    const cachedUrl = imageCache.get(spot.name);
+    // 控えのBlob URLが、どこからも使われていない間にCron(24時間以上前の未使用画像を毎日削除)で
+    // 消されていることがある(2026-09-29、金刀比羅宮など4件で発生・404)。使う前にHEADで生きているか確認し、
+    // 404なら控えを無効化して撮り直す
+    const cachedIsAlive = cachedUrl ? await isUrlAlive(cachedUrl) : false;
+    if (!cachedIsSvg && cachedIsAlive) {
       if (creditCache && !creditCache.has(spot.name)) {
         creditCache.set(spot.name, await fetchImageCredit(spot.wikiTitle));
       }
-      return imageCache.get(spot.name)!;
+      return cachedUrl!;
     }
     imageCache.delete(spot.name);
     creditCache?.delete(spot.name);
