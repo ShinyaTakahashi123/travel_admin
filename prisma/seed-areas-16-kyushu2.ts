@@ -87,7 +87,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "パワースポット"],
     days: [
       [
-        { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市大字宮浦2650", time: "9:30", stay: 80, memo: "イースター島の長老会から特別に許可を得て復刻されたモアイ像が並ぶ丘。" },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #262）
+        { name: "青島", wikiTitle: "青島_(宮崎県)", address: "宮崎県宮崎市青島2丁目13番", time: "9:00", stay: 60, memo: "島全体が青島神社の境内。「鬼の洗濯板」と呼ばれる奇岩群でも有名。" },
+        { name: "堀切峠", wikiTitle: "堀切峠", address: "宮崎県宮崎市内海", time: "10:15", stay: 40, memo: "フェニックスなど南国植物が並ぶ、日南海岸随一のドライブスポット。", transit: { mode: "car", min: 15 } },
+        { name: "道の駅フェニックス", wikiTitle: "道の駅フェニックス", address: "宮崎県宮崎市大字内海381-1", time: "10:59", stay: 40, memo: "堀切峠のそばの道の駅。展望テラスから鬼の洗濯板を一望。", transit: { mode: "car", min: 4 }, fallbackLatLng: [31.734, 131.4715] },
+        { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市大字宮浦2650", time: "11:56", stay: 80, memo: "イースター島の長老会から特別に許可を得て復刻されたモアイ像が並ぶ丘。", transit: { mode: "car", min: 17 } },
+        { name: "鵜戸神宮", wikiTitle: "鵜戸神宮", address: "日南市大字宮浦3232", time: "13:23", stay: 70, memo: "断崖の洞窟に埋め込まれた朱塗りの本殿。運玉投げも名物。", transit: { mode: "car", min: 7 } },
+        { name: "道の駅なんごう（PORTO）", wikiTitle: "道の駅なんごう", address: "宮崎県日南市南郷町大字贄波3220-24", time: "15:00", stay: 90, memo: "大小の島々を望むウッドデッキのテラスが自慢の道の駅。", transit: { mode: "car", min: 27 } },
       ],
     ],
   },
