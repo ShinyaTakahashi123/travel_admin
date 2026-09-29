@@ -2784,5 +2784,17 @@
     "sourceUrl": "https://commons.wikimedia.org/wiki/File:GSJ_Geological_Museum.JPG",
     "author": "あばさー",
     "license": "Public domain"
+  },
+  "つくばエキスポセンター": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tsukuba_(9975806953).jpg",
+    "author": "Guilhem Vellut from Annecy, France",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "筑波宇宙センター": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tsukuba_Space_Center-01.jpg",
+    "author": "Tnk3a",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/"
   }
 }
