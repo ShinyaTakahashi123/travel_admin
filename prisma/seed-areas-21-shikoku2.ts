@@ -185,7 +185,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "パワースポット"],
     days: [
       [
-        { name: "桂浜", wikiTitle: "桂浜", address: "高知市浦戸", time: "9:30", stay: 80, memo: "坂本龍馬の銅像が太平洋を見つめる、高知随一の景勝地。龍馬記念館も隣接。" },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #260）
+        { name: "桂浜", wikiTitle: "桂浜", address: "高知市浦戸", time: "9:30", stay: 80, memo: "坂本龍馬の銅像が太平洋を見つめる、高知随一の景勝地。" },
+        { name: "高知県立坂本龍馬記念館", wikiTitle: "高知県立坂本龍馬記念館", address: "高知県高知市浦戸城山830", time: "10:57", stay: 50, memo: "龍馬の手紙を多数所蔵する記念館。2018年に新館増設。", transit: { mode: "walk", min: 7 } },
+        { name: "高知県立牧野植物園", wikiTitle: "高知県立牧野植物園", address: "高知県高知市五台山4200-6", time: "12:01", stay: 60, memo: "植物学者・牧野富太郎の業績を記念する、五台山の植物園。", transit: { mode: "car", min: 14 } },
+        { name: "高知城", wikiTitle: "高知城", address: "高知県高知市丸ノ内1-2-1", time: "13:13", stay: 70, memo: "山内一豊が築いた、現存12天守の一つ。天守と本丸御殿が現存。", transit: { mode: "car", min: 12 } },
+        { name: "ひろめ市場", wikiTitle: "ひろめ市場", address: "高知県高知市帯屋町2丁目3-1", time: "14:30", stay: 75, memo: "平成10年開業の屋内市場。カツオのたたきなど高知グルメが集まる。", transit: { mode: "walk", min: 7 } },
+        { name: "はりまや橋", wikiTitle: "はりまや橋", address: "高知県高知市はりまや町1丁目", time: "15:56", stay: 35, memo: "よさこい節でも知られる、高知のシンボル的な橋。", transit: { mode: "walk", min: 11 } },
       ],
     ],
   },
