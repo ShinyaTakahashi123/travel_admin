@@ -9,6 +9,8 @@
  *   FUJIなごや科学館 https://www.nagoya-info.jp/spot/detail/2/ ／リニア・鉄道館 https://museum.jr-central.co.jp/ ／水族館のレストラン https://www.nagoyaaqua.jp/ ／動植物園のフード https://www.higashiyama.city.nagoya.jp/
  * 座標の出典: Nominatim（名古屋港水族館 35.0909700,136.8780335／名古屋海洋博物館・南極観測船ふじ 35.0906642,136.8805282／リニア・鉄道館 35.0488735,136.8512061／
  *   東山スカイタワー 35.1567554,136.9788473／名古屋市科学館 35.1652420,136.8985990）、OSM/Overpass（東山動植物園正門 35.1588656,136.9741269／植物園門 35.1542575,136.9812394）
+ *   ※名古屋海洋博物館（ポートビル）は、OSM（Nominatim・Overpass で「ポートビル」「海洋博物館」「展望」を検索）にも国土地理院の地名検索にも建物の点がなく、
+ *     OSM の点は「名古屋海洋博物館・南極観測船ふじ」の1点だけだったので、ふじと同じ点のままにした（企画運営の了承、2026-09-30）
  * 使い方(admin-site): npm run prod -- npx tsx prisma/fix-416-4d1139e6.ts [--commit]
  */
 import { prisma } from "../src/lib/prisma";
