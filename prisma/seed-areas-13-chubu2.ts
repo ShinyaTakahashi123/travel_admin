@@ -53,10 +53,18 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡", "自然"],
     days: [
       [
-        { name: "北方文化博物館", wikiTitle: "北方文化博物館", address: "新潟市江南区沢海2丁目15-25", time: "10:00", stay: 90, memo: "「豪農の館」と称される、越後を代表する大地主・伊藤家の邸宅と大庭園。" },
+        { name: "北方文化博物館", wikiTitle: "北方文化博物館", address: "新潟市江南区沢海2丁目15-25", time: "9:00", stay: 90, memo: "「豪農の館」と称される、越後を代表する大地主・伊藤家の邸宅と大庭園。" },
+        { name: "新津鉄道資料館", wikiTitle: "新潟市新津鉄道資料館", address: "新潟県新潟市秋葉区新津東町2丁目5番6号", time: "10:40", stay: 85, memo: "鉄道の町・新津の歴史を伝える資料館。実物車両やミニSL乗車体験も。", transit: { mode: "car", min: 10 } },
+        { name: "古津八幡山遺跡", wikiTitle: "古津八幡山遺跡", address: "新潟県新潟市秋葉区古津", time: "12:17", stay: 60, memo: "県内最大級とされる円墳が復元された、国指定史跡。", transit: { mode: "car", min: 12 } },
+        { name: "新潟県立植物園", wikiTitle: "新潟県立植物園", address: "新潟県新潟市秋葉区金津186", time: "13:21", stay: 90, memo: "大温室「グリーンドーム」が見どころの植物園。", transit: { mode: "car", min: 4 } },
+        { name: "石油の世界館", wikiTitle: "石油の世界館", address: "新潟県新潟市秋葉区金津1172番地1", time: "14:55", stay: 100, memo: "新津油田の歴史を伝える資料館。国史跡「新津油田金津鉱場跡」に隣接。", transit: { mode: "car", min: 4 } },
       ],
       [
-        { name: "古町", wikiTitle: "古町_(新潟市)", address: "新潟市中央区古町通", time: "9:30", stay: 70, memo: "老舗料亭や商店が並ぶ、新潟の花街文化を今に伝える歴史ある通り。" },
+        { name: "白山神社", wikiTitle: "白山神社_(新潟市中央区一番堀通町)", address: "新潟県新潟市中央区一番堀通町1番地", time: "9:00", stay: 35, memo: "新潟總鎮守。古町・本町の町割りの起点にもなった古社。" },
+        { name: "古町", wikiTitle: "古町_(新潟市)", address: "新潟市中央区古町通", time: "9:48", stay: 90, memo: "老舗料亭や商店が並ぶ、新潟の花街文化を今に伝える歴史ある通り。", transit: { mode: "walk", min: 13 } },
+        { name: "旧齋藤家別邸", wikiTitle: "旧齋藤家別邸", address: "新潟県新潟市中央区西大畑町576番地", time: "11:26", stay: 95, memo: "新潟の豪商・齋藤家の迎賓館。国指定名勝の回遊式庭園が見どころ。", transit: { mode: "walk", min: 8 } },
+        { name: "新潟市美術館", wikiTitle: "新潟市美術館", address: "新潟県新潟市中央区西大畑町5191番地9", time: "13:04", stay: 85, memo: "前川國男設計の美術館。ルドンやピカソなど5000点超を収蔵。", transit: { mode: "walk", min: 3 } },
+        { name: "みなとぴあ", wikiTitle: "新潟市歴史博物館", address: "新潟県新潟市中央区柳島町2丁目10番地", time: "14:36", stay: 115, memo: "港町新潟の歴史を伝える博物館。旧新潟税関庁舎は国重要文化財。", transit: { mode: "car", min: 7 } },
       ],
     ],
   },
