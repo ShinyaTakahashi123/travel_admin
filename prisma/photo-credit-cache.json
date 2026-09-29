@@ -2796,5 +2796,17 @@
     "author": "Tnk3a",
     "license": "CC BY-SA 3.0",
     "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/"
+  },
+  "道頓堀グリコサイン": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dotonbori_Glico_LED_signs_at_3rd_November_2014.JPG",
+    "author": "Tokumeigakarinoaoshima",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "道頓堀(街並み)": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Osaka_Dotonbori_Ebisu_Bridge.jpg",
+    "author": "Type specimen",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
   }
 }
