@@ -234,7 +234,7 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "黒川温泉（地蔵堂・川端通り）", wikiTitle: "黒川温泉", address: "阿蘇郡南小国町満願寺6612-9", time: "10:02", stay: 180, memo: "入湯手形を使って複数の露天風呂を巡れる、黒川温泉のシンボル的な散策エリア。", transit: { mode: "car", min: 22 } },
         { name: "田の原温泉", wikiTitle: "田の原温泉", address: "熊本県阿蘇郡南小国町満願寺7130", time: "13:07", stay: 40, memo: "鎌倉時代開湯と伝わる、田の原川沿いのひっそりとした湯治場。", transit: { mode: "car", min: 5 }, fallbackLatLng: [33.07019, 131.141968] },
         { name: "瀬の本高原", wikiTitle: "瀬の本高原", address: "熊本県阿蘇郡南小国町満願寺", time: "14:02", stay: 70, memo: "阿蘇とくじゅうを結ぶ高原地帯。牧草地の向こうにくじゅう連山を望む絶景ドライブコース。", transit: { mode: "car", min: 15 } },
-        { name: "大観峰", wikiTitle: "大観峰", address: "熊本県阿蘇市山田", time: "15:40", stay: 50, memo: "阿蘇外輪山の最高地点。阿蘇五岳とカルデラを一望できる展望所。", transit: { mode: "car", min: 28 } },
+        { name: "大観峰", wikiTitle: "大観峰", address: "熊本県阿蘇市山田", time: "15:40", stay: 50, memo: "阿蘇北外輪山の最高峰とされる展望所。阿蘇五岳とカルデラを一望できる。", transit: { mode: "car", min: 28 } },
       ],
     ],
   },
