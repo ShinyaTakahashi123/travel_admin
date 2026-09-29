@@ -275,8 +275,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["お寺", "温泉"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #253）
         { name: "那谷寺", wikiTitle: "那谷寺", address: "小松市那谷町ユ122", time: "9:30", stay: 70, memo: "奇岩遊仙境と呼ばれる岩山に建つ古刹。紅葉の名所としても有名。" },
-        { name: "山中温泉", wikiTitle: "山中温泉", address: "加賀市山中温泉", time: "11:20", stay: 60, memo: "松尾芭蕉が「おくのほそ道」で絶賛した、開湯1300年の名湯。", transit: { mode: "car", min: 20 } },
+        { name: "鶴仙渓遊歩道", wikiTitle: "鶴仙渓", address: "石川県加賀市山中温泉下谷町", time: "11:00", stay: 40, memo: "こおろぎ橋からあやとりはしを抜ける、大聖寺川沿いの渓谷散策路。", transit: { mode: "car", min: 20 }, fallbackLatLng: [36.2409882, 136.3716681] },
+        { name: "山中温泉", wikiTitle: "山中温泉", address: "加賀市山中温泉", time: "11:50", stay: 60, memo: "松尾芭蕉が「おくのほそ道」で絶賛した、開湯1300年の名湯。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [36.244179, 136.370316] },
+        { name: "山代温泉 古総湯", wikiTitle: "山代温泉", address: "石川県加賀市山代温泉18-128", time: "13:15", stay: 60, memo: "明治の総湯を復元した、体験型の温泉施設。", transit: { mode: "car", min: 25 }, fallbackLatLng: [36.2889656, 136.3614616] },
+        { name: "九谷焼窯跡展示館", wikiTitle: "九谷焼", address: "石川県加賀市山代温泉19-101-9", time: "14:23", stay: 60, memo: "国指定史跡・九谷磁器窯跡と、現存最古とされる登り窯。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [36.293953, 136.366236] },
+        { name: "魯山人寓居跡 いろは草庵", wikiTitle: "魯山人寓居跡いろは草庵", address: "石川県加賀市山代温泉18-5", time: "15:33", stay: 62, memo: "北大路魯山人が約半年を過ごした寓居の跡。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [36.287525, 136.360641] },
       ],
     ],
   },
