@@ -94,7 +94,7 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市大字宮浦2650", time: "11:49", stay: 80, memo: "イースター島の長老会から特別に許可を得て復刻されたモアイ像が並ぶ丘。", transit: { mode: "car", min: 17 } },
         { name: "鵜戸神宮", wikiTitle: "鵜戸神宮", address: "日南市大字宮浦3232", time: "13:16", stay: 70, memo: "断崖の洞窟に埋め込まれた朱塗りの本殿。運玉投げも名物。", transit: { mode: "car", min: 7 }, fallbackLatLng: [31.649165, 131.4661169] },
         { name: "飫肥城下町", wikiTitle: "飫肥城", address: "宮崎県日南市飫肥", time: "14:44", stay: 60, memo: "九州の小京都と呼ばれる城下町。重要伝統的建造物群保存地区。", transit: { mode: "car", min: 18 }, fallbackLatLng: [31.6275628, 131.3518221] },
-        { name: "道の駅なんごう（PORTO）", wikiTitle: "道の駅なんごう", address: "宮崎県日南市南郷町大字贄波3220-24", time: "16:07", stay: 40, memo: "大小の島々を望むウッドデッキのテラスが自慢の道の駅。", transit: { mode: "car", min: 23 } },
+        { name: "道の駅なんごう（PORTO）", wikiTitle: "道の駅なんごう", address: "宮崎県日南市南郷町大字贄波3220-24", time: "16:07", stay: 40, memo: "大小の島々を望むウッドデッキのテラスが自慢の道の駅。", transit: { mode: "car", min: 23 }, fallbackLatLng: [31.5030142, 131.3785752] },
       ],
     ],
   },
