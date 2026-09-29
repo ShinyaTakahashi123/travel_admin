@@ -15,7 +15,9 @@ const p=new PrismaClient({adapter:new PrismaPg({connectionString:process.env.DAT
 // 祈りの場かどうかが分かれる（仁徳天皇陵のような拝所つきの陵墓は該当、一般の古墳跡は非該当）
 // ため、誤検知が増えすぎないよう正規表現には含めない。拝所のある古墳は「陵」で拾われる想定
 const nameRe=/神社|寺|宮|堂|院|大社|教会|陵|供養塔/;
-const careRe=/静かに|敬意|手を合わせ/;
+// 2026-09-29 企画運営の指摘で「静かに」を判定語から外した(南宗寺「供養塔が静かに並んでいます」
+// のように、参拝者への配慮ではない文脈でも「静かに」がマッチし、誤って「一文あり」と判定されたため)
+const careRe=/敬意|手を合わせ/;
 
 function report(label, rows) {
   let hits=0;
