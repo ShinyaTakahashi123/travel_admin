@@ -23,8 +23,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #261）
         { name: "仙台城跡", wikiTitle: "仙台城", address: "仙台市青葉区川内1", time: "9:30", stay: 60, memo: "伊達政宗が築いた仙台藩62万石の居城跡。伊達政宗騎馬像が目印。" },
-        { name: "瑞鳳殿", wikiTitle: "瑞鳳殿", address: "仙台市青葉区霊屋下23-2", time: "11:00", stay: 40, memo: "伊達政宗の霊廟。桃山文化の様式を伝える絢爛豪華な廟建築。", transit: { mode: "car", min: 15 } },
+        { name: "仙台市博物館", wikiTitle: "仙台市博物館", address: "宮城県仙台市青葉区川内26", time: "10:37", stay: 71, memo: "仙台城三の丸跡に立つ博物館。伊達家ゆかりの甲冑や史料を展示。", transit: { mode: "walk", min: 7 } },
+        { name: "瑞鳳殿", wikiTitle: "瑞鳳殿", address: "仙台市青葉区霊屋下23-2", time: "11:56", stay: 40, memo: "伊達政宗の霊廟。桃山文化の様式を伝える絢爛豪華な廟建築。", transit: { mode: "car", min: 8 } },
+        { name: "大崎八幡宮", wikiTitle: "大崎八幡宮", address: "宮城県仙台市青葉区八幡4-6-1", time: "12:47", stay: 60, memo: "伊達政宗が造営した仙台62万石の総鎮守。国宝の桃山建築。", transit: { mode: "car", min: 11 } },
+        { name: "仙台朝市", wikiTitle: "仙台朝市", address: "宮城県仙台市青葉区中央3-8-5", time: "13:58", stay: 60, memo: "戦後の青空市場を起源とする、杜の都の台所。約70軒が並ぶ。", transit: { mode: "car", min: 11 } },
+        { name: "定禅寺通り", wikiTitle: "定禅寺通", address: "宮城県仙台市青葉区国分町1丁目", time: "15:10", stay: 82, memo: "4列166本のケヤキ並木。「杜の都」仙台を象徴する通り。", transit: { mode: "walk", min: 12 } },
       ],
     ],
   },
