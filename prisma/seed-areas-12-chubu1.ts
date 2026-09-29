@@ -212,10 +212,18 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["お寺", "城・史跡"],
     days: [
       [
-        { name: "甲斐善光寺", wikiTitle: "甲斐善光寺", address: "甲府市善光寺3丁目36-1", time: "10:00", stay: 50, memo: "武田信玄が信濃善光寺の焼失を恐れて建立した、東日本屈指の大伽藍。" },
+        { name: "甲斐善光寺", wikiTitle: "甲斐善光寺", address: "甲府市善光寺3丁目36-1", time: "9:00", stay: 100, memo: "武田信玄が信濃善光寺の焼失を恐れて建立した、東日本屈指の大伽藍。" },
+        { name: "酒折宮", wikiTitle: "酒折宮", address: "山梨県甲府市酒折3-1-13", time: "10:43", stay: 45, memo: "日本武尊の東征の行宮と伝わる、連歌発祥の地とされる古社。", transit: { mode: "car", min: 3 } },
+        { name: "舞鶴城公園", wikiTitle: "甲府城", address: "山梨県甲府市丸の内1-5-4", time: "11:35", stay: 100, memo: "甲府城跡の公園。稲荷櫓・鉄門など復元建物が見どころ。", transit: { mode: "car", min: 7 } },
+        { name: "山梨県立美術館", wikiTitle: "山梨県立美術館", address: "山梨県甲府市貢川1丁目4番27号", time: "13:23", stay: 100, memo: "ミレーの「種をまく人」をはじめ、バルビゾン派の絵画コレクションで有名な美術館。", transit: { mode: "car", min: 8 } },
+        { name: "山梨県立文学館", wikiTitle: "山梨県立文学館", address: "山梨県甲府市貢川1丁目5番35号", time: "15:06", stay: 90, memo: "美術館に隣接。芥川龍之介・飯田蛇笏のコレクションが中心。", transit: { mode: "walk", min: 3 } },
       ],
       [
-        { name: "藤村記念館", wikiTitle: "藤村記念館_(山梨県)", address: "甲府市北口2丁目14-1", time: "9:30", stay: 40, memo: "明治初期の擬洋風建築。旧睦沢学校校舎を移築した、山梨近代化の象徴。", fallbackLatLng: [35.6675, 138.5686] },
+        { name: "藤村記念館", wikiTitle: "藤村記念館_(山梨県)", address: "甲府市北口2丁目14-1", time: "9:00", stay: 50, memo: "明治初期の擬洋風建築。旧睦沢学校校舎を移築した、山梨近代化の象徴。", fallbackLatLng: [35.6675, 138.5686] },
+        { name: "甲州夢小路", wikiTitle: "甲州夢小路", address: "山梨県甲府市丸の内1丁目1-22", time: "9:52", stay: 90, memo: "城下町を再現した商業施設。「時の鐘」がシンボル。", transit: { mode: "walk", min: 2 } },
+        { name: "大泉寺", wikiTitle: "大泉寺_(甲府市)", address: "山梨県甲府市古府中町5015", time: "11:27", stay: 55, memo: "武田信虎の菩提寺。富士見池、信虎像などの重要文化財。", transit: { mode: "car", min: 5 } },
+        { name: "信玄ミュージアム", wikiTitle: "甲府市武田氏館跡歴史館", address: "山梨県甲府市大手3丁目1-14", time: "12:26", stay: 130, memo: "武田氏館跡歴史館。旧堀田古城園(登録有形文化財)も敷地内に。", transit: { mode: "car", min: 4 } },
+        { name: "武田神社", wikiTitle: "武田神社", address: "山梨県甲府市古府中町2611", time: "14:39", stay: 115, memo: "躑躅ヶ崎館跡に立つ、武田信玄を祀る神社。宝物殿も見どころ。", transit: { mode: "walk", min: 3 } },
       ],
     ],
   },
