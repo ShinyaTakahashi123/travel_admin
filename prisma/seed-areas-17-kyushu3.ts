@@ -109,7 +109,8 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "鹿児島市立美術館", wikiTitle: "鹿児島市立美術館", address: "鹿児島県鹿児島市城山町4-36", time: "11:29", stay: 50, memo: "鹿児島城二の丸跡に立つ美術館。印象派から現代までの西洋美術を収蔵。", transit: { mode: "walk", min: 4 } },
         { name: "西郷隆盛銅像", wikiTitle: "西郷隆盛銅像", address: "鹿児島県鹿児島市城山町", time: "12:24", stay: 20, memo: "昭和12年完成、彫刻家・安藤照作の銅像。城山を背に立つ。", transit: { mode: "walk", min: 5 } },
         { name: "鹿児島県歴史・美術センター黎明館", wikiTitle: "鹿児島県歴史・美術センター黎明館", address: "鹿児島県鹿児島市城山町7-2", time: "12:46", stay: 75, memo: "鶴丸城本丸跡に立つ県立総合博物館。", transit: { mode: "walk", min: 2 } },
-        { name: "城山展望台", wikiTitle: "城山_(鹿児島市)", address: "鹿児島県鹿児島市城山町22", time: "14:07", stay: 145, memo: "標高107mの展望所。桜島を一望、西南戦争ゆかりの史跡も点在。", transit: { mode: "car", min: 6 } },
+        { name: "城山展望台", wikiTitle: "城山_(鹿児島市)", address: "鹿児島県鹿児島市城山町22", time: "14:07", stay: 35, memo: "標高107mの展望所。桜島や鹿児島市街を一望できる。", transit: { mode: "car", min: 6 } },
+        { name: "西郷南洲顕彰館", wikiTitle: "西郷南洲顕彰館", address: "鹿児島県鹿児島市上竜尾町", time: "14:50", stay: 100, memo: "南洲神社・南洲墓地に隣接する資料館。近くに西郷洞窟も。", transit: { mode: "car", min: 8 } },
       ],
       [
         { name: "天文館", wikiTitle: "天文館_(鹿児島市)", address: "鹿児島市千日町", time: "9:30", stay: 80, memo: "2日目は、南九州最大の繁華街でご当地グルメの黒豚料理などを楽しむ。" },
