@@ -412,9 +412,10 @@ const ITINERARIES: HandmadeItinerary[] = [
       [
         { name: "長浜城歴史博物館", wikiTitle: "長浜城_(近江国)", address: "長浜市公園町10-10", time: "9:30", stay: 70, memo: "豊臣秀吉が初めて城持ち大名となったと伝わる城を再建した、歴史博物館。" },
         { name: "慶雲館", wikiTitle: "慶雲館_(長浜市)", address: "滋賀県長浜市港町2-5", time: "10:47", stay: 70, memo: "明治天皇の行在所として建てられた、迎賓館建築。庭園も見事。", transit: { mode: "walk", min: 7 } },
-        { name: "豊国神社", wikiTitle: "豊国神社_(長浜市)", address: "滋賀県長浜市南呉服町6-37", time: "12:04", stay: 40, memo: "長浜の町衆が秀吉を偲んで建てた神社。", transit: { mode: "walk", min: 7 } },
-        { name: "黒壁スクエア", wikiTitle: "黒壁スクエア", address: "長浜市元浜町14-8", time: "12:49", stay: 120, memo: "黒漆喰の蔵造りが並ぶ、ガラス工芸で有名なレトロな街並み。", transit: { mode: "walk", min: 5 } },
-        { name: "大通寺", wikiTitle: "大通寺_(長浜市)", address: "滋賀県長浜市元浜町32-9", time: "14:55", stay: 100, memo: "伏見城の遺構と伝わる本堂・大広間。含山軒・蘭亭の名勝庭園も。", transit: { mode: "walk", min: 6 } },
+        { name: "長浜鉄道スクエア", wikiTitle: "長浜鉄道スクエア", address: "滋賀県長浜市北船町1-41", time: "11:59", stay: 50, memo: "現存最古とされる旧長浜駅舎などからなる鉄道保存施設。", transit: { mode: "walk", min: 2 } },
+        { name: "豊国神社", wikiTitle: "豊国神社_(長浜市)", address: "滋賀県長浜市南呉服町6-37", time: "12:55", stay: 40, memo: "長浜の町衆が秀吉を偲んで建てた神社。", transit: { mode: "walk", min: 6 } },
+        { name: "黒壁スクエア", wikiTitle: "黒壁スクエア", address: "長浜市元浜町14-8", time: "13:40", stay: 120, memo: "黒漆喰の蔵造りが並ぶ、ガラス工芸で有名なレトロな街並み。", transit: { mode: "walk", min: 5 } },
+        { name: "大通寺", wikiTitle: "大通寺_(長浜市)", address: "滋賀県長浜市元浜町32-9", time: "15:46", stay: 48, memo: "伏見城の遺構と伝わる本堂・大広間。含山軒・蘭亭の名勝庭園も。", transit: { mode: "walk", min: 6 } },
       ],
     ],
   },
