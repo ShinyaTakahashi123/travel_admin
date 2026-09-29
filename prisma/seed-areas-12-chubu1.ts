@@ -221,11 +221,11 @@ const ITINERARIES: HandmadeItinerary[] = [
       ],
       [
         { name: "藤村記念館", wikiTitle: "藤村記念館_(山梨県)", address: "甲府市北口2丁目14-1", time: "9:00", stay: 50, memo: "明治初期の擬洋風建築。旧睦沢学校校舎を移築した、山梨近代化の象徴。", fallbackLatLng: [35.6675, 138.5686] },
-        { name: "甲州夢小路", wikiTitle: "甲州夢小路", address: "山梨県甲府市丸の内1丁目1-22", time: "9:52", stay: 95, memo: "城下町を再現した商業施設。「時の鐘」がシンボル。昼食を含む。運転する人は飲酒不可。", transit: { mode: "walk", min: 2 } },
+        { name: "甲州夢小路", wikiTitle: "甲州夢小路", address: "山梨県甲府市丸の内1丁目1-22", time: "9:52", stay: 95, memo: "城下町を再現した商業施設。「時の鐘」がシンボル。昼食を含む。お酒は20歳から、運転する人は飲酒不可。", transit: { mode: "walk", min: 2 } },
         { name: "大泉寺", wikiTitle: "大泉寺_(甲府市)", address: "山梨県甲府市古府中町5015", time: "11:32", stay: 55, memo: "武田信虎の菩提寺。富士見池、信虎像などの重要文化財。", transit: { mode: "car", min: 5 } },
         { name: "信玄ミュージアム", wikiTitle: "甲府市武田氏館跡歴史館", address: "山梨県甲府市大手3丁目1-14", time: "12:31", stay: 60, memo: "武田氏館跡歴史館。旧堀田古城園(登録有形文化財)も敷地内に。", transit: { mode: "car", min: 4 } },
         { name: "武田神社", wikiTitle: "武田神社", address: "山梨県甲府市古府中町2611", time: "13:34", stay: 40, memo: "躑躅ヶ崎館跡に立つ、武田信玄を祀る神社。宝物殿も見どころ。例祭は春。", transit: { mode: "walk", min: 3 } },
-        { name: "積翠寺", wikiTitle: "積翠寺", address: "山梨県甲府市上積翠寺町984", time: "14:22", stay: 35, memo: "武田信玄公生誕の地と伝わる寺。産湯の井戸・産湯天神が残る。拝観無料。", transit: { mode: "car", min: 8 }, fallbackLatLng: [35.702633, 138.591904] },
+        { name: "積翠寺", wikiTitle: "積翠寺", address: "山梨県甲府市上積翠寺町984", time: "14:22", stay: 35, memo: "武田信玄公生誕の地と伝わる寺。産湯の井戸・産湯天神が残る。", transit: { mode: "car", min: 8 }, fallbackLatLng: [35.702633, 138.591904] },
         { name: "要害山", wikiTitle: "要害山城", address: "山梨県甲府市上積翠寺町", time: "15:00", stay: 90, memo: "武田氏の詰城跡(国史跡)。信玄公生誕の地と伝わる。登山口から山頂まで徒歩35分ほど。", transit: { mode: "car", min: 3 }, fallbackLatLng: [35.7030748, 138.5985378] },
       ],
     ],
