@@ -215,10 +215,16 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "パワースポット"],
     days: [
       [
-        { name: "阿蘇神社", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地3083-1", time: "10:00", stay: 60, memo: "阿蘇十二神を祀る、火の国・肥後国一宮。初日は荘厳な楼門を見学。" },
+        { name: "阿蘇神社", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地3083-1", time: "9:00", stay: 90, memo: "阿蘇十二神を祀る、火の国・肥後国一宮。荘厳な楼門を見学。" },
+        { name: "極楽寺", wikiTitle: "極楽寺 (阿蘇市)", address: "熊本県阿蘇市一の宮町宮地3032", time: "10:35", stay: 100, memo: "阿蘇神社を守った七ヶ寺で唯一現存する寺。精進料理で昼食も。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [32.9469758, 131.113784] },
+        { name: "国造神社", wikiTitle: "国造神社", address: "熊本県阿蘇市一の宮町手野2100", time: "12:38", stay: 60, memo: "阿蘇神社の北宮。鳥居西に上御倉・下御倉古墳(県重要文化財)。", transit: { mode: "car", min: 23 }, fallbackLatLng: [33.005604, 131.132614] },
+        { name: "一の宮温泉センター", wikiTitle: "一の宮温泉センター", address: "熊本県阿蘇市一の宮町手野963-1", time: "13:50", stay: 165, memo: "市営の日帰り入浴施設。大浴場・露天風呂で旅の疲れを癒やす。", transit: { mode: "car", min: 12 }, fallbackLatLng: [32.97364, 131.128632] },
       ],
       [
-        { name: "一の宮門前町（水基めぐり）", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地", time: "9:30", stay: 60, memo: "2日目は、湧水を汲める「水基」が点在する門前町をそぞろ歩き。", fallbackLatLng: [32.9481, 131.1178] },
+        { name: "一の宮門前町（水基めぐり）", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地", time: "9:30", stay: 120, memo: "湧水を汲める「水基」が点在する門前町をそぞろ歩き、食べ歩きも。", fallbackLatLng: [32.9481, 131.1178] },
+        { name: "アゼリア21長者乃湯", wikiTitle: "アゼリア21長者乃湯", address: "熊本県阿蘇市一の宮町宮地5812", time: "11:38", stay: 90, memo: "市営の日帰り入浴施設。門前町めぐりの足を休める。", transit: { mode: "car", min: 8 }, fallbackLatLng: [32.926544, 131.109146] },
+        { name: "霜神社", wikiTitle: "霜神社", address: "熊本県阿蘇市役犬原9", time: "13:18", stay: 40, memo: "火焚き神事(国指定重要無形民俗文化財)で知られる社。駐車場なし。", transit: { mode: "car", min: 10 }, fallbackLatLng: [32.948245, 131.0916612] },
+        { name: "中通古墳群", wikiTitle: "中通古墳群", address: "熊本県阿蘇市一の宮町中通", time: "14:18", stay: 140, memo: "長目塚古墳など前方後円墳2基・円墳8基。県内最大級とされる。", transit: { mode: "car", min: 20 }, fallbackLatLng: [32.998753, 131.109909] },
       ],
     ],
   },
