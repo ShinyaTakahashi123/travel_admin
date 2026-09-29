@@ -282,8 +282,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     tagNames: ["家族旅行"],
     purposeNames: ["動物園・水族館", "テーマパーク"],
     days: [
+      // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で4ゾーンに分けて4スポットに、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #264）
       [
-        { name: "のんほいパーク", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "9:30", stay: 180, memo: "動物園・植物園・遊園地・自然史博物館が一体となった、「のんほいパーク」の愛称で親しまれる複合施設。" },
+        { name: "のんほいパーク（動物園ゾーン）", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "9:30", stay: 150, memo: "およそ140種の動物を飼育。極地動物館では水中のホッキョクグマなども。" },
+        { name: "のんほいパーク（植物園ゾーン）", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "12:10", stay: 70, memo: "大温室と「モネの庭」が見どころ。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.7198, 137.4335] },
+        { name: "のんほいパーク（自然史博物館）", wikiTitle: "豊橋市自然史博物館", address: "豊橋市大岩町字大穴1-238", time: "13:30", stay: 70, memo: "恐竜化石など4200点以上を展示。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.7224, 137.4332] },
+        { name: "のんほいパーク（遊園地ゾーン）", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "14:50", stay: 100, memo: "大観覧車など家族向けの乗り物がそろう。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.723, 137.4305] },
       ],
     ],
   },
