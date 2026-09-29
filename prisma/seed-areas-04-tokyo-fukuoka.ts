@@ -40,7 +40,7 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "根津美術館", wikiTitle: "根津美術館", address: "港区南青山6丁目5-1", time: "9:30", stay: 60, memo: "表参道近くにある、日本・東洋の古美術品と名庭園を持つ美術館。" },
-        { name: "表参道", wikiTitle: "表参道", address: "渋谷区神宮前", time: "10:44", stay: 60, memo: "けやき並木が美しい、ハイブランドが立ち並ぶ通り。", transit: { mode: "walk", min: 14 } },
+        { name: "表参道", wikiTitle: "表参道", address: "渋谷区神宮前", time: "10:44", stay: 60, memo: "けやき並木が美しい、ハイブランドが立ち並ぶ通り。戦後に植え直された並木。", transit: { mode: "walk", min: 14 } },
         { name: "明治神宮", wikiTitle: "明治神宮", address: "東京都渋谷区代々木神園町1-1", time: "11:57", stay: 50, memo: "明治天皇・昭憲皇太后を祀る神社。表参道の名の由来。大鳥居と鎮守の森。", transit: { mode: "walk", min: 13 } },
         { name: "東郷神社", wikiTitle: "東郷神社", address: "東京都渋谷区神宮前1-5-3", time: "12:57", stay: 45, memo: "日露戦争の連合艦隊司令長官・東郷平八郎を祀る神社。", transit: { mode: "walk", min: 10 } },
         { name: "太田記念美術館", wikiTitle: "太田記念美術館", address: "東京都渋谷区神宮前1丁目10番10号", time: "13:46", stay: 65, memo: "実業家・五代太田清蔵の浮世絵コレクションを収蔵する専門美術館。", transit: { mode: "walk", min: 4 } },
