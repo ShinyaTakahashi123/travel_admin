@@ -229,7 +229,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["温泉", "絶景・フォトスポット"],
     days: [
       [
-        { name: "黒川温泉（地蔵堂・川端通り）", wikiTitle: "黒川温泉", address: "阿蘇郡南小国町満願寺6612-9", time: "10:00", stay: 100, memo: "入湯手形を使って複数の露天風呂を巡れる、黒川温泉のシンボル的な散策エリア。" },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で5スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #258）
+        { name: "押戸石の丘", wikiTitle: "押戸石", address: "熊本県阿蘇郡南小国町中原511", time: "9:00", stay: 40, memo: "古代の祈りの場だったとも伝わる、磁気を帯びた巨石群が点在する丘。360度の絶景。" },
+        { name: "黒川温泉（地蔵堂・川端通り）", wikiTitle: "黒川温泉", address: "阿蘇郡南小国町満願寺6612-9", time: "10:02", stay: 180, memo: "入湯手形を使って複数の露天風呂を巡れる、黒川温泉のシンボル的な散策エリア。", transit: { mode: "car", min: 22 } },
+        { name: "田の原温泉", wikiTitle: "田の原温泉", address: "熊本県阿蘇郡南小国町満願寺7130", time: "13:07", stay: 40, memo: "鎌倉時代開湯と伝わる、田の原川沿いのひっそりとした湯治場。", transit: { mode: "car", min: 5 }, fallbackLatLng: [33.07019, 131.141968] },
+        { name: "瀬の本高原", wikiTitle: "瀬の本高原", address: "熊本県阿蘇郡南小国町満願寺", time: "14:02", stay: 70, memo: "阿蘇とくじゅうを結ぶ高原地帯。牧草地の向こうにくじゅう連山を望む絶景ドライブコース。", transit: { mode: "car", min: 15 } },
+        { name: "大観峰", wikiTitle: "大観峰", address: "熊本県阿蘇市山田", time: "15:40", stay: 50, memo: "阿蘇外輪山の最高地点。阿蘇五岳とカルデラを一望できる展望所。", transit: { mode: "car", min: 28 } },
       ],
     ],
   },
