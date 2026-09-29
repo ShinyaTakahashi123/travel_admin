@@ -90,11 +90,13 @@ function stripHtml(s: string | undefined): string | undefined {
 // Wikimedia Commonsの作者欄は「Foo (talk)」「Photo by Foo」「User:Foo」のような
 // HTMLタグの残骸や定型句を含むことが多い。stripHtmlのあとにこれを通し、名前だけに整える
 // (2026-09-29 法務の指摘。#267・#268の写真で「(talk)」「by」が混入していた)。
-function cleanAuthorName(s: string | undefined): string | undefined {
+export function cleanAuthorName(s: string | undefined): string | undefined {
   if (!s) return s;
   return s
     .replace(/^photo:\s*/i, "")
-    .replace(/\(\s*(talk|トーク)\s*\)/gi, "")
+    // 2026-09-30 企画運営の指摘(法務の気づき)で「(talk)」だけでなく「(talk · contribs)」
+    // 「(トーク・投稿記録)」のようにカッコ内に他の語が続く形も拾うよう広げた
+    .replace(/\(\s*(talk|トーク)[^()]*\)/gi, "")
     .replace(/,?\s*(taken with|with)\s+.*$/i, "")
     .replace(/^\s*(photo\s+)?by\s+/i, "")
     .replace(/^(ja:)?User:/i, "")
