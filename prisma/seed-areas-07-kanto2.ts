@@ -98,7 +98,8 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "三十槌の氷柱", wikiTitle: "中津峡", address: "埼玉県秩父市大滝三十槌", time: "11:00", stay: 25, memo: "中津峡入口の渓谷。冬は氷柱、それ以外の季節も清流と緑の眺めが魅力。", transit: { mode: "car", min: 10 }, fallbackLatLng: [35.9443713, 138.9253166] },
         { name: "秩父湖", wikiTitle: "秩父湖", address: "埼玉県秩父市大滝", time: "11:35", stay: 30, memo: "二瀬ダムによって生まれた人造湖。埼玉県内最初の多目的ダムとされる。", transit: { mode: "car", min: 10 }, fallbackLatLng: [35.9443809, 138.9121524] },
         { name: "三峯神社", wikiTitle: "三峯神社", address: "秩父市三峰298-1", time: "12:30", stay: 120, memo: "標高1100mの山中に鎮座する、狼を眷属とする古社。運が良ければ雲海も。", transit: { mode: "car", min: 25 } },
-        { name: "三峰口駅・SL転車台公園", wikiTitle: "三峰口駅", address: "埼玉県秩父市荒川白久", time: "15:00", stay: 90, memo: "秩父鉄道の終着駅に整備された、SLの転車台を見られる公園。", transit: { mode: "car", min: 30 }, fallbackLatLng: [35.9600528, 138.9790441] },
+        { name: "三峰口駅・SL転車台公園", wikiTitle: "三峰口駅", address: "埼玉県秩父市荒川白久", time: "15:00", stay: 25, memo: "秩父鉄道の終着駅に整備された、SLの転車台を見られる公園。運行日は公式で確認を。", transit: { mode: "car", min: 30 }, fallbackLatLng: [35.9600528, 138.9790441] },
+        { name: "道の駅あらかわ", wikiTitle: "道の駅あらかわ", address: "埼玉県秩父市荒川日野538-1", time: "15:35", stay: 60, memo: "地元・荒川地区の農産物直売所や、自然体験ができる「山里自然館」がある道の駅。", transit: { mode: "car", min: 10 }, fallbackLatLng: [35.9567047, 139.0135383] },
       ],
       [
         { name: "秩父ミューズパーク", wikiTitle: "秩父ミューズパーク", address: "秩父市久那2359", time: "9:30", stay: 70, memo: "音楽堂やスポーツ施設が集まる、緑豊かな広域公園。" },
