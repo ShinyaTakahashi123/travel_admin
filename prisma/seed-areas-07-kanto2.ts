@@ -92,18 +92,21 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["パワースポット", "神社"],
     days: [
       [
-        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で4スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #251）
-        { name: "大滝温泉遊湯館", wikiTitle: "大滝温泉", address: "埼玉県秩父市大滝", time: "9:00", stay: 50, memo: "西武秩父駅から車でおよそ50分、地下1000mから湧く塩化物泉の日帰り温泉。", fallbackLatLng: [35.9503567, 138.9386731] },
-        { name: "三十槌の氷柱", wikiTitle: "中津峡", address: "埼玉県秩父市大滝三十槌", time: "10:00", stay: 25, memo: "中津峡入口の渓谷。冬は氷柱、それ以外の季節も清流と緑の眺めが魅力。", transit: { mode: "car", min: 10 }, fallbackLatLng: [35.9443713, 138.9253166] },
-        { name: "秩父湖", wikiTitle: "秩父湖", address: "埼玉県秩父市大滝", time: "10:35", stay: 35, memo: "二瀬ダムによって生まれた人造湖。埼玉県内最初の多目的ダム。", transit: { mode: "car", min: 10 }, fallbackLatLng: [35.9443809, 138.9121524] },
-        { name: "三峯神社", wikiTitle: "三峯神社", address: "秩父市三峰298-1", time: "11:35", stay: 300, memo: "標高1100mの山中に鎮座する、狼を眷属とする古社。運が良ければ雲海も。", transit: { mode: "car", min: 25 } },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #251。企画運営・法務の指摘で1回組み直し）
+        { name: "秩父今宮神社", wikiTitle: "秩父今宮神社", address: "埼玉県秩父市中町16-10", time: "9:00", stay: 40, memo: "龍神池と龍神木が伝わる、八大龍王をまつる古社。", fallbackLatLng: [35.9949601, 139.0803248] },
+        { name: "大滝温泉遊湯館", wikiTitle: "大滝温泉", address: "埼玉県秩父市大滝", time: "10:10", stay: 40, memo: "地下1000mから湧く塩化物泉の日帰り温泉。", transit: { mode: "car", min: 30 }, fallbackLatLng: [35.9503567, 138.9386731] },
+        { name: "三十槌の氷柱", wikiTitle: "中津峡", address: "埼玉県秩父市大滝三十槌", time: "11:00", stay: 25, memo: "中津峡入口の渓谷。冬は氷柱、それ以外の季節も清流と緑の眺めが魅力。", transit: { mode: "car", min: 10 }, fallbackLatLng: [35.9443713, 138.9253166] },
+        { name: "秩父湖", wikiTitle: "秩父湖", address: "埼玉県秩父市大滝", time: "11:35", stay: 30, memo: "二瀬ダムによって生まれた人造湖。埼玉県内最初の多目的ダムとされる。", transit: { mode: "car", min: 10 }, fallbackLatLng: [35.9443809, 138.9121524] },
+        { name: "三峯神社", wikiTitle: "三峯神社", address: "秩父市三峰298-1", time: "12:30", stay: 120, memo: "標高1100mの山中に鎮座する、狼を眷属とする古社。運が良ければ雲海も。", transit: { mode: "car", min: 25 } },
+        { name: "三峰口駅・SL転車台公園", wikiTitle: "三峰口駅", address: "埼玉県秩父市荒川白久", time: "15:00", stay: 90, memo: "秩父鉄道の終着駅に整備された、SLの転車台を見られる公園。", transit: { mode: "car", min: 30 }, fallbackLatLng: [35.9600528, 138.9790441] },
       ],
       [
         { name: "秩父ミューズパーク", wikiTitle: "秩父ミューズパーク", address: "秩父市久那2359", time: "9:30", stay: 70, memo: "音楽堂やスポーツ施設が集まる、緑豊かな広域公園。" },
         { name: "秩父まつり会館", wikiTitle: "秩父夜祭", address: "秩父市番場町2-8", time: "10:55", stay: 40, memo: "日本三大曳山祭の一つ、秩父夜祭の豪華な屋台を常設展示。", transit: { mode: "car", min: 15 } },
         { name: "秩父神社", wikiTitle: "秩父神社", address: "埼玉県秩父市番場町1-3", time: "11:40", stay: 65, memo: "知知夫国の総鎮守。左甚五郎作と伝わる彫刻「つなぎの龍」などが見どころ。", transit: { mode: "walk", min: 5 } },
         { name: "秩父公園橋", wikiTitle: "秩父公園橋", address: "埼玉県秩父市中村町", time: "13:00", stay: 30, memo: "「秩父ハープ橋」の愛称で親しまれる、荒川に架かる斜張橋。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [36.0025678, 139.07267] },
-        { name: "羊山公園", wikiTitle: "羊山公園", address: "秩父市大宮6360", time: "13:40", stay: 180, memo: "武甲山の麓に広がる公園。東側斜面の「芝桜の丘」が有名。", transit: { mode: "car", min: 10 } },
+        { name: "羊山公園", wikiTitle: "羊山公園", address: "秩父市大宮6360", time: "13:40", stay: 60, memo: "武甲山の麓に広がる公園。東側斜面の「芝桜の丘」が有名。", transit: { mode: "car", min: 10 } },
+        { name: "西武秩父駅前温泉 祭の湯", wikiTitle: "西武秩父駅前温泉 祭の湯", address: "埼玉県秩父市野坂町1-16-15", time: "14:52", stay: 100, memo: "秩父の「祭り」をコンセプトにした、駅前の日帰り温泉施設。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [35.9903912, 139.0836665] },
       ],
     ],
   },
