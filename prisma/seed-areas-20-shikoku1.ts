@@ -71,9 +71,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     tagNames: ["定番観光"],
     purposeNames: ["絶景・フォトスポット", "祭り・イベント"],
     days: [
+      // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で4スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #268）
       [
-        { name: "阿波おどり会館", wikiTitle: "阿波おどり会館", address: "徳島市新町橋2丁目20", time: "9:30", stay: 60, memo: "阿波おどりの歴史や魅力を紹介する施設。実演を見られることもある（開催状況は公式サイトで要確認）。" },
-        { name: "眉山", wikiTitle: "眉山_(徳島県)", address: "徳島市眉山町", time: "11:00", stay: 60, memo: "阿波おどり会館からロープウェイで登る、徳島市街と紀伊水道を一望できる山。", transit: { mode: "other", min: 10 } },
+        { name: "徳島城跡（徳島中央公園）", wikiTitle: "徳島城", address: "徳島県徳島市徳島町城内1番外", time: "9:30", stay: 90, memo: "蜂須賀家政が築いた城の跡。徳島城博物館・旧表御殿庭園が見どころ。" },
+        { name: "阿波おどり会館", wikiTitle: "阿波おどり会館", address: "徳島市新町橋2丁目20", time: "11:11", stay: 80, memo: "阿波おどりの歴史や魅力を紹介する施設。実演を見られることもある（開催状況は公式サイトで要確認）。", transit: { mode: "walk", min: 11 } },
+        { name: "眉山", wikiTitle: "眉山_(徳島県)", address: "徳島市眉山町", time: "12:41", stay: 80, memo: "阿波おどり会館からロープウェイで登る、徳島市街と紀伊水道を一望できる山。", transit: { mode: "other", min: 10 } },
+        { name: "ひょうたん島クルーズ", wikiTitle: "新町川", address: "徳島県徳島市南内町2丁目", time: "14:18", stay: 135, memo: "新町川・助任川を巡る周遊船。水の都・徳島の街並みを船上から楽しめる。", transit: { mode: "other", min: 17 } },
       ],
     ],
   },
