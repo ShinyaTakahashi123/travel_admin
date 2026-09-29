@@ -137,8 +137,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["自然", "神社"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で5スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #256）
         { name: "水前寺成趣園", wikiTitle: "水前寺成趣園", address: "熊本市中央区水前寺公園8-1", time: "9:30", stay: 60, memo: "阿蘇の伏流水を引いた池泉回遊式庭園。東海道の風景を模したと伝わる。" },
-        { name: "藤崎八旛宮", wikiTitle: "藤崎八旗宮", address: "熊本市中央区井川淵町3-1", time: "11:00", stay: 40, memo: "平安時代創建と伝わる、熊本の総鎮守。", transit: { mode: "car", min: 15 } },
+        { name: "江津湖", wikiTitle: "江津湖", address: "熊本県熊本市中央区・東区", time: "10:40", stay: 60, memo: "600種の動植物が生息する、水前寺江津湖公園内の湧水湖。", transit: { mode: "car", min: 10 }, fallbackLatLng: [32.76956, 130.7525076] },
+        { name: "藤崎八旛宮", wikiTitle: "藤崎八旗宮", address: "熊本市中央区井川淵町3-1", time: "12:00", stay: 40, memo: "平安時代創建と伝わる、熊本の総鎮守。", transit: { mode: "car", min: 20 } },
+        { name: "加藤神社", wikiTitle: "加藤神社_(熊本市)", address: "熊本県熊本市中央区本丸2-1", time: "12:45", stay: 45, memo: "熊本城本丸に鎮座する、加藤清正公をまつる神社。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.8072411, 130.7051846] },
+        { name: "本妙寺", wikiTitle: "本妙寺_(熊本市)", address: "熊本県熊本市西区花園4-13-1", time: "13:38", stay: 172, memo: "加藤清正公をまつる、石段を上った先の浄池廟がある名刹。", transit: { mode: "car", min: 8 }, fallbackLatLng: [32.817203, 130.6867198] },
       ],
     ],
   },
