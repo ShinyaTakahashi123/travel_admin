@@ -87,6 +87,19 @@ function stripHtml(s: string | undefined): string | undefined {
   return s.replace(/<[^>]+>/g, "").trim() || undefined;
 }
 
+// Wikimedia Commonsの作者欄は「Foo (talk)」「Photo by Foo」「User:Foo」のような
+// HTMLタグの残骸や定型句を含むことが多い。stripHtmlのあとにこれを通し、名前だけに整える
+// (2026-09-29 法務の指摘。#267・#268の写真で「(talk)」「by」が混入していた)。
+function cleanAuthorName(s: string | undefined): string | undefined {
+  if (!s) return s;
+  return s
+    .replace(/\(\s*talk\s*\)/gi, "")
+    .replace(/^\s*(photo\s+)?by\s+/i, "")
+    .replace(/^User:/i, "")
+    .replace(/\s{2,}/g, " ")
+    .trim() || undefined;
+}
+
 /**
  * Wikipediaのoriginalimage.sourceはサムネイルURL（.../thumb/…/3840px-Foo.jpg）のことが多く、
  * 元のファイル名は末尾ではなく「thumb」の次から数えて2つ手前のセグメントに入っている。
@@ -133,7 +146,7 @@ export async function fetchImageCredit(wikiTitle: string): Promise<PhotoCredit |
 
     return {
       sourceUrl: ii.descriptionurl as string | undefined,
-      author: stripHtml(meta.Artist?.value)?.slice(0, 100),
+      author: cleanAuthorName(stripHtml(meta.Artist?.value))?.slice(0, 100),
       license,
       licenseUrl: meta.LicenseUrl?.value as string | undefined,
     };
