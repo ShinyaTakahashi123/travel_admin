@@ -190,7 +190,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "日御碕神社と日御碕灯台、出雲の岬と絶景を巡る1泊2日",
-    description: "海の守り神を祀る日御碕神社と、東洋一の高さを誇る日御碕灯台。出雲大社や稲佐の浜とは違う、出雲の岬に広がる絶景を楽しむ1泊2日です。",
+    description: "海の守り神を祀る日御碕神社と、東洋一の高さを誇る日御碕灯台。1日目は日御碕の岬をめぐり、2日目は稲佐の浜から出雲大社、神門通り、旧大社駅へ。出雲の岬と信仰の中心地、両方を楽しむ1泊2日です。",
     nights: 1,
     prefectureName: "島根県",
     areaNames: ["出雲"],
@@ -198,10 +198,19 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "絶景・フォトスポット"],
     days: [
       [
-        { name: "日御碕神社", wikiTitle: "日御碕神社", address: "出雲市大社町日御碕455", time: "10:00", stay: 50, memo: "「下の宮」「上の宮」からなる、海の守り神を祀る朱塗りの社殿が美しい神社。" },
+        { name: "日御碕神社", wikiTitle: "日御碕神社", address: "出雲市大社町日御碕455", time: "9:00", stay: 70, memo: "「下の宮」「上の宮」からなる、海の守り神を祀る朱塗りの社殿が美しい神社。" },
+        { name: "経島", wikiTitle: "経島", address: "島根県出雲市大社町日御碕", time: "10:14", stay: 15, memo: "日御碕神社の神域、ウミネコ繁殖地(国天然記念物)。上陸禁止、遊歩道から眺める。", transit: { mode: "walk", min: 4 } },
+        { name: "日御碕の遊歩道", wikiTitle: "日御碕", address: "島根県出雲市大社町日御碕", time: "10:32", stay: 45, memo: "柱状節理の海岸線、権現島を眺めながら歩く散策路。", transit: { mode: "walk", min: 3 } },
+        { name: "日御碕の集落", wikiTitle: "日御碕", address: "島根県出雲市大社町日御碕", time: "11:25", stay: 120, memo: "灯台のふもとの漁村。海鮮丼の食事処やみやげ物店で昼食。", transit: { mode: "walk", min: 8 } },
+        { name: "日御碕ビジターセンター", wikiTitle: "日御碕ビジターセンター", address: "島根県出雲市大社町日御碕", time: "13:27", stay: 30, memo: "日御碕の自然・歴史を紹介する観光案内施設。", transit: { mode: "walk", min: 2 } },
+        { name: "日御碕灯台", wikiTitle: "出雲日御碕灯台", address: "出雲市大社町日御碕1478", time: "14:00", stay: 150, memo: "石造りとして日本一の高さとされる灯台。灯台資料展示室併設。", transit: { mode: "walk", min: 3 } },
       ],
       [
-        { name: "日御碕灯台", wikiTitle: "出雲日御碕灯台", address: "出雲市大社町日御碕", time: "9:30", stay: 50, memo: "2日目は、石造りとして東洋一の高さを誇る灯台へ。日本海を一望する絶景が広がる。" },
+        { name: "稲佐の浜", wikiTitle: "稲佐の浜", address: "島根県出雲市大社町杵築北", time: "9:00", stay: 45, memo: "国譲り神話の舞台と伝わる海岸。弁天島が見どころ。" },
+        { name: "出雲大社", wikiTitle: "出雲大社", address: "島根県出雲市大社町杵築東195", time: "9:51", stay: 110, memo: "大国主大神を祀る古社。二礼四拍手一礼の作法、神楽殿の大注連縄。", transit: { mode: "car", min: 6 } },
+        { name: "北島国造館", wikiTitle: "北島国造館", address: "島根県出雲市大社町杵築東194", time: "11:46", stay: 35, memo: "出雲教の本院。心字池と亀の尾の滝の庭園、天神社。", transit: { mode: "walk", min: 5 } },
+        { name: "神門通り", wikiTitle: "神門通り", address: "島根県出雲市大社町杵築南", time: "12:36", stay: 140, memo: "出雲大社の表参道、約700m。出雲そば・出雲ぜんざいで昼食。", transit: { mode: "walk", min: 15 } },
+        { name: "旧大社駅", wikiTitle: "大社駅", address: "島根県出雲市大社町杵築南", time: "15:07", stay: 90, memo: "大正13年築の旧国鉄大社駅舎。国重要文化財、唯一の和風駅舎建築。", transit: { mode: "walk", min: 11 } },
       ],
     ],
   },
