@@ -445,7 +445,7 @@ export async function setUserAccountLegalHold(userAccountId: string, legalHold: 
   });
 }
 
-// 削除前6か月以内の投稿・送信を、退会後の保存記録(DeletedAccountRecord)に移してから削除する
+// 削除前6か月以内の投稿を、退会後の保存記録(DeletedAccountRecord)に移してから削除する
 // (利用者本人が画面から退会する場合と同じ扱い。user-site の deleteMyAccount と対応)
 export async function deleteUserAccount(userAccountId: string): Promise<ActionResult> {
   return run(async () => {
@@ -453,16 +453,10 @@ export async function deleteUserAccount(userAccountId: string): Promise<ActionRe
     const account = await prisma.userAccount.findUniqueOrThrow({ where: { id: userAccountId } });
 
     const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
-    const [comments, requests] = await Promise.all([
-      prisma.comment.findMany({
-        where: { userAccountId, createdAt: { gte: sixMonthsAgo } },
-        select: { body: true, ipAddress: true, createdAt: true },
-      }),
-      prisma.request.findMany({
-        where: { senderUserAccountId: userAccountId, createdAt: { gte: sixMonthsAgo } },
-        select: { ipAddress: true, createdAt: true },
-      }),
-    ]);
+    const comments = await prisma.comment.findMany({
+      where: { userAccountId, createdAt: { gte: sixMonthsAgo } },
+      select: { body: true, ipAddress: true, createdAt: true },
+    });
 
     await prisma.$transaction([
       prisma.deletedAccountRecord.create({
@@ -473,21 +467,12 @@ export async function deleteUserAccount(userAccountId: string): Promise<ActionRe
           name: account.name,
           legalHold: account.legalHold,
           items: {
-            create: [
-              ...comments.map((c) => ({
-                kind: "comment",
-                body: c.body,
-                ipAddress: c.ipAddress,
-                occurredAt: c.createdAt,
-              })),
-              // リクエストは通信の秘密のため本文は移さない
-              ...requests.map((r) => ({
-                kind: "request",
-                body: null,
-                ipAddress: r.ipAddress,
-                occurredAt: r.createdAt,
-              })),
-            ],
+            create: comments.map((c) => ({
+              kind: "comment",
+              body: c.body,
+              ipAddress: c.ipAddress,
+              occurredAt: c.createdAt,
+            })),
           },
         },
       }),
