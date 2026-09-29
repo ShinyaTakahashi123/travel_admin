@@ -223,6 +223,10 @@ export async function fetchAndUploadImage(
     const summary = await summaryRes.json();
     const imgUrl: string | undefined = summary.originalimage?.source ?? summary.thumbnail?.source;
     if (!imgUrl) throw new Error("no image in summary");
+    // Wikipediaのページに適切なサムネイルがないとき、Gthumb.svgなどの汎用アイコン(SVGをPNG化したもの)が
+    // 実際の写真の代わりに返ってくることがある(例: .../Gthumb.svg/langja-250px-Gthumb.svg.png)。
+    // 写真ではないため、URLにSVGファイル名が含まれる場合や、拡張子がsvgの場合は弾く
+    if (/\.svg(\?|$)|\.svg\//i.test(imgUrl)) throw new Error(`image is a placeholder svg: ${imgUrl}`);
 
     const imgRes = await fetch(imgUrl, { headers: { "User-Agent": UA } });
     if (!imgRes.ok) throw new Error(`image fetch ${imgRes.status}`);
