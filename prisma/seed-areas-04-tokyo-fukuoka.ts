@@ -128,10 +128,14 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館", "鉄道旅"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で7スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #265）
         { name: "門司港駅", wikiTitle: "門司港駅", address: "北九州市門司区西海岸1丁目5-31", time: "9:30", stay: 30, memo: "国の重要文化財に指定された、ネオ・ルネサンス様式の木造駅舎。" },
-        { name: "旧門司三井倶楽部", wikiTitle: "旧門司三井倶楽部", address: "北九州市門司区港町7-1", time: "10:15", stay: 40, memo: "アインシュタインも宿泊した、大正期の社交倶楽部建築。", transit: { mode: "walk", min: 5 } },
-        { name: "出光美術館（門司）", wikiTitle: "出光美術館_(門司)", address: "北九州市門司区東港町2-3", time: "11:10", stay: 50, memo: "出光興産創業者のコレクションを展示する美術館。", transit: { mode: "walk", min: 15 } },
-        { name: "ブルーウィングもじ", wikiTitle: "ブルーウィングもじ", address: "北九州市門司区港町4", time: "12:15", stay: 30, memo: "日本最大級の歩行者専用はね橋。1日数回跳ね上がる（時刻は公式サイトで確認）。", transit: { mode: "walk", min: 10 } },
+        { name: "旧門司三井倶楽部", wikiTitle: "旧門司三井倶楽部", address: "北九州市門司区港町7-1", time: "10:02", stay: 40, memo: "アインシュタインも宿泊した、大正期の社交倶楽部建築。", transit: { mode: "walk", min: 2 } },
+        { name: "出光美術館（門司）", wikiTitle: "出光美術館_(門司)", address: "北九州市門司区東港町2-3", time: "10:47", stay: 50, memo: "出光興産創業者のコレクションを展示する美術館。", transit: { mode: "walk", min: 5 } },
+        { name: "ブルーウィングもじ", wikiTitle: "ブルーウィングもじ", address: "北九州市門司区港町4", time: "11:41", stay: 30, memo: "日本最大級とされる歩行者専用はね橋。1日数回跳ね上がる（時刻は公式サイトで確認）。", transit: { mode: "walk", min: 4 } },
+        { name: "九州鉄道記念館", wikiTitle: "九州鉄道記念館", address: "福岡県北九州市門司区清滝2丁目3番29号", time: "12:18", stay: 60, memo: "元九州鉄道本社の赤レンガ建築。実物車両の屋外展示も見どころ。", transit: { mode: "walk", min: 7 } },
+        { name: "関門海峡ミュージアム", wikiTitle: "関門海峡ミュージアム", address: "福岡県北九州市門司区西海岸1丁目3番3号", time: "13:22", stay: 60, memo: "帆船のような外観の博物館。5階展望デッキから関門海峡を一望。", transit: { mode: "walk", min: 4 } },
+        { name: "関門トンネル人道", wikiTitle: "関門トンネル", address: "福岡県北九州市門司区和布刈", time: "14:45", stay: 105, memo: "全長780mの海底トンネル。歩いて本州へ渡れ、県境も体験できる。", transit: { mode: "walk", min: 23 }, fallbackLatLng: [33.9582037, 130.9682013] },
       ],
     ],
   },
