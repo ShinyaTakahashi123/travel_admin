@@ -52,10 +52,18 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館"],
     days: [
       [
-        { name: "富山県美術館", wikiTitle: "富山県美術館", address: "富山市木場町3-20", time: "10:00", stay: 80, memo: "「アートするとやま」を体感できる美術館。屋上庭園からの立山連峰の眺めも見事。" },
+        { name: "富山県美術館", wikiTitle: "富山県美術館", address: "富山市木場町3-20", time: "9:30", stay: 90, memo: "「アートするとやま」を体感できる美術館。屋上庭園からの立山連峰の眺めも見事。" },
+        { name: "富岩運河環水公園", wikiTitle: "富岩運河環水公園", address: "富山県富山市湊入船町", time: "11:05", stay: 60, memo: "運河沿いの公園。天門橋の展望塔と「世界一美しい」ともいわれるスタバが人気。", transit: { mode: "walk", min: 5 } },
+        { name: "富山市ガラス美術館", wikiTitle: "富山市ガラス美術館", address: "富山県富山市西町5番1号", time: "12:13", stay: 90, memo: "隈研吾ら設計、2015年竣工。ガラス・アルミ・石のファサードが特徴的な美術館。", transit: { mode: "car", min: 8 } },
+        { name: "富山城址公園", wikiTitle: "富山城", address: "富山県富山市丸の内", time: "13:53", stay: 75, memo: "神保長職が築いたと伝わる富山城の跡地。模擬天守の郷土博物館が見どころ。", transit: { mode: "walk", min: 10 } },
+        { name: "高志の国文学館", wikiTitle: "高志の国文学館", address: "富山県富山市舟橋南町2番22号", time: "15:12", stay: 80, memo: "旧県知事公館を改修した文学館。大伴家持ら富山ゆかりの文化人を紹介。", transit: { mode: "walk", min: 4 } },
       ],
       [
-        { name: "岩瀬大町通り", wikiTitle: "岩瀬_(富山市)", address: "富山市岩瀬大町", time: "9:30", stay: 90, memo: "北前船交易で栄えた廻船問屋の街並みが今も残る、レトロな港町エリア。", fallbackLatLng: [36.7828, 137.2317] },
+        { name: "中島閘門", wikiTitle: "中島閘門", address: "富山県富山市中島二丁目字浦川原割3番2", time: "9:00", stay: 60, memo: "パナマ運河方式の閘門。昭和9年(1934)完成、国指定重要文化財。" },
+        { name: "岩瀬カナル会館", wikiTitle: "岩瀬カナル会館", address: "富山県富山市岩瀬天神町48番地", time: "10:10", stay: 60, memo: "岩瀬運河沿いの観光施設。売店や展示ラウンジ、レストランがある。", transit: { mode: "car", min: 10 } },
+        { name: "岩瀬大町通り", wikiTitle: "岩瀬_(富山市)", address: "富山市岩瀬大町", time: "11:18", stay: 120, memo: "北前船交易で栄えた廻船問屋の街並みが今も残る、レトロな港町エリア。", transit: { mode: "walk", min: 8 } },
+        { name: "馬場家", wikiTitle: "旧馬場家住宅", address: "富山県富山市東岩瀬町107-2", time: "13:20", stay: 90, memo: "岩瀬五大家筆頭格の廻船問屋。トオリニワや大広間「オイ」が見どころ。", transit: { mode: "walk", min: 2 } },
+        { name: "岩瀬浜", wikiTitle: "富山港線", address: "富山県富山市岩瀬古志町", time: "15:00", stay: 95, memo: "ポートラム終点そばの海岸。富山湾越しに立山連峰を望む。", transit: { mode: "walk", min: 10 } },
       ],
     ],
   },
