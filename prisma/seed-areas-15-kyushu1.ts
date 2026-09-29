@@ -342,8 +342,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館", "自然"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #254）
         { name: "宮崎県総合博物館", wikiTitle: "宮崎県総合博物館", address: "宮崎市神宮2丁目4-4", time: "9:30", stay: 60, memo: "宮崎の自然・歴史・民俗を幅広く紹介する総合博物館。" },
-        { name: "平和台公園", wikiTitle: "平和台公園", address: "宮崎市下北方町越ケ迫6146", time: "11:00", stay: 50, memo: "「平和の塔」がそびえる、南国の緑豊かな広大な公園。", transit: { mode: "car", min: 15 } },
+        { name: "宮崎神宮", wikiTitle: "宮崎神宮", address: "宮崎県宮崎市神宮2-4-1", time: "10:40", stay: 40, memo: "神武天皇をまつる、地元で「神武さま」と呼ばれる古社。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [31.938439, 131.430491] },
+        { name: "平和台公園", wikiTitle: "平和台公園", address: "宮崎市下北方町越ケ迫6146", time: "11:28", stay: 50, memo: "「平和の塔」がそびえる、南国の緑豊かな広大な公園。", transit: { mode: "car", min: 8 } },
+        { name: "宮崎県護国神社", wikiTitle: "宮崎県護国神社", address: "宮崎県宮崎市神宮2丁目", time: "12:23", stay: 40, memo: "戦没者をまつる神社。遺品館に軍服や手紙などを展示。", transit: { mode: "car", min: 5 }, fallbackLatLng: [31.937341, 131.421762] },
+        { name: "宮崎県立美術館", wikiTitle: "宮崎県立美術館", address: "宮崎県宮崎市船塚3-210", time: "13:09", stay: 90, memo: "宮崎県ゆかりの作家を中心に収蔵・展示する美術館。", transit: { mode: "walk", min: 6 }, fallbackLatLng: [31.934262, 131.419177] },
+        { name: "宮崎科学技術館", wikiTitle: "宮崎科学技術館", address: "宮崎県宮崎市宮崎駅東1-2-2", time: "14:49", stay: 105, memo: "九州最大級のプラネタリウムと、アポロ月面着陸船の実物大模型。", transit: { mode: "car", min: 10 }, fallbackLatLng: [31.914456, 131.433813] },
       ],
     ],
   },
