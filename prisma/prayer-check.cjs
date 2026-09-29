@@ -10,7 +10,11 @@
 const {createRequire}=require("module");const r=createRequire(process.cwd()+"/package.json");
 r("dotenv").config();const {PrismaClient}=r("@prisma/client");const {PrismaPg}=r("@prisma/adapter-pg");
 const p=new PrismaClient({adapter:new PrismaPg({connectionString:process.env.DATABASE_URL})});
-const nameRe=/神社|寺|宮|堂|院|大社|教会/;
+// 2026-09-29 企画運営の指摘で「陵」「供養塔」を追加（仁徳天皇陵古墳・南宗寺の供養塔など、
+// 祈りの場だが寺社の名を含まないスポットを拾えていなかったため）。「古墳」は拝所の有無で
+// 祈りの場かどうかが分かれる（仁徳天皇陵のような拝所つきの陵墓は該当、一般の古墳跡は非該当）
+// ため、誤検知が増えすぎないよう正規表現には含めない。拝所のある古墳は「陵」で拾われる想定
+const nameRe=/神社|寺|宮|堂|院|大社|教会|陵|供養塔/;
 const careRe=/静かに|敬意|手を合わせ/;
 
 function report(label, rows) {
