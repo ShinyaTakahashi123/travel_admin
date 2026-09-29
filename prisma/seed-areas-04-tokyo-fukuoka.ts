@@ -135,7 +135,7 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "ブルーウィングもじ", wikiTitle: "ブルーウィングもじ", address: "北九州市門司区港町4", time: "11:41", stay: 30, memo: "日本最大級とされる歩行者専用はね橋。1日数回跳ね上がる（時刻は公式サイトで確認）。", transit: { mode: "walk", min: 4 } },
         { name: "九州鉄道記念館", wikiTitle: "九州鉄道記念館", address: "福岡県北九州市門司区清滝2丁目3番29号", time: "12:18", stay: 60, memo: "元九州鉄道本社の赤レンガ建築。実物車両の屋外展示も見どころ。", transit: { mode: "walk", min: 7 } },
         { name: "関門海峡ミュージアム", wikiTitle: "関門海峡ミュージアム", address: "福岡県北九州市門司区西海岸1丁目3番3号", time: "13:22", stay: 60, memo: "帆船のような外観の博物館。5階展望デッキから関門海峡を一望。", transit: { mode: "walk", min: 4 } },
-        { name: "関門トンネル人道", wikiTitle: "関門トンネル", address: "福岡県北九州市門司区和布刈", time: "14:45", stay: 105, memo: "全長780mの海底トンネル。歩いて本州へ渡れ、県境も体験できる。", transit: { mode: "walk", min: 23 }, fallbackLatLng: [33.9582037, 130.9682013] },
+        { name: "関門トンネル人道", wikiTitle: "関門トンネル", address: "福岡県北九州市門司区和布刈", time: "14:45", stay: 45, memo: "全長780mの海底トンネル。歩いて本州へ渡れ、県境も体験できる。入口そばに和布刈神社も。", transit: { mode: "walk", min: 23 }, fallbackLatLng: [33.9582037, 130.9682013] },
       ],
     ],
   },
