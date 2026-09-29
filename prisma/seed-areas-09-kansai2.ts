@@ -327,11 +327,20 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["自然", "絶景・フォトスポット"],
     days: [
       [
-        { name: "びわ湖大津館", wikiTitle: "びわ湖大津館", address: "大津市柳が崎5-35", time: "13:00", stay: 60, memo: "湖畔の洋館でランチと庭園散策。" },
-        { name: "琵琶湖疏水", wikiTitle: "琵琶湖疏水", address: "大津市三井寺町", time: "14:30", stay: 40, memo: "取水口周辺の桜並木や運河沿いを散策。", transit: { mode: "car", min: 15 } },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6+5スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #255）
+        { name: "びわ湖大津港", wikiTitle: "びわ湖大津港", address: "滋賀県大津市浜大津5-1-1", time: "9:30", stay: 70, memo: "「ミシガン」に乗る、大津港発着の琵琶湖クルーズ。", fallbackLatLng: [35.0126186, 135.8660059] },
+        { name: "琵琶湖疏水", wikiTitle: "琵琶湖疏水", address: "大津市三保ヶ崎", time: "10:48", stay: 30, memo: "取水口周辺の桜並木や運河沿いを散策。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [35.0131678, 135.8603804] },
+        { name: "近江神宮", wikiTitle: "近江神宮", address: "滋賀県大津市神宮町1-1", time: "11:33", stay: 50, memo: "天智天皇をまつる、かるたと時計ゆかりの神社。", transit: { mode: "car", min: 15 }, fallbackLatLng: [35.0324396, 135.8513091] },
+        { name: "びわ湖大津館", wikiTitle: "びわ湖大津館", address: "大津市柳が崎5-35", time: "12:33", stay: 60, memo: "湖畔の洋館でランチと庭園散策。", transit: { mode: "car", min: 10 } },
+        { name: "石山寺", wikiTitle: "石山寺", address: "滋賀県大津市石山寺1-1-1", time: "13:53", stay: 75, memo: "紫式部ゆかりの、西国三十三所第十三番札所。", transit: { mode: "car", min: 20 }, fallbackLatLng: [34.9672883, 135.9033943] },
+        { name: "瀬田の唐橋", wikiTitle: "瀬田の唐橋", address: "滋賀県大津市瀬田1丁目", time: "15:18", stay: 72, memo: "日本三名橋の一つに数えられる、瀬田川に架かる橋。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.9734202, 135.9057056] },
       ],
       [
         { name: "三井寺", wikiTitle: "園城寺", address: "大津市園城寺町246", time: "9:30", stay: 50, memo: "2日目の朝、静かな境内で琵琶湖を見渡す。" },
+        { name: "日吉大社", wikiTitle: "日吉大社", address: "滋賀県大津市坂本5-1-1", time: "10:38", stay: 60, memo: "神猿(まさる)で知られる、日吉・山王神社の総本社。", transit: { mode: "car", min: 18 }, fallbackLatLng: [35.0723729, 135.8643584] },
+        { name: "日吉東照宮", wikiTitle: "日吉東照宮", address: "滋賀県大津市坂本1丁目", time: "11:48", stay: 40, memo: "日光東照宮の手本になったと伝わる、権現造の社殿。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [35.0683623, 135.8644052] },
+        { name: "滋賀院門跡", wikiTitle: "滋賀院", address: "滋賀県大津市坂本4-6-1", time: "12:34", stay: 40, memo: "延暦寺の本坊。小堀遠州作と伝わる庭園がある。", transit: { mode: "walk", min: 6 }, fallbackLatLng: [35.069698, 135.868317] },
+        { name: "延暦寺", wikiTitle: "延暦寺", address: "滋賀県大津市坂本本町4220", time: "13:50", stay: 160, memo: "坂本ケーブルで登る、世界遺産・天台宗の総本山。", transit: { mode: "train", min: 36 }, fallbackLatLng: [35.067127, 135.852036] },
       ],
     ],
   },
