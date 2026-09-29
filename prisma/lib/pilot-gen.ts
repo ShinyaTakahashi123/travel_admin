@@ -93,9 +93,13 @@ function stripHtml(s: string | undefined): string | undefined {
 function cleanAuthorName(s: string | undefined): string | undefined {
   if (!s) return s;
   return s
-    .replace(/\(\s*talk\s*\)/gi, "")
+    .replace(/^photo:\s*/i, "")
+    .replace(/\(\s*(talk|トーク)\s*\)/gi, "")
+    .replace(/,?\s*(taken with|with)\s+.*$/i, "")
     .replace(/^\s*(photo\s+)?by\s+/i, "")
-    .replace(/^User:/i, "")
+    .replace(/^(ja:)?User:/i, "")
+    .replace(/^日:/, "")
+    .replace(/^日本語版ウィキペディアの(.+)さん$/, "$1")
     .replace(/\s{2,}/g, " ")
     .trim() || undefined;
 }
