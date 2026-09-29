@@ -18,9 +18,29 @@
  * 使い方: そのしおりのその日の、最終的な並び順どおりにspotsを渡す。
  * 既存スポットを残す/直す場合は{ id, data }、新規に作る場合は{ create }を使う。
  * 配列の並び順がそのままorderNo(1始まり)になる。削除したい既存スポットはremoveに列挙する。
+ *
+ * 説明文の更新・日をまたぐスポットの移動・複数日の並べ替えなど、1本のしおりへの変更を
+ * まとめて1つのトランザクションに入れたいときは、options.tx に呼び出し側の
+ * `prisma.$transaction(async (tx) => {...})` のtxを渡す。渡された場合はその中で新しく
+ * $transactionを張らず、渡されたtxをそのまま使う(=呼び出し側の一連の処理が途中で失敗すれば
+ * 全体が元に戻る)。渡さなければ、この関数が自分で$transactionを張る(従来どおり)。
+ * (2026-09-29、制作補助2からの提案・#375での事故を受けて追加。後方互換: 呼び出し側の
+ * 書き方は変えなくてよい)
+ *
+ * 例:
+ *   await prisma.$transaction(async (tx) => {
+ *     await tx.itinerary.update({ where: { id }, data: { description } });
+ *     await tx.spot.update({ where: { id: ishimonId }, data: { dayId: day1.id } }); // 日をまたぐ移動
+ *     await setDaySpotOrder(day1.id, [...], { tx });
+ *     await setDaySpotOrder(day2.id, [...], { tx });
+ *   }, { timeout: 60000 });
  */
 import { prisma } from "../../src/lib/prisma";
 import type { Prisma } from "@prisma/client";
+
+// prisma.$extends()で拡張されたクライアントは素のPrisma.TransactionClientと型が
+// 厳密には一致しないため、実際のprisma.$transactionのコールバック引数の型をそのまま借りる
+type TxClient = Parameters<Parameters<typeof prisma.$transaction>[0]>[0];
 
 export type SpotOrderItem =
   | { id: string; data: Omit<Prisma.SpotUpdateInput, "orderNo" | "day" | "dayId"> }
@@ -29,11 +49,11 @@ export type SpotOrderItem =
 export async function setDaySpotOrder(
   dayId: string,
   spots: SpotOrderItem[],
-  options?: { remove?: string[] }
+  options?: { remove?: string[]; tx?: TxClient }
 ): Promise<void> {
   const remove = options?.remove ?? [];
 
-  await prisma.$transaction(async (tx) => {
+  const run = async (tx: TxClient) => {
     const current = await tx.spot.findMany({ where: { dayId }, select: { id: true } });
     const currentIds = new Set(current.map((s) => s.id));
 
@@ -80,5 +100,11 @@ export async function setDaySpotOrder(
         await tx.spot.create({ data: { ...item.create, dayId, orderNo } });
       }
     }
-  });
+  };
+
+  if (options?.tx) {
+    await run(options.tx);
+  } else {
+    await prisma.$transaction((tx) => run(tx), { timeout: 60000 });
+  }
 }
