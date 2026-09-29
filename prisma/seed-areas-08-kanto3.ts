@@ -75,7 +75,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["動物園・水族館"],
     days: [
       [
-        { name: "那須どうぶつ王国", wikiTitle: "那須どうぶつ王国", address: "那須郡那須町大島1042-1", time: "9:30", stay: 180, memo: "カピバラやスコティッシュフォールドなど、様々な動物と間近でふれあえるテーマパーク。" },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で4スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #267）
+        { name: "那須どうぶつ王国（王国タウン）", wikiTitle: "那須どうぶつ王国", address: "那須郡那須町大島1042-1", time: "9:30", stay: 90, memo: "屋内中心のエリア。スナネコの繁殖でも知られる。" },
+        { name: "那須どうぶつ王国（王国ファーム）", wikiTitle: "那須どうぶつ王国", address: "栃木県那須郡那須町大島1042", time: "11:08", stay: 90, memo: "動物とふれあえる屋外エリア。ライドゾーンも。", transit: { mode: "other", min: 8 }, fallbackLatLng: [37.129, 140.044] },
+        { name: "りんどう湖ファミリー牧場", wikiTitle: "りんどう湖ファミリー牧場", address: "栃木県那須郡那須町高久丙414-2", time: "12:58", stay: 120, memo: "那須高原唯一の湖を中心にした観光牧場と遊園地。", transit: { mode: "car", min: 20 } },
+        { name: "殺生石", wikiTitle: "殺生石", address: "栃木県那須町湯本", time: "15:16", stay: 75, memo: "九尾の狐伝説にまつわる史跡。国指定名勝。", transit: { mode: "car", min: 18 } },
       ],
     ],
   },
