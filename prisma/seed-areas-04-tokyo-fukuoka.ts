@@ -40,9 +40,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "根津美術館", wikiTitle: "根津美術館", address: "港区南青山6丁目5-1", time: "9:30", stay: 60, memo: "表参道近くにある、日本・東洋の古美術品と名庭園を持つ美術館。" },
-        { name: "表参道", wikiTitle: "表参道", address: "渋谷区神宮前", time: "10:54", stay: 60, memo: "けやき並木が美しい、ハイブランドが立ち並ぶ通り。", transit: { mode: "walk", min: 14 } },
-        { name: "キャットストリート", wikiTitle: "キャットストリート", address: "渋谷区神宮前", time: "12:10", stay: 40, memo: "セレクトショップが並ぶ、原宿と渋谷をつなぐ裏通り。", transit: { mode: "walk", min: 10 } },
-        { name: "渋谷ヒカリエ", wikiTitle: "渋谷ヒカリエ", address: "渋谷区渋谷2丁目21-1", time: "13:10", stay: 40, memo: "アートやカルチャー発信拠点も併設する複合商業施設で締めくくる。", transit: { mode: "walk", min: 15 } },
+        { name: "表参道", wikiTitle: "表参道", address: "渋谷区神宮前", time: "10:44", stay: 60, memo: "けやき並木が美しい、ハイブランドが立ち並ぶ通り。", transit: { mode: "walk", min: 14 } },
+        { name: "明治神宮", wikiTitle: "明治神宮", address: "東京都渋谷区代々木神園町1-1", time: "11:57", stay: 100, memo: "明治天皇・昭憲皇太后を祀る神社。表参道の名の由来。大鳥居と鎮守の森。", transit: { mode: "walk", min: 13 } },
+        { name: "太田記念美術館", wikiTitle: "太田記念美術館", address: "東京都渋谷区神宮前1丁目10番10号", time: "13:47", stay: 65, memo: "実業家・五代太田清蔵の浮世絵コレクションを収蔵する専門美術館。", transit: { mode: "walk", min: 10 } },
+        { name: "キャットストリート", wikiTitle: "キャットストリート", address: "渋谷区神宮前", time: "14:57", stay: 40, memo: "セレクトショップが並ぶ、原宿と渋谷をつなぐ裏通り。", transit: { mode: "walk", min: 5 } },
+        { name: "渋谷ヒカリエ", wikiTitle: "渋谷ヒカリエ", address: "渋谷区渋谷2丁目21-1", time: "15:52", stay: 40, memo: "アートやカルチャー発信拠点も併設する複合商業施設で締めくくる。", transit: { mode: "walk", min: 15 } },
       ],
     ],
   },
