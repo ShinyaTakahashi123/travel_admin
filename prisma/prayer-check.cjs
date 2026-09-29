@@ -1,6 +1,8 @@
 // スポット名に「神社・寺・宮・堂・院・大社・教会」を含む（=今も参拝・法要がある可能性が高い）スポットの
-// 紹介文に、静かに見学する配慮の一文（「静かに」「敬意をもって」「配慮」）があるかをチェックする。
+// 紹介文に、静かに見学する配慮の一文（「静かに」「敬意」「手を合わせ」）があるかをチェックする。
 // 誤検知あり（例: 城跡・地名などに「宮」を含む場合）。1件ずつ内容を見て判断すること。
+// 2026-09-29 法務の指摘で「配慮」を判定語から外した（「バリアフリーに配慮」など無関係な文脈でも
+// マッチしてしまい、「参拝者」を含む本文で誤って「配慮の一文あり」と判定される事故があったため）。
 // 使い方:
 //   都道府県ごと（公開中のしおりのみが対象。従来どおり）: node prisma/prayer-check.cjs <都道府県>
 //   しおりID指定（状態を問わない。承認待ち(pending)のしおりにも使える。2026-09-27 法務の依頼で追加）:
@@ -9,7 +11,7 @@ const {createRequire}=require("module");const r=createRequire(process.cwd()+"/pa
 r("dotenv").config();const {PrismaClient}=r("@prisma/client");const {PrismaPg}=r("@prisma/adapter-pg");
 const p=new PrismaClient({adapter:new PrismaPg({connectionString:process.env.DATABASE_URL})});
 const nameRe=/神社|寺|宮|堂|院|大社|教会/;
-const careRe=/静かに|敬意をもって|配慮/;
+const careRe=/静かに|敬意|手を合わせ/;
 
 function report(label, rows) {
   let hits=0;
