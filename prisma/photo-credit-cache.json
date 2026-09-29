@@ -2738,5 +2738,28 @@
     "author": "Oos",
     "license": "CC BY-SA 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "宮崎県総合文化公園": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miyazaki_Prefectural_Arts_Center.jpg",
+    "author": "Sanjo",
+    "license": "Public domain"
+  },
+  "平和台公園": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_of_Tower_of_Peace_in_Heiwadai_Park_4.jpg",
+    "author": "そらみみ",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "江田神社": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eda-jinja_(Miyazaki)_haiden.JPG",
+    "author": "Saigen Jiro",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "住吉神社": {
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E4%BD%8F%E5%90%89%E7%A5%9E%E7%A4%BE.jpg",
+    "author": "Wanzu",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
   }
 }
