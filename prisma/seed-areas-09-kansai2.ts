@@ -157,11 +157,24 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["お寺", "パワースポット"],
     days: [
       [
-        { name: "壇上伽藍", wikiTitle: "壇上伽藍", address: "伊都郡高野町高野山152", time: "14:00", stay: 60, memo: "宿坊へのチェックイン前に、根本大塔などを参拝。" , fallbackLatLng: [34.2144, 135.5828] },
-        { name: "金剛峯寺", wikiTitle: "金剛峯寺", address: "伊都郡高野町高野山132", time: "15:20", stay: 50, memo: "夕方、比較的静かな時間帯に総本山を参拝。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.2128, 135.5850] },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で8スポットに拡充（早朝の例外あり。docs/content/20260929-itinerary-4spots-9to16-checklist.md #252）
+        { name: "大門", wikiTitle: "大門_(高野山)", address: "和歌山県伊都郡高野町高野山", time: "9:00", stay: 30, memo: "高野山の玄関口、朱塗りの総門。", fallbackLatLng: [34.2131496, 135.572858] },
+        { name: "女人堂", wikiTitle: "女人堂", address: "和歌山県伊都郡高野町高野山", time: "9:45", stay: 25, memo: "女人禁制の時代、女性が遥拝した7つの登り口のうち今に残る一堂。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [34.2188849, 135.5811088] },
+        { name: "徳川家霊台", wikiTitle: "徳川家霊台", address: "和歌山県伊都郡高野町高野山", time: "10:15", stay: 30, memo: "徳川家康・秀忠をまつる、精緻な彫刻が見どころの霊廟。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [34.2174543, 135.5830379] },
+        { name: "壇上伽藍", wikiTitle: "壇上伽藍", address: "伊都郡高野町高野山152", time: "10:55", stay: 80, memo: "弘法大師空海が最初に整備した根本道場。根本大塔などを参拝。" , transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.2144, 135.5828] },
+        { name: "金剛峯寺", wikiTitle: "金剛峯寺", address: "伊都郡高野町高野山132", time: "12:25", stay: 70, memo: "高野山真言宗の総本山。石庭「蟠龍庭」など。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.2128, 135.5850] },
+        { name: "高野山霊宝館", wikiTitle: "高野山霊宝館", address: "和歌山県伊都郡高野町高野山306", time: "13:43", stay: 60, memo: "国宝・重要文化財を多数収蔵する宝物館。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [34.2112832, 135.5808875] },
+        { name: "金剛三昧院", wikiTitle: "金剛三昧院", address: "和歌山県伊都郡高野町高野山425", time: "14:53", stay: 40, memo: "北条政子が建立した、国宝・多宝塔がある寺院。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.2101236, 135.5869835] },
+        { name: "苅萱堂", wikiTitle: "苅萱道心", address: "和歌山県伊都郡高野町高野山", time: "15:45", stay: 45, memo: "石童丸伝説で知られる、奥の院参道沿いの小さなお堂。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [34.2127171, 135.5930056] },
       ],
       [
         { name: "奥の院", wikiTitle: "奥の院_(高野山)", address: "伊都郡高野町高野山550", time: "6:00", stay: 60, memo: "早朝の勤行のあと、澄んだ空気の中を奥の院まで散策。" , fallbackLatLng: [34.2128, 135.5892] },
+        { name: "慈尊院", wikiTitle: "慈尊院", address: "和歌山県伊都郡九度山町慈尊院832", time: "8:40", stay: 65, memo: "空海の母ゆかりの「女人高野」。世界遺産・町石道の起点。", transit: { mode: "train", min: 100 }, fallbackLatLng: [34.2951647, 135.5499064] },
+        { name: "丹生官省符神社", wikiTitle: "丹生官省符神社", address: "和歌山県伊都郡九度山町慈尊院835", time: "9:53", stay: 40, memo: "慈尊院の鎮守。高野山の守護神をまつる、町石道の起点。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [34.2943003, 135.5494277] },
+        { name: "真田庵", wikiTitle: "真田庵", address: "和歌山県伊都郡九度山町九度山1413", time: "10:48", stay: 60, memo: "真田昌幸・幸村が蟄居した屋敷跡。昌幸の墓が残る。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [34.2908013, 135.5597811] },
+        { name: "道の駅 柿の郷くどやま", wikiTitle: "道の駅柿の郷くどやま", address: "和歌山県伊都郡九度山町入郷", time: "11:58", stay: 65, memo: "九度山特産の柿など、地元の味覚が並ぶ農産物直売所。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.2881, 135.5646] },
+        { name: "学文路天満宮", wikiTitle: "学文路天満宮", address: "和歌山県橋本市学文路", time: "13:13", stay: 45, memo: "受験生の合格祈願で親しまれる、菅原道真公をまつる社。", transit: { mode: "train", min: 10 }, fallbackLatLng: [34.2965572, 135.5800628] },
+        { name: "旧葛城館", wikiTitle: "旧葛城館", address: "和歌山県橋本市高野口町名倉1053", time: "14:28", stay: 122, memo: "明治の高野山参詣客でにぎわった、木造3階建ての旅館建築。今はカフェ。", transit: { mode: "train", min: 30 }, fallbackLatLng: [34.3075738, 135.5573318] },
       ],
     ],
   },
