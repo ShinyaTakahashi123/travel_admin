@@ -292,7 +292,7 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "青の洞門", wikiTitle: "青の洞門", address: "中津市本耶馬渓町洞", time: "9:30", stay: 40, memo: "禅海和尚が30年かけて掘り抜いたと伝わる、菊池寛の小説でも有名なトンネル。" },
-        { name: "羅漢寺", wikiTitle: "羅漢寺_(中津市)", address: "中津市本耶馬渓町跡田1548", time: "10:40", stay: 60, memo: "断崖の岩肌に張り付くように建つ、五百羅漢で知られる古刹。", transit: { mode: "car", min: 15 } },
+        { name: "羅漢寺", wikiTitle: "羅漢寺_(中津市)(境内撮影禁止のため写真は見送り)", address: "中津市本耶馬渓町跡田1548", time: "10:40", stay: 60, memo: "断崖の岩肌に張り付くように建つ、五百羅漢で知られる古刹。", transit: { mode: "car", min: 15 } },
       ],
     ],
   },
