@@ -354,8 +354,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡", "パワースポット"],
     days: [
       [
-        { name: "飯盛山", wikiTitle: "飯盛山_(福島県)", address: "会津若松市一箕町大字八幡字弁天下", time: "9:30", stay: 50, memo: "白虎隊十九士が自刃した地。鶴ヶ城を望む悲劇の舞台。" },
-        { name: "会津武家屋敷", wikiTitle: "会津武家屋敷", address: "会津若松市東山町大字石山字松原200", time: "10:50", stay: 60, memo: "会津藩家老・西郷頼母邸を復元した、上級武士の暮らしを伝える屋敷。", transit: { mode: "car", min: 10 } },
+        { name: "会津藩校日新館", wikiTitle: "日新館", address: "福島県会津若松市河東町南高野字高塚山10", time: "8:30", stay: 60, memo: "白虎隊も学んだ会津藩の藩校。「ならぬことはならぬ」の什の掟で知られる。" },
+        { name: "飯盛山", wikiTitle: "飯盛山_(福島県)", address: "会津若松市一箕町大字八幡字弁天下", time: "9:45", stay: 50, memo: "白虎隊十九士が自刃した地。鶴ヶ城を望む悲劇の舞台。", transit: { mode: "car", min: 15 } },
+        { name: "白虎隊記念館", wikiTitle: "白虎隊記念館", address: "福島県会津若松市一箕町八幡弁天下33", time: "10:52", stay: 40, memo: "白虎隊・戊辰戦争ゆかりの史料を伝える資料館。", transit: { mode: "walk", min: 17 } },
+        { name: "鶴ヶ城", wikiTitle: "若松城", address: "福島県会津若松市追手町1-1", time: "11:42", stay: 115, memo: "白虎隊が落城と思い込んだ、難攻不落と謳われた名城。", transit: { mode: "car", min: 10 } },
+        { name: "七日町通り", wikiTitle: "七日町通り_(会津若松市)", address: "福島県会津若松市七日町", time: "13:43", stay: 45, memo: "大正ロマンの町並みが残る、食べ歩きも楽しい通り。", transit: { mode: "car", min: 6 } },
+        { name: "阿弥陀寺", wikiTitle: "阿弥陀寺_(会津若松市)", address: "福島県会津若松市七日町4-20", time: "14:33", stay: 30, memo: "鶴ヶ城から移築された「御三階」と戊辰戦争戦死者の墓所。", transit: { mode: "walk", min: 5 } },
+        { name: "会津武家屋敷", wikiTitle: "会津武家屋敷", address: "会津若松市東山町大字石山字松原200", time: "15:11", stay: 95, memo: "会津藩家老・西郷頼母邸を復元した、上級武士の暮らしを伝える屋敷。", transit: { mode: "car", min: 8 } },
       ],
     ],
   },
