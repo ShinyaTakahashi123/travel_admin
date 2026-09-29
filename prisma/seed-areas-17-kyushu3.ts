@@ -102,11 +102,20 @@ const ITINERARIES: HandmadeItinerary[] = [
     tagNames: ["グルメ"],
     purposeNames: ["城・史跡", "ショッピング"],
     days: [
+      // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6+4スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #263）
       [
-        { name: "維新ふるさと館", wikiTitle: "維新ふるさと館", address: "鹿児島市加治屋町23-1", time: "10:00", stay: 60, memo: "西郷隆盛・大久保利通ら、幕末維新の志士を輩出した加治屋町ゆかりの資料館。" },
+        { name: "維新ふるさと館", wikiTitle: "維新ふるさと館", address: "鹿児島市加治屋町23-1", time: "9:30", stay: 60, memo: "西郷隆盛・大久保利通ら、幕末維新の志士を輩出した加治屋町ゆかりの資料館。" },
+        { name: "照国神社", wikiTitle: "照国神社", address: "鹿児島県鹿児島市照国町19-35", time: "10:45", stay: 40, memo: "島津斉彬公をまつる、鹿児島市で最も大きな神社。", transit: { mode: "walk", min: 15 } },
+        { name: "鹿児島市立美術館", wikiTitle: "鹿児島市立美術館", address: "鹿児島県鹿児島市城山町4-36", time: "11:29", stay: 50, memo: "鹿児島城二の丸跡に立つ美術館。印象派から現代までの西洋美術を収蔵。", transit: { mode: "walk", min: 4 } },
+        { name: "西郷隆盛銅像", wikiTitle: "西郷隆盛銅像", address: "鹿児島県鹿児島市城山町", time: "12:24", stay: 20, memo: "昭和12年完成、彫刻家・安藤照作の銅像。城山を背に立つ。", transit: { mode: "walk", min: 5 } },
+        { name: "鹿児島県歴史・美術センター黎明館", wikiTitle: "鹿児島県歴史・美術センター黎明館", address: "鹿児島県鹿児島市城山町7-2", time: "12:46", stay: 75, memo: "鶴丸城本丸跡に立つ県立総合博物館。", transit: { mode: "walk", min: 2 } },
+        { name: "城山展望台", wikiTitle: "城山_(鹿児島市)", address: "鹿児島県鹿児島市城山町22", time: "14:07", stay: 145, memo: "標高107mの展望所。桜島を一望、西南戦争ゆかりの史跡も点在。", transit: { mode: "car", min: 6 } },
       ],
       [
         { name: "天文館", wikiTitle: "天文館_(鹿児島市)", address: "鹿児島市千日町", time: "9:30", stay: 80, memo: "2日目は、南九州最大の繁華街でご当地グルメの黒豚料理などを楽しむ。" },
+        { name: "桜島", wikiTitle: "桜島", address: "鹿児島県鹿児島市桜島横山町", time: "11:05", stay: 90, memo: "フェリーで渡る活火山。湯之平展望所や溶岩なぎさ遊歩道が見どころ。", transit: { mode: "other", min: 15 } },
+        { name: "仙巌園", wikiTitle: "仙巌園", address: "鹿児島県鹿児島市吉野町9698-1", time: "13:00", stay: 90, memo: "桜島を借景にした島津家の大名庭園。反射炉跡は世界遺産の構成資産。", transit: { mode: "car", min: 25 } },
+        { name: "鹿児島中央駅", wikiTitle: "鹿児島中央駅", address: "鹿児島県鹿児島市中央町1-1", time: "14:45", stay: 105, memo: "アミュプラザ鹿児島がある鹿児島の玄関口。買い物や食事に便利。", transit: { mode: "car", min: 15 } },
       ],
     ],
   },
