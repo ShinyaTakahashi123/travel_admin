@@ -301,7 +301,7 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "由布岳", wikiTitle: "由布岳", address: "由布市湯布院町川上", time: "9:00", stay: 270, memo: "「豊後富士」とも呼ばれる、由布院のシンボル的な山。正面登山口から往復4〜5時間の本格登山。" },
-        { name: "塚原温泉 火口乃泉", wikiTitle: "塚原温泉", address: "由布市湯布院町塚原1235", time: "13:36", stay: 90, memo: "日本三大薬湯の一つ。登山の汗を流す日帰り入浴。", transit: { mode: "car", min: 6 }, fallbackLatLng: [33.304352, 131.386566] },
+        { name: "塚原温泉 火口乃泉", wikiTitle: "塚原温泉", address: "由布市湯布院町塚原1235", time: "13:36", stay: 90, memo: "強い酸性の湯として知られる。登山の汗を流す日帰り入浴。", transit: { mode: "car", min: 6 }, fallbackLatLng: [33.304352, 131.386566] },
         { name: "狭霧台", wikiTitle: "狭霧台", address: "由布市湯布院町川西", time: "15:16", stay: 25, memo: "由布岳と由布院盆地を一望する展望スポット。", transit: { mode: "car", min: 10 }, fallbackLatLng: [33.2602225, 131.3824425] },
         { name: "佛山寺", wikiTitle: "佛山寺", address: "由布市湯布院町川上1879", time: "15:46", stay: 45, memo: "由布岳の山岳信仰の拠点として開かれた古刹。", transit: { mode: "car", min: 5 }, fallbackLatLng: [33.263588, 131.37114] },
       ],
@@ -311,9 +311,10 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "下ん湯", wikiTitle: "下ん湯", address: "由布市湯布院町川上", time: "10:16", stay: 40, memo: "金鱗湖畔の茅葺き屋根の無人共同浴場。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [33.2658534, 131.3623282] },
         { name: "COMICO ART MUSEUM YUFUIN", wikiTitle: "COMICO_ART_MUSEUM_YUFUIN", address: "由布市湯布院町川上2995-1", time: "10:58", stay: 70, memo: "隈研吾設計の現代美術館。草間彌生ら7作家の作品を常設。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2652693, 131.3615766] },
         { name: "湯の坪街道", wikiTitle: "湯の坪街道", address: "由布市湯布院町川上", time: "12:11", stay: 80, memo: "梅ヶ枝餅などが並ぶ賑わいの通り。昼食もここで。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [33.2660923, 131.3632115] },
-        { name: "宇奈岐日女神社", wikiTitle: "宇奈岐日女神社", address: "由布市湯布院町川上2220", time: "13:42", stay: 55, memo: "由布院盆地の産土神を祀る古社、静かな杜を歩く。", transit: { mode: "walk", min: 11 }, fallbackLatLng: [33.2589, 131.3617] },
-        { name: "大杵社", wikiTitle: "大杵社", address: "由布市湯布院町川南", time: "14:46", stay: 40, memo: "樹齢1000年の国指定天然記念物の大杉。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [33.2527335, 131.3576605] },
-        { name: "由布院駅", wikiTitle: "由布院駅", address: "由布市湯布院町川北8-2", time: "15:40", stay: 50, memo: "磯崎新設計の木造駅舎。帰りはここから特急で。", transit: { mode: "walk", min: 14 }, fallbackLatLng: [33.2626128, 131.3551264] },
+        { name: "由布院ステンドグラス美術館", wikiTitle: "由布院ステンドグラス美術館", address: "由布市湯布院町川上2461-3", time: "13:41", stay: 40, memo: "日本初の本格的なステンドグラス専門美術館。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [33.259785, 131.365845] },
+        { name: "宇奈岐日女神社", wikiTitle: "宇奈岐日女神社", address: "由布市湯布院町川上2220", time: "14:26", stay: 55, memo: "由布院盆地の産土神を祀る古社、静かな杜を歩く。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [33.2589, 131.3617] },
+        { name: "大杵社", wikiTitle: "大杵社", address: "由布市湯布院町川南", time: "15:30", stay: 40, memo: "樹齢1000年の国指定天然記念物の大杉。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [33.2527335, 131.3576605] },
+        { name: "由布院駅", wikiTitle: "由布院駅", address: "由布市湯布院町川北8-2", time: "16:24", stay: 35, memo: "磯崎新設計の木造駅舎、アートホールの企画展示。帰りはここから特急で。", transit: { mode: "walk", min: 14 }, fallbackLatLng: [33.2626128, 131.3551264] },
       ],
     ],
   },
