@@ -602,6 +602,8 @@ const AREAS: AreaSeed[] = [
       { name: "坂本八幡宮", address: "太宰府市坂本3丁目14-23", lat: 33.5292, lng: 130.5142, memo: "元号「令和」の典拠となった万葉集の梅花の宴の舞台。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "坂本八幡宮" },
       { name: "天開稲荷社", address: "太宰府市宰府4丁目7-1", lat: 33.5236, lng: 130.5358, memo: "太宰府天満宮奥の山中に鎮座する、隠れたパワースポット。", websiteUrl: "https://www.dazaifutenmangu.or.jp/", wikiTitle: "太宰府天満宮" },
       { name: "太宰府天満宮宝物殿", address: "太宰府市宰府4丁目7-1", lat: 33.5219, lng: 130.5347, memo: "菅原道真公ゆかりの宝物など約5万点を収蔵する宝物館。", websiteUrl: "https://www.dazaifutenmangu.or.jp/", wikiTitle: "太宰府天満宮" },
+      { name: "菅公歴史館", address: "太宰府市宰府4丁目7-1", lat: 33.5219808, lng: 130.5345954, memo: "本殿裏、博多人形で道真公の生涯をたどる展示施設。", websiteUrl: "https://www.dazaifutenmangu.or.jp/", wikiTitle: "太宰府天満宮" },
+      { name: "太宰府市文化ふれあい館", address: "太宰府市国分4丁目9-1", lat: 33.5202557, lng: 130.5095003, memo: "太宰府の歴史や文化にふれる無料の資料館。", websiteUrl: "https://dazaifu-bunka.or.jp/", wikiTitle: "太宰府市文化ふれあい館" },
       { name: "大宰府展示館", address: "太宰府市観世音寺1丁目1-1", lat: 33.5137162, lng: 130.5161673, memo: "大宰府政庁跡の出土品を紹介する資料館。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "大宰府展示館" },
       { name: "客館跡", address: "太宰府市朱雀3丁目13", lat: 33.505253, lng: 130.516983, memo: "外国使節をもてなした迎賓施設の跡、令和2年に史跡広場として整備。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "大宰府" },
       { name: "榎社", address: "太宰府市朱雀6丁目18", lat: 33.5079896, lng: 130.5145514, memo: "菅原道真公が大宰府で過ごした配所の跡と伝わる神社。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "榎社" },
