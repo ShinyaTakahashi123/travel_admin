@@ -141,7 +141,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "遠刈田温泉の共同浴場めぐり、宮城蔵王の湯治文化を楽しむ日帰りプラン",
-    description: "こけしの産地としても知られる遠刈田温泉。歴史ある共同浴場を巡り、蔵王山麓の湯治文化にふれるプランです。",
+    description: "こけしの産地としても知られる遠刈田温泉。神の湯・壽の湯の共同浴場めぐりと刈田嶺神社の参拝、こけし館での絵付け体験、三階滝、蔵王のシンボル御釜と山頂の奥宮まで、宮城蔵王の湯治文化と自然を丸一日楽しむプランです。",
     nights: 0,
     prefectureName: "宮城県",
     areaNames: ["蔵王"],
@@ -149,8 +149,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["温泉"],
     days: [
       [
-        { name: "遠刈田温泉", wikiTitle: "遠刈田温泉", address: "刈田郡蔵王町遠刈田温泉", time: "10:00", stay: 90, memo: "開湯400年の歴史を持つ、こけしの産地としても有名な温泉地。" },
-        { name: "三階滝", wikiTitle: "三階滝_(宮城県)", address: "刈田郡蔵王町遠刈田温泉", time: "12:00", stay: 40, memo: "3段になって流れ落ちる、蔵王山麓の美しい滝。", transit: { mode: "car", min: 15 } },
+        { name: "刈田嶺神社(里宮)", wikiTitle: "刈田嶺神社_(蔵王町遠刈田温泉)", address: "宮城県刈田郡蔵王町遠刈田温泉仲町1", time: "9:00", stay: 20, memo: "遠刈田温泉の発展を支えてきた神社。御神体は夏は山頂の奥宮、冬は里宮に遷座する。" },
+        { name: "神の湯", wikiTitle: "遠刈田温泉", address: "宮城県刈田郡蔵王町遠刈田温泉本町", time: "9:22", stay: 40, memo: "遠刈田温泉の共同浴場の一つ。青森ヒバの香る浴室と足湯が特徴。", transit: { mode: "walk", min: 2 } },
+        { name: "壽の湯", wikiTitle: "遠刈田温泉", address: "宮城県刈田郡蔵王町遠刈田温泉本町", time: "10:05", stay: 40, memo: "江戸時代の湯小屋を再現した、こぢんまりとした共同浴場。", transit: { mode: "walk", min: 3 } },
+        { name: "みやぎ蔵王こけし館", wikiTitle: "こけし", address: "宮城県刈田郡蔵王町遠刈田温泉新地", time: "10:57", stay: 90, memo: "全国の伝統こけしおよそ5500点を展示。絵付け体験もできる。", transit: { mode: "car", min: 12 } },
+        { name: "三階滝", wikiTitle: "三階滝_(宮城県)", address: "刈田郡蔵王町遠刈田温泉", time: "12:42", stay: 50, memo: "3段になって流れ落ちる、蔵王山麓の美しい滝。日本の滝百選。", transit: { mode: "car", min: 15 } },
+        { name: "御釜", wikiTitle: "御釜_(蔵王山)", address: "宮城県刈田郡蔵王町遠刈田温泉", time: "13:57", stay: 100, memo: "蔵王連峰のシンボル、エメラルドグリーンの火口湖。「五色沼」とも。", transit: { mode: "car", min: 25 } },
+        { name: "刈田嶺神社(奥宮)", wikiTitle: "刈田嶺神社_(蔵王町刈田岳)", address: "宮城県刈田郡蔵王町刈田岳山頂", time: "15:47", stay: 45, memo: "刈田岳山頂の奥宮。御釜や仙台方面を見渡せる。参拝は春〜秋のみ。帰りは車で遠刈田温泉方面へ。", transit: { mode: "walk", min: 10 } },
       ],
     ],
   },
