@@ -105,7 +105,7 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "桜島ビジターセンター", wikiTitle: "", address: "鹿児島市桜島横山町", time: "11:00", stay: 60, memo: "桜島の噴火の歴史や成り立ちを紹介する火山学習施設。", fallbackLatLng: [31.5908244, 130.5941859], transit: { mode: "walk", min: 8 } },
         { name: "溶岩なぎさ公園", wikiTitle: "", address: "鹿児島市桜島横山町1722-3", time: "12:10", stay: 65, memo: "大正大噴火の溶岩原沿いの公園。日本最大級ともいわれる足湯。", fallbackLatLng: [31.584061, 130.595276], transit: { mode: "walk", min: 10 } },
         { name: "烏島展望所", wikiTitle: "", address: "鹿児島市桜島横山町", time: "13:40", stay: 40, memo: "大正噴火の溶岩に飲み込まれた、旧・烏島の高台の展望所。", fallbackLatLng: [31.5817752, 130.6011495], transit: { mode: "bus", min: 25 } },
-        { name: "赤水展望広場", wikiTitle: "", address: "鹿児島市桜島横山町", time: "14:45", stay: 40, memo: "錦江湾と桜島を望む、周遊バス停留所を兼ねた広場。", fallbackLatLng: [31.5768524, 130.6030966], transit: { mode: "bus", min: 25 } },
+        { name: "赤水展望広場", wikiTitle: "", address: "鹿児島市桜島横山町", time: "14:30", stay: 55, memo: "平成16年の長渕剛コンサート跡地。桜島溶岩の記念モニュメント「叫びの肖像」。", fallbackLatLng: [31.5768524, 130.6030966], transit: { mode: "walk", min: 10 } },
         { name: "湯之平展望所", wikiTitle: "桜島", address: "鹿児島市桜島小池町1025", time: "15:50", stay: 40, memo: "一般開放エリアで火口に最も近い展望所。桜島の迫力を間近に感じられる。", transit: { mode: "bus", min: 25 } },
       ],
     ],
