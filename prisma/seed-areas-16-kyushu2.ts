@@ -15,10 +15,12 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#331)で
-    // 1か所から5か所に再構成。高千穂峡の座標が実際の入口(御橋周辺)から
-    // 約735m離れていたため修正。#330で高千穂の主な行き先を使ったため、
-    // 周辺の未使用スポット(たかちほ食堂・総合公園・トンネルの駅・道の駅)で
-    // 構成(docs/content/20260929-itinerary-4spots-9to16-checklist.md #331)。
+    // 1か所から7か所に再構成。高千穂峡の座標が実際の入口(御橋周辺)から
+    // 約735m離れていたため修正。企画運営2026-10-01 04:48の指摘で、店・会社
+    // 単体の施設(たかちほ食堂・トンネルの駅)はスポットにできないため除外し、
+    // 昼食は高千穂神社の一言に統合。#330で使った実在スポット(槵觸神社・
+    // 高千穂神社・天岩戸神社・資料館)を中心に組み直した
+    // (docs/content/20260929-itinerary-4spots-9to16-checklist.md #331)。
     title: "高千穂峡と真名井の滝、定番の渓谷ボート日帰りプラン",
     description: "柱状節理の断崖が続く高千穂峡。真名井の滝を間近に望むボート体験で知られる、高千穂観光の定番プランです。",
     nights: 0,
@@ -28,11 +30,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "自然"],
     days: [
       [
-        { name: "高千穂峡", wikiTitle: "高千穂峡", address: "西臼杵郡高千穂町大字三田井", time: "9:30", stay: 140, memo: "柱状節理の断崖が続く峡谷。真名井の滝を間近に望む貸しボートが人気。", fallbackLatLng: [32.7017851, 131.300939] },
-        { name: "たかちほ食堂", wikiTitle: "", address: "西臼杵郡高千穂町三田井1398-4", time: "11:57", stay: 45, memo: "名物チキン南蛮定食で知られる地元の食堂。高千穂牛丼等も。", transit: { mode: "car", min: 7 }, fallbackLatLng: [32.715275, 131.304001] },
-        { name: "高千穂町総合公園", wikiTitle: "", address: "西臼杵郡高千穂町下野", time: "12:44", stay: 25, memo: "高千穂峡を見下ろす台地上の公園。散策路と児童広場。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [32.7144723, 131.3035707] },
-        { name: "トンネルの駅", wikiTitle: "", address: "西臼杵郡高千穂町下野2221-2", time: "13:18", stay: 120, memo: "廃トンネル・廃電車を活用した観光物産館。焼酎貯蔵庫見学。", transit: { mode: "car", min: 9 }, fallbackLatLng: [32.741165, 131.307739] },
-        { name: "道の駅高千穂", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1296-34", time: "15:33", stay: 60, memo: "特産品・地元野菜の物産コーナー。展望デッキから町並みを一望。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.7085599, 131.3007282] },
+        { name: "高千穂峡", wikiTitle: "高千穂峡", address: "西臼杵郡高千穂町大字三田井", time: "9:00", stay: 100, memo: "柱状節理の断崖が続く峡谷。真名井の滝を間近に望む貸しボートが人気。", fallbackLatLng: [32.7017851, 131.300939] },
+        { name: "高千穂町総合公園", wikiTitle: "", address: "西臼杵郡高千穂町下野", time: "10:45", stay: 25, memo: "高千穂峡を見下ろす台地上の公園。散策路と児童広場。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.7144723, 131.3035707] },
+        { name: "槵觸神社", wikiTitle: "槵觸神社", address: "西臼杵郡高千穂町三田井713", time: "11:15", stay: 30, memo: "天孫降臨ゆかりの神社。くしふる峰を御神体として祀る。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.7099875, 131.3138104] },
+        { name: "高千穂神社", wikiTitle: "高千穂神社", address: "西臼杵郡高千穂町三田井1037", time: "11:51", stay: 85, memo: "高千穂郷八十八社の総社。夫婦杉・秩父杉・鎮石等。参道近くで昼食も。", transit: { mode: "car", min: 6 } },
+        { name: "天岩戸神社(西本宮)", wikiTitle: "天岩戸神社", address: "西臼杵郡高千穂町岩戸1073-1", time: "13:30", stay: 55, memo: "天照大御神が身を隠したと伝わる洞窟「天岩戸」を御神体として祀る神社。", transit: { mode: "car", min: 14 }, fallbackLatLng: [32.7345037, 131.3506899] },
+        { name: "天安河原", wikiTitle: "天安河原", address: "西臼杵郡高千穂町岩戸1073-1", time: "14:37", stay: 40, memo: "八百万の神が集まり相談したと伝わる、洞窟状の聖地。積まれた石が幻想的。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [32.7378698, 131.3532338] },
+        { name: "高千穂町歴史民俗資料館", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1515", time: "15:32", stay: 60, memo: "考古・民俗資料およそ1万点。高千穂神楽の神面や彫物も展示。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.715633, 131.303314] },
       ],
     ],
   },
