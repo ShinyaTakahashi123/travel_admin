@@ -152,7 +152,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "水沢うどんと石段の湯、伊香保温泉グルメ&湯めぐり1泊2日",
-    description: "名物の水沢うどんを味わい、宿では石段街の外湯を楽しむ、伊香保温泉のグルメと温泉を両方満喫する1泊2日プランです。",
+    description: "水沢うどんと発祥の水澤寺、365段の石段街と伊香保神社、露天風呂やロープウェイ、竹久夢二の美術館に牧場まで。伊香保温泉のグルメと湯めぐりを両方満喫する1泊2日プランです。",
     nights: 1,
     prefectureName: "群馬県",
     areaNames: ["伊香保温泉"],
@@ -160,11 +160,19 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["温泉"],
     days: [
       [
-        { name: "水沢うどん街", wikiTitle: "水沢うどん", address: "渋川市伊香保町水沢", time: "11:00", stay: 60, memo: "日本三大うどんの一つ、水沢うどんの老舗が集まる街道。", fallbackLatLng: [36.4903, 138.9433] },
-        { name: "石段街", wikiTitle: "伊香保温泉", address: "渋川市伊香保町伊香保", time: "13:00", stay: 70, memo: "うどんのあとは、石段街をゆっくり散策してお土産探し。", transit: { mode: "car", min: 15 } },
+        { name: "水澤寺", wikiTitle: "", address: "渋川市伊香保町水沢214", time: "9:00", stay: 60, memo: "坂東三十三観音の一つ。水沢うどん発祥の言い伝え。", fallbackLatLng: [36.479881, 138.945084] },
+        { name: "水沢うどん街", wikiTitle: "水沢うどん", address: "渋川市伊香保町水沢", time: "10:15", stay: 105, memo: "日本三大うどんの一つ、水沢うどんの老舗が集まる街道。", fallbackLatLng: [36.4903, 138.9433], transit: { mode: "walk", min: 15 } },
+        { name: "伊香保関所", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "12:15", stay: 30, memo: "江戸期の関所跡を復元した展示施設。", fallbackLatLng: [36.498536, 138.916419], transit: { mode: "bus", min: 15 } },
+        { name: "伊香保神社", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "12:49", stay: 55, memo: "石段街の頂に鎮座する、延喜式内社の古社。", fallbackLatLng: [36.4959531, 138.9158811], transit: { mode: "walk", min: 4 } },
+        { name: "石段街", wikiTitle: "伊香保温泉", address: "渋川市伊香保町伊香保", time: "13:50", stay: 160, memo: "うどんのあとは、石段街をゆっくり散策してお土産探し。", transit: { mode: "walk", min: 6 } },
       ],
       [
-        { name: "河鹿橋", wikiTitle: "河鹿橋", address: "渋川市伊香保町伊香保", time: "9:30", stay: 30, memo: "2日目の朝、静かな朱色の橋を眺めながら散策。" },
+        { name: "河鹿橋", wikiTitle: "河鹿橋", address: "渋川市伊香保町伊香保", time: "9:00", stay: 35, memo: "2日目の朝、静かな朱色の橋を眺めながら散策。" },
+        { name: "伊香保露天風呂", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "9:37", stay: 70, memo: "河鹿橋のたもとに湧く、黄金の湯の野外共同浴場。", fallbackLatLng: [36.4910202, 138.9159351], transit: { mode: "walk", min: 2 } },
+        { name: "伊香保ロープウェイ", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "10:55", stay: 25, memo: "不如帰駅と見晴駅を結ぶ、全長499mのロープウェイ。", fallbackLatLng: [36.4951112, 138.9202152], transit: { mode: "walk", min: 8 } },
+        { name: "見晴・伊香保森林公園", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "11:24", stay: 110, memo: "山頂の展望台と、二ツ岳中心の県立森林公園。", fallbackLatLng: [36.4931197, 138.9210903], transit: { mode: "walk", min: 4 } },
+        { name: "竹久夢二伊香保記念館", wikiTitle: "", address: "渋川市伊香保町伊香保544-119", time: "13:28", stay: 70, memo: "大正ロマンの画家・竹久夢二の美人画等を紹介。", fallbackLatLng: [36.500042, 138.92689], transit: { mode: "other", min: 14 } },
+        { name: "伊香保グリーン牧場", wikiTitle: "", address: "渋川市金井2844-1", time: "14:58", stay: 95, memo: "動物とふれあえる、赤城山麓に広がる牧場。", fallbackLatLng: [36.4989553, 138.9452169], transit: { mode: "bus", min: 20 } },
       ],
     ],
   },
