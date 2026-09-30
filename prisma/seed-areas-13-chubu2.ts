@@ -91,7 +91,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "たらい舟体験とトキの森公園、佐渡の自然と文化を楽しむプラン",
-    description: "佐渡名物のたらい舟に乗り、特別天然記念物トキの生態を観察できるトキの森公園を訪ねる。佐渡ならではの体験と自然を楽しむプランです。島内は路線バスの本数が少ないため、レンタカーでの移動がおすすめです。",
+    description: "佐渡島南部の小木港で乗るたらい舟体験から、船大工の集落・宿根木、砂金採り体験の西三川ゴールドパーク、特別天然記念物トキに出会えるトキの森公園、佐渡の歴史と伝説を伝える佐渡歴史伝説館まで。佐渡ならではの体験と自然、歴史を一日でめぐるプランです。島内は路線バスの本数が少ないため、レンタカーでの移動がおすすめです。",
     nights: 0,
     prefectureName: "新潟県",
     areaNames: ["佐渡島"],
@@ -100,7 +100,10 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "たらい舟（小木港）", wikiTitle: "たらい舟", address: "佐渡市小木町", time: "9:30", stay: 40, memo: "元々は海女の漁具だった、丸い桶の形をした佐渡名物の乗り物体験。", fallbackLatLng: [37.8092, 138.2497] },
-        { name: "トキの森公園", wikiTitle: "トキの森公園", address: "佐渡市新穂長畝383-2", time: "11:30", stay: 60, memo: "特別天然記念物トキの保護・繁殖施設。間近で生態を観察できる。", transit: { mode: "car", min: 40 }, fallbackLatLng: [38.0522, 138.4544] },
+        { name: "宿根木集落", wikiTitle: "", address: "佐渡市宿根木", time: "10:20", stay: 50, memo: "重要伝統的建造物群保存地区。船大工と廻船業で栄えた町並み、三角家。", fallbackLatLng: [37.8091059, 138.2438636], transit: { mode: "car", min: 10 } },
+        { name: "佐渡西三川ゴールドパーク", wikiTitle: "", address: "佐渡市西三川835-1", time: "11:30", stay: 75, memo: "佐渡最古と伝わる西三川砂金山跡の体験型資料館。砂金採り体験。", fallbackLatLng: [37.8981166, 138.2963258], transit: { mode: "car", min: 20 } },
+        { name: "トキの森公園", wikiTitle: "トキの森公園", address: "佐渡市新穂長畝383-2", time: "13:35", stay: 50, memo: "特別天然記念物トキの保護・繁殖施設。間近で生態を観察できる。", transit: { mode: "car", min: 50 }, fallbackLatLng: [38.0372802, 138.4219455] },
+        { name: "佐渡歴史伝説館", wikiTitle: "", address: "佐渡市真野655", time: "14:59", stay: 95, memo: "順徳天皇・日蓮・世阿弥をテーマにした体感型ミュージアム。能舞台。", fallbackLatLng: [37.9546675, 138.3462313], transit: { mode: "car", min: 34 } },
       ],
     ],
   },
