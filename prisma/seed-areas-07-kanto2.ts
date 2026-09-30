@@ -31,7 +31,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "鉄道博物館で1日満喫、家族で楽しむさいたま鉄道の旅",
-    description: "実物車両やシミュレーターが揃う鉄道博物館を中心に楽しむ、子どもから大人まで夢中になれる日帰りプランです。",
+    description: "実物車両やシミュレーターが揃う鉄道博物館、盆栽文化にふれる大宮盆栽美術館、緑豊かな大宮公園と小動物園、大宮の氏神様・武蔵一宮氷川神社まで。子どもから大人まで夢中になれる日帰りプランです。",
     nights: 0,
     prefectureName: "埼玉県",
     areaNames: ["さいたま市内"],
@@ -40,7 +40,9 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "鉄道博物館", wikiTitle: "鉄道博物館_(さいたま市)", address: "さいたま市大宮区大成町3丁目47", time: "9:30", stay: 180, memo: "実物車両の展示やシミュレーター体験が充実した、鉄道ファン憧れの博物館。" },
-        { name: "大宮盆栽美術館", wikiTitle: "さいたま市大宮盆栽美術館", address: "さいたま市北区土呂町2丁目24-3", time: "13:30", stay: 50, memo: "鉄道漬けの午前のあとは、静かな盆栽の世界でひと休み。", transit: { mode: "car", min: 15 } },
+        { name: "大宮盆栽美術館", wikiTitle: "さいたま市大宮盆栽美術館", address: "さいたま市北区土呂町2丁目24-3", time: "12:50", stay: 60, memo: "鉄道漬けの午前のあとは、静かな盆栽の世界でひと休み。", transit: { mode: "walk", min: 20 } },
+        { name: "大宮公園", wikiTitle: "", address: "さいたま市大宮区高鼻町", time: "14:04", stay: 75, memo: "氷川神社の境内地から生まれた県営公園。園内に小動物園。", fallbackLatLng: [35.9190335, 139.6318133], transit: { mode: "walk", min: 14 } },
+        { name: "武蔵一宮氷川神社", wikiTitle: "", address: "さいたま市大宮区高鼻町1-407", time: "15:23", stay: 70, memo: "2400年以上の歴史をもつ古社。日本一長いといわれる参道。", fallbackLatLng: [35.9167708, 139.6297653], transit: { mode: "walk", min: 4 } },
       ],
     ],
   },
