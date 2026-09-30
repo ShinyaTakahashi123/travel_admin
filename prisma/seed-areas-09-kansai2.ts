@@ -143,7 +143,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "奥の院", wikiTitle: "奥の院_(高野山)", address: "伊都郡高野町高野山550", time: "9:30", stay: 100, memo: "弘法大師御廟に続く、荘厳な杉並木の参道。20万基を超える墓石が並ぶ。" , fallbackLatLng: [34.2128, 135.5892] },
-        { name: "徳川家霊台", wikiTitle: "徳川家霊台", address: "伊都郡高野町高野山", time: "11:30", stay: 20, memo: "徳川家康・秀忠を祀る、極彩色の美しい霊廟建築。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [34.2144, 135.5878] },
+        { name: "徳川家霊台", wikiTitle: "徳川家霊台", address: "伊都郡高野町高野山", time: "11:14", stay: 25, memo: "徳川家康・秀忠を祀る、極彩色の美しい霊廟建築。", transit: { mode: "walk", min: 4 }, fallbackLatLng: [34.2144, 135.5878] },
+        { name: "金剛峯寺", wikiTitle: "金剛峯寺", address: "伊都郡高野町高野山132", time: "11:44", stay: 110, memo: "高野山真言宗総本山。蟠龍庭と柳の間。昼食もこのあたりで。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [34.2138822, 135.5836872] },
+        { name: "壇上伽藍・根本大塔", wikiTitle: "壇上伽藍", address: "伊都郡高野町高野山152", time: "13:39", stay: 60, memo: "空海が最初に堂塔を築いた聖地。日本初の多宝塔様式。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [34.213437, 135.5799621] },
+        { name: "高野山霊宝館", wikiTitle: "高野山霊宝館", address: "伊都郡高野町高野山306", time: "14:43", stay: 66, memo: "大正10年開館、国宝21件を含む文化財を収蔵。", transit: { mode: "walk", min: 4 }, fallbackLatLng: [34.2112832, 135.5808875] },
+        { name: "大門", wikiTitle: "大門_(高野山)", address: "伊都郡高野町高野山", time: "15:59", stay: 35, memo: "高野山の総門。高さ25mの二層の楼門。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.2131496, 135.572858] },
       ],
     ],
   },
