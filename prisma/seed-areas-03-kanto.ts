@@ -264,9 +264,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館", "城・史跡"],
     days: [
       [
-        { name: "徳川ミュージアム", wikiTitle: "徳川ミュージアム", address: "水戸市見川1丁目1215-1", time: "9:30", stay: 70, memo: "水戸徳川家伝来の大名道具を展示する私立博物館。" },
-        { name: "常磐神社", wikiTitle: "常磐神社", address: "水戸市常磐町1丁目3-1", time: "10:55", stay: 30, memo: "水戸光圀・斉昭を祀る神社。偕楽園に隣接。", transit: { mode: "walk", min: 15 } },
-        { name: "水戸市立博物館", wikiTitle: "水戸市", address: "水戸市大町3丁目3-20", time: "11:45", stay: 40, memo: "水戸の歴史と文化を紹介する総合博物館。", transit: { mode: "car", min: 15 } },
+        { name: "徳川ミュージアム", wikiTitle: "徳川ミュージアム", address: "水戸市見川1丁目1215-1", time: "9:30", stay: 80, memo: "水戸徳川家伝来の大名道具を展示する私立博物館。" },
+        { name: "常磐神社", wikiTitle: "常磐神社", address: "水戸市常磐町1丁目3-1", time: "11:05", stay: 30, memo: "水戸光圀・斉昭を祀る神社。偕楽園に隣接。", transit: { mode: "walk", min: 15 } },
+        { name: "水戸東照宮", wikiTitle: "", address: "水戸市宮町2丁目5-13", time: "11:50", stay: 45, memo: "徳川家康を祀る神社。安神車(現存最古の鉄製戦車)など。", fallbackLatLng: [36.3726307, 140.4733604], transit: { mode: "car", min: 15 } },
+        { name: "弘道館", wikiTitle: "弘道館", address: "水戸市三の丸1丁目6-29", time: "12:43", stay: 100, memo: "徳川斉昭が開設した日本最大規模の藩校。重要文化財の正門等。", fallbackLatLng: [36.3759247, 140.4771604], transit: { mode: "walk", min: 8 } },
+        { name: "水戸市立博物館", wikiTitle: "水戸市", address: "水戸市大町3丁目3-20", time: "14:41", stay: 40, memo: "水戸の歴史と文化を紹介する総合博物館。", transit: { mode: "walk", min: 18 } },
+        { name: "笠原水道", wikiTitle: "笠原水道", address: "水戸市千波町1500", time: "15:39", stay: 60, memo: "徳川光圀が築いた江戸時代の水道。岩樋の復元や竜頭栓。", fallbackLatLng: [36.3561503, 140.4633387], transit: { mode: "car", min: 18 } },
       ],
     ],
   },
