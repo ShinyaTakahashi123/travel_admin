@@ -287,7 +287,8 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "熊野本宮大社", wikiTitle: "熊野本宮大社", address: "田辺市本宮町本宮1110", time: "12:20", stay: 80, memo: "熊野三山めぐりの最初に、熊野信仰の中心地へ。", transit: { mode: "walk", min: 80 } },
         { name: "大斎原", wikiTitle: "大斎原", address: "田辺市本宮町本宮", time: "13:55", stay: 45, memo: "旧社地の大鳥居を参拝。", transit: { mode: "walk", min: 15 } },
         { name: "湯の峰温泉 つぼ湯", wikiTitle: "", address: "田辺市本宮町湯峯", time: "15:00", stay: 40, memo: "世界遺産に登録された、熊野詣の湯垢離場。日本最古とされる共同浴場。30分交代制。", fallbackLatLng: [33.8291897, 135.7577217], transit: { mode: "car", min: 20 } },
-        { name: "東光寺", wikiTitle: "", address: "田辺市本宮町湯峯", time: "15:43", stay: 50, memo: "湯の峰温泉の名の由来となった薬師如来を祀る寺。", fallbackLatLng: [33.8288511, 135.7577083], transit: { mode: "walk", min: 3 } },
+        { name: "東光寺", wikiTitle: "", address: "田辺市本宮町湯峯", time: "15:43", stay: 20, memo: "湯の峰温泉の名の由来となった薬師如来を祀る寺。", fallbackLatLng: [33.8288511, 135.7577083], transit: { mode: "walk", min: 3 } },
+        { name: "湯筒", wikiTitle: "", address: "田辺市本宮町湯峯", time: "16:05", stay: 25, memo: "90℃の湯が自噴する、温泉たまごを作れる名所。", fallbackLatLng: [33.828852, 135.757569], transit: { mode: "walk", min: 2 } },
       ],
       [
         { name: "神倉神社", wikiTitle: "", address: "新宮市神倉1丁目", time: "9:00", stay: 75, memo: "熊野速玉大社の摂社。ゴトビキ岩がご神体、538段の石段。", fallbackLatLng: [33.7242509, 135.9841101] },
