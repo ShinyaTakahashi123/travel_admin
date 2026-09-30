@@ -29,7 +29,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "大原美術館、日本初の西洋美術中心の私立美術館プラン",
-    description: "エル・グレコの名画も収蔵する、日本初の西洋美術中心の私立美術館・大原美術館。美観地区の町並みとは違う、アートを楽しむプランです。",
+    description: "エル・グレコの名画も収蔵する、日本初とされる西洋美術中心の私立美術館・大原美術館。美観地区の町並みとは違う、アートを楽しむプランです。",
     nights: 0,
     prefectureName: "岡山県",
     areaNames: ["倉敷"],
@@ -37,7 +37,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館"],
     days: [
       [
-        { name: "大原美術館", wikiTitle: "大原美術館", address: "倉敷市中央1丁目1-15", time: "9:30", stay: 90, memo: "実業家・大原孫三郎が設立した、日本初の西洋美術中心の私立美術館。エル・グレコの名画も収蔵。" },
+        { name: "大原美術館", wikiTitle: "大原美術館", address: "倉敷市中央1丁目1-15", time: "9:30", stay: 90, memo: "実業家・大原孫三郎が設立した、日本初とされる西洋美術中心の私立美術館。エル・グレコの名画も収蔵。" },
+        { name: "語らい座大原本邸", wikiTitle: "", address: "倉敷市中央1-2-1", time: "11:02", stay: 60, memo: "国重要文化財の大原家住宅。大原孫三郎の生家。", fallbackLatLng: [34.597137, 133.770615], transit: { mode: "walk", min: 2 } },
+        { name: "児島虎次郎記念館", wikiTitle: "", address: "倉敷市本町1160", time: "12:07", stay: 70, memo: "大原美術館の別館(2025年開館)。旧第一合同銀行倉敷支店の建物。", fallbackLatLng: [34.596249, 133.77417], transit: { mode: "walk", min: 5 } },
+        { name: "UKIYO-E KURASHIKI/国芳館", wikiTitle: "", address: "倉敷市本町1-24", time: "13:19", stay: 45, memo: "歌川国芳専門の世界初とされるミュージアム。", fallbackLatLng: [34.5965463, 133.7732839], transit: { mode: "walk", min: 2 } },
+        { name: "加計美術館", wikiTitle: "", address: "倉敷市中央1丁目4-7", time: "14:07", stay: 50, memo: "倉敷芸術科学大学が運営する美術館。学生・卒業生の企画展。", fallbackLatLng: [34.595721, 133.7714865], transit: { mode: "walk", min: 3 } },
+        { name: "倉敷市立美術館", wikiTitle: "", address: "倉敷市中央2丁目6-1", time: "15:01", stay: 90, memo: "丹下健三設計の旧市庁舎を再生した美術館。池田遙邨コレクション。", fallbackLatLng: [34.5946987, 133.7689589], transit: { mode: "walk", min: 4 } },
       ],
     ],
   },
