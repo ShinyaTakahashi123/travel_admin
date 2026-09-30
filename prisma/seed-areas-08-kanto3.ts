@@ -160,11 +160,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["温泉"],
     days: [
       [
-        { name: "水澤寺", wikiTitle: "", address: "渋川市伊香保町水沢214", time: "9:00", stay: 60, memo: "坂東三十三観音の一つ。水沢うどん発祥の言い伝え。", fallbackLatLng: [36.479881, 138.945084] },
-        { name: "水沢うどん街", wikiTitle: "水沢うどん", address: "渋川市伊香保町水沢", time: "10:15", stay: 105, memo: "日本三大うどんの一つ、水沢うどんの老舗が集まる街道。", fallbackLatLng: [36.4903, 138.9433], transit: { mode: "walk", min: 15 } },
-        { name: "伊香保関所", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "12:15", stay: 30, memo: "江戸期の関所跡を復元した展示施設。", fallbackLatLng: [36.498536, 138.916419], transit: { mode: "bus", min: 15 } },
-        { name: "伊香保神社", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "12:49", stay: 55, memo: "石段街の頂に鎮座する、延喜式内社の古社。", fallbackLatLng: [36.4959531, 138.9158811], transit: { mode: "walk", min: 4 } },
-        { name: "石段街", wikiTitle: "伊香保温泉", address: "渋川市伊香保町伊香保", time: "13:50", stay: 160, memo: "うどんのあとは、石段街をゆっくり散策してお土産探し。", transit: { mode: "walk", min: 6 } },
+        { name: "伊香保関所", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "9:00", stay: 30, memo: "江戸期の関所跡を復元した展示施設。", fallbackLatLng: [36.498536, 138.916419] },
+        { name: "伊香保神社", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "9:34", stay: 55, memo: "石段街の頂に鎮座する、延喜式内社の古社。", fallbackLatLng: [36.4959531, 138.9158811], transit: { mode: "walk", min: 4 } },
+        { name: "石段街", wikiTitle: "伊香保温泉", address: "渋川市伊香保町伊香保", time: "10:35", stay: 60, memo: "石段街をゆっくり散策してお土産探し。", transit: { mode: "walk", min: 6 } },
+        { name: "水沢うどん街", wikiTitle: "水沢うどん", address: "渋川市伊香保町水沢", time: "11:50", stay: 95, memo: "日本三大うどんの一つ、水沢うどんの老舗が集まる街道。", fallbackLatLng: [36.4903, 138.9433], transit: { mode: "bus", min: 15 } },
+        { name: "水澤寺", wikiTitle: "", address: "渋川市伊香保町水沢214", time: "13:40", stay: 60, memo: "坂東三十三観音の一つ。水沢うどん発祥の言い伝え。", fallbackLatLng: [36.479881, 138.945084], transit: { mode: "walk", min: 15 } },
+        { name: "徳冨蘆花記念文学館", wikiTitle: "", address: "渋川市伊香保町伊香保", time: "15:00", stay: 90, memo: "小説「不如帰」で知られる文豪・徳冨蘆花の記念館。", fallbackLatLng: [36.499199, 138.915858], transit: { mode: "bus", min: 20 } },
       ],
       [
         { name: "河鹿橋", wikiTitle: "河鹿橋", address: "渋川市伊香保町伊香保", time: "9:00", stay: 35, memo: "2日目の朝、静かな朱色の橋を眺めながら散策。" },
