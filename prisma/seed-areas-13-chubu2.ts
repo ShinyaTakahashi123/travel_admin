@@ -201,7 +201,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "近江町市場", wikiTitle: "近江町市場", address: "金沢市上近江町50", time: "9:30", stay: 70, memo: "「金沢の台所」と呼ばれる、新鮮な海の幸が並ぶ市場で朝ごはん。" },
-        { name: "ひがし茶屋街", wikiTitle: "ひがし茶屋街", address: "金沢市東山1丁目", time: "11:10", stay: 80, memo: "紅殻格子の町家が並ぶ、金沢を代表する茶屋街。金箔スイーツも人気。", transit: { mode: "walk", min: 15 } },
+        { name: "ひがし茶屋街", wikiTitle: "ひがし茶屋街", address: "金沢市東山1丁目", time: "10:55", stay: 80, memo: "紅殻格子の町家が並ぶ、金沢を代表する茶屋街。金箔スイーツも人気。散策の途中で昼食をとりましょう。", transit: { mode: "walk", min: 15 } },
+        { name: "兼六園", wikiTitle: "兼六園", address: "金沢市兼六町1", time: "12:30", stay: 60, memo: "加賀藩主が長い歳月をかけて作り上げた大名庭園。日本三名園の一つ・国の特別名勝。", transit: { mode: "bus", min: 15 } },
+        { name: "金沢城公園", wikiTitle: "金沢城公園", address: "金沢市丸の内1-1", time: "13:38", stay: 60, memo: "加賀藩前田家の居城跡。菱櫓・五十間長屋・橋爪門続櫓(2001年復元)や石川門(重文)が見どころ。", transit: { mode: "walk", min: 8 } },
+        { name: "金沢21世紀美術館", wikiTitle: "金沢21世紀美術館", address: "金沢市広坂1丁目2-1", time: "14:48", stay: 60, memo: "SANAA設計の円形美術館。「スイミング・プール」など交流ゾーンの恒久展示が見どころ。", transit: { mode: "walk", min: 10 } },
+        { name: "尾山神社", wikiTitle: "尾山神社", address: "金沢市尾山町11-1", time: "15:58", stay: 45, memo: "前田利家を祀る神社。和漢洋折衷の神門(明治8年築、国指定重要文化財)が見どころ。参拝は静かに。帰りは香林坊・片町方面からバスやタクシーで金沢駅へ。", transit: { mode: "walk", min: 10 } },
       ],
     ],
   },
