@@ -18,8 +18,8 @@
  *   時刻表: https://www.navitime.co.jp/bus/diagram/timelist?departure=00080614&arrival=00082532&line=00020400 ・ https://www.navitime.co.jp/bus/diagram/timelist?departure=00082532&arrival=00283618&line=00052967 ・ https://www.navitime.co.jp/bus/diagram/timelist?departure=00283614&arrival=00228507&line=00052967 ・ https://www.navitime.co.jp/bus/diagram/timelist?departure=00025547&arrival=00025555&line=00050362
  * 座標の出典: OSM（ひがし茶屋街 node 2146147848／主計町茶屋街 node 2146147851／近江町市場 node 10792965205／尾山神社 way 207744651／金沢城公園 way 128905245／兼六園 way 50288147／成巽閣 way 303668313／長町武家屋敷跡 野村家 node 2146147872／
  *   金沢21世紀美術館 way 197980653／香林坊 バス停 node 4704464293／鈴木大拙館 way 877868599／国立工芸館 way 876150436／石川県立歴史博物館 way 320149532／石川県立美術館 relation 11953514／和田家住宅 way 236248621／明善寺 way 1260591574／
- *   荻町城跡展望台 node 2325707789／荻町 node 8536977639／白川八幡神社 way 586010808／民家園 way 662319019（Minkaen）／菅沼 node 8959032842／塩硝の館 node 1420913961（隣の五箇山民俗館の点として）／民俗資料館村上家 way 1342700012／白山宮 way 1342700013／
- *   上梨 バス停 node 4458842890／地主神社 node 4400562292（相倉集落の中の点として）／善徳寺 node 2837683703／城端曳山会館 way 279545671）
+ *   荻町城跡展望台 node 2325707789／荻町 node 8536977639／白川八幡神社 way 586010808／民家園 way 662319019（Minkaen）／菅沼 node 8959032842／塩硝の館 node 1420913961（五箇山民俗館は推定。隣の塩硝の館の点を元に）／民俗資料館村上家 way 1342700012／白山宮 way 1342700013／
+ *   上梨 バス停 node 4458842890（上梨の昼食は推定。バス停の点を元に）／地主神社 node 4400562292（相倉合掌造り集落は推定。集落の中の地主神社の点を元に）／善徳寺 node 2837683703／城端曳山会館 way 279545671）
  * 使い方(admin-site): npm run prod -- npx tsx prisma/fix-489-8d2e4984.ts [--commit]
  */
 import { prisma } from "../src/lib/prisma";
