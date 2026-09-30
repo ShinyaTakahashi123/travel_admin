@@ -167,7 +167,7 @@ const AREAS: AreaSeed[] = [
       { name: "ファーム富田", address: "空知郡中富良野町基線北15号", lat: 43.46, lng: 142.4667, memo: "一面に広がるラベンダー畑で有名な、富良野を代表する花畑。", websiteUrl: "https://www.farm-tomita.co.jp/", wikiTitle: "ファーム富田" },
       { name: "青い池", address: "上川郡美瑛町白金", lat: 43.611, lng: 142.6817, memo: "水面が青く輝く、美瑛を代表する神秘的なスポット。", websiteUrl: "https://biei-hokkaido.jp/", wikiTitle: "青い池" },
       { name: "四季彩の丘", address: "上川郡美瑛町新星第三", lat: 43.5464, lng: 142.4869, memo: "虹色の花畑が丘一面に広がる、美瑛の人気観光農園。", websiteUrl: "https://shikisainooka.jp/", wikiTitle: "四季彩の丘" },
-      { name: "白ひげの滝", address: "上川郡美瑛町白金", lat: 43.6122, lng: 142.6839, memo: "青い水面に流れ落ちる、美瑛川沿いの美しい滝。", websiteUrl: "https://biei-hokkaido.jp/", wikiTitle: "白ひげの滝" },
+      { name: "白ひげの滝", address: "上川郡美瑛町白金", lat: 43.4746, lng: 142.6392, memo: "青い水面に流れ落ちる、美瑛川沿いの美しい滝。", websiteUrl: "https://biei-hokkaido.jp/", wikiTitle: "白ひげの滝" },
       { name: "美瑛の丘（パッチワークの路）", address: "上川郡美瑛町", lat: 43.59, lng: 142.44, memo: "色とりどりの畑が織りなす、パッチワークのような丘陵地帯。", websiteUrl: "https://biei-hokkaido.jp/", wikiTitle: "美瑛町" },
       { name: "ケンとメリーの木", address: "上川郡美瑛町北瑛", lat: 43.5975, lng: 142.4256, memo: "CMで有名になった、丘の上にそびえる一本のポプラの木。", websiteUrl: "https://biei-hokkaido.jp/", wikiTitle: "ケンとメリーの木" },
       { name: "新富良野プリンスホテル・ニングルテラス", address: "富良野市中御料", lat: 43.3167, lng: 142.375, memo: "森の中に立つログハウス群のショップ街。夜の散策も人気。", websiteUrl: "https://www.princehotels.co.jp/shinfurano/", wikiTitle: "ニングルテラス" },
@@ -175,6 +175,8 @@ const AREAS: AreaSeed[] = [
       { name: "十勝岳望岳台", address: "上川郡美瑛町白金", lat: 43.6497, lng: 142.6875, memo: "活火山・十勝岳連峰を間近に望む、雄大な高原展望台。", websiteUrl: "https://biei-hokkaido.jp/", wikiTitle: "望岳台" },
       { name: "拓真館", address: "上川郡美瑛町美田", lat: 43.535, lng: 142.4544, memo: "美瑛の風景写真で有名な前田真三の作品を展示するギャラリー。", websiteUrl: "https://takushinkan.gallery/", wikiTitle: "拓真館" },
       { name: "三愛の丘展望公園", address: "上川郡美瑛町大久保協生", lat: 43.6069, lng: 142.4744, memo: "美瑛の丘陵風景を360度見渡せる小さな展望公園。", websiteUrl: "https://biei-hokkaido.jp/", wikiTitle: "美瑛町" },
+      { name: "北西の丘展望公園", address: "上川郡美瑛町大久保協生", lat: 43.6049, lng: 142.458, memo: "ピラミッド型の展望台から大雪山連峰を一望できる公園。", websiteUrl: "https://www.biei-hokkaido.jp/", wikiTitle: "美瑛町" },
+      { name: "風のガーデン", address: "富良野市中御料", lat: 43.3233, lng: 142.3541, memo: "ドラマ『風のガーデン』の撮影のために作られた宿根草の庭園。", websiteUrl: "https://www.princehotels.co.jp/shinfurano/", wikiTitle: "風のガーデン" },
     ],
   },
   {
