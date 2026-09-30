@@ -300,6 +300,8 @@ const AREAS: AreaSeed[] = [
       { name: "堀越神社", address: "大阪市天王寺区茶臼山町5-8", lat: 34.6503, lng: 135.5157, memo: "「一生に一度の願い」を叶えるとされる、聖徳太子ゆかりの神社。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "堀越神社" },
       { name: "大江神社", address: "大阪市天王寺区夕陽丘町5-59", lat: 34.658, lng: 135.5183, memo: "四天王寺の鎮守社の一つ。狛虎が祀られる珍しい神社。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "大江神社" },
       { name: "新世界・通天閣", address: "大阪市浪速区恵美須東1丁目18-6", lat: 34.6525393, lng: 135.5063098, memo: "明治36年の博覧会跡地に発展した繁華街。ジャンジャン横丁など昭和の下町情緒。", websiteUrl: "https://www.tsutenkaku.co.jp/", wikiTitle: "通天閣" },
+      { name: "慶沢園", address: "大阪市天王寺区茶臼山町1-82", lat: 34.6497113, lng: 135.5114229, memo: "住友家が大正7年に完成させた日本庭園。庭師・小川治兵衛の作。", websiteUrl: "https://www.osaka-art-museum.jp/keitakuen/", wikiTitle: "慶沢園" },
+      { name: "茶臼山", address: "大阪市天王寺区茶臼山町", lat: 34.6518614, lng: 135.5114555, memo: "大坂冬の陣で家康、夏の陣で真田幸村の本陣が置かれた史跡。", websiteUrl: "https://osaka-info.jp/spot/chausuyama-tennoji-park/", wikiTitle: "茶臼山_(大阪市)" },
     ],
   },
   {
