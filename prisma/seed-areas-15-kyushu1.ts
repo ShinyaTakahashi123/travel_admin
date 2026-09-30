@@ -51,6 +51,10 @@ const ITINERARIES: HandmadeItinerary[] = [
     ],
   },
   {
+    // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#332)で
+    // 1日目1か所・2日目1か所から11スポットに再構成。佐賀城公園・松原エリア
+    // (1日目)と柳町・与賀町・神野エリア(2日目)の実在の公共スポットで構成
+    // (docs/content/20260929-itinerary-4spots-9to16-checklist.md #332)。
     title: "佐賀県立博物館と旧古賀銀行、アートと明治レトロ建築を巡る1泊2日",
     description: "佐賀の美術・工芸を紹介する佐賀県立博物館・美術館と、レトロな洋風建築が残る佐賀市歴史民俗館。城下町とは違う佐賀の表情を楽しむ1泊2日です。",
     nights: 1,
@@ -60,10 +64,19 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館"],
     days: [
       [
-        { name: "佐賀県立博物館・美術館", wikiTitle: "佐賀県立美術館", address: "佐賀市城内1丁目15-23", time: "10:00", stay: 80, memo: "佐賀ゆかりの美術・工芸品を紹介する県立の博物館・美術館。", fallbackLatLng: [33.2495, 130.2999] },
+        { name: "佐賀県立博物館・美術館", wikiTitle: "佐賀県立美術館", address: "佐賀市城内1丁目15-23", time: "9:00", stay: 110, memo: "佐賀ゆかりの美術・工芸品を紹介する県立の博物館・美術館。", fallbackLatLng: [33.2495, 130.2999] },
+        { name: "佐賀城本丸歴史館", wikiTitle: "", address: "佐賀市城内2丁目18-1", time: "10:57", stay: 85, memo: "本丸御殿の一部を復元した施設。幕末・維新期の佐賀藩をテーマに展示。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [33.2456467, 130.3021684] },
+        { name: "佐嘉神社", wikiTitle: "", address: "佐賀市松原2丁目10-43", time: "12:30", stay: 35, memo: "10代藩主鍋島直正・11代直大を祀る神社。昼食も兼ねる。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [33.251144, 130.302719] },
+        { name: "徴古館", wikiTitle: "", address: "佐賀市松原2丁目5-22", time: "13:07", stay: 85, memo: "旧鍋島家伝来の美術・工芸品を収蔵する郷土資料館。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2515786, 130.3013806] },
+        { name: "松原川親水公園", wikiTitle: "", address: "佐賀市松原2丁目", time: "14:35", stay: 20, memo: "佐嘉神社周辺に整備されたおよそ750mの親水プロムナード。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [33.2508, 130.3018] },
+        { name: "佐賀バルーンミュージアム", wikiTitle: "", address: "佐賀市松原2丁目2-27", time: "15:00", stay: 90, memo: "熱気球をテーマにした日本初のミュージアム。フライトシミュレーター等。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [33.2524694, 130.3003905] },
       ],
       [
-        { name: "佐賀市歴史民俗館", wikiTitle: "佐賀市歴史民俗館", address: "佐賀市柳町2-9", time: "9:30", stay: 60, memo: "2日目は、旧古賀銀行など明治〜大正期の洋風建築が残る一角を散策。", fallbackLatLng: [33.2591, 130.2988] },
+        { name: "佐賀市歴史民俗館", wikiTitle: "佐賀市歴史民俗館", address: "佐賀市柳町2-9", time: "9:00", stay: 90, memo: "旧古賀銀行など明治〜大正期の洋風建築が残る一角を散策。", fallbackLatLng: [33.2591, 130.2988] },
+        { name: "龍造寺八幡宮", wikiTitle: "", address: "佐賀市白山1丁目3-2", time: "10:38", stay: 40, memo: "肥前鳥居(市重要文化財)で知られる龍造寺氏ゆかりの神社。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [33.255301, 130.2983534] },
+        { name: "与賀神社", wikiTitle: "", address: "佐賀市与賀町2-50", time: "11:30", stay: 55, memo: "国重要文化財の楼門・石橋・鳥居、樹齢1400年の大楠で知られる古社。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [33.2488679, 130.2948509] },
+        { name: "神野公園", wikiTitle: "", address: "佐賀市神園4丁目1-3", time: "12:40", stay: 110, memo: "鍋島直正の別邸跡の庭園。茶室・小動物園・遊園地。昼食も兼ねる。", transit: { mode: "bus", min: 15 }, fallbackLatLng: [33.2660578, 130.280924] },
+        { name: "佐賀県庁展望ホール", wikiTitle: "", address: "佐賀市城内1丁目1-59", time: "14:45", stay: 105, memo: "県庁新館最上階の360度展望ホール。", transit: { mode: "bus", min: 15 }, fallbackLatLng: [33.2495324, 130.2990441] },
       ],
     ],
   },
