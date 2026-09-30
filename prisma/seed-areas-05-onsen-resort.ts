@@ -151,7 +151,7 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "河口湖〜富士山パノラマロープウェイ", wikiTitle: "河口湖天上山公園", address: "南都留郡富士河口湖町浅川1163-1", time: "11:40", stay: 60, memo: "山頂から富士山と河口湖を一望できる、天上山への空中散歩。", transit: { mode: "car", min: 15 } },
         { name: "新倉山浅間公園", wikiTitle: "新倉山浅間公園", address: "山梨県富士吉田市新倉3353", time: "12:50", stay: 60, memo: "398段の階段の先に、富士山と五重塔(忠霊塔、戦没者慰霊の塔)を望む絶景。昼食もこの周辺で。", transit: { mode: "car", min: 10 } },
         { name: "忍野八海", wikiTitle: "忍野八海", address: "山梨県南都留郡忍野村忍草", time: "14:05", stay: 60, memo: "富士山の伏流水が湧く8つの池。世界文化遺産(富士山の構成資産)。", transit: { mode: "car", min: 15 } },
-        { name: "北口本宮冨士浅間神社", wikiTitle: "北口本宮冨士浅間神社", address: "山梨県富士吉田市上吉田5558", time: "15:17", stay: 45, memo: "富士山の世界遺産構成資産。日本最大級の木造大鳥居、国重要文化財11棟。", transit: { mode: "car", min: 12 } },
+        { name: "北口本宮冨士浅間神社", wikiTitle: "北口本宮冨士浅間神社", address: "山梨県富士吉田市上吉田5558", time: "15:17", stay: 45, memo: "富士山の世界遺産構成資産。日本最大級とされる木造大鳥居、国重要文化財11棟。", transit: { mode: "car", min: 12 } },
         { name: "新屋山神社", wikiTitle: "新屋山神社", address: "山梨県富士吉田市新屋1-1", time: "16:12", stay: 45, memo: "天文3年(1534)創建と伝わる神社。山を守る神として信仰され、近年は金運を願う人も多い。帰りは車で河口湖・富士吉田方面へ。", transit: { mode: "walk", min: 10 } },
       ],
     ],
