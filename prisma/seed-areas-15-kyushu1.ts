@@ -205,10 +205,22 @@ const ITINERARIES: HandmadeItinerary[] = [
     areaNames: ["別府温泉"],
     tagNames: ["温泉"],
     purposeNames: ["温泉", "絶景・フォトスポット"],
+    // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#335)で
+    // 2か所から10か所に再構成。正式な7つの地獄すべてに、地獄蒸し工房鉄輪・
+    // 明礬湯の花小屋・竹瓦温泉を加えた
+    // (docs/content/20260929-itinerary-4spots-9to16-checklist.md #335)。
     days: [
       [
         { name: "海地獄", wikiTitle: "海地獄", address: "別府市大字鉄輪559-1", time: "9:30", stay: 40, memo: "コバルトブルーの美しい湯が特徴の、別府地獄めぐりを代表する一つ。" },
-        { name: "血の池地獄", wikiTitle: "血の池地獄", address: "別府市野田778", time: "10:40", stay: 30, memo: "赤土に由来する、鮮やかな赤色の湯が印象的な地獄。日本最古の天然地獄。", transit: { mode: "car", min: 15 } },
+        { name: "鬼石坊主地獄", wikiTitle: "", address: "別府市大字鉄輪559-1", time: "10:12", stay: 20, memo: "粘土質の熱泥が坊主頭のように球状に沸き立つ地獄。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3151826, 131.4690325] },
+        { name: "かまど地獄", wikiTitle: "", address: "別府市鉄輪621", time: "10:37", stay: 25, memo: "1〜6丁目、それぞれ違う色の池が点在する地獄。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [33.3164456, 131.4724531] },
+        { name: "鬼山地獄", wikiTitle: "", address: "別府市鉄輪625", time: "11:04", stay: 20, memo: "摂氏99度の高温池。ワニの飼育でも知られる「ワニ地獄」。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3161473, 131.4733597] },
+        { name: "白池地獄", wikiTitle: "", address: "別府市鉄輪283-1", time: "11:26", stay: 20, memo: "湧出時は無色、池に落ちて白濁する地獄。熱帯魚観賞施設併設。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3153269, 131.4741443] },
+        { name: "地獄蒸し工房鉄輪", wikiTitle: "", address: "別府市風呂本5組", time: "11:49", stay: 70, memo: "温泉蒸気を使った伝統の地獄蒸し料理を体験できる別府市の施設。昼食も兼ねる。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [33.315443, 131.4761942] },
+        { name: "血の池地獄", wikiTitle: "血の池地獄", address: "別府市野田778", time: "13:04", stay: 30, memo: "赤土に由来する、鮮やかな赤色の湯が印象的な地獄。日本最古の天然地獄。", transit: { mode: "car", min: 5 } },
+        { name: "龍巻地獄", wikiTitle: "", address: "別府市内竈", time: "13:36", stay: 20, memo: "一定間隔で熱湯・噴気を噴き上げる間欠泉。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3269924, 131.4794383] },
+        { name: "明礬湯の花小屋", wikiTitle: "", address: "別府市明礬6組", time: "14:06", stay: 35, memo: "国重要文化的景観・重要無形民俗文化財の湯の花製造小屋群。", transit: { mode: "car", min: 10 }, fallbackLatLng: [33.31657, 131.441071] },
+        { name: "竹瓦温泉", wikiTitle: "", address: "別府市元町16-23", time: "14:58", stay: 95, memo: "唐破風造りの市営共同浴場。砂湯でも知られる別府のシンボル。", transit: { mode: "car", min: 17 }, fallbackLatLng: [33.277449, 131.5059764] },
       ],
     ],
   },
