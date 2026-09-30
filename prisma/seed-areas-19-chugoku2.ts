@@ -227,8 +227,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["お寺", "絶景・フォトスポット"],
     days: [
       [
-        { name: "千光寺", wikiTitle: "千光寺", address: "尾道市東土堂町15-1", time: "9:30", stay: 60, memo: "尾道のシンボル的な寺院。境内やロープウェー山頂からは尾道水道を一望できる。" },
-        { name: "尾道本通り商店街", wikiTitle: "尾道市", address: "尾道市土堂1丁目", time: "11:00", stay: 70, memo: "レトロな商店やカフェが並ぶ、尾道の中心商店街。猫の町としても知られる。", transit: { mode: "walk", min: 15 } },
+        { name: "千光寺", wikiTitle: "千光寺", address: "尾道市東土堂町15-1", time: "9:30", stay: 70, memo: "尾道のシンボル的な寺院。境内やロープウェー山頂からは尾道水道を一望できる。" },
+        { name: "天寧寺三重塔", wikiTitle: "", address: "尾道市東土堂町17-29", time: "10:45", stay: 20, memo: "尾道を代表する写真スポット。もとは五重塔だったと伝わる。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [34.4100702, 133.1998258] },
+        { name: "艮神社", wikiTitle: "", address: "尾道市長江1丁目3-5", time: "11:10", stay: 35, memo: "猫の細道の先にある古社。樹齢900年のクスノキ(県天然記念物)。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [34.410725, 133.2005655] },
+        { name: "西國寺", wikiTitle: "", address: "尾道市西久保町29-27", time: "11:53", stay: 55, memo: "2mを超える大草鞋で知られる真言宗大本山。昼食も兼ねる。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [34.4154284, 133.2031395] },
+        { name: "浄土寺", wikiTitle: "", address: "尾道市東久保町20-28", time: "12:58", stay: 75, memo: "本堂・多宝塔が国宝の名刹。足利尊氏の参籠の間が残る。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.4119587, 133.2107802] },
+        { name: "尾道本通り商店街", wikiTitle: "尾道市", address: "尾道市土堂1丁目", time: "14:21", stay: 130, memo: "レトロな商店やカフェが並ぶ、尾道の中心商店街。猫の町としても知られる。", transit: { mode: "walk", min: 8 } },
       ],
     ],
   },
