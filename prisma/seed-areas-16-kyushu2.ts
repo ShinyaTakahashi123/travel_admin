@@ -44,10 +44,12 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#330)で
-    // 1日目1か所・2日目1か所から11スポットに再構成。夜神楽(1日目)・雲海(2日目)
-    // はどちらも決まり6「例外(朝)」の対象のため時刻指定のスポットにはせず、
-    // 1日目は天岩戸神社らの通常の日として組み、2日目は国見ヶ丘の日の出から
-    // 始まる「例外（朝）」として組んだ(docs/content/20260929-itinerary-4spots-9to16-checklist.md #330)。
+    // 1日目1か所・2日目1か所から再構成。夜神楽(1日目)・雲海(2日目)はどちらも
+    // 決まり6「例外(朝)」の対象のため時刻指定のスポットにはせず、1日目は
+    // 天岩戸神社らの通常の日、2日目は国見ヶ丘の日の出から始まる「例外（朝）」
+    // として組んだ。企画運営2026-10-01 04:11の指摘で、当初の長い滞在6件を
+    // 決まりAの水増しと指摘され、実時間に戻して秋元神社・道の駅青雲橋等の
+    // 実在スポットで埋め直した(docs/content/20260929-itinerary-4spots-9to16-checklist.md #330)。
     title: "高千穂神社の夜神楽と国見ヶ丘の雲海、伝統と絶景の1泊2日",
     description: "高千穂神社に伝わる夜神楽と、雲海の名所として知られる国見ヶ丘を中心に、天岩戸神社や槵觸神社、荒立神社など、高千穂の神話ゆかりの地をめぐる1泊2日です。高千穂峡・真名井の滝めぐりは含みません。",
     nights: 1,
@@ -57,19 +59,24 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "祭り・イベント"],
     days: [
       [
-        { name: "天岩戸神社(西本宮)", wikiTitle: "天岩戸神社", address: "西臼杵郡高千穂町岩戸1073-1", time: "9:00", stay: 70, memo: "天照大御神が身を隠したと伝わる洞窟「天岩戸」を御神体として祀る神社。", fallbackLatLng: [32.7345037, 131.3506899] },
-        { name: "天安河原", wikiTitle: "天安河原", address: "西臼杵郡高千穂町岩戸1073-1", time: "10:22", stay: 45, memo: "八百万の神が集まり相談したと伝わる、洞窟状の聖地。積まれた石が幻想的。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [32.7378698, 131.3532338] },
-        { name: "天岩戸神社(東本宮)", wikiTitle: "", address: "西臼杵郡高千穂町岩戸", time: "11:17", stay: 35, memo: "天照大御神が天岩戸からお出ましのあと最初に住んだ場所と伝わる社。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [32.7327749, 131.3505047] },
-        { name: "槵觸神社(くしふる神社)", wikiTitle: "槵觸神社", address: "西臼杵郡高千穂町三田井713", time: "12:07", stay: 110, memo: "天孫降臨ゆかりの神社。くしふる峰を御神体として祀る。昼食も兼ねる。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.7099875, 131.3138104] },
-        { name: "荒立神社", wikiTitle: "荒立神社", address: "西臼杵郡高千穂町大字三田井667", time: "14:02", stay: 45, memo: "猿田彦命と天鈿女命をまつる神社。夫婦円満・縁結びのご利益で知られる。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [32.7116233, 131.3169702] },
-        { name: "高千穂神社", wikiTitle: "高千穂神社", address: "西臼杵郡高千穂町三田井1037", time: "14:53", stay: 125, memo: "高千穂郷八十八社の総社。夫婦杉・秩父杉・鎮石等。神楽殿で夜神楽が公開される。", transit: { mode: "car", min: 6 } },
+        { name: "天岩戸神社(西本宮)", wikiTitle: "天岩戸神社", address: "西臼杵郡高千穂町岩戸1073-1", time: "8:30", stay: 55, memo: "天照大御神が身を隠したと伝わる洞窟「天岩戸」を御神体として祀る神社。バスセンター付近でレンタカーを借りてから向かう。", fallbackLatLng: [32.7345037, 131.3506899] },
+        { name: "天安河原", wikiTitle: "天安河原", address: "西臼杵郡高千穂町岩戸1073-1", time: "9:37", stay: 40, memo: "八百万の神が集まり相談したと伝わる、洞窟状の聖地。積まれた石が幻想的。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [32.7378698, 131.3532338] },
+        { name: "天岩戸神社(東本宮)", wikiTitle: "", address: "西臼杵郡高千穂町岩戸", time: "10:27", stay: 25, memo: "天照大御神が天岩戸からお出ましのあと最初に住んだ場所と伝わる社。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [32.7327749, 131.3505047] },
+        { name: "八大龍王水神", wikiTitle: "", address: "西臼杵郡高千穂町岩戸6521", time: "11:01", stay: 20, memo: "およそ1300年の歴史を持つと伝わる水の神様。仏法を守護する八大龍王を祀る。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [32.7301824, 131.3564572] },
+        { name: "槵觸神社(くしふる神社)", wikiTitle: "槵觸神社", address: "西臼杵郡高千穂町三田井713", time: "11:36", stay: 30, memo: "天孫降臨ゆかりの神社。くしふる峰を御神体として祀る。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.7099875, 131.3138104] },
+        { name: "四皇子峰・高天原遥拝所", wikiTitle: "", address: "西臼杵郡高千穂町三田井1073", time: "12:09", stay: 18, memo: "神武天皇の兄弟4皇子生誕の地と伝わる丘。南端の石祠は高天原を遥拝する。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [32.7090042, 131.3151346] },
+        { name: "天真名井", wikiTitle: "", address: "西臼杵郡高千穂町三田井", time: "12:32", stay: 12, memo: "樹齢1300年のケヤキの根元から湧く水。瓊々杵尊が水種を移したと伝わる。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [32.7098, 131.3117] },
+        { name: "荒立神社", wikiTitle: "荒立神社", address: "西臼杵郡高千穂町大字三田井667", time: "12:51", stay: 30, memo: "猿田彦命と天鈿女命をまつる神社。急いで建てたため「荒立」の名がついたと伝わる。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [32.7116233, 131.3169702] },
+        { name: "高千穂神社", wikiTitle: "高千穂神社", address: "西臼杵郡高千穂町三田井1037", time: "13:27", stay: 120, memo: "高千穂郷八十八社の総社。夫婦杉・秩父杉・鎮石等。参道近くで昼食も。神楽殿で夜神楽が公開される。", transit: { mode: "car", min: 6 } },
+        { name: "高千穂町歴史民俗資料館", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1515", time: "15:32", stay: 60, memo: "考古・民俗資料およそ1万点。高千穂神楽の神面や彫物も展示。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.715633, 131.303314] },
       ],
       [
-        { name: "国見ヶ丘", wikiTitle: "国見ヶ丘", address: "西臼杵郡高千穂町押方", time: "6:00", stay: 150, memo: "秋から冬の早朝、条件がそろうと雲海が広がる展望台。日の出前の移動は安全第一で。" },
-        { name: "道の駅高千穂", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1296-34", time: "8:40", stay: 70, memo: "朝食と地元特産品の物産コーナー。展望デッキから町並みを一望。", transit: { mode: "car", min: 10 }, fallbackLatLng: [32.7085599, 131.3007282] },
-        { name: "高千穂あまてらす鉄道", wikiTitle: "", address: "西臼杵郡高千穂町三田井1425-1", time: "9:55", stay: 110, memo: "旧国鉄高千穂線の線路を活用した観光鉄道。高千穂鉄橋を渡るカート体験。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.714555, 131.3068484] },
-        { name: "高千穂峡淡水魚水族館", wikiTitle: "", address: "西臼杵郡高千穂町向山60-1", time: "11:51", stay: 120, memo: "玉垂の滝の湧水を使う小さな水族館。ヤマメ等およそ100種。昼食も兼ねる。", transit: { mode: "car", min: 6 }, fallbackLatLng: [32.702147, 131.3006739] },
-        { name: "高千穂の湯", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井3214-1", time: "14:00", stay: 155, memo: "高台に立つ日帰り温泉。露天風呂から高千穂の町並みを一望できる。", transit: { mode: "car", min: 9 }, fallbackLatLng: [32.7197159, 131.3132962] },
+        { name: "国見ヶ丘", wikiTitle: "国見ヶ丘", address: "西臼杵郡高千穂町押方", time: "6:00", stay: 70, memo: "秋から冬の早朝、条件がそろうと雲海が広がる展望台。日の出前の移動は安全第一で。朝食は宿でとってから出発。" },
+        { name: "秋元神社", wikiTitle: "", address: "西臼杵郡高千穂町向山", time: "7:50", stay: 55, memo: "拝殿が鬼門を封じる神社。奥の「太子ヶ窟」は天岩戸の別伝承地ともいわれる。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.6515594, 131.2843568] },
+        { name: "高千穂あまてらす鉄道", wikiTitle: "", address: "西臼杵郡高千穂町三田井1425-1", time: "9:25", stay: 75, memo: "旧国鉄高千穂線の線路を活用した観光鉄道。高千穂鉄橋を渡るカート体験。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.714555, 131.3068484] },
+        { name: "高千穂峡淡水魚水族館", wikiTitle: "", address: "西臼杵郡高千穂町向山60-1", time: "10:46", stay: 50, memo: "玉垂の滝の湧水を使う小さな水族館。ヤマメ等およそ100種。", transit: { mode: "car", min: 6 }, fallbackLatLng: [32.702147, 131.3006739] },
+        { name: "道の駅青雲橋(青雲橋)", wikiTitle: "", address: "西臼杵郡日之影町", time: "12:11", stay: 140, memo: "橋長410m・高さ137mのアーチ橋。国道橋として東洋一の高さとされる。昼食も。", transit: { mode: "car", min: 35 }, fallbackLatLng: [32.6605803, 131.3884686] },
+        { name: "高千穂の湯", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井3214-1", time: "15:11", stay: 80, memo: "高台に立つ日帰り温泉。露天風呂から高千穂の町並みを一望できる。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.7197159, 131.3132962] },
       ],
     ],
   },
