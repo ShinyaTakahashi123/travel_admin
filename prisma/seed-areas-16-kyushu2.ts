@@ -68,7 +68,8 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "天真名井", wikiTitle: "", address: "西臼杵郡高千穂町三田井", time: "12:32", stay: 12, memo: "樹齢1300年のケヤキの根元から湧く水。瓊々杵尊が水種を移したと伝わる。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [32.7098, 131.3117] },
         { name: "荒立神社", wikiTitle: "荒立神社", address: "西臼杵郡高千穂町大字三田井667", time: "12:51", stay: 30, memo: "猿田彦命と天鈿女命をまつる神社。急いで建てたため「荒立」の名がついたと伝わる。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [32.7116233, 131.3169702] },
         { name: "高千穂神社", wikiTitle: "高千穂神社", address: "西臼杵郡高千穂町三田井1037", time: "13:27", stay: 85, memo: "高千穂郷八十八社の総社。夫婦杉・秩父杉・鎮石等。参道近くで昼食も(45分程度)。神楽殿で夜神楽が公開される。", transit: { mode: "car", min: 6 } },
-        { name: "高千穂町歴史民俗資料館", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1515", time: "15:07", stay: 85, memo: "考古・民俗資料およそ1万点。高千穂神楽の神面や彫物も展示。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.715633, 131.303314] },
+        { name: "高千穂町歴史民俗資料館", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1515", time: "14:57", stay: 60, memo: "考古・民俗資料およそ1万点。高千穂神楽の神面や彫物も展示。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.715633, 131.303314] },
+        { name: "天岩戸温泉", wikiTitle: "", address: "西臼杵郡高千穂町岩戸58", time: "16:12", stay: 35, memo: "天岩戸地区を見渡す高台の日帰り入浴施設。大浴場・サウナ、茶屋を併設。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.744366, 131.352036] },
       ],
       [
         { name: "国見ヶ丘", wikiTitle: "国見ヶ丘", address: "西臼杵郡高千穂町押方", time: "6:00", stay: 70, memo: "秋から冬の早朝、条件がそろうと雲海が広がる展望台。日の出前の移動は安全第一で。朝食は宿でとってから出発。" },
@@ -76,7 +77,7 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "高千穂あまてらす鉄道", wikiTitle: "", address: "西臼杵郡高千穂町三田井1425-1", time: "9:25", stay: 75, memo: "旧国鉄高千穂線の線路を活用した観光鉄道。高千穂鉄橋を渡るカート体験。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.714555, 131.3068484] },
         { name: "高千穂峡淡水魚水族館", wikiTitle: "", address: "西臼杵郡高千穂町向山60-1", time: "10:46", stay: 50, memo: "玉垂の滝の湧水を使う小さな水族館。ヤマメ等およそ100種。", transit: { mode: "car", min: 6 }, fallbackLatLng: [32.702147, 131.3006739] },
         { name: "道の駅青雲橋(青雲橋)", wikiTitle: "", address: "西臼杵郡日之影町", time: "12:11", stay: 60, memo: "橋長410m・高さ137mのアーチ橋。国道橋として東洋一の高さとされる。昼食も。", transit: { mode: "car", min: 35 }, fallbackLatLng: [32.6605803, 131.3884686] },
-        { name: "石垣の村(戸川地区)", wikiTitle: "", address: "西臼杵郡日之影町七折戸川", time: "13:31", stay: 60, memo: "戸数7戸、山あいの石垣集落。高さ11mの石垣は日本一ともいわれる。", transit: { mode: "car", min: 20 }, fallbackLatLng: [32.671638, 131.405487] },
+        { name: "石垣の村(戸川地区)", wikiTitle: "", address: "西臼杵郡日之影町七折戸川", time: "13:31", stay: 60, memo: "山あいの小さな石垣集落。高さ11mの石垣は日本一ともいわれる。住民の暮らす集落のため見学は静かに。", transit: { mode: "car", min: 20 }, fallbackLatLng: [32.671638, 131.405487] },
         { name: "高千穂の湯", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井3214-1", time: "15:11", stay: 80, memo: "高台に立つ日帰り温泉。露天風呂から高千穂の町並みを一望できる。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.7197159, 131.3132962] },
       ],
     ],
