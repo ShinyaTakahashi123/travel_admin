@@ -66,7 +66,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     title: "有田焼の窯元めぐりと陶山神社、磁器の里・有田を巡る定番プラン",
-    description: "日本磁器発祥の地・有田。窯元が並ぶ通りを歩き、鳥居まで有田焼でできた陶山神社に参拝する、有田観光の定番プランです。",
+    description: "日本磁器発祥の地とされる有田。窯元が並ぶ通りを歩き、鳥居まで有田焼でできた陶山神社に参拝する、有田観光の定番プランです。",
     nights: 0,
     prefectureName: "佐賀県",
     areaNames: ["有田・伊万里"],
@@ -74,13 +74,15 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["ものづくり体験", "神社"],
     days: [
       [
-        { name: "有田内山伝統的建造物群", wikiTitle: "有田町", address: "西松浦郡有田町上幸平", time: "9:30", stay: 90, memo: "日本磁器発祥の地。江戸〜明治期の窯元や商家が軒を連ねる。" },
-        { name: "陶山神社", wikiTitle: "陶山神社", address: "西松浦郡有田町上白川1", time: "11:15", stay: 30, memo: "鳥居や狛犬まで有田焼でできた、全国でも珍しい「やきものの神社」。", transit: { mode: "car", min: 15 } },
-        { name: "泉山磁石場", wikiTitle: "", address: "西松浦郡有田町泉山1-5", time: "11:50", stay: 30, memo: "李参平が陶石を発見したとされる、有田焼400年の歴史の原点。", fallbackLatLng: [33.1939448, 129.9101704], transit: { mode: "car", min: 5 } },
-        { name: "有田町歴史民俗資料館東館", wikiTitle: "", address: "西松浦郡有田町泉山1-4-1", time: "12:22", stay: 40, memo: "窯業400年を支えてきた有田の歴史・民俗の資料館。登り窯の模型も。", fallbackLatLng: [33.195076, 129.91104], transit: { mode: "car", min: 2 } },
-        { name: "トンバイ塀のある裏通り", wikiTitle: "", address: "西松浦郡有田町上幸平一丁目", time: "13:07", stay: 25, memo: "登り窯の耐火レンガの廃材を赤土で固めた塀が続く裏通り。", fallbackLatLng: [33.1912682, 129.8999466], transit: { mode: "car", min: 5 } },
-        { name: "有田陶磁美術館", wikiTitle: "", address: "西松浦郡有田町赤絵町1-4-2", time: "13:34", stay: 40, memo: "明治7年建築の焼物倉庫を改築した美術館。江戸〜昭和初期の有田焼。", fallbackLatLng: [33.1904701, 129.8987623], transit: { mode: "walk", min: 2 } },
-        { name: "佐賀県立九州陶磁文化館", wikiTitle: "", address: "西松浦郡有田町戸杓乙3100-1", time: "14:30", stay: 120, memo: "九州各地のやきものを収集・展示する専門の美術館。蒲原・柴田コレクション。", fallbackLatLng: [33.179011, 129.880574], transit: { mode: "car", min: 16 } },
+        { name: "有田内山伝統的建造物群", wikiTitle: "有田町有田内山伝統的建造物群保存地区", address: "西松浦郡有田町上幸平", time: "9:30", stay: 90, memo: "日本磁器発祥の地とされる。江戸〜明治期の窯元や商家が軒を連ねる。", fallbackLatLng: [33.191868, 129.901443] },
+        { name: "陶山神社", wikiTitle: "陶山神社", address: "西松浦郡有田町上白川1", time: "11:15", stay: 30, memo: "鳥居や狛犬まで有田焼でできた、全国でも珍しい「やきものの神社」。", transit: { mode: "walk", min: 5 } },
+        { name: "泉山磁石場", wikiTitle: "", address: "西松浦郡有田町泉山1-5", time: "11:50", stay: 30, memo: "李参平が陶石を発見したとされる、有田焼400年の歴史の原点。昼食もこのあたりで。", fallbackLatLng: [33.1939448, 129.9101704], transit: { mode: "walk", min: 15 } },
+        { name: "大公孫樹", wikiTitle: "", address: "西松浦郡有田町泉山一丁目524-2", time: "12:24", stay: 15, memo: "泉山弁財天境内の、樹齢1000年とされる国指定天然記念物のイチョウ。", fallbackLatLng: [33.194229, 129.908661], transit: { mode: "walk", min: 4 } },
+        { name: "有田町歴史民俗資料館東館", wikiTitle: "", address: "西松浦郡有田町泉山1-4-1", time: "12:42", stay: 40, memo: "窯業400年を支えてきた有田の歴史・民俗の資料館。登り窯の模型も。", fallbackLatLng: [33.195076, 129.91104], transit: { mode: "walk", min: 3 } },
+        { name: "トンバイ塀のある裏通り", wikiTitle: "", address: "西松浦郡有田町上幸平一丁目", time: "13:37", stay: 25, memo: "登り窯の耐火レンガの廃材を赤土で固めた塀が続く裏通り。", fallbackLatLng: [33.1912682, 129.8999466], transit: { mode: "walk", min: 15 } },
+        { name: "有田陶磁美術館", wikiTitle: "", address: "西松浦郡有田町赤絵町1-4-2", time: "14:04", stay: 40, memo: "明治7年建築の焼物倉庫を改築した美術館。江戸〜昭和初期の有田焼。", fallbackLatLng: [33.1904701, 129.8987623], transit: { mode: "walk", min: 2 } },
+        { name: "有田ポーセリンパーク", wikiTitle: "", address: "西松浦郡有田町戸矢乙340-28", time: "14:54", stay: 45, memo: "ろくろ・絵付け体験ができる有田焼テーマの施設。", fallbackLatLng: [33.164637, 129.908242], transit: { mode: "car", min: 10 } },
+        { name: "佐賀県立九州陶磁文化館", wikiTitle: "", address: "西松浦郡有田町戸杓乙3100-1", time: "15:48", stay: 70, memo: "九州各地のやきものを収集・展示する専門の美術館。蒲原・柴田コレクション。", fallbackLatLng: [33.179011, 129.880574], transit: { mode: "car", min: 9 } },
       ],
     ],
   },
