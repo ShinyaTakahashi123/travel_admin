@@ -99,7 +99,7 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["動物園・水族館", "自然"],
     days: [
       [
-        { name: "たらい舟（小木港）", wikiTitle: "たらい舟", address: "佐渡市小木町", time: "9:30", stay: 40, memo: "元々は海女の漁具だった、丸い桶の形をした佐渡名物の乗り物体験。", fallbackLatLng: [37.819813, 138.269623] },
+        { name: "たらい舟（小木港）", wikiTitle: "たらい舟", address: "佐渡市小木町", time: "9:30", stay: 40, memo: "元々は海女の漁具だった、丸い桶の形をした佐渡名物の乗り物体験。", fallbackLatLng: [37.81466, 138.27958] },
         { name: "宿根木集落", wikiTitle: "", address: "佐渡市宿根木", time: "10:20", stay: 50, memo: "重要伝統的建造物群保存地区。船大工と廻船業で栄えた町並み、三角家。", fallbackLatLng: [37.8091059, 138.2438636], transit: { mode: "car", min: 10 } },
         { name: "佐渡西三川ゴールドパーク", wikiTitle: "", address: "佐渡市西三川835-1", time: "11:30", stay: 75, memo: "佐渡最古と伝わる西三川砂金山跡の体験型資料館。砂金採り体験。", fallbackLatLng: [37.8981166, 138.2963258], transit: { mode: "car", min: 20 } },
         { name: "トキの森公園", wikiTitle: "トキの森公園", address: "佐渡市新穂長畝383-2", time: "13:35", stay: 50, memo: "特別天然記念物トキの保護・繁殖施設。間近で生態を観察できる。", transit: { mode: "car", min: 50 }, fallbackLatLng: [38.0372802, 138.4219455] },
