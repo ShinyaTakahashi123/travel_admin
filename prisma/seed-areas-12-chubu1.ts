@@ -189,8 +189,8 @@ const ITINERARIES: HandmadeItinerary[] = [
     ],
   },
   {
-    title: "山梨県立美術館でミレーの「種をまく人」を鑑賞する、アート日帰りプラン",
-    description: "ミレーの「種をまく人」を所蔵することで知られる山梨県立美術館。バルビゾン派の絵画とともに、静かな芸術鑑賞を楽しむプランです。",
+    title: "山梨県立美術館とミレー、甲府城跡や武田神社をめぐるアート日帰りプラン",
+    description: "ミレーの「種をまく人」を所蔵する山梨県立美術館と隣接する山梨県立文学館、甲府城跡の舞鶴城公園、藤村式建築の藤村記念館、武田信玄を祀る武田神社まで。アートと歴史にふれる日帰りプランです。",
     nights: 0,
     prefectureName: "山梨県",
     areaNames: ["甲府"],
@@ -199,6 +199,10 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "山梨県立美術館", wikiTitle: "山梨県立美術館", address: "甲府市貢川1丁目4-27", time: "9:30", stay: 90, memo: "ミレーの「種をまく人」をはじめ、バルビゾン派の絵画コレクションで有名な美術館。" },
+        { name: "山梨県立文学館", wikiTitle: "", address: "甲府市貢川1丁目5-35", time: "11:03", stay: 60, memo: "美術館と同じ芸術の森公園内。樋口一葉ら山梨ゆかりの文学者の資料。", fallbackLatLng: [35.6601736, 138.5393353], transit: { mode: "walk", min: 3 } },
+        { name: "舞鶴城公園", wikiTitle: "", address: "甲府市丸の内1丁目", time: "12:23", stay: 90, memo: "日本百名城の一つ、甲府城の城跡を開放した公園。", fallbackLatLng: [35.6651191, 138.5713285], transit: { mode: "bus", min: 20 } },
+        { name: "藤村記念館", wikiTitle: "", address: "甲府市北口2丁目31", time: "13:58", stay: 30, memo: "国重要文化財、明治の擬洋風建築「藤村式建築」の旧睦沢学校校舎。", fallbackLatLng: [35.6678137, 138.5700537], transit: { mode: "walk", min: 5 } },
+        { name: "武田神社", wikiTitle: "", address: "甲府市古府中町2611", time: "14:40", stay: 100, memo: "躑躅ヶ崎館跡に鎮座する、武田信玄を祀る神社。", fallbackLatLng: [35.6867034, 138.5773899], transit: { mode: "bus", min: 12 } },
       ],
     ],
   },
