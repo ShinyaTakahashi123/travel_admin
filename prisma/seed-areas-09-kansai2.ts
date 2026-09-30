@@ -282,12 +282,19 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "パワースポット"],
     days: [
       [
-        { name: "熊野本宮大社", wikiTitle: "熊野本宮大社", address: "田辺市本宮町本宮1110", time: "9:30", stay: 50, memo: "熊野三山めぐりの最初に、熊野信仰の中心地へ。" },
-        { name: "大斎原", wikiTitle: "大斎原", address: "田辺市本宮町本宮", time: "10:40", stay: 30, memo: "旧社地の大鳥居を参拝。", transit: { mode: "walk", min: 15 } },
+        { name: "発心門王子", wikiTitle: "", address: "田辺市本宮町", time: "9:00", stay: 15, memo: "熊野古道中辺路の五体王子の一つ。ここから本宮大社まで熊野古道を歩く。", fallbackLatLng: [33.8617469, 135.7206005] },
+        { name: "伏拝王子", wikiTitle: "", address: "田辺市本宮町伏拝", time: "10:45", stay: 15, memo: "参詣者が初めて大斎原を見て伏し拝んだと伝わる王子跡。", fallbackLatLng: [33.8602049, 135.7568176], transit: { mode: "walk", min: 90 } },
+        { name: "熊野本宮大社", wikiTitle: "熊野本宮大社", address: "田辺市本宮町本宮1110", time: "12:20", stay: 80, memo: "熊野三山めぐりの最初に、熊野信仰の中心地へ。", transit: { mode: "walk", min: 80 } },
+        { name: "大斎原", wikiTitle: "大斎原", address: "田辺市本宮町本宮", time: "13:55", stay: 45, memo: "旧社地の大鳥居を参拝。", transit: { mode: "walk", min: 15 } },
+        { name: "湯の峰温泉 つぼ湯", wikiTitle: "", address: "田辺市本宮町湯峯", time: "15:00", stay: 90, memo: "世界遺産に登録された、熊野詣の湯垢離場。日本最古とされる共同浴場。", fallbackLatLng: [33.8291897, 135.7577217], transit: { mode: "walk", min: 20 } },
       ],
       [
-        { name: "熊野速玉大社", wikiTitle: "熊野速玉大社", address: "新宮市新宮1", time: "9:00", stay: 40, memo: "熊野川の河口近くに鎮座する、朱塗りの美しい神社。" },
-        { name: "熊野那智大社", wikiTitle: "熊野那智大社", address: "東牟婁郡那智勝浦町那智山1", time: "11:00", stay: 50, memo: "最後に那智の滝を望む、熊野三山最後の一社へ。", transit: { mode: "car", min: 40 } },
+        { name: "神倉神社", wikiTitle: "", address: "新宮市神倉1丁目", time: "9:00", stay: 75, memo: "熊野速玉大社の摂社。ゴトビキ岩がご神体、538段の石段。", fallbackLatLng: [33.7242509, 135.9841101] },
+        { name: "熊野速玉大社", wikiTitle: "熊野速玉大社", address: "新宮市新宮1", time: "10:30", stay: 70, memo: "熊野川の河口近くに鎮座する、朱塗りの美しい神社。", transit: { mode: "car", min: 15 } },
+        { name: "大門坂", wikiTitle: "", address: "東牟婁郡那智勝浦町那智山", time: "12:15", stay: 20, memo: "熊野古道の中でも古の面影を色濃く残す石畳の参詣道。", fallbackLatLng: [33.6707046, 135.9012075], transit: { mode: "car", min: 35 } },
+        { name: "熊野那智大社", wikiTitle: "熊野那智大社", address: "東牟婁郡那智勝浦町那智山1", time: "13:10", stay: 90, memo: "最後に那智の滝を望む、熊野三山最後の一社へ。", transit: { mode: "walk", min: 35 } },
+        { name: "青岸渡寺", wikiTitle: "", address: "東牟婁郡那智勝浦町那智山8", time: "14:43", stay: 30, memo: "那智大社に隣接する西国三十三所第一番札所。", fallbackLatLng: [33.6693139, 135.889923], transit: { mode: "walk", min: 3 } },
+        { name: "飛瀧神社(那智の滝)", wikiTitle: "", address: "東牟婁郡那智勝浦町那智山", time: "15:25", stay: 65, memo: "那智の滝そのものを御神体とする、本殿を持たない神社。", fallbackLatLng: [33.6741888, 135.8876666], transit: { mode: "walk", min: 12 } },
       ],
     ],
   },
