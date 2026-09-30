@@ -237,7 +237,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "高松城跡（玉藻公園）と讃岐うどん、海城と名物グルメのプラン",
-    description: "瀬戸内海の海水を引き入れた高松城跡と、本場の讃岐うどん。栗林公園とは違う、高松の海城とグルメを楽しむプランです。",
+    description: "瀬戸内海の海水を引き入れた高松城跡と、本場の讃岐うどん。栗林公園とは違う、高松の海城とグルメを楽しむプランです。源平合戦の舞台・屋島、四国の古民家を集めた四国村ミウゼアム、レトロな倉庫街・北浜alleyまで、高松市の定番と穴場を一日で巡ります。",
     nights: 0,
     prefectureName: "香川県",
     areaNames: ["高松"],
@@ -246,7 +246,10 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "高松城跡（玉藻公園）", wikiTitle: "高松城_(讃岐国)", address: "高松市玉藻町2-1", time: "9:30", stay: 60, memo: "瀬戸内海の海水を堀に引き入れた、日本三大水城の一つとされる城跡。" },
-        { name: "高松中央商店街（讃岐うどん）", wikiTitle: "高松市", address: "高松市丸亀町", time: "11:00", stay: 60, memo: "日本一長いアーケード街とも言われる中央商店街で、本場の讃岐うどんを味わう。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [34.3465, 134.0475] },
+        { name: "高松中央商店街（讃岐うどん）", wikiTitle: "高松市", address: "高松市丸亀町", time: "10:45", stay: 60, memo: "日本一長いアーケード街とも言われる中央商店街で、本場の讃岐うどんで昼食を。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [34.3465, 134.0475] },
+        { name: "屋島", wikiTitle: "屋島", address: "香川県高松市屋島東町", time: "12:00", stay: 90, memo: "源平合戦「屋島の戦い」の舞台。屋島寺と展望スポット「獅子の霊巌」。", transit: { mode: "car", min: 15 } },
+        { name: "四国村ミウゼアム", wikiTitle: "四国村ミウゼアム", address: "香川県高松市屋島中町91", time: "13:38", stay: 90, memo: "四国各地の古民家33棟を移築復原した野外博物館。安藤忠雄設計のギャラリーも。", transit: { mode: "car", min: 8 } },
+        { name: "北浜alley", wikiTitle: "北浜alley", address: "香川県高松市北浜町4-14", time: "15:23", stay: 70, memo: "昭和初期の倉庫群を活用した高松港そばの商業施設。カフェや雑貨店が集まる。", transit: { mode: "car", min: 15 } },
       ],
     ],
   },
