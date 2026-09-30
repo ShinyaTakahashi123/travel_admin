@@ -143,7 +143,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     title: "世界遺産・百舌鳥古墳群と刃物の街、堺の歴史を巡る日帰りプラン",
-    description: "仁徳天皇陵古墳をはじめとする世界遺産の古墳群と、伝統の堺打刃物。古代から続く「堺」の歴史を定番スポットで辿ります。",
+    description: "仁徳天皇陵古墳・履中天皇陵古墳をはじめとする世界遺産の古墳群、千利休ゆかりの南宗寺、伝統の堺打刃物まで。古代から続く「堺」の歴史を定番スポットで辿ります。",
     nights: 0,
     prefectureName: "大阪府",
     areaNames: ["堺・泉南"],
@@ -151,11 +151,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡"],
     days: [
       [
-        { name: "仁徳天皇陵古墳（大仙古墳）", wikiTitle: "仁徳天皇陵古墳", address: "堺市堺区大仙町", time: "9:00", stay: 40, memo: "世界最大級の墳墓とされる、百舌鳥古墳群の中心的存在。" },
-        { name: "堺市博物館", wikiTitle: "堺市博物館", address: "堺市堺区百舌鳥夕雲町2丁200-1", time: "9:55", stay: 50, memo: "古墳や堺の歴史を分かりやすく紹介する博物館。", transit: { mode: "walk", min: 12 } },
-        { name: "南宗寺", wikiTitle: "南宗寺", address: "堺市堺区南旅篭町東3丁1-2", time: "11:30", stay: 40, memo: "千利休ゆかりの禅寺。枯山水の庭園でも知られる。", transit: { mode: "bus", min: 25 } },
-        { name: "さかい利晶の杜", wikiTitle: "さかい利晶の杜", address: "堺市堺区宿院町西2丁1-1", time: "12:30", stay: 40, memo: "千利休と与謝野晶子、二人の堺の偉人を紹介する文化施設。", transit: { mode: "walk", min: 10 } },
-        { name: "堺伝統産業会館", wikiTitle: "堺市", address: "堺市堺区宿院町西2丁1-1", time: "13:25", stay: 40, memo: "堺打刃物や線香など、伝統工芸品を紹介・販売する施設。", transit: { mode: "car", min: 5 } },
+        { name: "仁徳天皇陵古墳（大仙古墳）", wikiTitle: "仁徳天皇陵古墳", address: "堺市堺区大仙町", time: "9:00", stay: 50, memo: "世界最大級の墳墓とされる、百舌鳥古墳群の中心的存在。" },
+        { name: "堺市博物館", wikiTitle: "堺市博物館", address: "堺市堺区百舌鳥夕雲町2丁200-1", time: "10:02", stay: 60, memo: "古墳や堺の歴史を分かりやすく紹介する博物館。", transit: { mode: "walk", min: 12 } },
+        { name: "履中天皇陵古墳", wikiTitle: "", address: "堺市西区北条町", time: "11:10", stay: 35, memo: "日本第3位の規模とされる、百舌鳥古墳群南部の前方後円墳。", fallbackLatLng: [34.5561961, 135.4788721], transit: { mode: "walk", min: 8 } },
+        { name: "南宗寺", wikiTitle: "南宗寺", address: "堺市堺区南旅篭町東3丁1-2", time: "12:05", stay: 50, memo: "千利休ゆかりの禅寺。枯山水の庭園でも知られる。", transit: { mode: "bus", min: 20 } },
+        { name: "さかい利晶の杜", wikiTitle: "さかい利晶の杜", address: "堺市堺区宿院町西2丁1-1", time: "13:05", stay: 60, memo: "千利休と与謝野晶子、二人の堺の偉人を紹介する文化施設。", transit: { mode: "walk", min: 10 } },
+        { name: "堺伝統産業会館", wikiTitle: "堺市", address: "堺市堺区材木町西一丁1-30", time: "14:18", stay: 55, memo: "堺打刃物や線香など、伝統工芸品を紹介・販売する施設。", fallbackLatLng: [34.582767, 135.477448], transit: { mode: "walk", min: 13 } },
+        { name: "妙国寺", wikiTitle: "", address: "堺市堺区材木町東4丁1-4", time: "15:18", stay: 75, memo: "樹齢1100年ともいわれる大蘇鉄で知られる日蓮宗の寺院。", fallbackLatLng: [34.5811682, 135.4814384], transit: { mode: "walk", min: 5 } },
       ],
     ],
   },
