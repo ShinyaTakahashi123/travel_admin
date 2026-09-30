@@ -24,7 +24,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "佐賀城本丸歴史館", wikiTitle: "佐賀城", address: "佐賀市城内2丁目18-1", time: "9:30", stay: 60, memo: "現存する木造復元建築として日本最大級。幕末佐賀藩の先進性を紹介する。" },
-        { name: "佐嘉神社", wikiTitle: "佐嘉神社", address: "佐賀市松原2丁目10-43", time: "11:00", stay: 40, memo: "幕末の名君・鍋島直正公を祀る、佐賀の総鎮守的な神社。", transit: { mode: "walk", min: 15 } },
+        { name: "佐賀城鯱の門", wikiTitle: "", address: "佐賀市城内二丁目", time: "10:32", stay: 20, memo: "天保9年建立、国重要文化財の佐賀城本丸表門。", fallbackLatLng: [33.24597, 130.302854], transit: { mode: "walk", min: 2 } },
+        { name: "佐賀県立博物館", wikiTitle: "", address: "佐賀市城内一丁目15-23", time: "10:55", stay: 65, memo: "自然史・考古・歴史・美術・工芸・民俗の常設展。高輪築堤の移設展示も。", fallbackLatLng: [33.24498, 130.300534], transit: { mode: "walk", min: 3 } },
+        { name: "与賀神社", wikiTitle: "", address: "佐賀市与賀町2-50", time: "12:08", stay: 30, memo: "6世紀創建と伝わる古社。楼門・鳥居・石橋は国重要文化財、大楠は県天然記念物。", fallbackLatLng: [33.248868, 130.294851], transit: { mode: "walk", min: 8 } },
+        { name: "佐嘉神社", wikiTitle: "佐嘉神社", address: "佐賀市松原2丁目10-43", time: "12:48", stay: 40, memo: "幕末の名君・鍋島直正公を祀る、佐賀の総鎮守的な神社。", transit: { mode: "walk", min: 10 } },
+        { name: "松原神社", wikiTitle: "", address: "佐賀市松原二丁目10-43", time: "13:30", stay: 20, memo: "安永元年創建、佐嘉神社と同じ敷地の神社。藩祖・鍋島直茂公を祀る。", fallbackLatLng: [33.251944, 130.3025], transit: { mode: "walk", min: 2 } },
+        { name: "佐賀バルーンミュージアム", wikiTitle: "", address: "佐賀市松原一丁目1-1", time: "13:53", stay: 55, memo: "国内初の常設型熱気球博物館。「イカロス5号」実機やシミュレーター。", fallbackLatLng: [33.252469, 130.300391], transit: { mode: "walk", min: 3 } },
+        { name: "大隈重信記念館・旧宅", wikiTitle: "", address: "佐賀市水ヶ江二丁目11-11", time: "15:00", stay: 90, memo: "大隈重信の記念館と生家。今井兼次設計の記念碑的建築。", fallbackLatLng: [33.247982, 130.308806], transit: { mode: "walk", min: 12 } },
       ],
     ],
   },
