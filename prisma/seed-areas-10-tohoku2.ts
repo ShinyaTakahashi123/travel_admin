@@ -89,7 +89,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "松島湾遊覧船と福浦橋、島めぐりの絶景クルーズプラン",
-    description: "260余りの島々が浮かぶ松島湾を遊覧船で巡り、縁結びの橋・福浦橋も渡る。日本三景の絶景を海と陸から楽しむプランです。",
+    description: "260余りの島々が浮かぶ松島湾を遊覧船で巡り、縁結びの橋・福浦橋も渡る。瑞巌寺や五大堂など、日本三景の絶景を海と陸から楽しむプランです。",
     nights: 0,
     prefectureName: "宮城県",
     areaNames: ["松島"],
@@ -97,8 +97,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "自然"],
     days: [
       [
-        { name: "松島湾遊覧船", wikiTitle: "松島湾", address: "宮城郡松島町松島字町内85", time: "9:30", stay: 60, memo: "260余りの島々が浮かぶ松島湾を、船上から一望できる遊覧船。" },
-        { name: "福浦橋", wikiTitle: "福浦島", address: "宮城郡松島町松島字町内", time: "11:00", stay: 40, memo: "「出会い橋」とも呼ばれる、福浦島へと続く朱塗りの橋。", transit: { mode: "car", min: 8 } },
+        { name: "西行戻しの松公園", wikiTitle: "", address: "宮城郡松島町松島字犬田2", time: "8:30", stay: 30, memo: "松島湾を見下ろす高台の公園。白衣観音展望台からの眺めが見どころ。", fallbackLatLng: [38.3673179, 141.0529378] },
+        { name: "瑞巌寺", wikiTitle: "瑞巌寺", address: "宮城郡松島町松島91", time: "9:10", stay: 120, memo: "伊達政宗の菩提寺、奥州随一の禅寺。本堂・庫裡及び廊下は国宝。", transit: { mode: "walk", min: 10 } },
+        { name: "円通院", wikiTitle: "", address: "宮城郡松島町松島字町内67", time: "11:12", stay: 90, memo: "伊達光宗の霊廟。4つの庭園と西洋バラの意匠で知られる。", fallbackLatLng: [38.3712885, 141.0599598], transit: { mode: "walk", min: 2 } },
+        { name: "五大堂", wikiTitle: "", address: "宮城郡松島町松島字町内111", time: "12:47", stay: 25, memo: "伊達政宗建立、東北現存最古の桃山建築。国重要文化財。", fallbackLatLng: [38.3697244, 141.0642082], transit: { mode: "walk", min: 5 } },
+        { name: "観瀾亭", wikiTitle: "", address: "宮城郡松島町松島字町内56", time: "13:15", stay: 45, memo: "伏見桃山城から移築と伝わる茶室。隣接する松島博物館も。", fallbackLatLng: [38.369701, 141.062378], transit: { mode: "walk", min: 3 } },
+        { name: "松島湾遊覧船", wikiTitle: "松島湾", address: "宮城郡松島町松島字町内85", time: "14:10", stay: 60, memo: "260余りの島々が浮かぶ松島湾を、船上から一望できる遊覧船。", transit: { mode: "car", min: 10 } },
+        { name: "福浦橋", wikiTitle: "福浦島", address: "宮城郡松島町松島字町内", time: "15:18", stay: 75, memo: "「出会い橋」とも呼ばれる、福浦島へと続く朱塗りの橋。", transit: { mode: "car", min: 8 } },
       ],
     ],
   },
