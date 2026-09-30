@@ -92,6 +92,18 @@ async function main() {
     }
   }
 
+  // 法務2026-09-30 23:39の追加提案(必須ではないが#228と揃える): 年齢の記載を外す
+  const iimoriyama2 = await prisma.spot.findFirstOrThrow({
+    where: { day: { itineraryId: ITIN_ID }, name: "飯盛山" },
+  });
+  {
+    const old = "16歳から17歳の少年たちで編成された白虎隊士中二番隊";
+    const next = "少年たちで編成された白虎隊士中二番隊";
+    if (iimoriyama2.memo?.includes(old)) {
+      await updateSpotInItinerary(ITIN_ID, { spotId: iimoriyama2.id }, { memo: iimoriyama2.memo.replace(old, next) });
+    }
+  }
+
   console.log("done");
 }
 main()
