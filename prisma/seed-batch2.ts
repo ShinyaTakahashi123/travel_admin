@@ -299,6 +299,7 @@ const AREAS: AreaSeed[] = [
       { name: "あべのキューズモール", address: "大阪市阿倍野区阿倍野筋1丁目6-1", lat: 34.6466, lng: 135.5147, memo: "天王寺・あべの地区最大級のショッピングモール。", websiteUrl: "https://abenoq.com/", wikiTitle: "あべのキューズモール" },
       { name: "堀越神社", address: "大阪市天王寺区茶臼山町5-8", lat: 34.6503, lng: 135.5157, memo: "「一生に一度の願い」を叶えるとされる、聖徳太子ゆかりの神社。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "堀越神社" },
       { name: "大江神社", address: "大阪市天王寺区夕陽丘町5-59", lat: 34.658, lng: 135.5183, memo: "四天王寺の鎮守社の一つ。狛虎が祀られる珍しい神社。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "大江神社" },
+      { name: "新世界・通天閣", address: "大阪市浪速区恵美須東1丁目18-6", lat: 34.6525393, lng: 135.5063098, memo: "明治36年の博覧会跡地に発展した繁華街。ジャンジャン横丁など昭和の下町情緒。", websiteUrl: "https://www.tsutenkaku.co.jp/", wikiTitle: "通天閣" },
     ],
   },
   {
