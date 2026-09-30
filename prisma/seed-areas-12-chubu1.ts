@@ -352,8 +352,8 @@ const ITINERARIES: HandmadeItinerary[] = [
       [
         { name: "名古屋城", wikiTitle: "名古屋城", address: "名古屋市中区本丸1-1", time: "9:30", stay: 100, memo: "金の鯱鉾で知られる、徳川家康が築いた尾張徳川家の居城。" },
         { name: "名古屋市市政資料館", wikiTitle: "名古屋市市政資料館", address: "名古屋市東区白壁1丁目3番", time: "11:24", stay: 35, memo: "旧名古屋控訴院の重要文化財建築、文化のみちの起点。", transit: { mode: "walk", min: 14 }, fallbackLatLng: [35.1806657, 136.9095551] },
-        { name: "文化のみち二葉館", wikiTitle: "文化のみち二葉館", address: "名古屋市東区橦木町3丁目23番地", time: "12:10", stay: 30, memo: "川上貞奴が暮らした和洋折衷の邸宅を復元。", transit: { mode: "walk", min: 11 }, fallbackLatLng: [35.1804255, 136.9187346] },
-        { name: "建中寺", wikiTitle: "建中寺", address: "名古屋市東区筒井1丁目7番57号", time: "12:50", stay: 70, memo: "尾張徳川家の菩提寺。昼食もこのあたりで。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [35.1792303, 136.9269256] },
+        { name: "文化のみち二葉館", wikiTitle: "文化のみち二葉館", address: "名古屋市東区橦木町3丁目23番地", time: "12:10", stay: 70, memo: "川上貞奴が暮らした和洋折衷の邸宅を復元。見学後、このあたりで昼食を。", transit: { mode: "walk", min: 11 }, fallbackLatLng: [35.1804255, 136.9187346] },
+        { name: "建中寺", wikiTitle: "建中寺", address: "名古屋市東区筒井1丁目7番57号", time: "13:30", stay: 30, memo: "尾張徳川家の菩提寺。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [35.1792303, 136.9269256] },
         { name: "徳川美術館", wikiTitle: "徳川美術館", address: "名古屋市東区徳川町1017", time: "14:10", stay: 60, memo: "尾張徳川家伝来の大名道具を展示する、国内屈指の大名道具コレクション。", transit: { mode: "walk", min: 10 } },
         { name: "徳川園", wikiTitle: "徳川園", address: "名古屋市東区徳川町1001", time: "15:12", stay: 90, memo: "徳川美術館のすぐ隣、名古屋市営の池泉回遊式大名庭園。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [35.1847742, 136.9329354] },
       ],
