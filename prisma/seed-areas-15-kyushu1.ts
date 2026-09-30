@@ -74,7 +74,7 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["ものづくり体験", "神社"],
     days: [
       [
-        { name: "有田内山伝統的建造物群", wikiTitle: "有田町有田内山伝統的建造物群保存地区", address: "西松浦郡有田町上幸平", time: "9:30", stay: 90, memo: "日本磁器発祥の地とされる。江戸〜明治期の窯元や商家が軒を連ねる。", fallbackLatLng: [33.191868, 129.901443] },
+        { name: "有田内山伝統的建造物群", wikiTitle: "有田町有田内山伝統的建造物群保存地区", address: "西松浦郡有田町上幸平", time: "9:30", stay: 90, memo: "日本磁器発祥の地とされる。江戸〜明治期の窯元や商家が軒を連ねる。", fallbackLatLng: [33.1918072, 129.9037031] },
         { name: "陶山神社", wikiTitle: "陶山神社", address: "西松浦郡有田町上白川1", time: "11:15", stay: 30, memo: "鳥居や狛犬まで有田焼でできた、全国でも珍しい「やきものの神社」。", transit: { mode: "walk", min: 5 } },
         { name: "泉山磁石場", wikiTitle: "", address: "西松浦郡有田町泉山1-5", time: "11:50", stay: 30, memo: "李参平が陶石を発見したとされる、有田焼400年の歴史の原点。昼食もこのあたりで。", fallbackLatLng: [33.1939448, 129.9101704], transit: { mode: "walk", min: 15 } },
         { name: "大公孫樹", wikiTitle: "", address: "西松浦郡有田町泉山一丁目524-2", time: "12:24", stay: 15, memo: "泉山弁財天境内の、樹齢1000年とされる国指定天然記念物のイチョウ。", fallbackLatLng: [33.194229, 129.908661], transit: { mode: "walk", min: 4 } },
