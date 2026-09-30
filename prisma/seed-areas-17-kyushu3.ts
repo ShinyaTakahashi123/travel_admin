@@ -91,7 +91,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "桜島フェリーと湯之平展望所、活火山・桜島を間近に望むプラン",
-    description: "錦江湾を渡る桜島フェリーと、桜島港近くの月讀神社・ビジターセンター、足湯でくつろぐ溶岩なぎさ公園、一般開放エリアで最も火口に近い湯之平展望所、溶岩原を歩く有村溶岩展望所まで。仙巌園とは違う、今なお噴煙を上げる活火山を間近に望むプランです。",
+    description: "錦江湾を渡る桜島フェリーと、桜島港近くの恐竜公園・月讀神社・ビジターセンター、足湯でくつろぐ溶岩なぎさ公園、烏島展望所や赤水展望広場、一般開放エリアで最も火口に近いとされる湯之平展望所まで。仙巌園とは違う、今なお噴煙を上げる活火山を間近に望むプランです。",
     nights: 0,
     prefectureName: "鹿児島県",
     areaNames: ["鹿児島市内"],
@@ -100,11 +100,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "桜島フェリー", wikiTitle: "桜島フェリー", address: "鹿児島市桜島港町61-4", time: "9:30", stay: 20, memo: "鹿児島市街と桜島を結ぶ、24時間運航のフェリー。錦江湾からの眺めも楽しめる。" },
-        { name: "月讀神社", wikiTitle: "", address: "鹿児島市桜島横山町", time: "9:53", stay: 25, memo: "桜島港近くの古社。大正噴火で埋没後、昭和15年に移設。", fallbackLatLng: [31.5912326, 130.5999732], transit: { mode: "walk", min: 3 } },
-        { name: "桜島ビジターセンター", wikiTitle: "", address: "鹿児島市桜島横山町", time: "10:25", stay: 50, memo: "桜島の噴火の歴史や成り立ちを紹介する火山学習施設。", fallbackLatLng: [31.5908244, 130.5941859], transit: { mode: "walk", min: 7 } },
-        { name: "溶岩なぎさ公園", wikiTitle: "", address: "鹿児島市桜島横山町1722-3", time: "11:25", stay: 70, memo: "大正大噴火の溶岩原沿いの公園。日本最大級ともいわれる足湯。", fallbackLatLng: [31.584061, 130.595276], transit: { mode: "walk", min: 10 } },
-        { name: "湯之平展望所", wikiTitle: "桜島", address: "鹿児島市桜島小池町1025", time: "13:10", stay: 80, memo: "一般開放エリアで火口に最も近い展望所。桜島の迫力を間近に感じられる。", transit: { mode: "bus", min: 35 } },
-        { name: "有村溶岩展望所", wikiTitle: "", address: "鹿児島市有村町", time: "14:55", stay: 90, memo: "大正溶岩原に整備された、約1kmの遊歩道がある展望所。", fallbackLatLng: [31.5543093, 130.6791137], transit: { mode: "bus", min: 25 } },
+        { name: "桜島自然恐竜公園", wikiTitle: "", address: "鹿児島市桜島横山町79", time: "9:53", stay: 30, memo: "実物大の恐竜モデルが並ぶ公園。大型すべり台やアスレチックも。", fallbackLatLng: [31.5931099, 130.6021259], transit: { mode: "walk", min: 3 } },
+        { name: "月讀神社", wikiTitle: "", address: "鹿児島市桜島横山町", time: "10:27", stay: 25, memo: "桜島港近くの古社。大正噴火で埋没後、昭和15年に移設。", fallbackLatLng: [31.5912326, 130.5999732], transit: { mode: "walk", min: 4 } },
+        { name: "桜島ビジターセンター", wikiTitle: "", address: "鹿児島市桜島横山町", time: "11:00", stay: 60, memo: "桜島の噴火の歴史や成り立ちを紹介する火山学習施設。", fallbackLatLng: [31.5908244, 130.5941859], transit: { mode: "walk", min: 8 } },
+        { name: "溶岩なぎさ公園", wikiTitle: "", address: "鹿児島市桜島横山町1722-3", time: "12:10", stay: 65, memo: "大正大噴火の溶岩原沿いの公園。日本最大級ともいわれる足湯。", fallbackLatLng: [31.584061, 130.595276], transit: { mode: "walk", min: 10 } },
+        { name: "烏島展望所", wikiTitle: "", address: "鹿児島市桜島横山町", time: "13:40", stay: 40, memo: "大正噴火の溶岩に飲み込まれた、旧・烏島の高台の展望所。", fallbackLatLng: [31.5817752, 130.6011495], transit: { mode: "bus", min: 25 } },
+        { name: "赤水展望広場", wikiTitle: "", address: "鹿児島市桜島横山町", time: "14:45", stay: 40, memo: "錦江湾と桜島を望む、周遊バス停留所を兼ねた広場。", fallbackLatLng: [31.5768524, 130.6030966], transit: { mode: "bus", min: 25 } },
+        { name: "湯之平展望所", wikiTitle: "桜島", address: "鹿児島市桜島小池町1025", time: "15:50", stay: 40, memo: "一般開放エリアで火口に最も近い展望所。桜島の迫力を間近に感じられる。", transit: { mode: "bus", min: 25 } },
       ],
     ],
   },
