@@ -278,8 +278,8 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡", "自然"],
     days: [
       [
-        { name: "野外博物館合掌造り民家園", wikiTitle: "白川郷", address: "大野郡白川村荻町2499", time: "9:30", stay: 115, memo: "25棟の合掌造り家屋を移築・保存した、野外博物館。高山駅でレンタカーを借りて向かう。", fallbackLatLng: [36.2533333, 136.901533] },
-        { name: "明善寺郷土館", wikiTitle: "明善寺_(白川村)", address: "大野郡白川村荻町679", time: "11:45", stay: 35, memo: "寛延元年創建と伝わる寺院。文政10年完成の本堂、文化14年ごろ建築の庫裏(郷土館)。", transit: { mode: "walk", min: 20 } },
+        { name: "野外博物館合掌造り民家園", wikiTitle: "白川郷", address: "大野郡白川村荻町2499", time: "9:30", stay: 126, memo: "25棟の合掌造り家屋を移築・保存した、野外博物館。高山駅でレンタカーを借りて向かう。", fallbackLatLng: [36.2550209, 136.9015303] },
+        { name: "明善寺郷土館", wikiTitle: "明善寺_(白川村)", address: "大野郡白川村荻町679", time: "11:45", stay: 35, memo: "寛延元年創建と伝わる寺院。文政10年完成の本堂、文化14年ごろ建築の庫裏(郷土館)。", transit: { mode: "walk", min: 9 } },
         { name: "長瀬家", wikiTitle: "白川郷", address: "大野郡白川村荻町", time: "12:23", stay: 40, memo: "明治30年(1897)建築、4層の屋根の合掌造り家屋。美術品・仏具を展示。昼食もここで。今も家族が暮らす。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [36.2573427, 136.9076652] },
         { name: "和田家", wikiTitle: "和田家住宅", address: "大野郡白川村荻町997", time: "13:07", stay: 70, memo: "国指定重要文化財。白川郷でも最大級とされる合掌造り家屋。名主・番所役人の家柄。今も家族が暮らす。", transit: { mode: "walk", min: 4 } },
         { name: "荻町城跡展望台", wikiTitle: "白川郷", address: "大野郡白川村荻町", time: "14:35", stay: 40, memo: "中世の山城跡とされる、荻町集落を見渡す展望台。山道を上って徒歩18分。", transit: { mode: "walk", min: 18 }, fallbackLatLng: [36.2629545, 136.9079634] },
@@ -290,8 +290,9 @@ const ITINERARIES: HandmadeItinerary[] = [
         { name: "荻町合掌造り集落", wikiTitle: "白川郷", address: "大野郡白川村荻町", time: "9:24", stay: 80, memo: "朝の人の少ない時間帯に集落をゆっくり散策。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [36.2619949, 136.906877] },
         { name: "神田家", wikiTitle: "白川郷", address: "大野郡白川村荻町226", time: "10:50", stay: 90, memo: "和田家の分家。安政年間ごろの建築と伝わる、精巧な間取りの合掌造り。昼食もここで。今も家族が暮らす。", transit: { mode: "walk", min: 6 } },
         { name: "白川八幡神社", wikiTitle: "白川八幡神社", address: "大野郡白川村荻町559", time: "12:25", stay: 35, memo: "荻町集落の鎮守。秋のどぶろく祭りで知られる。", transit: { mode: "walk", min: 5 } },
-        { name: "菅沼集落", wikiTitle: "菅沼集落", address: "富山県南砺市菅沼", time: "13:28", stay: 140, memo: "五箇山の合掌造り家屋9棟。荻町と同じ世界遺産。五箇山民俗館・塩硝の館あり。レンタカーで移動。", transit: { mode: "car", min: 28 } },
-        { name: "道の駅白川郷", wikiTitle: "道の駅白川郷", address: "大野郡白川村飯島411", time: "16:12", stay: 30, memo: "平成7年(1995)開業の道の駅。農産物直売所・食事処。帰りはレンタカーで高山駅へ。", transit: { mode: "car", min: 24 } },
+        { name: "菅沼集落", wikiTitle: "菅沼集落", address: "富山県南砺市菅沼", time: "13:28", stay: 70, memo: "五箇山の合掌造り家屋9棟。荻町と同じ世界遺産。五箇山民俗館あり(塩硝の館は火災復旧工事で休館中)。レンタカーで移動。", transit: { mode: "car", min: 28 } },
+        { name: "相倉集落", wikiTitle: "相倉集落", address: "富山県南砺市相倉", time: "14:47", stay: 75, memo: "五箇山の合掌造り家屋20棟ほど。菅沼より規模が大きい。展望スポットあり。", transit: { mode: "car", min: 9 } },
+        { name: "道の駅白川郷", wikiTitle: "道の駅白川郷", address: "大野郡白川村飯島411", time: "16:28", stay: 30, memo: "平成7年(1995)開業の道の駅。農産物直売所・食事処。帰りはレンタカーで高山駅へ。", transit: { mode: "car", min: 26 } },
       ],
     ],
   },
