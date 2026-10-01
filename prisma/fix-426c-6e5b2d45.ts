@@ -15,7 +15,7 @@ const EDITS: [number, string, string, string][] = [
 ];
 
 async function main() {
-  const rows = [];
+  const rows: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const [day, name, from, to] of EDITS) {
     const s = await prisma.spot.findFirstOrThrow({ where: { name, day: { itineraryId: ITINERARY_ID } }, select: { id: true, memo: true } });
     if (!s.memo?.includes(from)) throw new Error(`本文が想定と違います: ${name}`);

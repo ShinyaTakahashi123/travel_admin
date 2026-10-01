@@ -15,7 +15,7 @@ const EDITS: { dayNumber: number; spotName: string; from: string; to: string }[]
 ];
 
 async function main() {
-  const plan = [];
+  const plan: { e: (typeof EDITS)[number]; id: string; memo: string }[] = [];
   for (const e of EDITS) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: e.dayNumber, spotName: e.spotName });
     if (!s.memo?.includes(e.from)) throw new Error(`本文が想定と違います: ${e.spotName}`);

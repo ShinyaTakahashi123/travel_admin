@@ -17,7 +17,7 @@ const EDITS: [string, string, string, Record<string, unknown>][] = [
 ];
 
 async function main() {
-  const rows = [];
+  const rows: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const [name, from, to, extra] of EDITS) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: 1, spotName: name });
     if (!s.memo?.includes(from)) throw new Error(`本文が想定と違います: ${name}`);

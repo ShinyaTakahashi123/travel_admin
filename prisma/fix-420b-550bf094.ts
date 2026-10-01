@@ -44,7 +44,7 @@ const MEMOS: [number, string, string][] = [
 ];
 
 async function main() {
-  const rows = [];
+  const rows: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const [day, name, memo] of MEMOS) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: day, spotName: name });
     rows.push({ day, id: s.id, memo });

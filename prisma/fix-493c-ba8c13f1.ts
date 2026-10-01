@@ -15,7 +15,7 @@ const FIXES = [
 ];
 
 async function main() {
-  const rows = [];
+  const rows: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const f of FIXES) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: f.day, spotName: f.name });
     if (!s.memo?.includes(f.o)) throw new Error(`本文が想定と違います: ${f.name}`);

@@ -25,7 +25,7 @@ const D_NEW = "世界最大級ともいわれるプラネタリウムがある";
 async function main() {
   const it = await prisma.itinerary.findUniqueOrThrow({ where: { id: ITINERARY_ID }, select: { description: true } });
   if (!it.description?.includes(D_OLD)) throw new Error("説明文が想定と違います");
-  const rows = [];
+  const rows: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const [day, name, data, edit] of PLAN) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: day, spotName: name });
     const d: Record<string, unknown> = { ...data };

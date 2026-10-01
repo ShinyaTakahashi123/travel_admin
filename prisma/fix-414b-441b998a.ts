@@ -23,7 +23,7 @@ const PLAN: [number, string, Record<string, unknown>][] = [
 async function main() {
   const ichi = await findSpotInItinerary(ITINERARY_ID, { dayNumber: 1, spotName: "日曜市（高知）" });
   if (!ichi.memo?.includes(OLD)) throw new Error("日曜市の本文が想定と違います");
-  const rows = [];
+  const rows: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const [day, name, data] of PLAN) rows.push({ day, id: (await findSpotInItinerary(ITINERARY_ID, { dayNumber: day, spotName: name })).id, name, data });
   console.log(ichi.memo.replace(OLD, NEW));
   for (const r of rows) console.log(r.day, r.name, JSON.stringify(r.data));

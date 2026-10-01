@@ -16,7 +16,7 @@ const PLAN = [
 ];
 
 async function main() {
-  const spots = [];
+  const spots: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const p of PLAN) spots.push({ p, s: await findSpotInItinerary(ITINERARY_ID, { dayNumber: 1, spotName: p.name }) });
   for (const { p } of spots) console.log(`${p.name}: ${p.visitTime.toISOString().slice(11, 16)} +${p.stayDurationMin}分`);
   if (!COMMIT) return console.log("\n確認モードです。--commit で書き込みます。");

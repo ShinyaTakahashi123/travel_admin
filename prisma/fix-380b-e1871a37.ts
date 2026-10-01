@@ -86,7 +86,7 @@ async function main() {
       const st = h * 60 + m;
       const gap = prevEnd < 0 ? "" : ` (前から${st - prevEnd}分・移動${min}分${st - prevEnd !== min ? " ⚠" : ""})`;
       console.log(`${hm(st)}-${hm(st + stay)} ${mode ?? "-"}${gap} ${name}`);
-      console.log(`   ${"id" in x ? x.data.memo : x.create.memo}`);
+      console.log(`   ${"id" in x ? x.data?.memo : x.create.memo}`);
       prevEnd = st + stay;
     });
   }

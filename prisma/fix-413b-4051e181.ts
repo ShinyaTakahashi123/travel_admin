@@ -19,7 +19,7 @@ const PLAN: [string, Record<string, unknown>][] = [
 ];
 
 async function main() {
-  const spots = [];
+  const spots: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const [name, data] of PLAN) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: 1, spotName: name });
     const extra: Record<string, unknown> = {};

@@ -16,7 +16,7 @@ const EDITS: [string, Record<string, unknown>][] = [
 ];
 
 async function main() {
-  const rows = [];
+  const rows: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const [name, data] of EDITS) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: 1, spotName: name });
     rows.push({ id: s.id, data });

@@ -15,7 +15,7 @@ const fixes = [
 ];
 
 async function main() {
-  const plans = [];
+  const plans: any[] = []; // eslint-disable-line @typescript-eslint/no-explicit-any
   for (const f of fixes) {
     const s = await findSpotInItinerary(ITINERARY_ID, { dayNumber: 2, spotName: f.name });
     console.log(`${f.name}: ${s.lat},${s.lng} → ${f.lat},${f.lng}`);
