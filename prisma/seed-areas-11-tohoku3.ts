@@ -38,11 +38,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["祭り・イベント", "美術館・博物館"],
     days: [
       [
-        { name: "秋田市民俗芸能伝承館", wikiTitle: "秋田市民俗芸能伝承館", address: "秋田市大町1丁目3-30", time: "9:30", stay: 70, memo: "「ねぶり流し館」の愛称で親しまれる、竿燈まつりの実物道具を展示する伝承館。" },
+        { name: "秋田市民俗芸能伝承館", wikiTitle: "秋田市民俗芸能伝承館", address: "秋田市大町1丁目3-30", time: "9:30", stay: 70, memo: "「ねぶり流し館」の愛称で親しまれる、竿燈まつりの実物道具を展示する伝承館。竿燈演技体験も通年実施(予約不要)。" },
         { name: "千秋公園", wikiTitle: "久保田城", address: "秋田市千秋公園1-39", time: "10:55", stay: 90, memo: "久保田城跡の公園。御隅櫓・佐竹史料館・彌高神社など見どころ多数。", transit: { mode: "walk", min: 15 } },
         { name: "秋田県立美術館", wikiTitle: "秋田県立美術館", address: "秋田市中通1-4-2", time: "12:34", stay: 90, memo: "安藤忠雄設計。藤田嗣治の大壁画「秋田の行事」を収蔵。ラウンジで昼食を。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [39.7174373, 140.1215722] },
         { name: "秋田市立赤れんが郷土館", wikiTitle: "秋田市立赤れんが郷土館", address: "秋田市大町3-3-21", time: "14:11", stay: 70, memo: "明治45年築の旧秋田銀行本店本館。国指定重要文化財。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [39.717209, 140.115616] },
-        { name: "秋田まるごと市場", wikiTitle: "秋田まるごと市場", address: "秋田市卸町1-2-7", time: "15:45", stay: 60, memo: "鮮魚・青果・特産品が並ぶ市場。食事処も。帰りはバスで秋田駅へ。", transit: { mode: "walk", min: 24 }, fallbackLatLng: [39.7005003, 140.1095555] },
+        { name: "旧金子家住宅", wikiTitle: "旧金子家住宅", address: "秋田市大町1-3-31", time: "15:26", stay: 40, memo: "明治期再建の商家建築。質屋・古着屋から呉服卸商を営んだ金子家の住宅。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [39.7202325, 140.1169844] },
+        { name: "秋田まるごと市場", wikiTitle: "秋田まるごと市場", address: "秋田市卸町1-2-7", time: "16:34", stay: 25, memo: "鮮魚・青果・特産品が並ぶ市場。食事処も。帰りはバスで秋田駅へ。", transit: { mode: "walk", min: 28 }, fallbackLatLng: [39.7005003, 140.1095555] },
       ],
     ],
   },
