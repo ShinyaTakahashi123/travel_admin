@@ -272,8 +272,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "絶景・フォトスポット"],
     days: [
       [
-        { name: "那智の滝", wikiTitle: "那智滝", address: "東牟婁郡那智勝浦町那智山", time: "9:30", stay: 40, memo: "落差133m、日本三名瀑の一つ。滝そのものが御神体として祀られる。" },
-        { name: "熊野那智大社", wikiTitle: "熊野那智大社", address: "東牟婁郡那智勝浦町那智山1", time: "10:40", stay: 40, memo: "朱塗りの社殿が美しい、熊野三山の一つ。三重塔と滝の景観でも有名。", transit: { mode: "walk", min: 20 } },
+        { name: "大門坂", wikiTitle: "大門坂", address: "東牟婁郡那智勝浦町那智山", time: "9:00", stay: 50, memo: "紀伊勝浦駅前でレンタカーを借りてスタート。熊野古道の杉並木と石畳が続く世界遺産の区間。" },
+        { name: "青岸渡寺", wikiTitle: "青岸渡寺", address: "東牟婁郡那智勝浦町那智山8", time: "10:25", stay: 62, memo: "西国三十三所第一番札所。那智の滝と三重塔を望む撮影スポットも。", transit: { mode: "walk", min: 35 } },
+        { name: "熊野那智大社", wikiTitle: "熊野那智大社", address: "東牟婁郡那智勝浦町那智山1", time: "11:30", stay: 55, memo: "朱塗りの社殿が美しい、熊野三山の一つ。参道の茶店で昼食を。", transit: { mode: "walk", min: 3 } },
+        { name: "那智の滝", wikiTitle: "那智滝", address: "東牟婁郡那智勝浦町那智山", time: "12:35", stay: 40, memo: "落差133m、日本三名瀑の一つ。滝そのものが御神体として祀られる。", transit: { mode: "walk", min: 10 } },
+        { name: "勝浦漁港", wikiTitle: "勝浦漁港", address: "東牟婁郡那智勝浦町築地", time: "13:40", stay: 85, memo: "生鮪の水揚げで知られる漁港。足湯「海乃湯」「鮪乃湯」も。バスで大門坂駐車場へ戻って車で移動。", transit: { mode: "car", min: 25 } },
+        { name: "天然温泉公衆浴場はまゆ", wikiTitle: "那智勝浦温泉", address: "東牟婁郡那智勝浦町", time: "15:09", stay: 90, memo: "地元に親しまれる日帰り入浴施設。帰りは紀伊勝浦駅でレンタカーを返却。", transit: { mode: "car", min: 4 } },
       ],
     ],
   },
