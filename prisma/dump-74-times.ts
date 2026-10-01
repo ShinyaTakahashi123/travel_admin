@@ -10,7 +10,7 @@ async function main() {
   const days = await prisma.day.findMany({ where: { itineraryId: itinId }, orderBy: { dayNumber: "asc" }, include: { spots: { orderBy: { visitTime: "asc" } } } });
   for (const d of days) {
     console.log(`-- Day${d.dayNumber} (id=${d.id}) --`);
-    for (const s of d.spots) console.log(s.name, s.id, s.lat, s.lng, hm(s.visitTime), s.stayDurationMin);
+    for (const s of d.spots) console.log(s.name, s.id, s.lat, s.lng, hm(s.visitTime!), s.stayDurationMin);
   }
 }
 main().finally(() => prisma.$disconnect());

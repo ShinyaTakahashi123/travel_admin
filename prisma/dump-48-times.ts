@@ -8,7 +8,7 @@ function hm(d: Date) {
 
 async function main() {
   const spots = await prisma.spot.findMany({ where: { day: { itineraryId: ITIN } }, orderBy: { visitTime: "asc" } });
-  for (const s of spots) console.log(`${s.name} visit=${hm(s.visitTime)} stay=${s.stayDurationMin}`);
+  for (const s of spots) console.log(`${s.name} visit=${hm(s.visitTime!)} stay=${s.stayDurationMin}`);
   const last = await prisma.spot.findUniqueOrThrow({ where: { id: "d8133591-5557-4e74-a92f-45f8d040d001" } });
   console.log(`\n=== ${last.name} ===\n${last.memo}`);
 }

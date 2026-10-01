@@ -16,7 +16,7 @@ async function main() {
     console.log(`\n-- Day${d.dayNumber} (id=${d.id}) --`);
     for (const s of d.spots) {
       console.log(
-        `${s.name} id=${s.id} visit=${hm(s.visitTime)} stay=${s.stayDurationMin} mode=${s.transitMode} tdur=${s.transitDurationMin} line=${s.transitLine}`
+        `${s.name} id=${s.id} visit=${hm(s.visitTime!)} stay=${s.stayDurationMin} mode=${s.transitMode} tdur=${s.transitDurationMin} line=${s.transitLine}`
       );
     }
   }

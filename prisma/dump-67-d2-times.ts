@@ -10,7 +10,7 @@ async function main() {
   const day = await prisma.day.findFirstOrThrow({ where: { itineraryId: ITIN, dayNumber: 2 }, include: { spots: { orderBy: { visitTime: "asc" } } } });
   console.log("dayId=", day.id);
   for (const s of day.spots) {
-    console.log(`${s.name} id=${s.id} visit=${hm(s.visitTime)} stay=${s.stayDurationMin} mode=${s.transitMode} tdur=${s.transitDurationMin}`);
+    console.log(`${s.name} id=${s.id} visit=${hm(s.visitTime!)} stay=${s.stayDurationMin} mode=${s.transitMode} tdur=${s.transitDurationMin}`);
   }
 }
 main().finally(() => prisma.$disconnect());

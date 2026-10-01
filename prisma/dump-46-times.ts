@@ -15,7 +15,7 @@ async function main() {
   for (const d of days) {
     console.log(`\n-- Day${d.dayNumber} --`);
     for (const s of d.spots) {
-      console.log(`${s.name} visit=${hm(s.visitTime)} stay=${s.stayDurationMin}`);
+      console.log(`${s.name} visit=${hm(s.visitTime!)} stay=${s.stayDurationMin}`);
     }
   }
 }

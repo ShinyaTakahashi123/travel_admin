@@ -10,6 +10,6 @@ async function main() {
   const itin = await prisma.itinerary.findUniqueOrThrow({ where: { id: ITIN } });
   console.log("nights=", (itin as any).nights);
   const spots = await prisma.spot.findMany({ where: { day: { itineraryId: ITIN } }, orderBy: { visitTime: "asc" } });
-  for (const s of spots) console.log(`${s.name} visit=${hm(s.visitTime)} stay=${s.stayDurationMin}`);
+  for (const s of spots) console.log(`${s.name} visit=${hm(s.visitTime!)} stay=${s.stayDurationMin}`);
 }
 main().finally(() => prisma.$disconnect());

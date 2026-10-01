@@ -8,6 +8,6 @@ function hm(d: Date) {
 
 async function main() {
   const spots = await prisma.spot.findMany({ where: { day: { itineraryId: ITIN } }, orderBy: { visitTime: "asc" } });
-  for (const s of spots) console.log(`${s.name} id=${s.id} visit=${hm(s.visitTime)} stay=${s.stayDurationMin} lat=${s.lat} lng=${s.lng} mode=${s.transitMode} tdur=${s.transitDurationMin}`);
+  for (const s of spots) console.log(`${s.name} id=${s.id} visit=${hm(s.visitTime!)} stay=${s.stayDurationMin} lat=${s.lat} lng=${s.lng} mode=${s.transitMode} tdur=${s.transitDurationMin}`);
 }
 main().finally(() => prisma.$disconnect());
