@@ -11,7 +11,7 @@ const COMMIT = process.argv.includes("--commit");
 
 async function main() {
   const s = await prisma.spot.findUniqueOrThrow({ where: { id: SPOT_ID }, include: { day: true } });
-  if (s.day.itineraryId !== ITINERARY_ID || s.name !== "石舞台古墳" || s.lat !== 34.4661 || s.lng !== 135.8228) throw new Error("想定と違います");
+  if (s.day.itineraryId !== ITINERARY_ID || s.name !== "石舞台古墳" || Number(s.lat) !== 34.4661 || Number(s.lng) !== 135.8228) throw new Error("想定と違います");
   console.log(`${s.name}: (${s.lat},${s.lng}) → (34.4668488,135.8261444)`);
   if (!COMMIT) return console.log("\n確認モードです。--commit で書き込みます。");
   await prisma.spot.update({ where: { id: SPOT_ID }, data: { lat: 34.4668488, lng: 135.8261444 } });
