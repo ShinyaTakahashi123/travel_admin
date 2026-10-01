@@ -61,8 +61,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["祭り・イベント", "城・史跡"],
     days: [
       [
-        { name: "津軽藩ねぷた村", wikiTitle: "津軽藩ねぷた村", address: "弘前市亀甲町61", time: "10:00", stay: 60, memo: "津軽三味線の生演奏を楽しめる施設。ねぷた絵や津軽の伝統工芸にも触れられます。", fallbackLatLng: [40.6098, 140.4644] },
-        { name: "弘前城（弘前公園）", wikiTitle: "弘前城", address: "弘前市下白銀町1", time: "15:00", stay: 60, memo: "雪灯籠やミニかまくらが園内を彩る「弘前城雪燈籠まつり」の会場。例年2月中旬ごろの開催で、夕方からのライトアップが見どころです（開催時期は公式サイトで要確認）。", transit: { mode: "walk", min: 15 } },
+        { name: "津軽藩ねぷた村", wikiTitle: "津軽藩ねぷた村", address: "弘前市亀甲町61", time: "09:00", stay: 60, memo: "津軽三味線の生演奏を楽しめる施設。ねぷた絵や津軽の伝統工芸にも触れられます。", fallbackLatLng: [40.6098, 140.4644] },
+        { name: "仲町伝統的建造物群保存地区", wikiTitle: "仲町伝統的建造物群保存地区", address: "弘前市若党町・馬喰町一帯", time: "10:18", stay: 35, memo: "江戸時代の中級武士が暮らした屋敷町。旧岩田家住宅など公開武家住宅があります。", transit: { mode: "walk", min: 18 }, fallbackLatLng: [40.6124612, 140.4709443] },
+        { name: "弘前昇天教会", wikiTitle: "弘前昇天教会", address: "弘前市山道町1", time: "11:11", stay: 15, memo: "大正10年(1921)建築の赤レンガ造りの教会。見学は外観のみ。", transit: { mode: "walk", min: 18 }, fallbackLatLng: [40.5993763, 140.4732323] },
+        { name: "最勝院", wikiTitle: "最勝院", address: "弘前市銅屋町63", time: "11:32", stay: 35, memo: "国重要文化財の五重塔がそびえる寺院。", transit: { mode: "walk", min: 6 }, fallbackLatLng: [40.5965849, 140.4686445] },
+        { name: "禅林街", wikiTitle: "禅林街", address: "弘前市西茂森1丁目", time: "12:23", stay: 40, memo: "津軽家の菩提寺・長勝寺をはじめ曹洞宗の寺院が軒を連ねる寺町。", transit: { mode: "walk", min: 16 }, fallbackLatLng: [40.598697, 140.4535668] },
+        { name: "藤田記念庭園", wikiTitle: "藤田記念庭園", address: "弘前市上白銀町8-1", time: "13:13", stay: 45, memo: "大正時代の実業家の別邸庭園。冬期は高台部・洋館のみ公開、洋館内「大正浪漫喫茶室」で昼食をとれます。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [40.6040352, 140.460367] },
+        { name: "弘前城（弘前公園）", wikiTitle: "弘前城", address: "弘前市下白銀町1", time: "14:05", stay: 150, memo: "雪灯籠やミニかまくらが園内を彩る「弘前城雪燈籠まつり」の会場。例年2月の開催で、夕方からのライトアップが見どころです（開催時期は公式サイトで要確認）。", transit: { mode: "walk", min: 7 } },
       ],
     ],
   },
