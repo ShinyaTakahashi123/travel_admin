@@ -89,7 +89,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "雪の大谷ウォークと黒部ダム、迫力の大自然を体感するプラン",
-    description: "春の風物詩・雪の大谷の大雪壁を歩き、日本一の高さを誇る黒部ダムの大観光放水を見る。立山黒部の雄大なスケールを体感するプランです（雪の大谷は例年4〜6月限定）。",
+    description: "春の風物詩・雪の大谷の大雪壁を歩き、日本一の高さとされる黒部ダムで、迫力の観光放水を見る。立山黒部の雄大なスケールを体感するプランです（雪の大谷は例年4〜6月限定）。",
     nights: 0,
     prefectureName: "富山県",
     areaNames: ["立山黒部"],
@@ -97,8 +97,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "自然"],
     days: [
       [
-        { name: "雪の大谷", wikiTitle: "雪の大谷", address: "中新川郡立山町芦峅寺", time: "10:00", stay: 40, memo: "高さ最大20mにもなる、除雪でできた雪の壁を歩ける春の絶景（例年4〜6月限定）。", fallbackLatLng: [36.5719, 137.6011] },
-        { name: "黒部ダム", wikiTitle: "黒部ダム", address: "中新川郡立山町芦峅寺", time: "12:30", stay: 60, memo: "日本一の高さを誇るアーチ式ダム。夏季は大迫力の観光放水も見られる。", transit: { mode: "bus", min: 60, line: "立山黒部アルペンルート" }, fallbackLatLng: [36.5658, 137.6486] },
+        { name: "美女平", wikiTitle: "美女平", address: "中新川郡立山町芦峅寺", time: "9:30", stay: 70, memo: "立山駅からケーブルカーでおよそ7分。森林浴の森100選のブナ・タテヤマスギ林。", fallbackLatLng: [36.5833454, 137.4586143] },
+        { name: "室堂", wikiTitle: "室堂", address: "中新川郡立山町芦峅寺", time: "11:30", stay: 130, memo: "高さ最大20mにもなる、除雪でできた雪の壁を歩ける春の絶景（例年4〜6月限定）。みくりが池・地獄谷も。食事処で昼食を。", transit: { mode: "bus", min: 50, line: "立山黒部アルペンルート" }, fallbackLatLng: [36.5719, 137.6011] },
+        { name: "大観峰", wikiTitle: "大観峰", address: "中新川郡立山町芦峅寺", time: "13:50", stay: 20, memo: "標高2,316m、黒部湖と後立山連峰を望む展望スポット。", transit: { mode: "bus", min: 10, line: "立山黒部アルペンルート" }, fallbackLatLng: [36.5698087, 137.6316437] },
+        { name: "黒部平", wikiTitle: "黒部平", address: "中新川郡立山町芦峅寺", time: "14:17", stay: 20, memo: "高山植物約100種が楽しめる黒部平庭園。黒部湖と立山連峰を一望。", transit: { mode: "other", min: 7 }, fallbackLatLng: [36.5671451, 137.6501481] },
+        { name: "黒部ダム", wikiTitle: "黒部ダム", address: "中新川郡立山町芦峅寺", time: "15:00", stay: 95, memo: "日本一の高さとされるアーチ式ダム。夏季は迫力の観光放水も見られる。帰りは往路と同じルートで立山駅へ。", transit: { mode: "other", min: 23 }, fallbackLatLng: [36.5658, 137.6486] },
       ],
     ],
   },
