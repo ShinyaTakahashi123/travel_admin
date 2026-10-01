@@ -608,6 +608,7 @@ const AREAS: AreaSeed[] = [
       { name: "客館跡", address: "太宰府市朱雀3丁目13", lat: 33.505253, lng: 130.516983, memo: "外国使節をもてなした迎賓施設の跡、令和2年に史跡広場として整備。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "大宰府" },
       { name: "榎社", address: "太宰府市朱雀6丁目18", lat: 33.5079896, lng: 130.5145514, memo: "菅原道真公が大宰府で過ごした配所の跡と伝わる神社。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "榎社" },
       { name: "筑前国分寺跡", address: "太宰府市国分4丁目13", lat: 33.5205879, lng: 130.5066711, memo: "聖武天皇の詔で建てられた国分寺の跡、金堂や七重塔の礎石が残る。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "筑前国分寺" },
+      { name: "水城跡", address: "太宰府市水城1丁目", lat: 33.521808, lng: 130.4989372, memo: "天智天皇3年築造の特別史跡、巨大な土塁と水城館。", websiteUrl: "https://ja.kyoto.travel/", wikiTitle: "水城" },
     ],
   },
   {
