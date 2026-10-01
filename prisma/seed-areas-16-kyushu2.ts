@@ -110,10 +110,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "青島神社", wikiTitle: "青島神社", address: "宮崎市青島2-13-1", time: "9:30", stay: 75, memo: "宮崎駅前でレンタカーを借りてスタート。島全体が境内、国特別天然記念物のビロウ樹群。縁結びの神社。" },
-        { name: "堀切峠", wikiTitle: "堀切峠", address: "宮崎市内海", time: "10:54", stay: 33, memo: "日南海岸随一とされる展望スポット。鬼の洗濯板と太平洋を一望。", transit: { mode: "car", min: 9 }, fallbackLatLng: [31.7768245, 131.4821614] },
-        { name: "道の駅フェニックス", wikiTitle: "道の駅フェニックス", address: "宮崎市内海乙3089", time: "11:30", stay: 90, memo: "堀切峠そばの道の駅。食事処で昼食を。展望デッキからの眺めも。", transit: { mode: "car", min: 3 }, fallbackLatLng: [31.7688886, 131.478289] },
-        { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市宮浦2650", time: "13:21", stay: 80, memo: "イースター島長老会の特別許可で復刻された、世界で唯一のモアイ像7体。", transit: { mode: "car", min: 21 }, fallbackLatLng: [31.6632784, 131.4609574] },
-        { name: "鵜戸神宮", wikiTitle: "鵜戸神宮", address: "日南市大字宮浦3232", time: "14:49", stay: 105, memo: "断崖の洞窟に埋め込まれた朱塗りの本殿。運玉投げも名物。帰りは宮崎駅でレンタカーを返却。", transit: { mode: "car", min: 8 } },
+        { name: "青島亜熱帯植物園", wikiTitle: "青島亜熱帯植物園", address: "宮崎市青島2-12-1", time: "10:47", stay: 35, memo: "ヤシ類や南国花木が並ぶ植物園。大温室のマンゴーの大木も。", transit: { mode: "car", min: 2 }, fallbackLatLng: [31.8014266, 131.4696146] },
+        { name: "堀切峠", wikiTitle: "堀切峠", address: "宮崎市内海", time: "11:31", stay: 18, memo: "日南海岸随一とされる展望スポット。鬼の洗濯板と太平洋を一望。", transit: { mode: "car", min: 9 }, fallbackLatLng: [31.7768245, 131.4821614] },
+        { name: "道の駅フェニックス", wikiTitle: "道の駅フェニックス", address: "宮崎市内海乙3089", time: "11:52", stay: 60, memo: "堀切峠そばの道の駅。食事処で昼食を。展望デッキからの眺めも。", transit: { mode: "car", min: 3 }, fallbackLatLng: [31.7688886, 131.478289] },
+        { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市宮浦2650", time: "13:13", stay: 65, memo: "イースター島長老会の特別許可で復刻された、世界で唯一のモアイ像7体。", transit: { mode: "car", min: 21 }, fallbackLatLng: [31.6632784, 131.4609574] },
+        { name: "飫肥城下町", wikiTitle: "飫肥城下町", address: "日南市飫肥", time: "14:37", stay: 50, memo: "九州の小京都とも呼ばれる城下町。武家屋敷と水路の町並み、飫肥天の食べ歩き。", transit: { mode: "car", min: 19 }, fallbackLatLng: [31.6261254, 131.3536227] },
+        { name: "鵜戸神宮", wikiTitle: "鵜戸神宮", address: "日南市大字宮浦3232", time: "15:46", stay: 70, memo: "断崖の洞窟に埋め込まれた朱塗りの本殿。運玉投げも名物。帰りは宮崎駅でレンタカーを返却。", transit: { mode: "car", min: 19 } },
       ],
     ],
   },
