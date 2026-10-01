@@ -146,7 +146,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["動物園・水族館", "高原・避暑"],
     days: [
       [
-        { name: "伊香保グリーン牧場", wikiTitle: "伊香保グリーン牧場", address: "渋川市金井2844-1", time: "9:30", stay: 150, memo: "羊の大行進やアルパカとのふれあいが楽しめる、高原の牧場。" },
+        { name: "伊香保グリーン牧場", wikiTitle: "伊香保グリーン牧場", address: "渋川市金井2844-1", time: "9:30", stay: 150, memo: "渋川駅前でレンタカーを借りてスタート。羊の大行進やアルパカとのふれあいが楽しめる、高原の牧場。" },
+        { name: "水澤寺", wikiTitle: "水澤寺", address: "渋川市伊香保町水沢214", time: "12:07", stay: 70, memo: "坂東三十三観音の第16番札所。門前の水沢うどん街で昼食を。", transit: { mode: "car", min: 7 } },
+        { name: "伊香保石段街", wikiTitle: "伊香保温泉", address: "渋川市伊香保町伊香保", time: "13:26", stay: 45, memo: "365段の石段の両側に、土産物店や射的場が並ぶ温泉街のシンボル。", transit: { mode: "car", min: 9 } },
+        { name: "伊香保露天風呂", wikiTitle: "伊香保温泉", address: "渋川市伊香保町伊香保581", time: "14:21", stay: 45, memo: "黄金の湯を森に囲まれて楽しめる日帰り入浴施設。", transit: { mode: "walk", min: 10 } },
+        { name: "河鹿橋", wikiTitle: "河鹿橋", address: "渋川市伊香保町伊香保", time: "15:09", stay: 15, memo: "朱塗りの太鼓橋。紅葉の名所としても知られる撮影スポット。", transit: { mode: "walk", min: 3 } },
+        { name: "榛名湖", wikiTitle: "榛名湖", address: "高崎市榛名湖町", time: "15:37", stay: 53, memo: "榛名山のカルデラ湖。ボートや湖畔散策を楽しめる。帰りは渋川駅でレンタカーを返却。", transit: { mode: "car", min: 13 } },
       ],
     ],
   },
