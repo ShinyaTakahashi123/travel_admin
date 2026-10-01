@@ -296,6 +296,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "足摺岬", wikiTitle: "足摺岬", address: "土佐清水市足摺岬", time: "9:30", stay: 70, memo: "四国最南端の岬。白亜の灯台と、断崖に打ち寄せる太平洋の荒波を一望できる。" },
+        { name: "金剛福寺", wikiTitle: "金剛福寺", address: "土佐清水市足摺岬1", time: "10:48", stay: 35, memo: "四国霊場第38番札所、弘法大師開基と伝わる古刹。", transit: { mode: "walk", min: 8 } },
+        { name: "唐人駄場遺跡", wikiTitle: "唐人駄場", address: "土佐清水市松尾977", time: "11:31", stay: 35, memo: "縄文〜弥生の暮らしの跡、環状の巨石群「唐人石」。", transit: { mode: "car", min: 8 }, fallbackLatLng: [32.733238, 132.984283] },
+        { name: "ジョン万次郎資料館", wikiTitle: "中浜万次郎", address: "土佐清水市養老303-1", time: "12:21", stay: 45, memo: "土佐清水市立、中浜万次郎(ジョン万次郎)の生涯を紹介。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.7813927, 132.9327159] },
+        { name: "竜串海岸", wikiTitle: "竜串", address: "土佐清水市竜串", time: "13:18", stay: 55, memo: "国の名勝・天然記念物の奇岩群。昼食もこのあたりで。", transit: { mode: "car", min: 12 }, fallbackLatLng: [32.7854925, 132.8660251] },
+        { name: "見残し海岸", wikiTitle: "竜串", address: "土佐清水市竜串", time: "14:28", stay: 55, memo: "グラスボートで渡る、蜂の巣状風化の奇岩地帯。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [32.7919801, 132.8759317] },
+        { name: "海のギャラリー", wikiTitle: "海のギャラリー", address: "土佐清水市三崎字竜串", time: "15:36", stay: 55, memo: "土佐清水市立竜串貝類展示館、国登録有形文化財。帰りはここから。", transit: { mode: "walk", min: 13 }, fallbackLatLng: [32.788672, 132.865787] },
       ],
     ],
   },
