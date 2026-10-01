@@ -196,7 +196,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "自然"],
     days: [
       [
-        { name: "田貫湖", wikiTitle: "田貫湖", address: "富士宮市猪之頭", time: "9:30", stay: 90, memo: "「逆さ富士」やダイヤモンド富士で知られる、静かな人造湖。" },
+        { name: "陣馬の滝", wikiTitle: "陣馬の滝", address: "富士宮市猪之頭", time: "9:00", stay: 35, memo: "富士宮駅前でレンタカーを借りてスタート。富士山の伏流水が落ちる小さな滝。" },
+        { name: "田貫湖", wikiTitle: "田貫湖", address: "富士宮市猪之頭", time: "9:43", stay: 102, memo: "「逆さ富士」やダイヤモンド富士で知られる、静かな人造湖。一周3.3kmの遊歩道も。", transit: { mode: "car", min: 8 } },
+        { name: "まかいの牧場", wikiTitle: "まかいの牧場", address: "富士宮市根原449-1", time: "11:31", stay: 90, memo: "富士山を望む体験型牧場。レストランで昼食を。", transit: { mode: "car", min: 6 } },
+        { name: "白糸の滝", wikiTitle: "白糸ノ滝_(静岡県)", address: "富士宮市上井出", time: "13:08", stay: 45, memo: "幅150mにわたり、絹糸のように流れ落ちる世界文化遺産の滝。", transit: { mode: "car", min: 7 } },
+        { name: "富士山本宮浅間大社", wikiTitle: "富士山本宮浅間大社", address: "富士宮市宮町1-1", time: "14:12", stay: 50, memo: "全国1300余りの浅間神社の総本宮。富士山信仰の中心地。", transit: { mode: "car", min: 19 } },
+        { name: "富士山世界遺産センター", wikiTitle: "静岡県富士山世界遺産センター", address: "富士宮市宮町5-12", time: "15:07", stay: 85, memo: "坂茂設計、逆さ富士の意匠。らせんスロープで富士登山を疑似体験。帰りは富士宮駅でレンタカーを返却。", transit: { mode: "walk", min: 5 } },
       ],
     ],
   },
