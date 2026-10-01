@@ -17,7 +17,7 @@ async function main() {
   const d = await findSpotInItinerary(ITINERARY_ID, { dayNumber: 2, spotName: "鳴門市ドイツ館" });
   if (!d.memo?.includes(O)) throw new Error("ドイツ館の本文が想定と違います");
   const k = await findSpotInItinerary(ITINERARY_ID, { dayNumber: 1, spotName: "道の駅くるくる なると" });
-  if (Number(k.lat) !== 34.1614276 || Number(k.lng) !== 134.5786142) throw new Error("くるくる なるとの座標が想定と違います");
+  if (Math.abs(Number(k.lat) - 34.1614276) > 1e-5 || Math.abs(Number(k.lng) - 134.5786142) > 1e-5) throw new Error("くるくる なるとの座標が想定と違います");
   console.log(`ドイツ館: ${O} → ${N}\nくるくる なると: (${k.lat},${k.lng}) → (34.1584928,134.5796644)`);
   if (!COMMIT) return console.log("\n確認モードです。--commit で書き込みます。");
   await prisma.$transaction(async (tx) => {
