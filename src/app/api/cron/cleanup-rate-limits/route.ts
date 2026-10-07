@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma";
 // Cron Jobs数の上限内に収めるため、複数の定期削除処理をこの1本にまとめている:
 // 1. 回数制限用の記録（RateLimitEvent）のうち24時間より古いものを削除（直近24時間分で十分なため）
 // 2. 権利侵害の申告・開示請求への対応のため記録しているIPアドレス
-//    （Comment.ipAddress / Request.ipAddress / Itinerary.submittedIp）のうち、
+//    （Comment.ipAddress / Itinerary.submittedIp）のうち、
 //    記録から6か月を過ぎたものをnullにする（投稿・しおり本体は消さない）
 // 3. 退会後の保存記録（DeletedAccountRecord）のうち、退会から6か月を過ぎ、
 //    legalHold(保全の印)が付いていないものは、明細(items)を削除しメール・名前をnullにする
@@ -25,13 +25,9 @@ export async function GET(request: Request) {
   const ipCutoff = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
   const deletedAccountCutoff = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
 
-  const [rateLimitEvents, comments, requests, itineraries] = await Promise.all([
+  const [rateLimitEvents, comments, itineraries] = await Promise.all([
     prisma.rateLimitEvent.deleteMany({ where: { createdAt: { lt: rateLimitCutoff } } }),
     prisma.comment.updateMany({
-      where: { createdAt: { lt: ipCutoff }, ipAddress: { not: null } },
-      data: { ipAddress: null },
-    }),
-    prisma.request.updateMany({
       where: { createdAt: { lt: ipCutoff }, ipAddress: { not: null } },
       data: { ipAddress: null },
     }),
@@ -62,7 +58,7 @@ export async function GET(request: Request) {
 
   const result = {
     rateLimitEvents: rateLimitEvents.count,
-    ipCleared: { comments: comments.count, requests: requests.count, itineraries: itineraries.count },
+    ipCleared: { comments: comments.count, itineraries: itineraries.count },
     deletedAccountRecordsPurged,
     auditLogsPurged: auditLogsPurged.count,
   };

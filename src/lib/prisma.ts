@@ -25,7 +25,6 @@ function createPrismaClient() {
     adapter,
     omit: {
       comment: { ipAddress: true },
-      request: { ipAddress: true },
       itinerary: { submittedIp: true },
       deletedAccountRecord: { email: true, name: true },
       deletedAccountRecordItem: { body: true, ipAddress: true },

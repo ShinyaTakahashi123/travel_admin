@@ -136,7 +136,6 @@ model UserAccount {
   favorites     Favorite[]
   comments      Comment[]
   reports       Report[]
-  sentRequests  Request[]
 
   @@index([homeAreaId])
   @@map("user_account")
@@ -209,7 +208,6 @@ model PlannerAccount {
   serviceAreas     PlannerServiceArea[]
   specialtyTags    PlannerSpecialtyTag[]
   itineraries      Itinerary[]
-  receivedRequests Request[]
 
   @@index([homeAreaId])
   @@map("planner_account")
@@ -343,7 +341,6 @@ model Itinerary {
   favorites       Favorite[]
   comments        Comment[]
   shareLogs       ShareLog[]
-  requests        Request[]
   pageViews       PageView[]
 
   @@index([plannerAccountId])
@@ -552,26 +549,6 @@ model ShareLog {
 
   @@index([itineraryId, platform])
   @@map("share_log")
-}
-
-model Request {
-  id                  String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  plannerAccountId    String   @map("planner_account_id") @db.Uuid
-  senderUserAccountId String   @map("sender_user_account_id") @db.Uuid
-  itineraryId         String?  @map("itinerary_id") @db.Uuid
-  message             String
-  status              String   @default("unread") // unread|read|responded
-  // 権利侵害の申告・開示請求への対応のため送信時に記録(6か月後にCronでnullにする)。
-  // リクエスト機能の継続可否は別途判断中(docs/specs/20260924-legal-request-feature-telecom.md)
-  ipAddress           String?  @map("ip_address")
-  createdAt           DateTime @default(now()) @map("created_at") @db.Timestamptz
-
-  plannerAccount    PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
-  senderUserAccount UserAccount    @relation(fields: [senderUserAccountId], references: [id], onDelete: Cascade)
-  itinerary         Itinerary?     @relation(fields: [itineraryId], references: [id], onDelete: SetNull)
-
-  @@index([plannerAccountId, status])
-  @@map("request")
 }
 
 // ============================================================
