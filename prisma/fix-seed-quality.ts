@@ -219,11 +219,16 @@ async function main() {
             dayId: u.dayId,
             orderNo: u.orderNo,
             visitTime: new Date(Date.UTC(1970, 0, 1, Math.floor(u.visitMin / 60), u.visitMin % 60)),
-            transitMode: u.transit?.mode ?? null,
-            transitDurationMin: u.transit?.min ?? null,
-            transitLine: null,
           },
         });
+        // 並べ替えで移動(乗り継ぎ)が変わるため、乗り継ぎ行(SpotTransitLeg)を
+        // 1件目から作り直す(このスクリプトが作る乗り継ぎは常に1件のため)
+        await tx.spotTransitLeg.deleteMany({ where: { spotId: u.spotId } });
+        if (u.transit) {
+          await tx.spotTransitLeg.create({
+            data: { spotId: u.spotId, orderNo: 1, transitMode: u.transit.mode, transitDurationMin: u.transit.min ?? null },
+          });
+        }
       }
     }, { timeout: 60000 });
   }

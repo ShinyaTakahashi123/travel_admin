@@ -123,19 +123,6 @@ ALTER TABLE spot
   ADD CONSTRAINT spot_stay_duration_min_check
   CHECK (stay_duration_min IS NULL OR stay_duration_min >= 0);
 
-ALTER TABLE spot
-  ADD CONSTRAINT spot_transit_mode_check
-  CHECK (transit_mode IN ('walk', 'train', 'bus', 'car', 'taxi', 'other'));
-
-ALTER TABLE spot
-  ADD CONSTRAINT spot_transit_duration_min_check
-  CHECK (transit_duration_min IS NULL OR transit_duration_min >= 0);
-
--- 路線名(transit_line)は移動手段が電車・バスのときのみ設定可能
-ALTER TABLE spot
-  ADD CONSTRAINT spot_transit_line_only_for_train_bus
-  CHECK (transit_line IS NULL OR transit_mode IN ('train', 'bus'));
-
 -- ============================================================
 -- 2.6 エンゲージメント（お気に入り・コメント・通報・共有・リクエスト）
 -- ============================================================

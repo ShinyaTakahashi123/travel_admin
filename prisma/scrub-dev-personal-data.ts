@@ -23,14 +23,15 @@
 //   ハッシュへ。本物のパスワードのハッシュが開発用DBに残ると、漏れたときに本番の管理者
 //   パスワードを試す手がかりになるため。セキュリティ2026-09-27)。emailだけは、
 //   運営メンバー自身が開発用の管理者サイトにログインするために置き換えない
-// - Comment.ip_address、Request.ip_address、DeletedAccountRecordItem.ip_address、
+// - Comment.ip_address、DeletedAccountRecordItem.ip_address、
 //   Itinerary.submitted_ip: null
-// - Request.message: 空文字("")。通信の秘密にあたるため、開発用でも中身を残さない
 // - Report.reason: 開発用のダミー文へ
 // - Inquiry.name / email / message: ダミーへ
 // - DeletedAccountRecord.email / name、DeletedAccountRecordItem.body: ダミーへ
 // - 置き換えないもの(公開している情報): UserAccount.name・profile、
 //   PlannerAccount.name・profile、Comment.body、Itinerary本体、Adminのemail
+// - trip・trip_spot・checkin・prefecture_visit: 会員の行動の記録のため、ダミー値への
+//   置き換えではなく全件削除する(docs/specs/20260928-footprint-map-checkin.md 5節)
 
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
@@ -79,7 +80,6 @@ async function main() {
     plannerAccount: await prisma.plannerAccount.count(),
     admin: await prisma.admin.count({ where: { OR: [{ inviteToken: { not: null } }, { resetToken: { not: null } }] } }),
     comment: await prisma.comment.count({ where: { ipAddress: { not: null } } }),
-    request: await prisma.request.count(),
     report: await prisma.report.count(),
     inquiry: await prisma.inquiry.count(),
     deletedAccountRecord: await prisma.deletedAccountRecord.count(),
@@ -87,6 +87,12 @@ async function main() {
       where: { OR: [{ ipAddress: { not: null } }, { body: { not: null } }] },
     }),
     itinerarySubmittedIp: await prisma.itinerary.count({ where: { submittedIp: { not: null } } }),
+    trip: await prisma.trip.count(),
+    checkin: await prisma.checkin.count(),
+    prefectureVisit: await prisma.prefectureVisit.count(),
+    accountLink: await prisma.accountLink.count(),
+    accountLinkNonce: await prisma.accountLinkNonce.count(),
+    accountLinkReceipt: await prisma.accountLinkReceipt.count(),
   };
   console.log("対象件数:", counts);
 
@@ -129,7 +135,6 @@ async function main() {
 
     // IPアドレス
     await tx.comment.updateMany({ data: { ipAddress: null } });
-    await tx.request.updateMany({ data: { ipAddress: null, message: "" } });
     await tx.deletedAccountRecordItem.updateMany({ data: { ipAddress: null, body: null } });
     await tx.itinerary.updateMany({ data: { submittedIp: null } });
 
@@ -150,6 +155,17 @@ async function main() {
       SET email = 'deleted-' || id || '@example.invalid',
           name = '開発用ダミー'
     `;
+
+    // 足あと地図・現地チェックイン: 会員の行動の記録なので全件削除する
+    // (tripを消すとtrip_spot・checkinはonDelete: Cascadeで一緒に消える)
+    await tx.trip.deleteMany();
+    await tx.prefectureVisit.deleteMany();
+
+    // アカウントの連携・合言葉・受け取りの印も全件削除する
+    // (docs/specs/20260928-account-link.md 3節)
+    await tx.accountLink.deleteMany();
+    await tx.accountLinkNonce.deleteMany();
+    await tx.accountLinkReceipt.deleteMany();
   });
 
   console.log("");

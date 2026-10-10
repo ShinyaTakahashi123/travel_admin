@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { resolveReportHideItinerary, dismissReport } from "@/lib/actions";
 import { REPORT_STATUS_LABEL } from "@/lib/format";
 import { formatDate } from "@/lib/format";
+import { Pagination } from "@/components/ui/pagination";
+import type { PageInfo } from "@/lib/pagination";
 
 type PlainReport = {
   id: string;
@@ -24,10 +26,12 @@ export function ReportList({
   reports,
   unreadCount,
   initialSelectedId,
+  pageInfo,
 }: {
   reports: PlainReport[];
   unreadCount: number;
   initialSelectedId?: string;
+  pageInfo: PageInfo;
 }) {
   const router = useRouter();
   const [selectedId, setSelectedId] = useState(initialSelectedId ?? reports[0]?.id);
@@ -111,6 +115,7 @@ export function ReportList({
             })}
           </div>
         )}
+        <Pagination basePath="/reports" searchParams={{}} {...pageInfo} />
       </div>
 
       {selected && (

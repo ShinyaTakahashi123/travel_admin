@@ -1,19 +1,25 @@
 import { prisma } from "@/lib/prisma";
 import { ReportList } from "@/components/report-list";
+import { buildPageInfo, ADMIN_PAGE_SIZE } from "@/lib/pagination";
 
 export default async function ReportManagementPage({
   searchParams,
 }: {
-  searchParams: Promise<{ selected?: string }>;
+  searchParams: Promise<{ selected?: string; page?: string }>;
 }) {
-  const { selected } = await searchParams;
+  const { selected, page: pageParam } = await searchParams;
+
+  const totalCount = await prisma.report.count();
+  const pageInfo = buildPageInfo(pageParam, totalCount, ADMIN_PAGE_SIZE);
+  // 未読の件数は、ページを分ける前と同じになるよう、一覧とは別に数える(仕様書2026-09-27)
+  const unreadCount = await prisma.report.count({ where: { status: "unread" } });
 
   const reports = await prisma.report.findMany({
-    orderBy: { createdAt: "desc" },
+    orderBy: [{ createdAt: "desc" }, { id: "asc" }],
+    skip: pageInfo.skip,
+    take: pageInfo.take,
     include: { reporterUserAccount: { select: { name: true } } },
   });
-
-  const unreadCount = reports.filter((r) => r.status === "unread").length;
 
   const itineraryIds = reports.filter((r) => r.targetType === "itinerary").map((r) => r.targetId);
   const commentIds = reports.filter((r) => r.targetType === "comment").map((r) => r.targetId);
@@ -60,6 +66,6 @@ export default async function ReportManagementPage({
   });
 
   return (
-    <ReportList reports={plain} unreadCount={unreadCount} initialSelectedId={selected} />
+    <ReportList reports={plain} unreadCount={unreadCount} initialSelectedId={selected} pageInfo={pageInfo} />
   );
 }

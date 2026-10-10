@@ -11,6 +11,7 @@ import {
 import { AdminDayTabs, type AdminDayData } from "@/components/admin-day-tabs";
 import { ItineraryReviewActions } from "@/components/itinerary-review-actions";
 import { ItineraryModerationActions } from "@/components/itinerary-moderation-actions";
+import { RevokeSharedLinkButton } from "@/components/revoke-shared-link-button";
 import { ItineraryPhotoGallery, type GalleryPhoto } from "@/components/itinerary-photo-gallery";
 import { REVIEW_CHECKLIST } from "@/lib/review-checklist";
 import { computeReviewWarnings, type ReviewSpot } from "@/lib/review-warnings";
@@ -26,19 +27,6 @@ function formatSpotTime(time: Date | null): string | null {
 function spotTimeMinutes(time: Date | null): number | null {
   if (!time) return null;
   return time.getUTCHours() * 60 + time.getUTCMinutes();
-}
-
-// スポットの乗り継ぎ一覧を求める(transitLegsが空でも、移行前の旧列に
-// transit_modeがあれば1つ目の移動として補う)
-function effectiveTransitLegs(spot: {
-  transitMode: string | null;
-  transitDurationMin: number | null;
-  transitLine: string | null;
-  transitLegs: { transitMode: string; transitDurationMin: number | null; transitLine: string | null }[];
-}): { transitMode: string; transitDurationMin: number | null; transitLine: string | null }[] {
-  if (spot.transitLegs.length > 0) return spot.transitLegs;
-  if (!spot.transitMode) return [];
-  return [{ transitMode: spot.transitMode, transitDurationMin: spot.transitDurationMin, transitLine: spot.transitLine }];
 }
 
 export default async function ItineraryDetailAdminPage({
@@ -103,7 +91,7 @@ export default async function ItineraryDetailAdminPage({
       memo: spot.memo,
       websiteUrl: spot.websiteUrl,
       hasLocation: spot.lat != null && spot.lng != null,
-      transitLegs: effectiveTransitLegs(spot),
+      transitLegs: spot.transitLegs,
     })),
   }));
 
@@ -137,7 +125,7 @@ export default async function ItineraryDetailAdminPage({
       lat: spot.lat != null ? Number(spot.lat) : null,
       lng: spot.lng != null ? Number(spot.lng) : null,
       visitTimeMinutes: spotTimeMinutes(spot.visitTime),
-      transitLegs: effectiveTransitLegs(spot),
+      transitLegs: spot.transitLegs,
     }))
   );
   const warnings = isPending
@@ -185,6 +173,16 @@ export default async function ItineraryDetailAdminPage({
                 通報 {unreadReports.length}件
               </span>
             )}
+            {itinerary.isCopy && (
+              <span className="bg-sky-100 text-sky-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
+                コピー
+              </span>
+            )}
+            {itinerary.sharedLinkTokenHash && (
+              <span className="bg-amber-100 text-amber-700 text-sm font-bold px-2.5 py-0.5 rounded-full">
+                限定公開リンクあり
+              </span>
+            )}
           </div>
           <div className="text-sm text-muted-foreground">
             T-{itinerary.id.slice(0, 4).toUpperCase()} ・ 投稿者:{" "}
@@ -201,11 +199,14 @@ export default async function ItineraryDetailAdminPage({
           </div>
         </div>
 
-        {isPending ? (
-          <ItineraryReviewActions itineraryId={itinerary.id} title={itinerary.title} />
-        ) : (
-          <ItineraryModerationActions itineraryId={itinerary.id} status={itinerary.status} />
-        )}
+        <div className="flex items-start gap-2.5 flex-wrap">
+          {itinerary.sharedLinkTokenHash && <RevokeSharedLinkButton itineraryId={itinerary.id} />}
+          {isPending ? (
+            <ItineraryReviewActions itineraryId={itinerary.id} title={itinerary.title} />
+          ) : (
+            <ItineraryModerationActions itineraryId={itinerary.id} status={itinerary.status} />
+          )}
+        </div>
       </div>
 
       {isPending && previousRejectionReason && (

@@ -5,17 +5,31 @@ import { prisma } from "@/lib/prisma";
 import { formatDateTime, ADMIN_STATUS_LABEL } from "@/lib/format";
 import { InviteAdminDialog } from "@/components/invite-admin-dialog";
 import { ResendInviteButton } from "@/components/resend-invite-button";
+import { buildPageInfo, ADMIN_PAGE_SIZE } from "@/lib/pagination";
+import { Pagination } from "@/components/ui/pagination";
 
 const ROLE_LABEL: Record<string, { label: string; bg: string; fg: string }> = {
   super: { label: "スーパー管理者", bg: "#EEF0FF", fg: "#4F46E5" },
   staff: { label: "一般管理者", bg: "#F1F5F9", fg: "#64748B" },
 };
 
-export default async function AccountManagementPage() {
+export default async function AccountManagementPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
   const admin = await getActiveAdmin();
   if (admin?.role !== "super") redirect("/");
 
-  const admins = await prisma.admin.findMany({ orderBy: { createdAt: "asc" } });
+  const { page: pageParam } = await searchParams;
+  const totalCount = await prisma.admin.count();
+  const pageInfo = buildPageInfo(pageParam, totalCount, ADMIN_PAGE_SIZE);
+
+  const admins = await prisma.admin.findMany({
+    orderBy: [{ createdAt: "asc" }, { id: "asc" }],
+    skip: pageInfo.skip,
+    take: pageInfo.take,
+  });
 
   return (
     <div>
@@ -86,6 +100,7 @@ export default async function AccountManagementPage() {
           </tbody>
         </table>
       </div>
+      <Pagination basePath="/accounts" searchParams={{}} {...pageInfo} />
     </div>
   );
 }
