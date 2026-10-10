@@ -23,9 +23,8 @@
 //   ハッシュへ。本物のパスワードのハッシュが開発用DBに残ると、漏れたときに本番の管理者
 //   パスワードを試す手がかりになるため。セキュリティ2026-09-27)。emailだけは、
 //   運営メンバー自身が開発用の管理者サイトにログインするために置き換えない
-// - Comment.ip_address、Request.ip_address、DeletedAccountRecordItem.ip_address、
+// - Comment.ip_address、DeletedAccountRecordItem.ip_address、
 //   Itinerary.submitted_ip: null
-// - Request.message: 空文字("")。通信の秘密にあたるため、開発用でも中身を残さない
 // - Report.reason: 開発用のダミー文へ
 // - Inquiry.name / email / message: ダミーへ
 // - DeletedAccountRecord.email / name、DeletedAccountRecordItem.body: ダミーへ
@@ -81,7 +80,6 @@ async function main() {
     plannerAccount: await prisma.plannerAccount.count(),
     admin: await prisma.admin.count({ where: { OR: [{ inviteToken: { not: null } }, { resetToken: { not: null } }] } }),
     comment: await prisma.comment.count({ where: { ipAddress: { not: null } } }),
-    request: await prisma.request.count(),
     report: await prisma.report.count(),
     inquiry: await prisma.inquiry.count(),
     deletedAccountRecord: await prisma.deletedAccountRecord.count(),
@@ -137,7 +135,6 @@ async function main() {
 
     // IPアドレス
     await tx.comment.updateMany({ data: { ipAddress: null } });
-    await tx.request.updateMany({ data: { ipAddress: null, message: "" } });
     await tx.deletedAccountRecordItem.updateMany({ data: { ipAddress: null, body: null } });
     await tx.itinerary.updateMany({ data: { submittedIp: null } });
 
