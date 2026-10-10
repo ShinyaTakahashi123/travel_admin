@@ -38,6 +38,14 @@ export function jstMidnightUtc(dateKey: string): Date {
   return new Date(`${dateKey}T00:00:00+09:00`);
 }
 
+// 日付キー（YYYY-MM-DD）を、DailyMetric.metricDate（@db.Date、時刻を持たない）用のDateにする。
+// jstMidnightUtcとは違い、UTCのまま「その日のY-M-D」になるようにする（時差を足すと
+// UTC上の日付がずれてしまうため）。読み出し側（ダッシュボード）もgetUTCMonth/getUTCDateで
+// 日付キーを復元する前提
+export function dateKeyToDateOnly(dateKey: string): Date {
+  return new Date(`${dateKey}T00:00:00.000Z`);
+}
+
 export function formatNights(nights: number): string {
   if (nights <= 0) return "日帰り";
   return `${nights}泊${nights + 1}日`;

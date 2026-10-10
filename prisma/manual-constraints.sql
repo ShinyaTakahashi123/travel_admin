@@ -144,6 +144,21 @@ ALTER TABLE request
   CHECK (status IN ('unread', 'read', 'responded'));
 
 -- ============================================================
+-- 2.7 PV（page_view。docs/specs/20261010-pv-bot-filter.md）
+-- ============================================================
+
+-- bot_nameは決まった一覧(src/lib/bot-detection.tsのBOT_NAMES)の値のみ・40文字以内
+ALTER TABLE page_view
+  ADD CONSTRAINT page_view_bot_name_check
+  CHECK (
+    bot_name IS NULL
+    OR (
+      char_length(bot_name) <= 40
+      AND bot_name IN ('googlebot', 'bingbot', 'gptbot', 'claudebot', 'other')
+    )
+  );
+
+-- ============================================================
 -- updated_at 自動更新トリガー（2.0節の共通関数 + 各テーブルへの適用）
 -- ============================================================
 

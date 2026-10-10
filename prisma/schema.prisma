@@ -681,6 +681,11 @@ model PageView {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   itineraryId String?  @map("itinerary_id") @db.Uuid
   viewedAt    DateTime @default(now()) @map("viewed_at") @db.Timestamptz
+  // ロボットのアクセスかどうか(docs/specs/20261010-pv-bot-filter.md)。
+  // botNameは決まった一覧(src/lib/bot-detection.tsのBOT_NAMES)の値のみ、DB側もCHECKで縛る。
+  // User-Agentの全文・IPアドレスは保存しない
+  isBot       Boolean  @default(false) @map("is_bot")
+  botName     String?  @map("bot_name")
 
   itinerary Itinerary? @relation(fields: [itineraryId], references: [id], onDelete: SetNull)
 
