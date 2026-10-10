@@ -20,7 +20,7 @@ export default async function UserAccountDetailPage({
       homeArea: true,
       interestTags: { include: { tag: true } },
       wishlistAreas: { include: { area: true } },
-      _count: { select: { favorites: true, comments: true, sentRequests: true } },
+      _count: { select: { favorites: true, comments: true } },
       favorites: {
         orderBy: { createdAt: "desc" },
         take: 5,
@@ -103,7 +103,6 @@ export default async function UserAccountDetailPage({
         {[
           { label: "お気に入り数", value: user._count.favorites },
           { label: "コメント数", value: user._count.comments },
-          { label: "送信したリクエスト", value: user._count.sentRequests },
         ].map((kpi) => (
           <div key={kpi.label} className="bg-card border border-border rounded-2xl px-4.5 py-4 flex-1 min-w-[140px]">
             <div className="text-sm text-muted-foreground font-bold mb-1">{kpi.label}</div>

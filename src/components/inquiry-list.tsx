@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useEffect, useState, useTransition } from "react";
 import { markInquiryRead, markInquiryResponded, markInquiryUnresponded } from "@/lib/actions";
 import { INQUIRY_STATUS_LABEL, INQUIRY_SOURCE_LABEL, formatDate } from "@/lib/format";
+import { Pagination } from "@/components/ui/pagination";
+import type { PageInfo } from "@/lib/pagination";
 
 type PlainInquiry = {
   id: string;
@@ -23,6 +25,7 @@ export function InquiryList({
   categories,
   currentCategory,
   currentSource,
+  pageInfo,
 }: {
   inquiries: PlainInquiry[];
   unreadCount: number;
@@ -30,6 +33,7 @@ export function InquiryList({
   categories: string[];
   currentCategory: string;
   currentSource: string;
+  pageInfo: PageInfo;
 }) {
   const [selectedId, setSelectedId] = useState(initialSelectedId ?? inquiries[0]?.id);
   const [isPending, startTransition] = useTransition();
@@ -153,6 +157,11 @@ export function InquiryList({
             })}
           </div>
         )}
+        <Pagination
+          basePath="/inquiries"
+          searchParams={{ category: currentCategory || undefined, source: currentSource || undefined }}
+          {...pageInfo}
+        />
       </div>
 
       {selected && (

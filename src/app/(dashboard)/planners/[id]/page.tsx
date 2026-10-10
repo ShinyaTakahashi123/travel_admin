@@ -23,7 +23,6 @@ export default async function PlannerAccountDetailPage({
         orderBy: { createdAt: "desc" },
         include: { areas: { include: { area: true } }, _count: { select: { favorites: true } } },
       },
-      receivedRequests: { select: { id: true } },
     },
   });
   if (!planner) notFound();
@@ -89,7 +88,6 @@ export default async function PlannerAccountDetailPage({
           { label: "投稿数", value: planner.itineraries.length },
           { label: "累計いいね", value: totalFavorites },
           { label: "累計SNS共有数", value: shareTotal },
-          { label: "受信したリクエスト", value: planner.receivedRequests.length },
         ].map((kpi) => (
           <div key={kpi.label} className="bg-card border border-border rounded-2xl px-4.5 py-4 flex-1 min-w-[140px]">
             <div className="text-sm text-muted-foreground font-bold mb-1">{kpi.label}</div>

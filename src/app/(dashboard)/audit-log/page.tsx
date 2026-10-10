@@ -3,6 +3,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { getActiveAdmin } from "@/lib/admin-guard";
 import { formatDateTime, AUDIT_LOG_ACTION_LABEL, AUDIT_LOG_TARGET_TYPE_LABEL } from "@/lib/format";
+import { buildPageInfo, ADMIN_PAGE_SIZE } from "@/lib/pagination";
+import { Pagination } from "@/components/ui/pagination";
 
 const TARGET_TYPES = ["itinerary", "user_account", "planner_account", "admin", "report", "inquiry"];
 
@@ -28,25 +30,30 @@ function targetHref(targetType: string, targetId: string): string | null {
 export default async function AuditLogPage({
   searchParams,
 }: {
-  searchParams: Promise<{ action?: string; targetType?: string; from?: string; to?: string }>;
+  searchParams: Promise<{ action?: string; targetType?: string; from?: string; to?: string; page?: string }>;
 }) {
   const admin = await getActiveAdmin();
   if (!admin) redirect("/login");
   if (admin.role !== "super") redirect("/");
 
-  const { action, targetType, from, to } = await searchParams;
+  const { action, targetType, from, to, page: pageParam } = await searchParams;
+
+  const where = {
+    action: action || undefined,
+    targetType: targetType || undefined,
+    createdAt: {
+      gte: from ? new Date(`${from}T00:00:00+09:00`) : undefined,
+      lte: to ? new Date(`${to}T23:59:59+09:00`) : undefined,
+    },
+  };
+  const totalCount = await prisma.adminAuditLog.count({ where });
+  const pageInfo = buildPageInfo(pageParam, totalCount, ADMIN_PAGE_SIZE);
 
   const logs = await prisma.adminAuditLog.findMany({
-    where: {
-      action: action || undefined,
-      targetType: targetType || undefined,
-      createdAt: {
-        gte: from ? new Date(`${from}T00:00:00+09:00`) : undefined,
-        lte: to ? new Date(`${to}T23:59:59+09:00`) : undefined,
-      },
-    },
-    orderBy: { createdAt: "desc" },
-    take: 200,
+    where,
+    orderBy: [{ createdAt: "desc" }, { id: "asc" }],
+    skip: pageInfo.skip,
+    take: pageInfo.take,
     include: { admin: { select: { name: true } } },
   });
 
@@ -66,7 +73,7 @@ export default async function AuditLogPage({
     <div>
       <div className="text-xl font-black mb-1">操作の記録</div>
       <p className="text-sm text-muted-foreground mb-5">
-        承認・却下・利用停止・削除などの操作の記録です（スーパー管理者のみ閲覧できます。新しい順に最大200件）。
+        承認・却下・利用停止・削除などの操作の記録です（スーパー管理者のみ閲覧できます。新しい順）。
       </p>
 
       <div className="flex items-center gap-3 mb-5 flex-wrap">
@@ -191,6 +198,7 @@ export default async function AuditLogPage({
           </tbody>
         </table>
       </div>
+      <Pagination basePath="/audit-log" searchParams={{ action, targetType, from, to }} {...pageInfo} />
     </div>
   );
 }
