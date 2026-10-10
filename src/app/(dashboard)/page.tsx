@@ -1,18 +1,9 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
-import { jstDateKeyDaysAgo, jstMidnightUtc } from "@/lib/format";
+import { jstDateKeyDaysAgo, jstMidnightUtc, toJstDateKey } from "@/lib/format";
 import { botNameLabel } from "@/lib/bot-name-label";
 
 const TAKEDOWN_INQUIRY_CATEGORY = "権利侵害・削除のご依頼";
-
-// PVからロボットのアクセスを外す対応(docs/specs/20261010-pv-bot-filter.md)を本番に
-// 出した日。この日より前のPVの日次推移には、ロボットのアクセスが混ざっている。
-// TODO: 本番に出す日が決まったら書き換える(仮)
-const BOT_FILTER_EFFECTIVE_DATE = "2026-12-31";
-const BOT_FILTER_EFFECTIVE_DATE_LABEL = (() => {
-  const [, m, d] = BOT_FILTER_EFFECTIVE_DATE.split("-").map(Number);
-  return `${m}/${d}`;
-})();
 
 function TrendCard({
   label,
@@ -101,9 +92,10 @@ export default async function DashboardPage() {
     pendingCount,
     unreadReportCount,
     unreadTakedownCount,
-    dailyMetrics,
+    dailyMetricsDesc,
     botBreakdownToday,
     botBreakdown7days,
+    earliestBotPageView,
   ] = await Promise.all([
     prisma.userAccount.count(),
     prisma.itinerary.count({ where: { status: "published" } }),
@@ -112,7 +104,10 @@ export default async function DashboardPage() {
     prisma.itinerary.count({ where: { status: "pending" } }),
     prisma.report.count({ where: { status: "unread" } }),
     prisma.inquiry.count({ where: { status: "unread", category: TAKEDOWN_INQUIRY_CATEGORY } }),
-    prisma.dailyMetric.findMany({ orderBy: { metricDate: "asc" }, take: 14 }),
+    // 新しい日が毎晩増えていくため、直近14日を取るには「新しいほうから14件」を取って
+    // あとで古い順に並べ直す(「古いほうから14件」だと、15日目以降は最新日が出ない。
+    // セキュリティ指摘2026-10-10)
+    prisma.dailyMetric.findMany({ orderBy: { metricDate: "desc" }, take: 14 }),
     prisma.pageView.groupBy({
       by: ["botName"],
       where: { viewedAt: { gte: todayStart }, isBot: true },
@@ -125,9 +120,20 @@ export default async function DashboardPage() {
       _count: true,
       orderBy: { _count: { botName: "desc" } },
     }),
+    // ロボットを外す対応が本番でいつから効いているかを、実際のデータから推測する
+    // (is_botの行は新しいコードでしか作られないため、一番古いis_botの行の日付を、
+    // 「この日からロボットが数に入らなくなった」の目安として使う。企画運営2026-10-10)
+    prisma.pageView.findFirst({ where: { isBot: true }, orderBy: { viewedAt: "asc" }, select: { viewedAt: true } }),
   ]);
 
+  const dailyMetrics = [...dailyMetricsDesc].reverse();
   const dates = dailyMetrics.map((m) => `${m.metricDate.getUTCMonth() + 1}/${m.metricDate.getUTCDate()}`);
+  const botFilterSinceLabel = earliestBotPageView
+    ? (() => {
+        const [, m, d] = toJstDateKey(earliestBotPageView.viewedAt).split("-").map(Number);
+        return `${m}/${d}`;
+      })()
+    : null;
 
   return (
     <div>
@@ -211,7 +217,7 @@ export default async function DashboardPage() {
           dates={dates}
         />
         <TrendCard
-          label="PV数"
+          label={dailyMetrics.length ? `PV数（${dates[dates.length - 1]}まで）` : "PV数"}
           value={
             dailyMetrics.length
               ? dailyMetrics[dailyMetrics.length - 1].pvCount.toLocaleString()
@@ -219,7 +225,11 @@ export default async function DashboardPage() {
           }
           points={dailyMetrics.map((m) => m.pvCount)}
           dates={dates}
-          footnote={`${BOT_FILTER_EFFECTIVE_DATE_LABEL}より前はロボットのアクセスを含みます`}
+          footnote={
+            botFilterSinceLabel
+              ? `${botFilterSinceLabel}より前はロボットのアクセスを含みます`
+              : "グラフの大きな数字は、毎晩の集計による「前日まで」の値です。今日の分は上の「本日のPV」をご覧ください"
+          }
         />
       </div>
     </div>

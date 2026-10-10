@@ -10,6 +10,7 @@
  * 毎晩のCron（/api/cron/daily-metrics）が始まってからは、このスクリプトを
  * 毎回実行する必要はない（最初の1回、グラフに過去分を表示するために使う）。
  */
+import { prisma } from "../src/lib/prisma";
 import { jstDateKeyDaysAgo } from "../src/lib/format";
 import { computeDailyMetric, upsertDailyMetric } from "../src/lib/daily-metrics";
 
@@ -41,4 +42,11 @@ async function main() {
   console.log(COMMIT ? "登録しました" : "確認モードのため、ここで終了します。問題なければ --commit を付けて実行してください。");
 }
 
-main();
+main()
+  .catch((e) => {
+    console.error("失敗しました:", e);
+    process.exitCode = 1;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
