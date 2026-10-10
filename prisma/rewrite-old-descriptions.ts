@@ -8,6 +8,9 @@
  */
 import { prisma } from "../src/lib/prisma";
 
+// 接続先(本番/開発)の表示と確かめ(企画運営2026-09-27)。Next.jsアプリ本体からは読み込まれない
+require("../scripts/assert-db-target.cjs");
+
 // id → 新しいdescription。10件ずつ、複数回に分けて追記していく。
 const NEW_DESCRIPTIONS: Record<string, string> = {
   // 京都市内（清水・祇園・河原町）

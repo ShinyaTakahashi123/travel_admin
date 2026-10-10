@@ -15,6 +15,9 @@
 
 import { put } from "@vercel/blob";
 import { prisma } from "../src/lib/prisma";
+
+// 接続先(本番/開発)の表示と確かめ(企画運営2026-09-27)。Next.jsアプリ本体からは読み込まれない
+require("../scripts/assert-db-target.cjs");
 import existingPhotoCache from "./photo-cache.json";
 
 type SpotSeed = {
@@ -341,11 +344,7 @@ async function main() {
                 ? {}
                 : (() => {
                     const t = TRANSIT_PATTERN[(idx - 1) % TRANSIT_PATTERN.length];
-                    return {
-                      transitLegs: {
-                        create: [{ orderNo: 1, transitMode: t.mode, transitDurationMin: t.dur, transitLine: t.line ?? null }],
-                      },
-                    };
+                    return { transitMode: t.mode, transitDurationMin: t.dur, transitLine: t.line ?? null };
                   })()),
             },
           });

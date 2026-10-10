@@ -40,6 +40,16 @@ function main() {
   const knownDevHost = process.env.SHIORIE_DEV_DB_HOST;
 
   if (target === "prod") {
+    // SHIORIE_TARGET=prodの目印だけで信じず、実際の接続先が開発用として登録された
+    // ホスト名と一致していないかも確かめる(一致していたら、.env.prodが読み込まれて
+    // いない可能性が高い。目印と接続先が食い違ったまま「本番」と表示するのは危険なため)
+    if (knownDevHost && host === knownDevHost) {
+      console.error("");
+      console.error("🔴 SHIORIE_TARGET=prod が指定されていますが、接続先は開発用として登録された");
+      console.error("   ホスト名と同じです。.env.prodが正しく読み込まれているか確かめてください。");
+      console.error("");
+      process.exit(1);
+    }
     console.log(`[接続先] 本番 (${maskHost(host)})`);
     return;
   }
