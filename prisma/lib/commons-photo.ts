@@ -5,7 +5,7 @@
  * 記事名(wikiTitle)経由のみのため、Commonsの検索で見つけた具体的なファイルを使うにはこちらを使う)。
  */
 import { put } from "@vercel/blob";
-import { toWebJpeg } from "./pilot-gen";
+import { toWebJpeg, cleanAuthorName } from "./pilot-gen";
 
 export type PhotoCredit = {
   sourceUrl?: string | null;
@@ -31,7 +31,10 @@ function isFreeLicense(licenseShortName: string | undefined): boolean {
 
 function stripHtml(s: string | undefined): string | undefined {
   if (!s) return s;
-  return s.replace(/<[^>]+>/g, "").trim() || undefined;
+  return s
+    .replace(/<[^>]+>/g, "")
+    .replace(/ /g, " ") // &nbsp; が残ることがあるため通常の空白に揃える
+    .trim() || undefined;
 }
 
 const UA = "shiorie-photofill/1.0 (contact: st.83.53.abcd@gmail.com)";
@@ -58,7 +61,7 @@ export async function fetchCommonsImageInfo(
     url: ii.url as string,
     credit: {
       sourceUrl: ii.descriptionurl as string | undefined,
-      author: stripHtml(meta.Artist?.value)?.slice(0, 100),
+      author: cleanAuthorName(stripHtml(meta.Artist?.value))?.slice(0, 100),
       license,
       licenseUrl: meta.LicenseUrl?.value as string | undefined,
     },
