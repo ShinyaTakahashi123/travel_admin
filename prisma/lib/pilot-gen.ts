@@ -6,6 +6,15 @@ import { put } from "@vercel/blob";
 import sharp from "sharp";
 import { prisma } from "../../src/lib/prisma";
 
+async function isUrlAlive(url: string): Promise<boolean> {
+  try {
+    const res = await fetch(url, { method: "HEAD" });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 // DBに書き込むseedスクリプト共通の入口。ここで接続先(本番/開発)を表示し、
 // 目印(SHIORIE_TARGET=prod)と実際の接続先が食い違っていないかを確かめる
 // (企画運営2026-09-27、制作がnpm run prod -- を使わずに実行して表示が出なかったため)。
@@ -78,6 +87,30 @@ function stripHtml(s: string | undefined): string | undefined {
   return s.replace(/<[^>]+>/g, "").trim() || undefined;
 }
 
+// Wikimedia Commonsの作者欄は「Foo (talk)」「Photo by Foo」「User:Foo」のような
+// HTMLタグの残骸や定型句を含むことが多い。stripHtmlのあとにこれを通し、名前だけに整える
+// (2026-09-29 法務の指摘。#267・#268の写真で「(talk)」「by」が混入していた)。
+export function cleanAuthorName(s: string | undefined): string | undefined {
+  if (!s) return s;
+  return s
+    // 2026-10-12 写真の追加(ca4cf898)で発見。MediaWikiが作者欄を自動推定したときの定型句
+    .replace(/^No machine-readable author provided\.\s*(.+?)\s+assumed\s*\(based on copyright claims\)\.?$/i, "$1")
+    .replace(/^photo:\s*/i, "")
+    // 2026-09-30 企画運営の指摘(法務の気づき)で「(talk)」だけでなく「(talk · contribs)」
+    // 「(トーク・投稿記録)」のようにカッコ内に他の語が続く形も拾うよう広げた
+    .replace(/\(\s*(talk|トーク)[^()]*\)/gi, "")
+    .replace(/,?\s*(taken with|with)\s+.*$/i, "")
+    .replace(/^\s*(photo\s+)?by\s+/i, "")
+    .replace(/^(ja:)?User:/i, "")
+    .replace(/^日:/, "")
+    .replace(/^日本語版ウィキペディアの(.+)さん$/, "$1")
+    // 2026-10-12 写真の追加(7133c8fe)で発見。「〇〇 at Japanese Wikipedia」のような、
+    // どのウィキメディア系サイトの利用者かを示す定型句の末尾
+    .replace(/\s+at\s+(Japanese\s+)?Wikipedia$/i, "")
+    .replace(/\s{2,}/g, " ")
+    .trim() || undefined;
+}
+
 /**
  * Wikipediaのoriginalimage.sourceはサムネイルURL（.../thumb/…/3840px-Foo.jpg）のことが多く、
  * 元のファイル名は末尾ではなく「thumb」の次から数えて2つ手前のセグメントに入っている。
@@ -124,7 +157,7 @@ export async function fetchImageCredit(wikiTitle: string): Promise<PhotoCredit |
 
     return {
       sourceUrl: ii.descriptionurl as string | undefined,
-      author: stripHtml(meta.Artist?.value)?.slice(0, 100),
+      author: cleanAuthorName(stripHtml(meta.Artist?.value))?.slice(0, 100),
       license,
       licenseUrl: meta.LicenseUrl?.value as string | undefined,
     };
@@ -215,10 +248,25 @@ export async function fetchAndUploadImage(
   creditCache?: Map<string, PhotoCredit | null>
 ): Promise<string | null> {
   if (imageCache.has(spot.name)) {
-    if (creditCache && !creditCache.has(spot.name)) {
-      creditCache.set(spot.name, await fetchImageCredit(spot.wikiTitle));
+    // 控え(photo-cache.json/photo-credit-cache.json)は、svgチェックが入る前の古い取得結果を
+    // そのまま持っていることがある(実体が地図や記号のsvgだったケース)。出典(sourceUrl)が
+    // わかっている場合は、返す前にsvg由来かどうかをもう一度確認し、該当すれば控えを無効化して
+    // 再取得する(2026-09-28追加。「尾道市街地～向島」がSHIMANAMI_EXP(E76).svgを掴んでいた件)
+    const cachedCredit = creditCache?.get(spot.name);
+    const cachedIsSvg = cachedCredit?.sourceUrl && /\.svg(\?|$)|\.svg\//i.test(cachedCredit.sourceUrl);
+    const cachedUrl = imageCache.get(spot.name);
+    // 控えのBlob URLが、どこからも使われていない間にCron(24時間以上前の未使用画像を毎日削除)で
+    // 消されていることがある(2026-09-29、金刀比羅宮など4件で発生・404)。使う前にHEADで生きているか確認し、
+    // 404なら控えを無効化して撮り直す
+    const cachedIsAlive = cachedUrl ? await isUrlAlive(cachedUrl) : false;
+    if (!cachedIsSvg && cachedIsAlive) {
+      if (creditCache && !creditCache.has(spot.name)) {
+        creditCache.set(spot.name, await fetchImageCredit(spot.wikiTitle));
+      }
+      return cachedUrl!;
     }
-    return imageCache.get(spot.name)!;
+    imageCache.delete(spot.name);
+    creditCache?.delete(spot.name);
   }
   const UA = "tabishiori-pilot/1.0 (contact: st.83.53.abcd@gmail.com)";
   try {
@@ -338,7 +386,11 @@ export async function generateAreas(areas: AreaSeed[], imageCache: Map<string, s
                 ? {}
                 : (() => {
                     const t = TRANSIT_PATTERN[(idx - 1) % TRANSIT_PATTERN.length];
-                    return { transitMode: t.mode, transitDurationMin: t.dur, transitLine: t.line ?? null };
+                    return {
+                      transitLegs: {
+                        create: [{ orderNo: 1, transitMode: t.mode, transitDurationMin: t.dur, transitLine: t.line ?? null }],
+                      },
+                    };
                   })()),
             },
           });

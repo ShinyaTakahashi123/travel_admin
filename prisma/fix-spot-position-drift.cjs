@@ -1,0 +1,135 @@
+/**
+ * 公開中・承認待ちしおりの位置ずれ修正スクリプト(2026-09-28作成、2度改訂)
+ *
+ * 【1度目の改訂】最初の版は、3件以上ある場合に多数決を使っていたが、同じ間違った位置が
+ * 複数のしおりに写されているだけのケースがあり、多数決では正しく判定できないことが
+ * 企画運営の実地確認(Nominatim直接検索)で判明した。この版は、多数決をやめて、
+ * 名前(＋都道府県。同名の別施設と混同しないよう、必要に応じて市町村名も加えた)で
+ * OpenStreetMap(Nominatim)を1件ずつ直接検索し、正しい位置を決め直した。
+ *
+ * 【2度目の改訂・企画運営の実行OK(2026-09-28、ユーザー了承2026-09-28 11:5x)】
+ * - 琴引浜は「一番近い値」ではなく、名前で引いた値(35.70333,135.05205)に変更
+ * - 確信度が低い7件(淡輪ときめきビーチ・旧軽井沢銀座通り・大沼国定公園・箱根海賊船・
+ *   遠刈田温泉・りんくう公園・中禅寺湖)は対象から除外(今回は直さない。台帳の「広い場所」の
+ *   印で扱う)
+ *
+ * docs/content/20260928-spot-position-drift.md の50件のうち、大日寺(別の2つの寺と
+ * 判明ずみ、対象外)と上記7件を除く42件が対象。
+ *
+ * 「正しい位置」は、しおりID・スポット名ではなく「正規化した名前(丸括弧を除いたもの)＋都道府県」で
+ * 該当スポットを探し、現在の値がこの値と離れている(緯度経度どちらかが0.0005度=約50m超ずれている)
+ * ものだけを更新する。
+ *
+ * 実行方法:
+ *   確認モード(本番読み取りのみ): npm run prod -- node prisma/fix-spot-position-drift.cjs
+ *   本登録(企画運営の確認・OKのあと): npm run prod -- node prisma/fix-spot-position-drift.cjs --commit
+ */
+const {createRequire}=require("module");const r=createRequire(process.cwd()+"/package.json");
+r("dotenv").config();const {PrismaClient}=r("@prisma/client");const {PrismaPg}=r("@prisma/adapter-pg");
+const p=new PrismaClient({adapter:new PrismaPg({connectionString:process.env.DATABASE_URL})});
+
+const COMMIT = process.argv.includes("--commit");
+
+// 根拠は「どのサービスで何を検索して得た値か」を1件ずつ記録している。
+// 「多数決」という言葉は使わない(この改訂で多数決をやめたため)
+const CORRECT = [
+  ["青い池", "北海道", 43.493490, 142.614098, "Nominatim「青い池 北海道」で検索し完全一致"],
+  ["一斗俵沈下橋", "高知県", 33.284762, 133.109889, "Nominatim「四万十町一斗俵」で検索(名前そのものは見つからず、地名で代用)。近い川の名前がヒット"],
+  ["美瑛の丘", "北海道", 43.639022, 142.545116, "Nominatim「美瑛の丘 北海道」で検索し完全一致(前回の案「北西の丘展望公園」は誤り。訂正)"],
+  ["丹後由良", "京都府", 35.515877, 135.279412, "Nominatim「丹後由良 京都府」で検索し完全一致(丹後由良駅の位置。前回の多数決の案は誤り。訂正)"],
+  ["経ヶ岬灯台", "京都府", 35.777139, 135.223361, "Nominatim「経ヶ岬灯台 京都府」で検索し完全一致"],
+  ["三愛の丘展望公園", "北海道", 43.556945, 142.478368, "Nominatim「三愛の丘展望公園 北海道」で検索し完全一致"],
+  ["長安寺", "神奈川県", 35.2735, 139.0128, "Nominatim「長安寺 箱根町」で検索し一致(仙石原)。「長安寺 神奈川県」だけで検索すると横須賀市の同名の別の寺がヒットするため、町名まで指定して確かめた"],
+  ["銀山温泉街", "山形県", 38.5697, 140.5311, "企画運営がNominatim「銀山温泉」で直接検索し確認(2026-09-28 12:4x)。前回の多数決の案は誤り。訂正"],
+  ["白銀の滝", "山形県", 38.568121, 140.531604, "Nominatim「白銀の滝 山形県」で検索し完全一致。前回の多数決の案は誤り。訂正"],
+  ["琴引浜", "京都府", 35.70333, 135.05205, "Nominatim「琴引浜 京都府」で検索した名前そのものの値(企画運営の指摘により「一番近い値」ではなくこちらを採用)"],
+  ["水間寺", "大阪府", 34.398858, 135.385606, "Nominatim「水間寺 大阪府」で検索し完全一致"],
+  ["丹後国分寺跡", "京都府", 35.580056, 135.180056, "Nominatim「丹後国分寺跡 京都府」で検索し完全一致"],
+  ["高湯通り", "山形県", 38.167871, 140.39601, "Nominatim「高湯通り 山形県」で検索し完全一致"],
+  ["蔵王ロープウェイ", "山形県", 38.161118, 140.394722, "Nominatim「蔵王ロープウェイ 山形県」で検索し一致(山麓駅)。本文を読み比べ、樹氷高原駅行きと同じ施設と確認ずみ"],
+  ["成相寺", "京都府", 35.595439, 135.187372, "Nominatim「成相寺 京都府」で検索し完全一致"],
+  ["ジョン万次郎資料館", "高知県", 32.781765, 132.932404, "Nominatim「ジョン万次郎資料館 高知県」で検索し完全一致"],
+  ["拓真館", "北海道", 43.53, 142.489444, "Nominatim「拓真館 北海道」で検索し完全一致"],
+  ["伊根の舟屋", "京都府", 35.67494, 135.289437, "Nominatim「伊根の舟屋 京都府」で検索し一致(伊根の舟屋 雅)。前回の多数決の案は誤り。訂正"],
+  ["トラピスチヌ修道院", "北海道", 41.78785, 140.822514, "Nominatim「トラピスチヌ修道院 北海道」で検索し完全一致"],
+  ["傘松公園", "京都府", 35.5869, 135.1947, "Nominatim「傘松公園 京都府」で検索し完全一致"],
+  ["来島海峡展望館", "愛媛県", 34.11356, 132.977005, "Nominatim「来島海峡展望館 愛媛県」で検索し完全一致"],
+  ["能古島", "福岡県", 33.622399, 130.305875, "Nominatim「能古島 福岡県」で検索し完全一致。ただし島全体を指す名前のため、検索のたびに値が変わる可能性がある(参考値扱い)。前回の多数決の案は誤り。訂正"],
+  ["二色の浜公園", "大阪府", 34.436417, 135.335667, "Nominatim「二色の浜公園 大阪府」の結果(34.442581,135.340475)に一番近い値を採用。前回の多数決の案とは異なる。訂正(確信度は中)"],
+  ["天橋立", "京都府", 35.569361, 135.191528, "Nominatim「天橋立 京都府」で検索した結果(35.568002,135.190638)に一番近い値を採用。前回案(南側の文珠を代表点)は誤り。訂正"],
+  ["坂本八幡宮", "福岡県", 33.516778, 130.513472, "Nominatim「坂本八幡宮 福岡県」で検索し完全一致"],
+  ["金森赤レンガ倉庫", "北海道", 41.766111, 140.7175, "Nominatim「金森赤レンガ倉庫 北海道」で検索し一致"],
+  ["旧函館区公会堂", "北海道", 41.765028, 140.708889, "Nominatim「旧函館区公会堂 北海道」で検索し完全一致"],
+  ["竈門神社", "福岡県", 33.528861, 130.552389, "Nominatim「竈門神社 福岡県」で検索し完全一致。前回の多数決の案は誤り。訂正"],
+  ["高松塚古墳", "奈良県", 34.462222, 135.806472, "Nominatim「高松塚古墳 奈良県」で検索し一致"],
+  ["ベイサイドプレイス博多", "福岡県", 33.603778, 130.398861, "Nominatim「ベイサイドプレイス博多 福岡県」で検索し一致(ベイサイドプレイス博多埠頭)。前回の多数決の案は誤り。訂正"],
+  ["奈良文化財研究所飛鳥資料館", "奈良県", 34.4783, 135.8156, "Nominatim「奈良文化財研究所飛鳥資料館 明日香村」で検索し一致"],
+  ["大石公園", "山梨県", 35.5233, 138.7465, "Nominatim「大石公園 山梨県」で検索し完全一致"],
+  ["函館ハリストス正教会", "北海道", 41.762778, 140.712222, "Nominatim「函館ハリストス正教会 北海道」で検索し一致"],
+  ["金峯山寺", "奈良県", 34.36825, 135.858167, "Nominatim「金峯山寺 奈良県」で検索し一致。前回の多数決の案は誤り。訂正"],
+  ["さかい利晶の杜", "大阪府", 34.575952, 135.47026, "Nominatim「さかい利晶の杜 大阪府」で検索し完全一致"],
+  ["まんだら湯", "兵庫県", 35.624456, 134.805731, "Nominatim「まんだら湯 兵庫県」で検索し完全一致(前回は見つからなかったが、再検索で発見)"],
+  ["如意輪寺", "奈良県", 34.364556, 135.867861, "Nominatim「如意輪寺 奈良県」で検索し一致"],
+  ["南宗寺", "大阪府", 34.569019, 135.468478, "Nominatim「南宗寺 大阪府」で検索し一致"],
+  ["天武・持統天皇陵", "奈良県", 34.468756, 135.807825, "Nominatim「天武・持統天皇陵 奈良県」で検索し完全一致"],
+  ["りんくうプレミアム・アウトレット", "大阪府", 34.406389, 135.296083, "Nominatim「りんくうプレミアム・アウトレット 大阪府」で検索し一致"],
+  ["夢京橋キャッスルロード", "滋賀県", 35.271042, 136.251558, "Nominatim「夢京橋キャッスルロード 滋賀県」で検索し完全一致。前回の多数決の案は誤り。訂正"],
+  ["壺屋やちむん通り", "沖縄県", 26.212461, 127.69236, "Nominatim「壺屋やちむん通り 沖縄県」で検索し一致"],
+];
+
+function stripParen(name) {
+  return name.replace(/[（(][^）)]+[）)]/g, "").trim() || name;
+}
+const EPS = 0.0005; // 約50m
+
+(async () => {
+  const host = new URL(process.env.DATABASE_URL).host;
+  console.log("[接続先チェック] host:", host);
+  console.log(COMMIT ? "=== 修正モード ===" : "=== 確認モード（書き込みなし） ===");
+
+  const its = await p.itinerary.findMany({
+    where: { status: { in: ["published", "pending"] } },
+    include: { days: { include: { spots: true } }, areas: { include: { area: true } } },
+  });
+
+  let totalTargets = 0, totalUpdated = 0, totalAlreadyOk = 0, totalNotFound = 0;
+
+  for (const [name, pref, lat, lng, reason] of CORRECT) {
+    const matches = [];
+    for (const it of its) {
+      const prefectureNames = it.areas.map((a) => a.area).filter((a) => a.level === "prefecture").map((a) => a.name);
+      if (!prefectureNames.includes(pref)) continue;
+      for (const d of it.days) {
+        for (const s of d.spots) {
+          if (stripParen(s.name) !== name) continue;
+          matches.push({ spotId: s.id, itineraryId: it.id, itineraryTitle: it.title, status: it.status, spotName: s.name, lat: s.lat == null ? null : Number(s.lat), lng: s.lng == null ? null : Number(s.lng) });
+        }
+      }
+    }
+    if (matches.length === 0) { console.log(`\n[NG] 「${name}」(${pref}) のスポットが見つかりません`); totalNotFound++; continue; }
+
+    console.log(`\n### ${name} (${pref}) 採用案: ${lat},${lng} — ${reason}`);
+    for (const m of matches) {
+      totalTargets++;
+      const diff = m.lat == null || m.lng == null ? Infinity : Math.max(Math.abs(m.lat - lat), Math.abs(m.lng - lng));
+      if (diff < EPS) {
+        console.log(`  [そのまま] [${m.itineraryTitle}](${m.status}) 今: ${m.lat},${m.lng}`);
+        totalAlreadyOk++;
+        continue;
+      }
+      console.log(`  [直す] [${m.itineraryTitle}](${m.status}) 今: ${m.lat},${m.lng} → 新: ${lat},${lng}`);
+      if (COMMIT) {
+        await p.spot.update({ where: { id: m.spotId }, data: { lat, lng } });
+        totalUpdated++;
+      }
+    }
+  }
+
+  console.log(`\n対象スポット総数: ${totalTargets} / そのまま(すでに正しい): ${totalAlreadyOk} / 見つからず: ${totalNotFound}`);
+  if (COMMIT) {
+    console.log(`更新した件数: ${totalUpdated}`);
+  } else {
+    console.log(`直す予定の件数: ${totalTargets - totalAlreadyOk}`);
+    console.log("これは確認モードです。書き込みは行っていません。企画運営の確認・OKのあと --commit を付けて実行してください。");
+  }
+})().finally(() => p.$disconnect());
