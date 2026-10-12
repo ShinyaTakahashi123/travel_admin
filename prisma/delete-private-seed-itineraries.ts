@@ -5,8 +5,10 @@
  * 対象: 公式プランナー（OFFICIAL_PLANNER_ID）の status="private" のしおりのみ。
  * Day/Spot/Photo/ItineraryArea/ItineraryTag/ItineraryPurposeTag/Favorite/Comment/ShareLog は
  * schema.prisma上 onDelete: Cascade のため、Itineraryの削除で自動的に削除される。
- * Request.itineraryId / PageView.itineraryId は onDelete: SetNull のため、
+ * PageView.itineraryId は onDelete: SetNull のため、
  * 行自体は残りitineraryIdがNULLになる（Report.targetIdはFK関連なしで無関係）。
+ * (2026-10-08: Requestの表自体は削除していないが、schema.prisma上はモデルを
+ *  外したため、このスクリプトのRequestの件数表示も合わせて外した)
  *
  * 実行方法:
  *   確認モード: npx tsx prisma/delete-private-seed-itineraries.ts
@@ -34,7 +36,7 @@ async function main() {
   }
 
   const targetIds = targets.map((t) => t.id);
-  const [dayCount, spotCount, photoCount, favoriteCount, commentCount, shareLogCount, requestCount, pageViewCount] =
+  const [dayCount, spotCount, photoCount, favoriteCount, commentCount, shareLogCount, pageViewCount] =
     await Promise.all([
       prisma.day.count({ where: { itineraryId: { in: targetIds } } }),
       prisma.spot.count({ where: { day: { itineraryId: { in: targetIds } } } }),
@@ -42,7 +44,6 @@ async function main() {
       prisma.favorite.count({ where: { itineraryId: { in: targetIds } } }),
       prisma.comment.count({ where: { itineraryId: { in: targetIds } } }),
       prisma.shareLog.count({ where: { itineraryId: { in: targetIds } } }),
-      prisma.request.count({ where: { itineraryId: { in: targetIds } } }),
       prisma.pageView.count({ where: { itineraryId: { in: targetIds } } }),
     ]);
 
@@ -53,7 +54,6 @@ async function main() {
   console.log(`  Favorite: ${favoriteCount}件 (Cascade削除)`);
   console.log(`  Comment: ${commentCount}件 (Cascade削除)`);
   console.log(`  ShareLog: ${shareLogCount}件 (Cascade削除)`);
-  console.log(`  Request: ${requestCount}件 (itineraryIdがNULLになるのみ、行は残る)`);
   console.log(`  PageView: ${pageViewCount}件 (itineraryIdがNULLになるのみ、行は残る)`);
   console.log(`  Report: FK関連なし（targetType/targetIdの緩い参照のため対象外）`);
 

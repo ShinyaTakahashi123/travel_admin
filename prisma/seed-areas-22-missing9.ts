@@ -274,7 +274,7 @@ const ITINERARIES: HandmadeItinerary[] = [
     ],
   },
   {
-    title: "のんほいパーク、動物園・植物園・水族館が揃う複合施設プラン",
+    title: "のんほいパーク、動物園・植物園・自然史博物館を一日で巡る複合施設プラン",
     description: "動物園・植物園・遊園地・自然史博物館が集まる、豊橋総合動植物公園「のんほいパーク」。吉田城跡とは違う、家族で楽しむプランです。",
     nights: 0,
     prefectureName: "愛知県",
@@ -282,8 +282,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     tagNames: ["家族旅行"],
     purposeNames: ["動物園・水族館", "テーマパーク"],
     days: [
+      // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で4ゾーンに分けて4スポットに、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #264）
       [
-        { name: "のんほいパーク", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "9:30", stay: 180, memo: "動物園・植物園・遊園地・自然史博物館が一体となった、「のんほいパーク」の愛称で親しまれる複合施設。" },
+        { name: "のんほいパーク（動物園ゾーン）", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "9:30", stay: 190, memo: "およそ140種の動物を飼育。極地動物館では水中のホッキョクグマなども。アジアゾウの放飼場は国内最大級ともいわれる広さ。" },
+        { name: "のんほいパーク（植物園ゾーン）", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "12:50", stay: 70, memo: "大温室と「モネの庭」が見どころ。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.7198, 137.4335] },
+        { name: "のんほいパーク（自然史博物館）", wikiTitle: "豊橋市自然史博物館", address: "豊橋市大岩町字大穴1-238", time: "14:10", stay: 70, memo: "恐竜化石など4200点以上を展示。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.7224, 137.4332] },
+        { name: "のんほいパーク（遊園地ゾーン）", wikiTitle: "豊橋総合動植物公園", address: "豊橋市大岩町字大穴1-238", time: "15:30", stay: 60, memo: "大観覧車など家族向けの乗り物がそろう。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [34.723, 137.4305] },
       ],
     ],
   },
@@ -318,8 +322,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "パワースポット"],
     days: [
       [
-        { name: "伊勢神宮内宮", wikiTitle: "伊勢神宮", address: "伊勢市宇治館町1", time: "9:30", stay: 90, memo: "天照大御神を祀る、日本人の心のふるさととも言われる神宮。" },
-        { name: "おかげ横丁", wikiTitle: "おかげ横丁", address: "伊勢市宇治中之切町52", time: "11:20", stay: 70, memo: "伊勢名物の食べ歩きが楽しめる、内宮の門前町・おはらい町にある商店街。", transit: { mode: "walk", min: 15 } },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で5スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #266）。外宮先祭の習わしで外宮を内宮より先に、浜参宮の習わしで二見興玉神社を最初に配置
+        { name: "二見興玉神社", wikiTitle: "二見興玉神社", address: "三重県伊勢市二見町江575", time: "9:00", stay: 60, memo: "浜参宮で知られる神社。夫婦岩が鳥居の役目を果たす。" },
+        { name: "外宮（豊受大神宮）", wikiTitle: "豊受大神宮", address: "三重県伊勢市豊川町279", time: "10:18", stay: 70, memo: "豊受大御神を祀る。外宮先祭の習わしで内宮より先に参拝。", transit: { mode: "car", min: 18 } },
+        { name: "伊勢神宮内宮", wikiTitle: "伊勢神宮", address: "伊勢市宇治館町1", time: "11:38", stay: 90, memo: "天照大御神を祀る、日本人の心のふるさととも言われる神宮。", transit: { mode: "car", min: 10 } },
+        { name: "猿田彦神社", wikiTitle: "猿田彦神社_(伊勢市)", address: "三重県伊勢市宇治浦田2-1-10", time: "13:26", stay: 40, memo: "みちひらきの神・猿田彦大神を祀る。八角形の意匠が見どころ。", transit: { mode: "walk", min: 18 } },
+        { name: "おかげ横丁", wikiTitle: "おかげ横丁", address: "伊勢市宇治中之切町52", time: "14:13", stay: 140, memo: "伊勢名物の食べ歩きが楽しめる、内宮の門前町・おはらい町にある商店街。", transit: { mode: "walk", min: 7 } },
       ],
     ],
   },

@@ -14,6 +14,13 @@ const ITINERARIES: HandmadeItinerary[] = [
   // 宮崎県 高千穂
   // ============================================================
   {
+    // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#331)で
+    // 1か所から7か所に再構成。高千穂峡の座標が実際の入口(御橋周辺)から
+    // 約735m離れていたため修正。企画運営2026-10-01 04:48の指摘で、店・会社
+    // 単体の施設(たかちほ食堂・トンネルの駅)はスポットにできないため除外し、
+    // 昼食は高千穂神社の一言に統合。#330で使った実在スポット(槵觸神社・
+    // 高千穂神社・天岩戸神社・資料館)を中心に組み直した
+    // (docs/content/20260929-itinerary-4spots-9to16-checklist.md #331)。
     title: "高千穂峡と真名井の滝、定番の渓谷ボート日帰りプラン",
     description: "柱状節理の断崖が続く高千穂峡。真名井の滝を間近に望むボート体験で知られる、高千穂観光の定番プランです。",
     nights: 0,
@@ -23,7 +30,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "自然"],
     days: [
       [
-        { name: "高千穂峡", wikiTitle: "高千穂峡", address: "西臼杵郡高千穂町大字三田井", time: "9:30", stay: 90, memo: "柱状節理の断崖が続く峡谷。真名井の滝を間近に望む貸しボートが人気。" },
+        { name: "高千穂峡", wikiTitle: "高千穂峡", address: "西臼杵郡高千穂町大字三田井", time: "9:00", stay: 100, memo: "柱状節理の断崖が続く峡谷。真名井の滝を間近に望む貸しボートが人気。", fallbackLatLng: [32.7017851, 131.300939] },
+        { name: "高千穂町総合公園", wikiTitle: "", address: "西臼杵郡高千穂町下野", time: "10:45", stay: 25, memo: "高千穂峡を見下ろす台地上の公園。散策路と児童広場。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.7144723, 131.3035707] },
+        { name: "槵觸神社", wikiTitle: "槵觸神社", address: "西臼杵郡高千穂町三田井713", time: "11:15", stay: 30, memo: "天孫降臨ゆかりの神社。くしふる峰を御神体として祀る。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.7099875, 131.3138104] },
+        { name: "高千穂神社", wikiTitle: "高千穂神社", address: "西臼杵郡高千穂町三田井1037", time: "11:51", stay: 85, memo: "高千穂郷八十八社の総社。夫婦杉・秩父杉・鎮石等。参道近くで昼食も。", transit: { mode: "car", min: 6 } },
+        { name: "天岩戸神社(西本宮)", wikiTitle: "天岩戸神社", address: "西臼杵郡高千穂町岩戸1073-1", time: "13:30", stay: 55, memo: "天照大御神が身を隠したと伝わる洞窟「天岩戸」を御神体として祀る神社。", transit: { mode: "car", min: 14 }, fallbackLatLng: [32.7345037, 131.3506899] },
+        { name: "天安河原", wikiTitle: "天安河原", address: "西臼杵郡高千穂町岩戸1073-1", time: "14:37", stay: 40, memo: "八百万の神が集まり相談したと伝わる、洞窟状の聖地。積まれた石が幻想的。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [32.7378698, 131.3532338] },
+        { name: "高千穂町歴史民俗資料館", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1515", time: "15:32", stay: 60, memo: "考古・民俗資料およそ1万点。高千穂神楽の神面や彫物も展示。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.715633, 131.303314] },
       ],
     ],
   },
@@ -43,8 +56,15 @@ const ITINERARIES: HandmadeItinerary[] = [
     ],
   },
   {
+    // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#330)で
+    // 1日目1か所・2日目1か所から再構成。夜神楽(1日目)・雲海(2日目)はどちらも
+    // 決まり6「例外(朝)」の対象のため時刻指定のスポットにはせず、1日目は
+    // 天岩戸神社らの通常の日、2日目は国見ヶ丘の日の出から始まる「例外（朝）」
+    // として組んだ。企画運営2026-10-01 04:11の指摘で、当初の長い滞在6件を
+    // 決まりAの水増しと指摘され、実時間に戻して秋元神社・道の駅青雲橋等の
+    // 実在スポットで埋め直した(docs/content/20260929-itinerary-4spots-9to16-checklist.md #330)。
     title: "高千穂神社の夜神楽と国見ヶ丘の雲海、伝統と絶景の1泊2日",
-    description: "高千穂神社で受け継がれる夜神楽と、雲海の名所として知られる国見ヶ丘。峡谷や天岩戸とは違う、高千穂の伝統文化と展望を楽しむ1泊2日です。",
+    description: "高千穂神社に伝わる夜神楽と、雲海の名所として知られる国見ヶ丘を中心に、天岩戸神社や槵觸神社、荒立神社など、高千穂の神話ゆかりの地をめぐる1泊2日です。高千穂峡・真名井の滝めぐりは含みません。",
     nights: 1,
     prefectureName: "宮崎県",
     areaNames: ["高千穂"],
@@ -52,10 +72,26 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "祭り・イベント"],
     days: [
       [
-        { name: "高千穂神社", wikiTitle: "高千穂神社", address: "西臼杵郡高千穂町三田井1037", time: "16:00", stay: 90, memo: "初日の夜は、毎晩奉納される高千穂神楽（夜神楽）を鑑賞。" },
+        { name: "天岩戸神社(西本宮)", wikiTitle: "天岩戸神社", address: "西臼杵郡高千穂町岩戸1073-1", time: "8:30", stay: 55, memo: "天照大御神が身を隠したと伝わる洞窟「天岩戸」を御神体として祀る神社。バスセンター付近でレンタカーを借りてから向かう。", fallbackLatLng: [32.7345037, 131.3506899] },
+        { name: "天安河原", wikiTitle: "天安河原", address: "西臼杵郡高千穂町岩戸1073-1", time: "9:37", stay: 40, memo: "八百万の神が集まり相談したと伝わる、洞窟状の聖地。積まれた石が幻想的。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [32.7378698, 131.3532338] },
+        { name: "天岩戸神社(東本宮)", wikiTitle: "", address: "西臼杵郡高千穂町岩戸", time: "10:27", stay: 25, memo: "天照大御神が天岩戸からお出ましのあと最初に住んだ場所と伝わる社。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [32.7327749, 131.3505047] },
+        { name: "八大龍王水神", wikiTitle: "", address: "西臼杵郡高千穂町岩戸6521", time: "11:01", stay: 20, memo: "およそ1300年の歴史を持つと伝わる水の神様。仏法を守護する八大龍王を祀る。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [32.7301824, 131.3564572] },
+        { name: "槵觸神社(くしふる神社)", wikiTitle: "槵觸神社", address: "西臼杵郡高千穂町三田井713", time: "11:36", stay: 30, memo: "天孫降臨ゆかりの神社。くしふる峰を御神体として祀る。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.7099875, 131.3138104] },
+        { name: "四皇子峰・高天原遥拝所", wikiTitle: "", address: "西臼杵郡高千穂町三田井1073", time: "12:09", stay: 18, memo: "神武天皇の兄弟4皇子生誕の地と伝わる丘。南端の石祠は高天原を遥拝する。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [32.7090042, 131.3151346] },
+        { name: "天真名井", wikiTitle: "", address: "西臼杵郡高千穂町三田井", time: "12:32", stay: 12, memo: "樹齢1300年のケヤキの根元から湧く水。瓊々杵尊が水種を移したと伝わる。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [32.7098, 131.3117] },
+        { name: "荒立神社", wikiTitle: "荒立神社", address: "西臼杵郡高千穂町大字三田井667", time: "12:51", stay: 30, memo: "猿田彦命と天鈿女命をまつる神社。急いで建てたため「荒立」の名がついたと伝わる。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [32.7116233, 131.3169702] },
+        { name: "高千穂神社", wikiTitle: "高千穂神社", address: "西臼杵郡高千穂町三田井1037", time: "13:27", stay: 85, memo: "高千穂郷八十八社の総社。夫婦杉・秩父杉・鎮石等。参道近くで昼食も(45分程度)。神楽殿で夜神楽が公開される。", transit: { mode: "car", min: 6 } },
+        { name: "高千穂町歴史民俗資料館", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井1515", time: "14:57", stay: 60, memo: "考古・民俗資料およそ1万点。高千穂神楽の神面や彫物も展示。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.715633, 131.303314] },
+        { name: "天岩戸温泉", wikiTitle: "", address: "西臼杵郡高千穂町岩戸58", time: "16:12", stay: 35, memo: "天岩戸地区を見渡す高台の日帰り入浴施設。大浴場・サウナ、茶屋を併設。", transit: { mode: "car", min: 15 }, fallbackLatLng: [32.744366, 131.352036] },
       ],
       [
-        { name: "国見ヶ丘", wikiTitle: "国見ヶ丘", address: "西臼杵郡高千穂町押方", time: "6:00", stay: 60, memo: "2日目の早朝は、秋から冬にかけて雲海が広がることで知られる展望台へ。例年見頃は9〜11月の早朝、気象条件次第のため確実な観賞は保証されません。" },
+        { name: "国見ヶ丘", wikiTitle: "国見ヶ丘", address: "西臼杵郡高千穂町押方", time: "6:00", stay: 70, memo: "秋から冬の早朝、条件がそろうと雲海が広がる展望台。日の出前の移動は安全第一で。朝食は宿でとってから出発。" },
+        { name: "秋元神社", wikiTitle: "", address: "西臼杵郡高千穂町向山", time: "7:50", stay: 55, memo: "山あいにひっそりと立つ神社。奥の「太子ヶ窟」は天岩戸の別伝承地ともいわれる。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.6515594, 131.2843568] },
+        { name: "高千穂あまてらす鉄道", wikiTitle: "", address: "西臼杵郡高千穂町三田井1425-1", time: "9:25", stay: 75, memo: "旧国鉄高千穂線の線路を活用した観光鉄道。高千穂鉄橋を渡るカート体験。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.714555, 131.3068484] },
+        { name: "高千穂峡淡水魚水族館", wikiTitle: "", address: "西臼杵郡高千穂町向山60-1", time: "10:46", stay: 50, memo: "玉垂の滝の湧水を使う小さな水族館。ヤマメ等およそ100種。", transit: { mode: "car", min: 6 }, fallbackLatLng: [32.702147, 131.3006739] },
+        { name: "道の駅青雲橋(青雲橋)", wikiTitle: "", address: "西臼杵郡日之影町", time: "12:11", stay: 60, memo: "橋長410m・高さ137mのアーチ橋。国道橋として東洋一の高さとされる。昼食も。", transit: { mode: "car", min: 35 }, fallbackLatLng: [32.6605803, 131.3884686] },
+        { name: "石垣の村(戸川地区)", wikiTitle: "", address: "西臼杵郡日之影町七折戸川", time: "13:31", stay: 60, memo: "山あいの小さな石垣集落。高さ11mの石垣は日本一ともいわれる。住民の暮らす集落のため見学は静かに。", transit: { mode: "car", min: 20 }, fallbackLatLng: [32.671638, 131.405487] },
+        { name: "高千穂の湯", wikiTitle: "", address: "西臼杵郡高千穂町大字三田井3214-1", time: "15:11", stay: 80, memo: "高台に立つ日帰り温泉。露天風呂から高千穂の町並みを一望できる。", transit: { mode: "car", min: 40 }, fallbackLatLng: [32.7197159, 131.3132962] },
       ],
     ],
   },
@@ -65,7 +101,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     title: "鵜戸神宮、崖に埋め込まれた社殿を訪ねる定番日帰りプラン",
-    description: "断崖の洞窟に埋め込まれた朱塗りの社殿で知られる鵜戸神宮。縁結び・安産のご利益で知られる、日南海岸を代表する定番プランです。",
+    description: "断崖の洞窟に埋め込まれた朱塗りの社殿で知られる鵜戸神宮。縁結び・安産の神社として親しまれる、日南海岸を代表する定番プランです。",
     nights: 0,
     prefectureName: "宮崎県",
     areaNames: ["日南海岸"],
@@ -73,7 +109,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "パワースポット"],
     days: [
       [
-        { name: "鵜戸神宮", wikiTitle: "鵜戸神宮", address: "日南市大字宮浦3232", time: "9:30", stay: 70, memo: "断崖の洞窟に埋め込まれた朱塗りの本殿。運玉投げも名物。" },
+        { name: "青島神社", wikiTitle: "青島神社", address: "宮崎市青島2-13-1", time: "9:30", stay: 75, memo: "宮崎駅前でレンタカーを借りてスタート。島全体が境内、国特別天然記念物のビロウ樹群。縁結びの神社。" },
+        { name: "青島亜熱帯植物園", wikiTitle: "青島亜熱帯植物園", address: "宮崎市青島2-12-1", time: "10:47", stay: 35, memo: "ヤシ類や南国花木が並ぶ植物園。大温室のマンゴーの大木も。", transit: { mode: "car", min: 2 }, fallbackLatLng: [31.8014266, 131.4696146] },
+        { name: "堀切峠", wikiTitle: "堀切峠", address: "宮崎市内海", time: "11:31", stay: 18, memo: "日南海岸随一とされる展望スポット。鬼の洗濯板と太平洋を一望。", transit: { mode: "car", min: 9 }, fallbackLatLng: [31.7768245, 131.4821614] },
+        { name: "道の駅フェニックス", wikiTitle: "道の駅フェニックス", address: "宮崎市内海乙3089", time: "11:52", stay: 60, memo: "堀切峠そばの道の駅。食事処で昼食を。展望デッキからの眺めも。", transit: { mode: "car", min: 3 }, fallbackLatLng: [31.7688886, 131.478289] },
+        { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市宮浦2650", time: "13:13", stay: 65, memo: "イースター島長老会の特別許可で復刻された、世界で唯一のモアイ像7体。", transit: { mode: "car", min: 21 }, fallbackLatLng: [31.6632784, 131.4609574] },
+        { name: "飫肥城下町", wikiTitle: "飫肥城下町", address: "日南市飫肥", time: "14:37", stay: 50, memo: "九州の小京都とも呼ばれる城下町。武家屋敷と水路の町並み、飫肥天の食べ歩き。", transit: { mode: "car", min: 19 }, fallbackLatLng: [31.6261254, 131.3536227] },
+        { name: "鵜戸神宮", wikiTitle: "鵜戸神宮", address: "日南市大字宮浦3232", time: "15:46", stay: 70, memo: "断崖の洞窟に埋め込まれた朱塗りの本殿。運玉投げも名物。帰りは宮崎駅でレンタカーを返却。", transit: { mode: "car", min: 19 } },
       ],
     ],
   },
@@ -87,7 +129,14 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "パワースポット"],
     days: [
       [
-        { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市大字宮浦2650", time: "9:30", stay: 80, memo: "イースター島の長老会から特別に許可を得て復刻されたモアイ像が並ぶ丘。" },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #262）
+        { name: "青島", wikiTitle: "青島_(宮崎県)", address: "宮崎県宮崎市青島2丁目13番", time: "9:00", stay: 60, memo: "島全体が青島神社の境内。「鬼の洗濯板」と呼ばれる奇岩群でも有名。" },
+        { name: "堀切峠", wikiTitle: "堀切峠", address: "宮崎県宮崎市内海", time: "10:08", stay: 40, memo: "フェニックスなど南国植物が並ぶ、日南海岸随一のドライブスポット。", transit: { mode: "car", min: 8 }, fallbackLatLng: [31.7768245, 131.4821614] },
+        { name: "道の駅フェニックス", wikiTitle: "道の駅フェニックス", address: "宮崎県宮崎市大字内海381-1", time: "10:52", stay: 40, memo: "堀切峠のそばの道の駅。展望テラスから鬼の洗濯板を一望。", transit: { mode: "car", min: 4 }, fallbackLatLng: [31.7688886, 131.478289] },
+        { name: "サンメッセ日南", wikiTitle: "サンメッセ日南", address: "日南市大字宮浦2650", time: "11:49", stay: 80, memo: "イースター島の長老会から特別に許可を得て復刻されたモアイ像が並ぶ丘。", transit: { mode: "car", min: 17 } },
+        { name: "鵜戸神宮", wikiTitle: "鵜戸神宮", address: "日南市大字宮浦3232", time: "13:16", stay: 70, memo: "断崖の洞窟に埋め込まれた朱塗りの本殿。運玉投げも名物。", transit: { mode: "car", min: 7 }, fallbackLatLng: [31.649165, 131.4661169] },
+        { name: "飫肥城下町", wikiTitle: "飫肥城", address: "宮崎県日南市飫肥", time: "14:44", stay: 60, memo: "九州の小京都と呼ばれる城下町。重要伝統的建造物群保存地区。", transit: { mode: "car", min: 18 }, fallbackLatLng: [31.6275628, 131.3518221] },
+        { name: "道の駅なんごう（PORTO）", wikiTitle: "道の駅なんごう", address: "宮崎県日南市南郷町大字贄波3220-24", time: "16:07", stay: 40, memo: "大小の島々を望むウッドデッキのテラスが自慢の道の駅。", transit: { mode: "car", min: 23 }, fallbackLatLng: [31.5030142, 131.3785752] },
       ],
     ],
   },
@@ -137,8 +186,14 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["自然", "神社"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #256）
+        // 2026-09-29 企画運営の指摘で再修正: 江津湖の種数の言い切りを削除、本妙寺の滞在172分(時間合わせ)を90分にし熊本城を追加
         { name: "水前寺成趣園", wikiTitle: "水前寺成趣園", address: "熊本市中央区水前寺公園8-1", time: "9:30", stay: 60, memo: "阿蘇の伏流水を引いた池泉回遊式庭園。東海道の風景を模したと伝わる。" },
-        { name: "藤崎八旛宮", wikiTitle: "藤崎八旗宮", address: "熊本市中央区井川淵町3-1", time: "11:00", stay: 40, memo: "平安時代創建と伝わる、熊本の総鎮守。", transit: { mode: "car", min: 15 } },
+        { name: "江津湖", wikiTitle: "江津湖", address: "熊本県熊本市中央区・東区", time: "10:40", stay: 60, memo: "スイゼンジノリなど貴重な動植物が見られる、水前寺江津湖公園内の湧水湖。", transit: { mode: "car", min: 10 }, fallbackLatLng: [32.76956, 130.7525076] },
+        { name: "藤崎八旛宮", wikiTitle: "藤崎八旗宮", address: "熊本市中央区井川淵町3-1", time: "12:00", stay: 40, memo: "平安時代創建と伝わる、熊本の総鎮守。", transit: { mode: "car", min: 20 } },
+        { name: "加藤神社", wikiTitle: "加藤神社_(熊本市)", address: "熊本県熊本市中央区本丸2-1", time: "12:45", stay: 45, memo: "熊本城本丸に鎮座する、加藤清正公をまつる神社。", transit: { mode: "car", min: 5 }, fallbackLatLng: [32.8072411, 130.7051846] },
+        { name: "熊本城", wikiTitle: "熊本城", address: "熊本県熊本市中央区本丸1-1", time: "13:37", stay: 75, memo: "加藤清正が築いた名城。天守閣は2021年に復旧完了、宇土櫓は復旧工事中。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [32.805721, 130.701035] },
+        { name: "本妙寺", wikiTitle: "本妙寺_(熊本市)", address: "熊本県熊本市西区花園4-13-1", time: "15:02", stay: 90, memo: "加藤清正公をまつる、176段の石段を上った先の浄池廟がある名刹。", transit: { mode: "car", min: 10 }, fallbackLatLng: [32.817203, 130.6867198] },
       ],
     ],
   },
@@ -187,14 +242,19 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["自然", "絶景・フォトスポット"],
     days: [
       [
-        { name: "草千里ヶ浜", wikiTitle: "草千里ヶ浜", address: "阿蘇市黒川", time: "9:30", stay: 50, memo: "烏帽子岳の麓に広がる草原と湖沼。放牧された馬の姿も見られる。" },
-        { name: "阿蘇山上（中岳火口）", wikiTitle: "中岳_(熊本県)", address: "阿蘇市黒川", time: "10:50", stay: 40, memo: "今なお活動を続ける、迫力満点の火口。火山ガス発生時は立入規制あり、事前に規制情報を要確認。", transit: { mode: "car", min: 20 }, fallbackLatLng: [32.8845, 131.1044] },
+        { name: "草千里ヶ浜", wikiTitle: "草千里ヶ浜", address: "阿蘇市黒川", time: "9:30", stay: 50, memo: "JR阿蘇駅前でレンタカーを借りてスタート。烏帽子岳の麓に広がる草原と湖沼。放牧された馬の姿も見られる。" },
+        { name: "阿蘇火山博物館", wikiTitle: "阿蘇火山博物館", address: "阿蘇市赤水1930-1", time: "10:26", stay: 40, memo: "中岳火口のライブ映像や噴火の迫力を体感できる展示。", transit: { mode: "walk", min: 6 }, fallbackLatLng: [32.8855288, 131.0521419] },
+        { name: "阿蘇山上（中岳火口）", wikiTitle: "中岳_(熊本県)", address: "阿蘇市黒川", time: "11:18", stay: 40, memo: "今なお活動を続ける、迫力満点の火口。火山ガス発生時は立入規制あり、事前に規制情報を要確認。", transit: { mode: "car", min: 12 }, fallbackLatLng: [32.8799877, 131.074491] },
+        { name: "米塚", wikiTitle: "米塚", address: "阿蘇市草千里ヶ浜", time: "12:12", stay: 20, memo: "健磐龍命が米を積み上げてできたと伝わる円錐火山。立入不可、道路沿いから眺める。", transit: { mode: "car", min: 14 }, fallbackLatLng: [32.9056458, 131.0444065] },
+        { name: "阿蘇神社", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地3083-1", time: "12:50", stay: 75, memo: "全国約500社の総本社。日本三大楼門の一つとされる楼門(熊本地震から復旧)。門前町で昼食を。", transit: { mode: "car", min: 18 }, fallbackLatLng: [32.9477081, 131.1161157] },
+        { name: "大観峰", wikiTitle: "大観峰", address: "阿蘇市山田", time: "14:22", stay: 55, memo: "阿蘇五岳とカルデラを一望する北外輪山の展望スポット。", transit: { mode: "car", min: 17 }, fallbackLatLng: [32.9956615, 131.0670948] },
+        { name: "内牧温泉", wikiTitle: "内牧温泉", address: "阿蘇市内牧", time: "15:26", stay: 80, memo: "100年を超える歴史を持つ阿蘇の温泉街。日帰り入浴も。帰りは阿蘇駅でレンタカーを返却。", transit: { mode: "car", min: 9 }, fallbackLatLng: [32.9705065, 131.047694] },
       ],
     ],
   },
   {
     title: "阿蘇神社と一の宮門前町、火の国の信仰と参道グルメの1泊2日",
-    description: "阿蘇十二神を祀る阿蘇神社と、水基めぐりが楽しい一の宮門前町。大観峰や中岳火口とは違う、阿蘇の信仰と門前町の風情を楽しむ1泊2日です。",
+    description: "阿蘇十二神を祀る阿蘇神社と、水基めぐりが楽しい一の宮門前町。大観峰の絶景や草千里ヶ浜の雄大な景色もあわせて楽しむ、阿蘇の信仰と自然を満喫する1泊2日です。",
     nights: 1,
     prefectureName: "熊本県",
     areaNames: ["阿蘇"],
@@ -202,10 +262,21 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "パワースポット"],
     days: [
       [
-        { name: "阿蘇神社", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地3083-1", time: "10:00", stay: 60, memo: "阿蘇十二神を祀る、火の国・肥後国一宮。初日は荘厳な楼門を見学。" },
+        { name: "阿蘇神社", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地3083-1", time: "9:00", stay: 45, memo: "阿蘇十二神を祀る、火の国・肥後国一宮。荘厳な楼門を見学。" },
+        { name: "極楽寺", wikiTitle: "極楽寺 (阿蘇市)", address: "熊本県阿蘇市一の宮町宮地3032", time: "9:50", stay: 35, memo: "阿蘇神社を守った七ヶ寺で唯一現存するとされる寺。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [32.9469758, 131.113784] },
+        { name: "大観峰", wikiTitle: "大観峰", address: "熊本県阿蘇市", time: "10:46", stay: 75, memo: "阿蘇北外輪山の最高峰(936m)。阿蘇五岳を望む展望スポット。柵の外・崖のふちに注意。", transit: { mode: "car", min: 21 } },
+        { name: "阿蘇火山博物館", wikiTitle: "阿蘇火山博物館", address: "熊本県阿蘇郡南阿蘇村", time: "12:32", stay: 70, memo: "阿蘇の火山活動を映像・模型で学べる博物館。中岳火口のライブ映像も。", transit: { mode: "car", min: 31 } },
+        { name: "米塚", wikiTitle: "米塚", address: "熊本県阿蘇市", time: "13:50", stay: 30, memo: "草千里ヶ浜のそばの円錐形の小さな火山(国の名勝・天然記念物)。道路沿いから眺める。", transit: { mode: "car", min: 8 } },
+        { name: "草千里ヶ浜", wikiTitle: "草千里ヶ浜", address: "熊本県阿蘇郡南阿蘇村", time: "14:29", stay: 55, memo: "烏帽子岳のふもとの草原と火口湖。放牧された馬が見られることも。火山の規制情報に注意。", transit: { mode: "car", min: 9 } },
+        { name: "内牧温泉", wikiTitle: "内牧温泉", address: "熊本県阿蘇市内牧", time: "15:52", stay: 50, memo: "阿蘇温泉郷最大級とされる温泉地。夏目漱石ゆかりの文学碑も。", transit: { mode: "car", min: 28 } },
       ],
       [
-        { name: "一の宮門前町（水基めぐり）", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地", time: "9:30", stay: 60, memo: "2日目は、湧水を汲める「水基」が点在する門前町をそぞろ歩き。", fallbackLatLng: [32.9481, 131.1178] },
+        { name: "一の宮門前町（水基めぐり）", wikiTitle: "阿蘇神社", address: "阿蘇市一の宮町宮地", time: "9:30", stay: 100, memo: "湧水を汲める「水基」が点在する門前町をそぞろ歩き、食べ歩きも。", fallbackLatLng: [32.9481, 131.1178] },
+        { name: "道の駅阿蘇", wikiTitle: "道の駅阿蘇", address: "熊本県阿蘇市黒川1440-1", time: "11:22", stay: 70, memo: "阿蘇あか牛など地元産品が並ぶ物産店。昼食にも。", transit: { mode: "car", min: 12 } },
+        { name: "国造神社", wikiTitle: "国造神社", address: "熊本県阿蘇市一の宮町手野2110", time: "12:53", stay: 35, memo: "阿蘇神社の北宮。鳥居西に上御倉・下御倉古墳(県重要文化財)。", transit: { mode: "car", min: 21 }, fallbackLatLng: [32.9894066780556, 131.121677888889] },
+        { name: "霜神社", wikiTitle: "霜神社", address: "熊本県阿蘇市役犬原9", time: "13:44", stay: 40, memo: "火焚き神事(国指定重要無形民俗文化財)で知られる社。駐車場なし。", transit: { mode: "car", min: 16 }, fallbackLatLng: [32.948245, 131.0916612] },
+        { name: "中通古墳群", wikiTitle: "中通古墳群", address: "熊本県阿蘇市一の宮町中通", time: "14:32", stay: 25, memo: "長目塚古墳など前方後円墳2基・円墳8基。県内最大級とされる。道から見学。", transit: { mode: "car", min: 8 }, fallbackLatLng: [32.963954, 131.112569] },
+        { name: "アゼリア21長者乃湯", wikiTitle: "アゼリア21長者乃湯", address: "熊本県阿蘇市一の宮町宮地5812", time: "15:10", stay: 80, memo: "市営の日帰り入浴施設。旅の締めくくりに疲れを癒やす。浴場での撮影は控える。", transit: { mode: "car", min: 13 }, fallbackLatLng: [32.926544, 131.109146] },
       ],
     ],
   },
@@ -223,7 +294,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["温泉", "絶景・フォトスポット"],
     days: [
       [
-        { name: "黒川温泉（地蔵堂・川端通り）", wikiTitle: "黒川温泉", address: "阿蘇郡南小国町満願寺6612-9", time: "10:00", stay: 100, memo: "入湯手形を使って複数の露天風呂を巡れる、黒川温泉のシンボル的な散策エリア。" },
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で5スポットに拡充、口調もサイト標準に（docs/content/20260929-itinerary-4spots-9to16-checklist.md #258）
+        { name: "押戸石の丘", wikiTitle: "押戸石", address: "熊本県阿蘇郡南小国町中原511", time: "9:00", stay: 40, memo: "古代の祈りの場だったとも伝わる、磁気を帯びた巨石群が点在する丘。360度の絶景。" },
+        { name: "黒川温泉（地蔵堂・川端通り）", wikiTitle: "黒川温泉", address: "阿蘇郡南小国町満願寺6612-9", time: "10:02", stay: 180, memo: "入湯手形を使って複数の露天風呂を巡れる、黒川温泉のシンボル的な散策エリア。", transit: { mode: "car", min: 22 } },
+        { name: "田の原温泉", wikiTitle: "田の原温泉", address: "熊本県阿蘇郡南小国町満願寺7130", time: "13:07", stay: 40, memo: "鎌倉時代開湯と伝わる、田の原川沿いのひっそりとした湯治場。", transit: { mode: "car", min: 5 }, fallbackLatLng: [33.07019, 131.141968] },
+        { name: "瀬の本高原", wikiTitle: "瀬の本高原", address: "熊本県阿蘇郡南小国町満願寺", time: "14:02", stay: 70, memo: "阿蘇とくじゅうを結ぶ高原地帯。牧草地の向こうにくじゅう連山を望む絶景ドライブコース。", transit: { mode: "car", min: 15 } },
+        { name: "大観峰", wikiTitle: "大観峰", address: "熊本県阿蘇市山田", time: "15:40", stay: 50, memo: "阿蘇北外輪山の最高峰とされる展望所。阿蘇五岳とカルデラを一望できる。", transit: { mode: "car", min: 28 } },
       ],
     ],
   },

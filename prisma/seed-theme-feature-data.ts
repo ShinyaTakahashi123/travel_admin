@@ -16,6 +16,14 @@ import { prisma } from "../src/lib/prisma";
 // 接続先(本番/開発)の表示と確かめ(企画運営2026-09-27)。Next.jsアプリ本体からは読み込まれない
 require("../scripts/assert-db-target.cjs");
 
+// 今までプログラムに直接書いていた絵(user-siteのpublic/themes/theme-{slug}.svg)を、
+// そのままimage_urlに入れる(セキュリティ・企画運営2026-09-28指摘: 入れないと、本番に
+// 登録した瞬間にテーマの絵が全部予備の絵になってしまう)。
+// このファイルはuser-siteのpublicフォルダを持たないため(このスクリプトはadmin-site側で
+// 動く。fs.existsSyncでの確認はできない・本番のVercelには他リポジトリのファイルは
+// そもそも無い)、user-siteに実在するファイルと直接照らし合わせた決め打ちの一覧にする。
+// まだ絵が無いテーマ(お遍路・酒蔵めぐりは今後画像作成が用意)はnullのままにし、
+// 予備の絵にフォールバックさせる
 type ThemeSeed = {
   slug: string;
   name: string;
@@ -24,6 +32,7 @@ type ThemeSeed = {
   intro: string;
   seasons: string[]; // "spring"|"summer"|"autumn"|"winter"
   status: "draft" | "published";
+  imageUrl: string | null;
 };
 
 const THEMES: ThemeSeed[] = [
@@ -34,6 +43,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["紅葉狩り"],
     seasons: ["autumn"],
     status: "published",
+    imageUrl: "/themes/theme-koyo.svg",
     intro:
       "山や渓谷、古都の庭園が赤や黄色に染まる紅葉の季節。例年の見頃は、北海道・東北の山あいで10月上旬ごろから始まり、関東・関西の街なかでは11月中旬〜12月上旬ごろまで楽しめます。紅葉の名所をめぐるモデルコースを、地方ごとにまとめました。見頃は年によって前後するので、お出かけ前に最新の色づき情報も確認してください。",
   },
@@ -44,6 +54,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["ウィンタースポーツ"],
     seasons: ["winter"],
     status: "published",
+    imageUrl: "/themes/theme-winter.svg",
     intro:
       "雪化粧した古都や合掌造りの集落、湯けむりの温泉街、雪まつりやイルミネーション。寒い季節だからこそ出会える景色を楽しむ、冬の旅のモデルコースを地方ごとにまとめました。雪の多い地域では、交通機関の運休や道路の通行止めがあるので、お出かけ前に最新の情報を確認してください。",
   },
@@ -54,6 +65,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["温泉"],
     seasons: ["winter"],
     status: "published",
+    imageUrl: "/themes/theme-onsen.svg",
     intro:
       "湯けむりの温泉街をそぞろ歩き、日帰り入浴や宿でゆっくりくつろぐ。全国の温泉地をめぐるモデルコースを、地方ごとにまとめました。温泉街の散策スポットや、立ち寄りやすい日帰り湯も確認できます。",
   },
@@ -64,6 +76,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["絶景・フォトスポット"],
     seasons: [],
     status: "published",
+    imageUrl: "/themes/theme-zekkei.svg",
     intro:
       "海や山、滝や湖、街を見下ろす展望台。思わず写真を撮りたくなる絶景スポットをめぐるモデルコースを、地方ごとにまとめました。訪れる時間帯のコツや、移動手段もあわせて確認できます。",
   },
@@ -74,6 +87,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: [],
     seasons: [],
     status: "published",
+    imageUrl: "/themes/theme-gourmet.svg",
     intro:
       "市場の海鮮、ご当地の名物料理、食べ歩きの商店街。その土地ならではの味を楽しむモデルコースを、地方ごとにまとめました。観光と食事を組み合わせた回り方の参考にどうぞ。",
   },
@@ -84,6 +98,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["動物園・水族館", "テーマパーク"],
     seasons: [],
     status: "published",
+    imageUrl: "/themes/theme-family.svg",
     intro:
       "動物園や水族館、テーマパーク、体験施設など、子どもと一緒に楽しめるスポットをめぐるモデルコースを、地方ごとにまとめました。移動時間や滞在時間の目安もあるので、無理のない日程づくりに役立ちます。",
   },
@@ -94,6 +109,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: [],
     seasons: [],
     status: "published",
+    imageUrl: "/themes/theme-solo.svg",
     intro:
       "自分のペースで、行きたい場所へ。一人でも気兼ねなく楽しめる街歩きや寺社めぐり、景色を眺める旅のモデルコースを、地方ごとにまとめました。",
   },
@@ -104,6 +120,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["ビーチ・海水浴", "離島"],
     seasons: ["summer"],
     status: "published",
+    imageUrl: "/themes/theme-beach.svg",
     intro:
       "青い海と白い砂浜、島めぐりやマリンアクティビティ。海辺の景色を楽しむモデルコースを、地方ごとにまとめました。海水浴や船の運航は季節によって変わるので、事前に確認してお出かけください。",
   },
@@ -114,6 +131,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["花見・桜"],
     seasons: ["spring"],
     status: "published",
+    imageUrl: "/themes/theme-sakura.svg",
     intro:
       "春を彩る桜の名所をめぐるモデルコースを、地方ごとにまとめました。例年の見頃は、九州・関東で3月下旬ごろ、東北・北海道では4月下旬〜5月ごろです。開花は年によって前後するので、最新の開花情報もあわせて確認してください。",
   },
@@ -124,6 +142,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: [],
     seasons: [],
     status: "published",
+    imageUrl: "/themes/theme-castle.svg",
     intro:
       "天守を仰ぎ、石垣や堀をめぐり、城下町を歩く。江戸時代以前から天守が残る城、再建された天守、石垣や堀が残る城跡まで、城下町の町並みや庭園、ご当地の名物と組み合わせたお城めぐりのモデルコースを、地方ごとにまとめました。修理や工事で見学できる範囲が変わることがあるので、お出かけ前に各城の公式サイトで確かめてください。",
   },
@@ -134,6 +153,7 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: [],
     seasons: [],
     status: "published",
+    imageUrl: "/themes/theme-goshuin.svg",
     intro:
       "寺社をお参りし、その証として御朱印をいただく旅。鎌倉・京都・奈良・伊勢・出雲・日光など、1〜2日で無理なく巡れる寺社の組み合わせを、地方ごとにまとめました。御朱印は、先にお参りを済ませてから授与所でお願いするものです。受付の時間や御朱印の種類、書き置きかどうかは寺社ごとに異なるので、お出かけ前に各寺社の公式の案内で確かめてください。寺社は今も祈りの場です。境内では静かにお参りし、御朱印の売り買いはやめましょう。",
   },
@@ -147,6 +167,10 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: [],
     seasons: ["spring", "autumn"],
     status: "draft",
+    // 絵は画像作成が用意済み(img/theme-henro c8d8346)だが、まだuser-siteの
+    // publicフォルダにマージされていない。下書きのため今は問題ないが、公開前に
+    // 画像のマージが済んでいるか確かめること
+    imageUrl: "/themes/theme-henro.svg",
     intro:
       "四国に点在する八十八か所の霊場をめぐる、祈りと歩みの旅。車で区切って回る1泊2日のモデルコースを、札所の番号順にまとめました。（下書き・公開前に紹介文の見直しが必要）",
   },
@@ -157,6 +181,10 @@ const THEMES: ThemeSeed[] = [
     purposeTagNames: ["酒蔵・ワイナリー巡り"],
     seasons: [],
     status: "draft",
+    // 絵は画像作成が用意済み(img/theme-covers 00d0e9f)だが、まだuser-siteの
+    // publicフォルダにマージされていない。下書きのため今は問題ないが、公開前に
+    // 画像のマージが済んでいるか確かめること
+    imageUrl: "/themes/theme-sake-brewery.svg",
     intro:
       "白壁の蔵元をめぐり、蔵見学や試飲を楽しむ旅。全国の酒どころのモデルコースを、地方ごとにまとめました。（下書き・公開前に紹介文の見直しが必要）",
   },
@@ -316,7 +344,7 @@ async function main() {
   for (const [i, theme] of THEMES.entries()) {
     const already = existingThemeSlugs.has(theme.slug);
     console.log(
-      `  ${already ? "(既にあるためスキップ)" : `${i + 1}件目として登録`} /theme/${theme.slug} 「${theme.name}」(${theme.status})`
+      `  ${already ? "(既にあるためスキップ)" : `${i + 1}件目として登録`} /theme/${theme.slug} 「${theme.name}」(${theme.status}) 絵:${theme.imageUrl ?? "(まだ無いので予備の絵)"}`
     );
   }
 
@@ -351,6 +379,7 @@ async function main() {
         intro: theme.intro,
         seasons: theme.seasons,
         status: theme.status,
+        imageUrl: theme.imageUrl,
         displayOrder: themeDisplayOrder,
         tags: { create: theme.tagNames.flatMap((n) => (tagIdByName.has(n) ? [{ tagId: tagIdByName.get(n)! }] : [])) },
         purposeTags: {

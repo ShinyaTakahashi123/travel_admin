@@ -38,8 +38,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["祭り・イベント", "美術館・博物館"],
     days: [
       [
-        { name: "秋田市民俗芸能伝承館", wikiTitle: "秋田市民俗芸能伝承館", address: "秋田市大町1丁目3-30", time: "9:30", stay: 70, memo: "「ねぶり流し館」の愛称で親しまれる、竿燈まつりの実物道具を展示する伝承館。" },
-        { name: "千秋公園", wikiTitle: "久保田城", address: "秋田市千秋公園1-39", time: "11:10", stay: 50, memo: "伝承館のあと、久保田城跡の公園を散策。", transit: { mode: "walk", min: 15 } },
+        { name: "秋田市民俗芸能伝承館", wikiTitle: "秋田市民俗芸能伝承館", address: "秋田市大町1丁目3-30", time: "9:30", stay: 70, memo: "「ねぶり流し館」の愛称で親しまれる、竿燈まつりの実物道具を展示する伝承館。竿燈演技体験も通年実施(予約不要)。" },
+        { name: "千秋公園", wikiTitle: "久保田城", address: "秋田市千秋公園1-39", time: "10:55", stay: 90, memo: "久保田城跡の公園。御隅櫓・佐竹史料館・彌高神社など見どころ多数。", transit: { mode: "walk", min: 15 } },
+        { name: "秋田県立美術館", wikiTitle: "秋田県立美術館", address: "秋田市中通1-4-2", time: "12:34", stay: 90, memo: "安藤忠雄設計。藤田嗣治の大壁画「秋田の行事」を収蔵。ラウンジで昼食を。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [39.7174373, 140.1215722] },
+        { name: "秋田市立赤れんが郷土館", wikiTitle: "秋田市立赤れんが郷土館", address: "秋田市大町3-3-21", time: "14:11", stay: 70, memo: "明治45年築の旧秋田銀行本店本館。国指定重要文化財。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [39.717209, 140.115616] },
+        { name: "旧金子家住宅", wikiTitle: "旧金子家住宅", address: "秋田市大町1-3-31", time: "15:26", stay: 40, memo: "明治期再建の商家建築。質屋・古着屋から呉服卸商を営んだ金子家の住宅。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [39.7202325, 140.1169844] },
+        { name: "秋田まるごと市場", wikiTitle: "秋田まるごと市場", address: "秋田市卸町1-2-7", time: "16:34", stay: 25, memo: "鮮魚・青果・特産品が並ぶ市場。食事処も。帰りはバスで秋田駅へ。", transit: { mode: "walk", min: 28 }, fallbackLatLng: [39.7005003, 140.1095555] },
       ],
     ],
   },
@@ -256,10 +260,21 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡", "花見・桜"],
     days: [
       [
-        { name: "弘前公園", wikiTitle: "弘前公園", address: "弘前市大字下白銀町1", time: "10:00", stay: 100, memo: "弘前城の天守と、四季折々の公園の景観をじっくり楽しむ（桜の見頃は例年4月下旬〜5月上旬）。" },
+        { name: "弘前公園", wikiTitle: "弘前公園", address: "弘前市大字下白銀町1", time: "9:00", stay: 140, memo: "弘前城の天守と、四季折々の公園の景観をじっくり楽しむ。天守は2026年8月に曳戻し完了。" },
+        { name: "弘前市立観光館", wikiTitle: "弘前市立観光館", address: "青森県弘前市下白銀町2-1", time: "11:27", stay: 45, memo: "組ねぷた・津軽塗などの展示、物産店。", transit: { mode: "walk", min: 7 } },
+        { name: "旧弘前市立図書館", wikiTitle: "旧弘前市立図書館", address: "青森県弘前市下白銀町2-1", time: "12:14", stay: 35, memo: "明治のルネサンス風洋館、郷土文学館として公開。", transit: { mode: "walk", min: 2 } },
+        { name: "津軽藩ねぷた村", wikiTitle: "津軽藩ねぷた村", address: "青森県弘前市亀甲町61", time: "13:02", stay: 90, memo: "実物大のねぷた展示、津軽三味線の生演奏。", transit: { mode: "walk", min: 13 } },
+        { name: "仲町の武家屋敷", wikiTitle: "仲町伝統的建造物群保存地区", address: "青森県弘前市若党町", time: "14:34", stay: 75, memo: "旧岩田家住宅など4棟の武家住宅を公開。北門(亀甲門)前。", transit: { mode: "walk", min: 2 } },
+        { name: "弘前八幡宮", wikiTitle: "弘前八幡宮", address: "青森県弘前市大字八幡町1丁目1-1", time: "15:59", stay: 45, memo: "唐門・本殿が国重要文化財。弘前城の鬼門を守る社。", transit: { mode: "car", min: 10 } },
       ],
       [
-        { name: "藤田記念庭園", wikiTitle: "藤田記念庭園", address: "弘前市大字上白銀町8-1", time: "9:30", stay: 60, memo: "2日目は、岩木山を望む静かな日本庭園で朝のひとときを過ごす。" },
+        { name: "藤田記念庭園", wikiTitle: "藤田記念庭園", address: "弘前市大字上白銀町8-1", time: "9:00", stay: 60, memo: "岩木山を望む静かな日本庭園。堀江金蔵設計の洋館。" },
+        { name: "弘前れんが倉庫美術館", wikiTitle: "弘前れんが倉庫美術館", address: "青森県弘前市吉野町2-1", time: "10:05", stay: 95, memo: "田根剛設計、旧酒造工場を改修した現代アート美術館。", transit: { mode: "car", min: 5 } },
+        { name: "弘前昇天教会", wikiTitle: "日本聖公会弘前昇天教会教会堂", address: "青森県弘前市山道町7-1", time: "11:42", stay: 20, memo: "赤れんがのゴシック様式教会。現役のため外観のみ見学。", transit: { mode: "walk", min: 2 } },
+        { name: "最勝院", wikiTitle: "最勝院", address: "青森県弘前市銅屋町", time: "12:09", stay: 60, memo: "国重要文化財の五重塔(1667年完成)。", transit: { mode: "walk", min: 7 } },
+        { name: "長勝寺・禅林街", wikiTitle: "長勝寺 (弘前市)", address: "青森県弘前市西茂森1-13-8", time: "13:14", stay: 90, memo: "津軽家の菩提寺。33のお寺が並ぶ禅林街。", transit: { mode: "car", min: 5 } },
+        { name: "弘前教会", wikiTitle: "弘前教会", address: "青森県弘前市元寺町48", time: "14:50", stay: 20, memo: "東北最古とされるプロテスタント教会。現役のため外観のみ見学。", transit: { mode: "car", min: 6 } },
+        { name: "弘前市りんご公園", wikiTitle: "弘前市りんご公園", address: "青森県弘前市大字清水富田字寺沢125", time: "15:19", stay: 75, memo: "80品種・2300本のりんご園。旧小山内家住宅(重要文化財)も。", transit: { mode: "car", min: 9 } },
       ],
     ],
   },

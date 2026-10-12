@@ -15,7 +15,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     title: "佐賀城本丸歴史館と佐嘉神社、定番の佐賀市内さんぽ日帰りプラン",
-    description: "幕末の佐賀藩の姿を伝える佐賀城本丸歴史館と、鍋島直正公を祀る佐嘉神社。佐賀市内の歴史スポットを巡る定番プランです。",
+    description: "幕末の佐賀藩の姿を伝える佐賀城本丸歴史館と、鍋島直正公を祀る佐嘉神社。与賀神社や佐賀バルーンミュージアム、大隈重信記念館など、佐賀市内の歴史スポットを巡る定番プランです。",
     nights: 0,
     prefectureName: "佐賀県",
     areaNames: ["佐賀市内"],
@@ -23,8 +23,15 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡", "神社"],
     days: [
       [
-        { name: "佐賀城本丸歴史館", wikiTitle: "佐賀城", address: "佐賀市城内2丁目18-1", time: "9:30", stay: 60, memo: "現存する木造復元建築として日本最大級。幕末佐賀藩の先進性を紹介する。" },
-        { name: "佐嘉神社", wikiTitle: "佐嘉神社", address: "佐賀市松原2丁目10-43", time: "11:00", stay: 40, memo: "幕末の名君・鍋島直正公を祀る、佐賀の総鎮守的な神社。", transit: { mode: "walk", min: 15 } },
+        { name: "佐賀城本丸歴史館", wikiTitle: "佐賀城", address: "佐賀市城内2丁目18-1", time: "9:30", stay: 60, memo: "現存する木造復元建築として日本最大級とされる。幕末佐賀藩の先進性を紹介する。" },
+        { name: "佐賀城鯱の門", wikiTitle: "", address: "佐賀市城内二丁目", time: "10:32", stay: 20, memo: "天保9年建立、国重要文化財の佐賀城本丸表門。", fallbackLatLng: [33.24597, 130.302854], transit: { mode: "walk", min: 2 } },
+        { name: "佐賀県立博物館", wikiTitle: "", address: "佐賀市城内一丁目15-23", time: "10:55", stay: 60, memo: "自然史・考古・歴史・美術・工芸・民俗の常設展。高輪築堤の移設展示も。", fallbackLatLng: [33.24498, 130.300534], transit: { mode: "walk", min: 3 } },
+        { name: "与賀神社", wikiTitle: "", address: "佐賀市与賀町2-50", time: "12:03", stay: 55, memo: "6世紀創建と伝わる古社。楼門・鳥居・石橋は国重要文化財、大楠は県天然記念物。参拝後にこのあたりで昼食。", fallbackLatLng: [33.248868, 130.294851], transit: { mode: "walk", min: 8 } },
+        { name: "佐嘉神社", wikiTitle: "佐嘉神社", address: "佐賀市松原2丁目10-43", time: "13:08", stay: 40, memo: "幕末の名君・鍋島直正公を祀る、佐賀の総鎮守的な神社。", transit: { mode: "walk", min: 10 } },
+        { name: "松原神社", wikiTitle: "", address: "佐賀市松原二丁目10-43", time: "13:50", stay: 20, memo: "安永元年創建、佐嘉神社と同じ敷地の神社。藩祖・鍋島直茂公を祀る。", fallbackLatLng: [33.251944, 130.3025], transit: { mode: "walk", min: 2 } },
+        { name: "佐賀バルーンミュージアム", wikiTitle: "", address: "佐賀市松原一丁目1-1", time: "14:13", stay: 50, memo: "国内初とされる常設型熱気球博物館。「イカロス5号」実機やシミュレーター。", fallbackLatLng: [33.252469, 130.300391], transit: { mode: "walk", min: 3 } },
+        { name: "旧古賀家", wikiTitle: "", address: "佐賀市柳町3-15", time: "15:11", stay: 35, memo: "明治17年建築、古賀銀行創設者の邸宅。市重要文化財。", fallbackLatLng: [33.2543049, 130.3070156], transit: { mode: "walk", min: 8 } },
+        { name: "大隈重信記念館・旧宅", wikiTitle: "", address: "佐賀市水ヶ江二丁目11-11", time: "15:55", stay: 55, memo: "大隈重信の記念館と生家。今井兼次設計の記念碑的建築。", fallbackLatLng: [33.247982, 130.308806], transit: { mode: "walk", min: 9 } },
       ],
     ],
   },
@@ -44,6 +51,10 @@ const ITINERARIES: HandmadeItinerary[] = [
     ],
   },
   {
+    // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#332)で
+    // 1日目1か所・2日目1か所から11スポットに再構成。佐賀城公園・松原エリア
+    // (1日目)と柳町・与賀町・神野エリア(2日目)の実在の公共スポットで構成
+    // (docs/content/20260929-itinerary-4spots-9to16-checklist.md #332)。
     title: "佐賀県立博物館と旧古賀銀行、アートと明治レトロ建築を巡る1泊2日",
     description: "佐賀の美術・工芸を紹介する佐賀県立博物館・美術館と、レトロな洋風建築が残る佐賀市歴史民俗館。城下町とは違う佐賀の表情を楽しむ1泊2日です。",
     nights: 1,
@@ -53,10 +64,24 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館"],
     days: [
       [
-        { name: "佐賀県立博物館・美術館", wikiTitle: "佐賀県立美術館", address: "佐賀市城内1丁目15-23", time: "10:00", stay: 80, memo: "佐賀ゆかりの美術・工芸品を紹介する県立の博物館・美術館。", fallbackLatLng: [33.2495, 130.2999] },
+        { name: "佐賀県立博物館・美術館", wikiTitle: "佐賀県立美術館", address: "佐賀市城内1丁目15-23", time: "9:00", stay: 110, memo: "佐賀ゆかりの美術・工芸品を紹介する県立の博物館・美術館。", fallbackLatLng: [33.2495, 130.2999] },
+        { name: "鯱の門", wikiTitle: "", address: "佐賀市城内2丁目18-1", time: "10:57", stay: 8, memo: "天保9年(1838)の本丸再建で建てられた佐賀城本丸の表門。佐賀の乱の弾痕も。", transit: { mode: "walk", min: 7 }, fallbackLatLng: [33.245971, 130.3028536] },
+        { name: "佐賀城本丸歴史館", wikiTitle: "", address: "佐賀市城内2丁目18-1", time: "11:06", stay: 85, memo: "本丸御殿の一部を復元した施設。幕末・維新期の佐賀藩をテーマに展示。", transit: { mode: "walk", min: 1 }, fallbackLatLng: [33.2456467, 130.3021684] },
+        { name: "大隈重信記念館", wikiTitle: "", address: "佐賀市水ヶ江2丁目11-11", time: "12:40", stay: 90, memo: "大隈重信の旧宅(国史跡)に隣接する記念館。昼食も兼ねる。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [33.2479816, 130.3088062] },
+        { name: "佐嘉神社", wikiTitle: "", address: "佐賀市松原2丁目10-43", time: "14:19", stay: 30, memo: "10代藩主鍋島直正・11代直大を祀る神社。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [33.251144, 130.302719] },
+        { name: "徴古館", wikiTitle: "", address: "佐賀市松原2丁目5-22", time: "14:51", stay: 40, memo: "旧鍋島家伝来の美術・工芸品を収蔵する郷土資料館。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2515786, 130.3013806] },
+        { name: "松原川親水公園", wikiTitle: "", address: "佐賀市松原2丁目", time: "15:34", stay: 20, memo: "佐嘉神社周辺に整備されたおよそ750mの親水プロムナード。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [33.2508, 130.3018] },
+        { name: "佐賀バルーンミュージアム", wikiTitle: "", address: "佐賀市松原2丁目2-27", time: "15:59", stay: 60, memo: "熱気球をテーマにした日本初のミュージアム。フライトシミュレーター等。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [33.2524694, 130.3003905] },
       ],
       [
-        { name: "佐賀市歴史民俗館", wikiTitle: "佐賀市歴史民俗館", address: "佐賀市柳町2-9", time: "9:30", stay: 60, memo: "2日目は、旧古賀銀行など明治〜大正期の洋風建築が残る一角を散策。", fallbackLatLng: [33.2591, 130.2988] },
+        { name: "佐賀市歴史民俗館", wikiTitle: "佐賀市歴史民俗館", address: "佐賀市柳町2-9", time: "9:00", stay: 45, memo: "旧古賀銀行の建物を中心とする施設。大正ロマン漂う洋風建築。", fallbackLatLng: [33.254095, 130.3066463] },
+        { name: "旧古賀家", wikiTitle: "", address: "佐賀市柳町3-15", time: "9:47", stay: 40, memo: "古賀銀行創設者・古賀善平の旧宅。武家屋敷風の町家、15の和室。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2543049, 130.3070156] },
+        { name: "旧牛島家", wikiTitle: "", address: "佐賀市柳町2-9", time: "10:29", stay: 30, memo: "佐賀旧城下町に残る町家建築の中でも特に古いものと伝わる。18世紀前期の建築と推定。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2539244, 130.3072685] },
+        { name: "旧三省銀行", wikiTitle: "", address: "佐賀市柳町2-12", time: "11:01", stay: 40, memo: "明治期の米穀商発祥の銀行建築。むくり屋根の蔵造り、吹き抜けが特徴。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2542483, 130.3074974] },
+        { name: "龍造寺八幡宮", wikiTitle: "", address: "佐賀市白山1丁目3-2", time: "11:52", stay: 40, memo: "肥前鳥居(市重要文化財)で知られる龍造寺氏ゆかりの神社。", transit: { mode: "walk", min: 11 }, fallbackLatLng: [33.255301, 130.2983534] },
+        { name: "与賀神社", wikiTitle: "", address: "佐賀市与賀町2-50", time: "12:44", stay: 90, memo: "国重要文化財の楼門・石橋・鳥居、樹齢1400年の大楠で知られる古社。昼食も兼ねる。", transit: { mode: "walk", min: 12 }, fallbackLatLng: [33.2488679, 130.2948509] },
+        { name: "神野公園", wikiTitle: "", address: "佐賀市神園4丁目1-3", time: "14:29", stay: 70, memo: "鍋島直正の別邸跡の庭園。茶室・小動物園・遊園地。", transit: { mode: "bus", min: 15 }, fallbackLatLng: [33.2660578, 130.280924] },
+        { name: "佐賀県庁展望ホール", wikiTitle: "", address: "佐賀市城内1丁目1-59", time: "15:54", stay: 35, memo: "県庁新館最上階の360度展望ホール。", transit: { mode: "bus", min: 15 }, fallbackLatLng: [33.2495324, 130.2990441] },
       ],
     ],
   },
@@ -66,7 +91,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     title: "有田焼の窯元めぐりと陶山神社、磁器の里・有田を巡る定番プラン",
-    description: "日本磁器発祥の地・有田。窯元が並ぶ通りを歩き、鳥居まで有田焼でできた陶山神社に参拝する、有田観光の定番プランです。",
+    description: "日本磁器発祥の地とされる有田。窯元が並ぶ通りを歩き、鳥居まで有田焼でできた陶山神社に参拝する、有田観光の定番プランです。",
     nights: 0,
     prefectureName: "佐賀県",
     areaNames: ["有田・伊万里"],
@@ -74,8 +99,15 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["ものづくり体験", "神社"],
     days: [
       [
-        { name: "有田内山伝統的建造物群", wikiTitle: "有田町", address: "西松浦郡有田町上幸平", time: "9:30", stay: 90, memo: "日本磁器発祥の地。江戸〜明治期の窯元や商家が軒を連ねる。" },
-        { name: "陶山神社", wikiTitle: "陶山神社", address: "西松浦郡有田町上白川1", time: "11:30", stay: 30, memo: "鳥居や狛犬まで有田焼でできた、全国でも珍しい「やきものの神社」。", transit: { mode: "car", min: 15 } },
+        { name: "有田内山伝統的建造物群", wikiTitle: "有田町有田内山伝統的建造物群保存地区", address: "西松浦郡有田町上幸平", time: "9:30", stay: 90, memo: "日本磁器発祥の地とされる。江戸〜明治期の窯元や商家が軒を連ねる。", fallbackLatLng: [33.1918072, 129.9037031] },
+        { name: "陶山神社", wikiTitle: "陶山神社", address: "西松浦郡有田町上白川1", time: "11:15", stay: 30, memo: "鳥居や狛犬まで有田焼でできた、全国でも珍しい「やきものの神社」。", transit: { mode: "walk", min: 5 } },
+        { name: "泉山磁石場", wikiTitle: "", address: "西松浦郡有田町泉山1-5", time: "11:50", stay: 30, memo: "李参平が陶石を発見したとされる、有田焼400年の歴史の原点。昼食もこのあたりで。", fallbackLatLng: [33.1939448, 129.9101704], transit: { mode: "walk", min: 15 } },
+        { name: "大公孫樹", wikiTitle: "", address: "西松浦郡有田町泉山一丁目524-2", time: "12:24", stay: 15, memo: "泉山弁財天境内の、樹齢1000年とされる国指定天然記念物のイチョウ。", fallbackLatLng: [33.194229, 129.908661], transit: { mode: "walk", min: 4 } },
+        { name: "有田町歴史民俗資料館東館", wikiTitle: "", address: "西松浦郡有田町泉山1-4-1", time: "12:42", stay: 40, memo: "窯業400年を支えてきた有田の歴史・民俗の資料館。登り窯の模型も。", fallbackLatLng: [33.195076, 129.91104], transit: { mode: "walk", min: 3 } },
+        { name: "トンバイ塀のある裏通り", wikiTitle: "", address: "西松浦郡有田町上幸平一丁目", time: "13:37", stay: 25, memo: "登り窯の耐火レンガの廃材を赤土で固めた塀が続く裏通り。", fallbackLatLng: [33.1912682, 129.8999466], transit: { mode: "walk", min: 15 } },
+        { name: "有田陶磁美術館", wikiTitle: "", address: "西松浦郡有田町赤絵町1-4-2", time: "14:04", stay: 40, memo: "明治7年建築の焼物倉庫を改築した美術館。江戸〜昭和初期の有田焼。", fallbackLatLng: [33.1904701, 129.8987623], transit: { mode: "walk", min: 2 } },
+        { name: "有田ポーセリンパーク", wikiTitle: "", address: "西松浦郡有田町戸矢乙340-28", time: "14:54", stay: 45, memo: "ろくろ・絵付け体験ができる有田焼テーマの施設。", fallbackLatLng: [33.164637, 129.908242], transit: { mode: "car", min: 10 } },
+        { name: "佐賀県立九州陶磁文化館", wikiTitle: "", address: "西松浦郡有田町戸杓乙3100-1", time: "15:48", stay: 70, memo: "九州各地のやきものを収集・展示する専門の美術館。蒲原・柴田コレクション。", fallbackLatLng: [33.179011, 129.880574], transit: { mode: "car", min: 9 } },
       ],
     ],
   },
@@ -167,16 +199,29 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     title: "別府地獄めぐり、極彩色の温泉地獄を巡る定番日帰りプラン",
-    description: "海地獄・血の池地獄など、色とりどりの源泉が織りなす別府地獄めぐり。日本一の湧出量を誇る別府温泉の定番プランです。",
+    description: "海地獄・血の池地獄など、色とりどりの源泉が織りなす別府地獄めぐり。日本一ともいわれる湧出量を誇る別府温泉の定番プランです。",
     nights: 0,
     prefectureName: "大分県",
     areaNames: ["別府温泉"],
     tagNames: ["温泉"],
     purposeNames: ["温泉", "絶景・フォトスポット"],
+    // 2026-10-01 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応(#335)で
+    // 2か所から10か所に再構成。正式な7つの地獄すべてに、地獄蒸し工房鉄輪・
+    // 明礬湯の花小屋・竹瓦温泉を加えた
+    // (docs/content/20260929-itinerary-4spots-9to16-checklist.md #335)。
     days: [
       [
         { name: "海地獄", wikiTitle: "海地獄", address: "別府市大字鉄輪559-1", time: "9:30", stay: 40, memo: "コバルトブルーの美しい湯が特徴の、別府地獄めぐりを代表する一つ。" },
-        { name: "血の池地獄", wikiTitle: "血の池地獄", address: "別府市野田778", time: "10:40", stay: 30, memo: "赤土に由来する、鮮やかな赤色の湯が印象的な地獄。日本最古の天然地獄。", transit: { mode: "car", min: 15 } },
+        { name: "鬼石坊主地獄", wikiTitle: "", address: "別府市大字鉄輪559-1", time: "10:12", stay: 20, memo: "粘土質の熱泥が坊主頭のように球状に沸き立つ地獄。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3151826, 131.4690325] },
+        { name: "かまど地獄", wikiTitle: "", address: "別府市鉄輪621", time: "10:37", stay: 25, memo: "1〜6丁目、それぞれ違う色の池が点在する地獄。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [33.3164456, 131.4724531] },
+        { name: "鬼山地獄", wikiTitle: "", address: "別府市鉄輪625", time: "11:04", stay: 20, memo: "摂氏99度の高温池。ワニの飼育でも知られる「ワニ地獄」。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3161473, 131.4733597] },
+        { name: "白池地獄", wikiTitle: "", address: "別府市鉄輪283-1", time: "11:26", stay: 20, memo: "湧出時は無色、池に落ちて白濁する地獄。熱帯魚観賞施設併設。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3153269, 131.4741443] },
+        { name: "地獄蒸し工房鉄輪", wikiTitle: "", address: "別府市風呂本5組", time: "11:49", stay: 70, memo: "温泉蒸気を使った伝統の地獄蒸し料理を体験できる別府市の施設。昼食も兼ねる。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [33.315443, 131.4761942] },
+        { name: "血の池地獄", wikiTitle: "血の池地獄", address: "別府市野田778", time: "13:09", stay: 30, memo: "赤土に由来する、鮮やかな赤色の湯が印象的な地獄。日本最古の天然地獄。", transit: { mode: "bus", min: 10 } },
+        { name: "龍巻地獄", wikiTitle: "", address: "別府市内竈", time: "13:41", stay: 20, memo: "一定間隔で熱湯・噴気を噴き上げる間欠泉。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.3269924, 131.4794383] },
+        { name: "明礬湯の花小屋", wikiTitle: "", address: "別府市明礬6組", time: "14:16", stay: 35, memo: "国重要文化的景観・重要無形民俗文化財の湯の花製造小屋群。", transit: { mode: "bus", min: 15 }, fallbackLatLng: [33.31657, 131.441071] },
+        { name: "竹瓦小路", wikiTitle: "", address: "別府市元町14", time: "15:11", stay: 15, memo: "竹瓦温泉隣の現存する木造アーケード。近代化産業遺産。", transit: { mode: "bus", min: 20 }, fallbackLatLng: [33.277391, 131.505907] },
+        { name: "竹瓦温泉", wikiTitle: "", address: "別府市元町16-23", time: "15:28", stay: 65, memo: "唐破風造りの市営共同浴場。砂湯でも知られる別府のシンボル。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.277449, 131.5059764] },
       ],
     ],
   },
@@ -246,8 +291,8 @@ const ITINERARIES: HandmadeItinerary[] = [
     ],
   },
   {
-    title: "由布岳登山と金鱗湖、由布院の自然をじっくり楽しむ1泊2日",
-    description: "由布院のシンボル・由布岳の中腹まで登り、翌日は金鱗湖と湯の坪街道をゆっくり散策する。自然と温泉街、両方を味わう1泊2日です。",
+    title: "由布岳登山と宇奈岐日女神社、由布院の自然をじっくり楽しむ1泊2日",
+    description: "由布院のシンボル・由布岳の中腹まで登り、翌日は金鱗湖や由布院駅周辺の史跡・現代アートを巡る。由布院の自然と文化を存分に味わう1泊2日です。",
     nights: 1,
     prefectureName: "大分県",
     areaNames: ["由布院"],
@@ -255,10 +300,21 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["ハイキング・登山", "自然"],
     days: [
       [
-        { name: "由布岳", wikiTitle: "由布岳", address: "由布市湯布院町川上", time: "9:00", stay: 150, memo: "「豊後富士」とも呼ばれる、由布院のシンボル的な山。中腹までのハイキングも人気。" },
+        { name: "由布岳", wikiTitle: "由布岳", address: "由布市湯布院町川上", time: "9:00", stay: 270, memo: "「豊後富士」とも呼ばれる、由布院のシンボル的な山。正面登山口から往復4〜5時間の本格登山。" },
+        { name: "塚原温泉 火口乃泉", wikiTitle: "塚原温泉", address: "由布市湯布院町塚原1235", time: "13:36", stay: 90, memo: "強い酸性の湯として知られる。登山の汗を流す日帰り入浴。", transit: { mode: "car", min: 6 }, fallbackLatLng: [33.304352, 131.386566] },
+        { name: "狭霧台", wikiTitle: "狭霧台", address: "由布市湯布院町川西", time: "15:16", stay: 25, memo: "由布岳と由布院盆地を一望する展望スポット。", transit: { mode: "car", min: 10 }, fallbackLatLng: [33.2602225, 131.3824425] },
+        { name: "佛山寺", wikiTitle: "佛山寺", address: "由布市湯布院町川上1879", time: "15:46", stay: 45, memo: "由布岳の山岳信仰の拠点として開かれた古刹。", transit: { mode: "car", min: 5 }, fallbackLatLng: [33.263588, 131.37114] },
       ],
       [
-        { name: "宇奈岐日女神社", wikiTitle: "宇奈岐日女神社", address: "由布市湯布院町川上2220", time: "9:30", stay: 40, memo: "2日目は、由布院盆地の産土神を祀る古社を訪ね、静かな杜を歩く。", fallbackLatLng: [33.2589, 131.3617] },
+        { name: "金鱗湖", wikiTitle: "金鱗湖", address: "由布市湯布院町川上", time: "9:00", stay: 40, memo: "由布院のシンボル的な池。大分川の源流の一つ。", fallbackLatLng: [33.2672073, 131.3688542] },
+        { name: "天祖神社", wikiTitle: "天祖神社", address: "由布市湯布院町川上", time: "9:42", stay: 25, memo: "金鱗湖畔に鎮座する古社。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2663398, 131.3696776] },
+        { name: "下ん湯", wikiTitle: "下ん湯", address: "由布市湯布院町川上", time: "10:16", stay: 40, memo: "金鱗湖畔の茅葺き屋根の無人共同浴場。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [33.2658534, 131.3623282] },
+        { name: "COMICO ART MUSEUM YUFUIN", wikiTitle: "COMICO_ART_MUSEUM_YUFUIN", address: "由布市湯布院町川上2995-1", time: "10:58", stay: 70, memo: "隈研吾設計の現代美術館。草間彌生ら7作家の作品を常設。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [33.2652693, 131.3615766] },
+        { name: "湯の坪街道", wikiTitle: "湯の坪街道", address: "由布市湯布院町川上", time: "12:11", stay: 80, memo: "梅ヶ枝餅などが並ぶ賑わいの通り。昼食もここで。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [33.2660923, 131.3632115] },
+        { name: "由布院ステンドグラス美術館", wikiTitle: "由布院ステンドグラス美術館", address: "由布市湯布院町川上2461-3", time: "13:41", stay: 40, memo: "日本初の本格的なステンドグラス専門美術館。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [33.259785, 131.365845] },
+        { name: "宇奈岐日女神社", wikiTitle: "宇奈岐日女神社", address: "由布市湯布院町川上2220", time: "14:26", stay: 55, memo: "由布院盆地の産土神を祀る古社、静かな杜を歩く。", transit: { mode: "walk", min: 5 }, fallbackLatLng: [33.2589, 131.3617] },
+        { name: "大杵社", wikiTitle: "大杵社", address: "由布市湯布院町川南", time: "15:30", stay: 40, memo: "樹齢1000年の国指定天然記念物の大杉。", transit: { mode: "walk", min: 9 }, fallbackLatLng: [33.2527335, 131.3576605] },
+        { name: "由布院駅", wikiTitle: "由布院駅", address: "由布市湯布院町川北8-2", time: "16:24", stay: 35, memo: "磯崎新設計の木造駅舎、アートホールの企画展示。帰りはここから特急で。", transit: { mode: "walk", min: 14 }, fallbackLatLng: [33.2626128, 131.3551264] },
       ],
     ],
   },
@@ -268,7 +324,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   // ============================================================
   {
     title: "中津城と福澤諭吉旧居、定番の中津さんぽ日帰りプラン",
-    description: "「奥平の城」として知られる中津城と、一万円札の顔・福澤諭吉が育った旧居。中津の歴史と偉人ゆかりの地を巡る定番プランです。",
+    description: "「奥平の城」として知られる中津城と、一万円札の顔・福澤諭吉が育った旧居。なかはくや大江医家史料館、寺町の町並み、大雅の書画で知られる自性寺、村上医家史料館まで、中津の歴史と偉人ゆかりの地を巡る定番プランです。",
     nights: 0,
     prefectureName: "大分県",
     areaNames: ["中津"],
@@ -276,8 +332,14 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡"],
     days: [
       [
-        { name: "中津城", wikiTitle: "中津城", address: "中津市二ノ丁1273", time: "9:30", stay: 50, memo: "黒田官兵衛が築いた、日本三大水城の一つに数えられる城。" },
-        { name: "福澤諭吉旧居・福澤記念館", wikiTitle: "福澤諭吉旧居・福澤記念館", address: "中津市留守居町586", time: "10:50", stay: 40, memo: "一万円札の顔・福澤諭吉が幼少期を過ごした旧居と記念館。", transit: { mode: "walk", min: 15 }, fallbackLatLng: [33.5975, 131.1875] },
+        { name: "中津城", wikiTitle: "中津城", address: "中津市二ノ丁1273", time: "9:30", stay: 50, memo: "黒田官兵衛が築いた、日本三大水城の一つともいわれる城。" },
+        { name: "なかはく", wikiTitle: "", address: "中津市二ノ丁", time: "10:23", stay: 65, memo: "中津城の石垣側が総ガラス張りの中津市歴史博物館。", fallbackLatLng: [33.6053306, 131.1846067], transit: { mode: "walk", min: 3 } },
+        { name: "福澤諭吉旧居・福澤記念館", wikiTitle: "福澤諭吉旧居・福澤記念館", address: "中津市留守居町586", time: "11:36", stay: 80, memo: "一万円札の顔・福澤諭吉が幼少期を過ごした旧居と記念館。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [33.5975, 131.1875] },
+        { name: "大江医家史料館", wikiTitle: "", address: "中津市諸町906", time: "13:00", stay: 35, memo: "中津藩御殿医・大江家の旧宅。解体新書関連資料や薬草園。", fallbackLatLng: [33.6042364, 131.1920146], transit: { mode: "walk", min: 4 } },
+        { name: "寺町", wikiTitle: "", address: "中津市新博多町", time: "13:38", stay: 30, memo: "江戸期の町割りが残る、およそ12の寺院が並ぶ通り。", fallbackLatLng: [33.6029719, 131.189783], transit: { mode: "walk", min: 3 } },
+        { name: "自性寺", wikiTitle: "", address: "中津市島田本町", time: "14:20", stay: 40, memo: "奥平家の菩提寺。池大雅の書画を常設展示する「大雅堂」。", fallbackLatLng: [33.6029092, 131.1800359], transit: { mode: "walk", min: 12 } },
+        { name: "小幡記念図書館", wikiTitle: "", address: "中津市二ノ丁", time: "15:06", stay: 35, memo: "小幡篤次郎ゆかり、槇文彦設計の図書館建築。", fallbackLatLng: [33.6037428, 131.1844041], transit: { mode: "walk", min: 6 } },
+        { name: "村上医家史料館", wikiTitle: "", address: "中津市諸町1780", time: "15:44", stay: 60, memo: "中津藩御典医・村上家の史料館。蘭学と医学の歴史を紹介。", fallbackLatLng: [33.601901, 131.184969], transit: { mode: "walk", min: 3 } },
       ],
     ],
   },
@@ -292,7 +354,7 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "青の洞門", wikiTitle: "青の洞門", address: "中津市本耶馬渓町洞", time: "9:30", stay: 40, memo: "禅海和尚が30年かけて掘り抜いたと伝わる、菊池寛の小説でも有名なトンネル。" },
-        { name: "羅漢寺", wikiTitle: "羅漢寺_(中津市)", address: "中津市本耶馬渓町跡田1548", time: "10:40", stay: 60, memo: "断崖の岩肌に張り付くように建つ、五百羅漢で知られる古刹。", transit: { mode: "car", min: 15 } },
+        { name: "羅漢寺", wikiTitle: "羅漢寺_(中津市)(境内撮影禁止のため写真は見送り)", address: "中津市本耶馬渓町跡田1548", time: "10:40", stay: 60, memo: "断崖の岩肌に張り付くように建つ、五百羅漢で知られる古刹。", transit: { mode: "car", min: 15 } },
       ],
     ],
   },
@@ -342,14 +404,19 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館", "自然"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #254）
         { name: "宮崎県総合博物館", wikiTitle: "宮崎県総合博物館", address: "宮崎市神宮2丁目4-4", time: "9:30", stay: 60, memo: "宮崎の自然・歴史・民俗を幅広く紹介する総合博物館。" },
-        { name: "平和台公園", wikiTitle: "平和台公園", address: "宮崎市下北方町越ケ迫6146", time: "11:00", stay: 50, memo: "「平和の塔」がそびえる、南国の緑豊かな広大な公園。", transit: { mode: "car", min: 15 } },
+        { name: "宮崎神宮", wikiTitle: "宮崎神宮", address: "宮崎県宮崎市神宮2-4-1", time: "10:40", stay: 40, memo: "神武天皇をまつる、地元で「神武さま」と呼ばれる古社。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [31.938439, 131.430491] },
+        { name: "平和台公園", wikiTitle: "平和台公園", address: "宮崎市下北方町越ケ迫6146", time: "11:28", stay: 50, memo: "「平和の塔」がそびえる、南国の緑豊かな広大な公園。", transit: { mode: "car", min: 8 } },
+        { name: "宮崎県護国神社", wikiTitle: "宮崎県護国神社", address: "宮崎県宮崎市神宮2丁目", time: "12:23", stay: 40, memo: "戦没者をまつる神社。遺品館に軍服や手紙などを展示。", transit: { mode: "car", min: 5 }, fallbackLatLng: [31.937341, 131.421762] },
+        { name: "宮崎県立美術館", wikiTitle: "宮崎県立美術館", address: "宮崎県宮崎市船塚3-210", time: "13:09", stay: 90, memo: "続いて訪れるのは宮崎県立美術館です。宮崎県ゆかりの作家の作品を中心に、国内外の美術作品を収蔵・展示する美術館です。開放的な吹き抜けのロビーや、緑豊かな中庭を備え、ゆったりとした時間の中で作品と向き合えるのが魅力です。館内のカフェで昼食をとりながら、ひと休みするのもおすすめです。常設展のほか、多彩な企画展も開催されており、訪れるたびに新しい発見があります。芸術鑑賞のひとときを楽しみましょう。鑑賞を終えたら、車で宮崎科学技術館へ向かいましょう。", transit: { mode: "walk", min: 6 }, fallbackLatLng: [31.934262, 131.419177] },
+        { name: "宮崎科学技術館", wikiTitle: "宮崎科学技術館", address: "宮崎県宮崎市宮崎駅東1-2-2", time: "14:49", stay: 105, memo: "九州最大級のプラネタリウムと、アポロ月面着陸船の実物大模型。", transit: { mode: "car", min: 10 }, fallbackLatLng: [31.914456, 131.433813] },
       ],
     ],
   },
   {
     title: "宮崎神宮とフローランテ宮崎、緑と花に包まれる1泊2日",
-    description: "神武天皇を祀る宮崎神宮の鎮守の杜と、四季の花が咲き誇るフローランテ宮崎。青島や博物館とは違う、宮崎市内の緑と花を楽しむ1泊2日です。",
+    description: "神武天皇を祀る宮崎神宮の鎮守の杜と、四季の花が咲き誇るフローランテ宮崎を中心に、護国神社や総合文化公園、平和台公園、阿波岐原の神話ゆかりの神社、青島神社まで、宮崎市内外の緑と花、歴史をめぐる1泊2日です。",
     nights: 1,
     prefectureName: "宮崎県",
     areaNames: ["宮崎市内"],
@@ -357,10 +424,21 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["神社", "花見・桜"],
     days: [
       [
-        { name: "宮崎神宮", wikiTitle: "宮崎神宮", address: "宮崎市神宮2丁目4-1", time: "10:00", stay: 60, memo: "神武天皇を祀る、宮崎を代表する神社。初日は鎮守の杜をゆっくり歩く。" },
+        { name: "宮崎神宮", wikiTitle: "宮崎神宮", address: "宮崎市神宮2丁目4-1", time: "09:00", stay: 60, memo: "宮崎神宮は、日本の初代天皇と伝えられる神武天皇と、その父母である鵜葺草葺不合尊、玉依姫命をお祀りする神社です。社伝によれば、神武天皇の孫にあたる建磐龍命が、九州の長官に就任した際、祖父の遺徳をたたえてお祀りしたのが始まりとされ、その後、第10代崇神天皇や第12代景行天皇の時代にも社殿の造営が行われたと伝えられています。明治時代には、神武天皇の東征を記念する事業として大規模な改築が進められ、明治40年(1907)に現在の姿が完成しました。社名も、明治6年(1873)の「宮崎神社」、明治11年(1878)の「宮崎宮」を経て、大正2年(1913)に「神宮」の号を許され、現在の「宮崎神宮」となりました。長い参道と鎮守の杜に包まれた、荘厳な雰囲気です。静かに、敬意をもってお参りしましょう。" },
+        { name: "宮崎県総合博物館", wikiTitle: "宮崎県総合博物館", address: "宮崎市神宮2丁目4-4", time: "10:03", stay: 80, memo: "宮崎神宮からは歩いて3分ほどです。宮崎県総合博物館は、宮崎神宮の杜に隣接する県立の博物館です。昭和26年(1951)に宮崎県立博物館として開館し、昭和46年(1971)、自然史・歴史・民俗の3部門を統合した総合博物館として今の姿になりました。自然史展示室では宮崎の森や水辺の生き物を、歴史展示室では旧石器時代から現代までの暮らしを、民俗展示室では山・里・海の暮らしや祈り・祭りを紹介しています。敷地内の民家園には、昭和47年(1972)から53年(1978)にかけて、県内各地から移築された4棟の伝統的な民家が並び、当時の暮らしをしのぶことができます。", transit: { mode: "walk", min: 3 }, fallbackLatLng: [31.9400272, 131.4237708] },
+        { name: "宮崎県護国神社", wikiTitle: "宮崎県護国神社", address: "宮崎市神宮二丁目4-3", time: "11:28", stay: 30, memo: "宮崎県総合博物館からは徒歩5分ほどです。宮崎県護国神社は、宮崎神宮の境内西側の森に鎮座する神社です。昭和18年(1943)に創立の許可を得たものの、戦時中の資材不足などで建設が中断し、戦後の昭和29年(1954)、宮崎神宮の境内神社として改めて創建されました。宮崎県出身の戦没者を祀り、昭和47年(1972)からは専任の職員が置かれ、独立した運営が行われています。静かに、敬意をもってお参りしましょう。", transit: { mode: "walk", min: 5 } },
+        { name: "宮崎県総合文化公園", wikiTitle: "宮崎県総合文化公園", address: "宮崎市船塚3-210", time: "12:04", stay: 80, memo: "宮崎県護国神社からは徒歩6分ほどです。宮崎県総合文化公園は、東西450m・南北370mの敷地に、県立図書館や芸術劇場、県立美術館などが集まる文化施設エリアと、緑豊かな県民広場からなる公園です。6月ごろには見頃を迎える菖蒲園があり、フクロウの一種・アオバズクが飛来することでも知られています。園内や周辺には飲食店もあるので、ここで昼食をとりましょう。", transit: { mode: "walk", min: 6 } },
+        { name: "宮崎県立美術館", wikiTitle: "宮崎県立美術館", address: "宮崎市船塚3-210", time: "13:26", stay: 45, memo: "宮崎県総合文化公園からは徒歩2分ほどです。宮崎県立美術館は、平成6年(1994)に開館した美術館です。宮崎県出身の画家・瑛九の作品を専門に紹介する展示室を備えており、常設展では代表作を鑑賞することができます。企画展も随時開催されています。休館日は公式サイトで確かめてから訪れましょう。", transit: { mode: "walk", min: 2 } },
+        { name: "平和台公園", wikiTitle: "平和台公園", address: "宮崎市下北方町越ケ迫6146", time: "14:21", stay: 60, memo: "宮崎県立美術館からは、ここで車に乗り換えて10分ほどです。平和台公園は、標高60mの丘陵地に広がる、宮崎市街を一望できる公園です。園内の平和の塔は、紀元2600年を記念する事業として昭和15年(1940)に完成しました。戦後、GHQの指示で塔に掲げられていた文字や像が撤去されましたが、昭和37年(1962)と昭和40年(1965)にそれぞれ復元されています。昭和37年(1962)には、園内に約400体の埴輪のレプリカが並ぶ「はにわ園」も完成しました。昭和39年(1964)の東京オリンピックでは、聖火リレーの第2スタート地点にもなりました。", transit: { mode: "car", min: 10 } },
+        { name: "橘公園", wikiTitle: "橘公園 (宮崎市)", address: "宮崎市橘通西", time: "15:36", stay: 55, memo: "平和台公園からは車で15分ほどです。橘公園は、大淀川の左岸沿いに、およそ700mにわたって広がる公園です。昭和23年(1948)に開園し、フェニックスの並木と芝生が南国らしい雰囲気を演出しています。ノーベル賞作家・川端康成の小説『たまゆら』の舞台にもなりました。川沿いの散歩道を、のんびりと歩いてみましょう。 今夜は、この近くの宿に宿泊します。", transit: { mode: "car", min: 15 } },
       ],
       [
-        { name: "フローランテ宮崎", wikiTitle: "フローランテ宮崎", address: "宮崎市山崎町浜山414-16", time: "9:30", stay: 70, memo: "2日目は、四季折々の花々が楽しめる都市公園を散策。", fallbackLatLng: [31.9522, 131.4517] },
+        { name: "フローランテ宮崎", wikiTitle: "フローランテ宮崎", address: "宮崎市山崎町浜山414-16", time: "9:30", stay: 70, memo: "フローランテ宮崎は、「花のまちづくり」の拠点として整備された都市緑化植物園です。園内には、テーマの異なる庭園や広場が点在し、四季折々の花々が来園者を楽しませてくれます。春には色とりどりのチューリップなどが咲き誇り、秋には季節の花々が庭園を彩り、冬には光と花が織りなすイルミネーションが催されるなど、季節ごとに趣向を凝らしたイベントが開かれています。昨日参拝した宮崎神宮の鎮守の杜とはまた違う、色彩豊かな花の景色を、ゆったりと散策しましょう。", fallbackLatLng: [31.9522, 131.4517] },
+        { name: "江田神社", wikiTitle: "江田神社 (宮崎市)", address: "宮崎市阿波岐原町字産母127", time: "10:48", stay: 45, memo: "フローランテ宮崎からは車で8分ほどです。江田神社は、『古事記』『日本書紀』で、伊邪那岐尊が黄泉の国から帰った際に禊を行ったと伝えられる「阿波岐原」の地に鎮座する神社です。主祭神は伊邪那岐尊で、伊邪那美尊もあわせて祀られています。『延喜式』神名帳にも記載のある古社で、「御祓い発祥の地」とも呼ばれています。境内近くの「みそぎ池」は、伊邪那岐尊が禊を行った際、天照大神・月読尊・素盞鳴尊の三貴子が生まれたと伝えられる場所です。静かに、敬意をもってお参りしましょう。", transit: { mode: "car", min: 8 } },
+        { name: "住吉神社", wikiTitle: "住吉神社 (宮崎市)", address: "宮崎市塩路3082", time: "11:41", stay: 40, memo: "江田神社からは車で8分ほどです。住吉神社は、伊邪那岐尊の禊の際に生まれたとされる住吉三神(底筒男命・中筒男命・表筒男命)を祀る神社です。摂津(大阪)の住吉大社にあやかって「江田住吉神社」とも称され、古くから海の神として信仰されてきました。静かに、敬意をもってお参りしましょう。", transit: { mode: "car", min: 8 } },
+        { name: "県立阿波岐原森林公園", wikiTitle: "阿波岐原森林公園", address: "宮崎市塩路", time: "12:41", stay: 80, memo: "住吉神社からは車で20分ほどです。県立阿波岐原森林公園は、一ツ葉海岸沿いに広がる松林の中にある森林公園です。都市計画区域はおよそ391haにおよび、県が管理するパークウエイは全長4.2kmにわたって四季折々の草花で彩られています。周辺には飲食店も点在しているので、ここで昼食をとりましょう。", transit: { mode: "car", min: 20 } },
+        { name: "サンビーチ一ツ葉", wikiTitle: "サンビーチ一ツ葉", address: "宮崎市塩路", time: "14:09", stay: 40, memo: "阿波岐原森林公園からは徒歩8分ほどです。サンビーチ一ツ葉は、みやざき臨海公園内にある、宮崎県内で唯一とされる人工ビーチです。宮崎・日南海岸リゾート構想の一環として整備されました。遊泳できる期間や区域は季節によって決まっているので、事前に公式サイトで確かめましょう。白い砂浜と青い海を眺めながら、のんびりと海岸を歩いてみましょう。", transit: { mode: "walk", min: 8 } },
+        { name: "青島神社", wikiTitle: "青島神社", address: "宮崎市青島2丁目13-1", time: "15:19", stay: 75, memo: "サンビーチ一ツ葉からは車で30分ほどです。青島神社は、周囲1.5kmの青島全体を境内とする神社で、山幸彦(彦火火出見命)・豊玉姫命・塩筒大神をお祀りしています。社伝によれば、海神の宮から戻った彦火火出見命が青島に上陸して宮を営んだ跡に、神々を祀ったのが始まりと伝わります。島を取り巻く波状岩「鬼の洗濯板」でも知られていますが、波をかぶって濡れると滑りやすいので、足元に気をつけ、潮が満ちているときは近づかないようにしましょう。静かに、敬意をもってお参りしましょう。 参拝を終えたら、車で宮崎市街・宮崎空港方面へ戻りましょう。", transit: { mode: "car", min: 30 } },
       ],
     ],
   },

@@ -53,10 +53,21 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["城・史跡", "自然"],
     days: [
       [
-        { name: "北方文化博物館", wikiTitle: "北方文化博物館", address: "新潟市江南区沢海2丁目15-25", time: "10:00", stay: 90, memo: "「豪農の館」と称される、越後を代表する大地主・伊藤家の邸宅と大庭園。" },
+        { name: "北方文化博物館", wikiTitle: "北方文化博物館", address: "新潟市江南区沢海2丁目15-25", time: "9:00", stay: 90, memo: "「豪農の館」と称される、越後を代表する大地主・伊藤家の邸宅と大庭園。" },
+        { name: "新津鉄道資料館", wikiTitle: "新潟市新津鉄道資料館", address: "新潟県新潟市秋葉区新津東町2丁目5番6号", time: "10:40", stay: 60, memo: "鉄道の町・新津の歴史を伝える資料館。実物車両やミニSL乗車体験も。", transit: { mode: "car", min: 10 } },
+        { name: "古津八幡山遺跡", wikiTitle: "古津八幡山遺跡", address: "新潟県新潟市秋葉区古津", time: "11:52", stay: 60, memo: "県内最大級とされる円墳が復元された、国指定史跡。", transit: { mode: "car", min: 12 } },
+        { name: "新津美術館", wikiTitle: "新潟市新津美術館", address: "新潟県新潟市秋葉区蒲ヶ沢109番地1", time: "12:57", stay: 60, memo: "「花と遺跡のふるさと公園」内の美術館。近現代美術の企画展を開催。", transit: { mode: "car", min: 5 } },
+        { name: "新潟県立植物園", wikiTitle: "新潟県立植物園", address: "新潟県新潟市秋葉区金津186", time: "13:59", stay: 90, memo: "大温室「グリーンドーム」が見どころの植物園。", transit: { mode: "car", min: 2 } },
+        { name: "石油の世界館", wikiTitle: "石油の世界館", address: "新潟県新潟市秋葉区金津1172番地1", time: "15:33", stay: 60, memo: "新津油田の歴史を伝える資料館。国史跡「新津油田金津鉱場跡」に隣接。", transit: { mode: "car", min: 4 } },
       ],
       [
-        { name: "古町", wikiTitle: "古町_(新潟市)", address: "新潟市中央区古町通", time: "9:30", stay: 70, memo: "老舗料亭や商店が並ぶ、新潟の花街文化を今に伝える歴史ある通り。" },
+        { name: "白山神社", wikiTitle: "白山神社_(新潟市中央区一番堀通町)", address: "新潟県新潟市中央区一番堀通町1番地", time: "9:00", stay: 35, memo: "新潟總鎮守。古町・本町の町割りの起点にもなった古社。" },
+        { name: "古町", wikiTitle: "古町_(新潟市)", address: "新潟市中央区古町通", time: "9:48", stay: 90, memo: "老舗料亭や商店が並ぶ、新潟の花街文化を今に伝える歴史ある通り。", transit: { mode: "walk", min: 13 } },
+        { name: "旧齋藤家別邸", wikiTitle: "旧齋藤家別邸", address: "新潟県新潟市中央区西大畑町576番地", time: "11:26", stay: 60, memo: "新潟の豪商・齋藤家の迎賓館。国指定名勝の回遊式庭園が見どころ。", transit: { mode: "walk", min: 8 } },
+        { name: "砂丘館", wikiTitle: "砂丘館", address: "新潟県新潟市中央区西大畑町5218番地1", time: "12:31", stay: 45, memo: "旧日本銀行新潟支店長役宅。和風庭園も見どころ。", transit: { mode: "walk", min: 5 } },
+        { name: "新潟市美術館", wikiTitle: "新潟市美術館", address: "新潟県新潟市中央区西大畑町5191番地9", time: "13:22", stay: 85, memo: "前川國男設計の美術館。ルドンやピカソなど5000点超を収蔵。", transit: { mode: "walk", min: 6 } },
+        { name: "萬代橋", wikiTitle: "萬代橋", address: "新潟県新潟市中央区万代", time: "14:53", stay: 25, memo: "信濃川に架かる新潟市のシンボル。国指定重要文化財。", transit: { mode: "car", min: 6 } },
+        { name: "みなとぴあ", wikiTitle: "新潟市歴史博物館", address: "新潟県新潟市中央区柳島町2丁目10番地", time: "15:23", stay: 70, memo: "港町新潟の歴史を伝える博物館。旧新潟税関庁舎は国重要文化財。", transit: { mode: "car", min: 5 } },
       ],
     ],
   },
@@ -80,7 +91,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "たらい舟体験とトキの森公園、佐渡の自然と文化を楽しむプラン",
-    description: "佐渡名物のたらい舟に乗り、特別天然記念物トキの生態を観察できるトキの森公園を訪ねる。佐渡ならではの体験と自然を楽しむプランです。島内は路線バスの本数が少ないため、レンタカーでの移動がおすすめです。",
+    description: "佐渡島南部の小木港で乗るたらい舟体験から、船大工の集落・宿根木、砂金採り体験の西三川ゴールドパーク、特別天然記念物トキに出会えるトキの森公園、佐渡の歴史と伝説を伝える佐渡歴史伝説館まで。佐渡ならではの体験と自然、歴史を一日でめぐるプランです。島内は路線バスの本数が少ないため、レンタカーでの移動がおすすめです。",
     nights: 0,
     prefectureName: "新潟県",
     areaNames: ["佐渡島"],
@@ -88,8 +99,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["動物園・水族館", "自然"],
     days: [
       [
-        { name: "たらい舟（小木港）", wikiTitle: "たらい舟", address: "佐渡市小木町", time: "9:30", stay: 40, memo: "元々は海女の漁具だった、丸い桶の形をした佐渡名物の乗り物体験。", fallbackLatLng: [37.8092, 138.2497] },
-        { name: "トキの森公園", wikiTitle: "トキの森公園", address: "佐渡市新穂長畝383-2", time: "11:30", stay: 60, memo: "特別天然記念物トキの保護・繁殖施設。間近で生態を観察できる。", transit: { mode: "car", min: 40 }, fallbackLatLng: [38.0522, 138.4544] },
+        { name: "たらい舟（小木港）", wikiTitle: "たらい舟", address: "佐渡市小木町", time: "9:30", stay: 40, memo: "元々は海女の漁具だった、丸い桶の形をした佐渡名物の乗り物体験。", fallbackLatLng: [37.81466, 138.27958] },
+        { name: "宿根木集落", wikiTitle: "", address: "佐渡市宿根木", time: "10:20", stay: 50, memo: "重要伝統的建造物群保存地区。船大工と廻船業で栄えた町並み、三角家。", fallbackLatLng: [37.8091059, 138.2438636], transit: { mode: "car", min: 10 } },
+        { name: "佐渡西三川ゴールドパーク", wikiTitle: "", address: "佐渡市西三川835-1", time: "11:30", stay: 75, memo: "佐渡最古と伝わる西三川砂金山跡の体験型資料館。砂金採り体験。", fallbackLatLng: [37.8981166, 138.2963258], transit: { mode: "car", min: 20 } },
+        { name: "トキの森公園", wikiTitle: "トキの森公園", address: "佐渡市新穂長畝383-2", time: "13:35", stay: 50, memo: "特別天然記念物トキの保護・繁殖施設。間近で生態を観察できる。", transit: { mode: "car", min: 50 }, fallbackLatLng: [38.0372802, 138.4219455] },
+        { name: "佐渡歴史伝説館", wikiTitle: "", address: "佐渡市真野655", time: "14:59", stay: 55, memo: "順徳天皇・日蓮・世阿弥をテーマにした体感型ミュージアム。能舞台。", fallbackLatLng: [37.9546675, 138.3462313], transit: { mode: "car", min: 34 } },
+        { name: "妙宣寺", wikiTitle: "", address: "佐渡市阿仏坊29", time: "16:04", stay: 35, memo: "新潟県内に現存する唯一の五重塔(国重要文化財)がある日蓮宗寺院。", fallbackLatLng: [37.971361, 138.3725], transit: { mode: "car", min: 10 } },
       ],
     ],
   },
@@ -181,7 +196,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "ひがし茶屋街と近江町市場、金沢の花街とグルメを楽しむプラン",
-    description: "紅殻格子の町家が並ぶひがし茶屋街と、「金沢の台所」近江町市場。加賀百万石の風情とグルメ、両方を味わうプランです。",
+    description: "紅殻格子の町家が並ぶひがし茶屋街と、「金沢の台所」近江町市場でグルメを味わったあと、兼六園・金沢城公園・金沢21世紀美術館・尾山神社と、加賀百万石の城下町を巡るプランです。",
     nights: 0,
     prefectureName: "石川県",
     areaNames: ["金沢"],
@@ -190,7 +205,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "近江町市場", wikiTitle: "近江町市場", address: "金沢市上近江町50", time: "9:30", stay: 70, memo: "「金沢の台所」と呼ばれる、新鮮な海の幸が並ぶ市場で朝ごはん。" },
-        { name: "ひがし茶屋街", wikiTitle: "ひがし茶屋街", address: "金沢市東山1丁目", time: "11:10", stay: 80, memo: "紅殻格子の町家が並ぶ、金沢を代表する茶屋街。金箔スイーツも人気。", transit: { mode: "walk", min: 15 } },
+        { name: "ひがし茶屋街", wikiTitle: "ひがし茶屋街", address: "金沢市東山1丁目", time: "10:55", stay: 80, memo: "紅殻格子の町家が並ぶ、金沢を代表する茶屋街。金箔スイーツも人気。散策の途中で昼食をとりましょう。", transit: { mode: "walk", min: 15 } },
+        { name: "兼六園", wikiTitle: "兼六園", address: "金沢市兼六町1", time: "12:30", stay: 60, memo: "加賀藩主が長い歳月をかけて作り上げた大名庭園。日本三名園の一つ・国の特別名勝。", transit: { mode: "bus", min: 15 } },
+        { name: "金沢城公園", wikiTitle: "金沢城公園", address: "金沢市丸の内1-1", time: "13:38", stay: 60, memo: "加賀藩前田家の居城跡。菱櫓・五十間長屋・橋爪門続櫓(2001年復元)や石川門(重文)が見どころ。", transit: { mode: "walk", min: 8 } },
+        { name: "金沢21世紀美術館", wikiTitle: "金沢21世紀美術館", address: "金沢市広坂1丁目2-1", time: "14:48", stay: 60, memo: "SANAA設計の円形美術館。「スイミング・プール」など交流ゾーンの恒久展示が見どころ。", transit: { mode: "walk", min: 10 } },
+        { name: "尾山神社", wikiTitle: "尾山神社", address: "金沢市尾山町11-1", time: "15:58", stay: 45, memo: "前田利家を祀る神社。和漢洋折衷の神門(明治8年築、国指定重要文化財)が見どころ。参拝は静かに。帰りは香林坊・片町方面からバスやタクシーで金沢駅へ。", transit: { mode: "walk", min: 10 } },
       ],
     ],
   },
@@ -275,14 +294,19 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["お寺", "温泉"],
     days: [
       [
+        // 2026-09-29 しおりえ(制作補助) 「1日4か所以上・9時〜17時」対応で6スポットに拡充（docs/content/20260929-itinerary-4spots-9to16-checklist.md #253）
         { name: "那谷寺", wikiTitle: "那谷寺", address: "小松市那谷町ユ122", time: "9:30", stay: 70, memo: "奇岩遊仙境と呼ばれる岩山に建つ古刹。紅葉の名所としても有名。" },
-        { name: "山中温泉", wikiTitle: "山中温泉", address: "加賀市山中温泉", time: "11:20", stay: 60, memo: "松尾芭蕉が「おくのほそ道」で絶賛した、開湯1300年の名湯。", transit: { mode: "car", min: 20 } },
+        { name: "鶴仙渓遊歩道", wikiTitle: "鶴仙渓", address: "石川県加賀市山中温泉下谷町", time: "11:00", stay: 40, memo: "こおろぎ橋からあやとりはしを抜ける、大聖寺川沿いの渓谷散策路。", transit: { mode: "car", min: 20 }, fallbackLatLng: [36.2409882, 136.3716681] },
+        { name: "山中温泉", wikiTitle: "山中温泉", address: "加賀市山中温泉", time: "11:50", stay: 60, memo: "松尾芭蕉が「おくのほそ道」で絶賛した、開湯1300年の名湯。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [36.244179, 136.370316] },
+        { name: "山代温泉 古総湯", wikiTitle: "山代温泉", address: "石川県加賀市山代温泉18-128", time: "13:15", stay: 60, memo: "明治の総湯を復元した、体験型の温泉施設。", transit: { mode: "car", min: 25 }, fallbackLatLng: [36.2889656, 136.3614616] },
+        { name: "九谷焼窯跡展示館", wikiTitle: "九谷焼", address: "石川県加賀市山代温泉19-101-9", time: "14:23", stay: 60, memo: "国指定史跡・九谷磁器窯跡と、現存最古とされる登り窯。", transit: { mode: "walk", min: 8 }, fallbackLatLng: [36.293953, 136.366236] },
+        { name: "魯山人寓居跡 いろは草庵", wikiTitle: "魯山人寓居跡いろは草庵", address: "石川県加賀市山代温泉18-5", time: "15:33", stay: 62, memo: "北大路魯山人が約半年を過ごした寓居の跡。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [36.287525, 136.360641] },
       ],
     ],
   },
   {
     title: "山代温泉の古総湯と九谷焼、加賀の伝統文化を楽しむプラン",
-    description: "明治時代の総湯を再現した山代温泉の古総湯と、加賀を代表する伝統工芸・九谷焼。加賀温泉郷の文化的な魅力を楽しむプランです。",
+    description: "明治時代の総湯を再現した山代温泉の古総湯、魯山人ゆかりのいろは草庵、九谷焼の窯跡と美術館、大聖寺城跡や五百羅漢の全昌寺まで。加賀温泉郷の文化と歴史をじっくりとめぐるプランです。",
     nights: 0,
     prefectureName: "石川県",
     areaNames: ["加賀温泉郷"],
@@ -291,7 +315,13 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "山代温泉古総湯", wikiTitle: "山代温泉", address: "加賀市山代温泉18-128", time: "9:30", stay: 50, memo: "明治時代の総湯を、当時の姿そのままに再現した総湯施設。" },
-        { name: "九谷焼窯跡展示館", wikiTitle: "九谷焼", address: "加賀市山代温泉東山町4", time: "10:50", stay: 50, memo: "江戸時代の登り窯跡を保存・展示する、九谷焼の歴史を学べる施設。", transit: { mode: "walk", min: 15 } },
+        { name: "魯山人寓居跡 いろは草庵", wikiTitle: "", address: "加賀市山代温泉18-5", time: "10:23", stay: 35, memo: "若き北大路魯山人が半年ほど滞在した家を公開する施設。", fallbackLatLng: [36.287525, 136.360641], transit: { mode: "walk", min: 3 } },
+        { name: "九谷焼窯跡展示館", wikiTitle: "九谷焼", address: "加賀市山代温泉東山町4", time: "11:10", stay: 60, memo: "江戸時代の登り窯跡を保存・展示する、九谷焼の歴史を学べる施設。", transit: { mode: "walk", min: 12 } },
+        { name: "石川県九谷焼美術館", wikiTitle: "", address: "加賀市大聖寺地方町1-10-13", time: "12:45", stay: 60, memo: "古九谷から現代作家ものまで、九谷焼の名品を所蔵する美術館。", fallbackLatLng: [36.3028094, 136.3102176], transit: { mode: "bus", min: 35 } },
+        { name: "全昌寺", wikiTitle: "", address: "加賀市大聖寺東町3丁目", time: "13:48", stay: 30, memo: "松尾芭蕉ゆかりの寺。517体の極彩色の五百羅漢像。", fallbackLatLng: [36.3014719, 136.3085612], transit: { mode: "walk", min: 3 } },
+        { name: "江沼神社", wikiTitle: "", address: "加賀市大聖寺八間道55", time: "14:30", stay: 30, memo: "大聖寺藩祖・前田利治を祀る神社。国重要文化財「長流亭」。", fallbackLatLng: [36.3093148, 136.3076825], transit: { mode: "walk", min: 12 } },
+        { name: "深田久弥 山の文化館", wikiTitle: "", address: "加賀市大聖寺番場町18-2", time: "15:03", stay: 40, memo: "「日本百名山」の著者、深田久弥ゆかりの文学館。", fallbackLatLng: [36.310001, 136.309662], transit: { mode: "walk", min: 3 } },
+        { name: "錦城山公園", wikiTitle: "", address: "加賀市山岸", time: "15:50", stay: 60, memo: "大聖寺城の跡地に整備された、史跡指定の公園。", fallbackLatLng: [36.3078325, 136.3047047], transit: { mode: "walk", min: 7 } },
       ],
     ],
   },

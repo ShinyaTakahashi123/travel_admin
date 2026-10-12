@@ -336,9 +336,18 @@ async function insertItineraries(itineraries: HandmadeItinerary[], resolved: Map
                   memo: spot.memo,
                   stayDurationMin: spot.stay,
                   websiteUrl: r.verifiedUrl,
-                  transitMode: spot.transit?.mode ?? null,
-                  transitDurationMin: spot.transit?.min ?? null,
-                  transitLine: spot.transit?.line ?? null,
+                  transitLegs: spot.transit
+                    ? {
+                        create: [
+                          {
+                            orderNo: 1,
+                            transitMode: spot.transit.mode,
+                            transitDurationMin: spot.transit.min ?? null,
+                            transitLine: spot.transit.line ?? null,
+                          },
+                        ],
+                      }
+                    : undefined,
                   photos: photoUrl
                     ? {
                         create: [

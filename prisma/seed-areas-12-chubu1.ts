@@ -52,10 +52,20 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["美術館・博物館"],
     days: [
       [
-        { name: "富山県美術館", wikiTitle: "富山県美術館", address: "富山市木場町3-20", time: "10:00", stay: 80, memo: "「アートするとやま」を体感できる美術館。屋上庭園からの立山連峰の眺めも見事。" },
+        { name: "富山県美術館", wikiTitle: "富山県美術館", address: "富山市木場町3-20", time: "9:30", stay: 90, memo: "「アートするとやま」を体感できる美術館。屋上庭園からの立山連峰の眺めも見事。" },
+        { name: "富岩運河環水公園", wikiTitle: "富岩運河環水公園", address: "富山県富山市湊入船町", time: "11:05", stay: 60, memo: "運河沿いの公園。天門橋の展望塔と「世界一美しい」ともいわれるスタバが人気。", transit: { mode: "walk", min: 5 } },
+        { name: "富山市ガラス美術館", wikiTitle: "富山市ガラス美術館", address: "富山県富山市西町5番1号", time: "12:13", stay: 90, memo: "隈研吾ら設計、2015年竣工。ガラス・アルミ・石のファサードが特徴的な美術館。", transit: { mode: "car", min: 8 } },
+        { name: "富山城址公園", wikiTitle: "富山城", address: "富山県富山市丸の内", time: "13:53", stay: 75, memo: "神保長職が築いたと伝わる富山城の跡地。模擬天守の郷土博物館が見どころ。", transit: { mode: "walk", min: 10 } },
+        { name: "高志の国文学館", wikiTitle: "高志の国文学館", address: "富山県富山市舟橋南町2番22号", time: "15:12", stay: 80, memo: "旧県知事公館を改修した文学館。大伴家持ら富山ゆかりの文化人を紹介。", transit: { mode: "walk", min: 4 } },
       ],
       [
-        { name: "岩瀬大町通り", wikiTitle: "岩瀬_(富山市)", address: "富山市岩瀬大町", time: "9:30", stay: 90, memo: "北前船交易で栄えた廻船問屋の街並みが今も残る、レトロな港町エリア。", fallbackLatLng: [36.7828, 137.2317] },
+        { name: "中島閘門", wikiTitle: "中島閘門", address: "富山県富山市中島二丁目字浦川原割3番2", time: "9:00", stay: 60, memo: "パナマ運河方式の閘門。昭和9年(1934)完成、国指定重要文化財。" },
+        { name: "岩瀬カナル会館", wikiTitle: "岩瀬カナル会館", address: "富山県富山市岩瀬天神町48番地", time: "10:10", stay: 60, memo: "岩瀬運河沿いの観光施設。売店や展示ラウンジ、レストランがある。", transit: { mode: "car", min: 10 } },
+        { name: "岩瀬大町通り", wikiTitle: "岩瀬_(富山市)", address: "富山市岩瀬大町", time: "11:18", stay: 120, memo: "北前船交易で栄えた廻船問屋の街並みが今も残る、レトロな港町エリア。", transit: { mode: "walk", min: 8 } },
+        { name: "岩瀬諏訪神社", wikiTitle: "岩瀬曳山車祭", address: "富山県富山市岩瀬", time: "13:23", stay: 30, memo: "岩瀬曳山車祭の中心となる神社。1659年、諏訪神社の分霊を勧請。", transit: { mode: "walk", min: 5 } },
+        { name: "馬場家", wikiTitle: "旧馬場家住宅", address: "富山県富山市東岩瀬町107-2", time: "13:58", stay: 55, memo: "岩瀬五大家筆頭格の廻船問屋。トオリニワや大広間「オイ」が見どころ。", transit: { mode: "walk", min: 5 } },
+        { name: "富山港展望台", wikiTitle: "富山港展望台", address: "富山県富山市東岩瀬町海岸通り5", time: "14:56", stay: 30, memo: "高さ24.85mの展望台。富山港・岩瀬の町並みと立山連峰を一望。", transit: { mode: "walk", min: 3 } },
+        { name: "岩瀬浜", wikiTitle: "富山港線", address: "富山県富山市岩瀬古志町", time: "15:39", stay: 55, memo: "ポートラム終点そばの海岸。富山湾越しに立山連峰を望む。", transit: { mode: "walk", min: 13 } },
       ],
     ],
   },
@@ -79,7 +89,7 @@ const ITINERARIES: HandmadeItinerary[] = [
   },
   {
     title: "雪の大谷ウォークと黒部ダム、迫力の大自然を体感するプラン",
-    description: "春の風物詩・雪の大谷の大雪壁を歩き、日本一の高さを誇る黒部ダムの大観光放水を見る。立山黒部の雄大なスケールを体感するプランです（雪の大谷は例年4〜6月限定）。",
+    description: "春の風物詩・雪の大谷の大雪壁を歩き、日本一の高さとされる黒部ダムを訪ねる。立山黒部の雄大なスケールを体感するプランです（雪の大谷は例年4月中旬〜6月下旬限定。黒部ダムの観光放水は例年6月下旬〜10月中旬で、雪の大谷とは時期が異なります）。",
     nights: 0,
     prefectureName: "富山県",
     areaNames: ["立山黒部"],
@@ -87,8 +97,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["絶景・フォトスポット", "自然"],
     days: [
       [
-        { name: "雪の大谷", wikiTitle: "雪の大谷", address: "中新川郡立山町芦峅寺", time: "10:00", stay: 40, memo: "高さ最大20mにもなる、除雪でできた雪の壁を歩ける春の絶景（例年4〜6月限定）。", fallbackLatLng: [36.5719, 137.6011] },
-        { name: "黒部ダム", wikiTitle: "黒部ダム", address: "中新川郡立山町芦峅寺", time: "12:30", stay: 60, memo: "日本一の高さを誇るアーチ式ダム。夏季は大迫力の観光放水も見られる。", transit: { mode: "bus", min: 60, line: "立山黒部アルペンルート" }, fallbackLatLng: [36.5658, 137.6486] },
+        { name: "美女平", wikiTitle: "美女平", address: "中新川郡立山町芦峅寺", time: "9:30", stay: 70, memo: "電鉄富山駅から立山線でおよそ1時間の立山駅から、ケーブルカーでおよそ7分。美女平自然探勝路の内回りコース(およそ2km、公式1時間)、森林浴の森100選のブナ・タテヤマスギ林。", fallbackLatLng: [36.5833454, 137.4586143] },
+        { name: "室堂", wikiTitle: "室堂", address: "中新川郡立山町芦峅寺", time: "11:30", stay: 130, memo: "高さ最大20mにもなる、除雪でできた雪の壁を歩ける春の絶景（例年4月中旬〜6月下旬限定）。みくりが池・地獄谷(火山ガスで立入規制あり)も。食事処で昼食を。", transit: { mode: "bus", min: 50, line: "立山黒部アルペンルート" }, fallbackLatLng: [36.5719, 137.6011] },
+        { name: "大観峰", wikiTitle: "大観峰", address: "中新川郡立山町芦峅寺", time: "13:50", stay: 20, memo: "標高2,316m、黒部湖と後立山連峰を望む展望スポット。", transit: { mode: "bus", min: 10, line: "立山黒部アルペンルート" }, fallbackLatLng: [36.5698087, 137.6316437] },
+        { name: "黒部平", wikiTitle: "黒部平", address: "中新川郡立山町芦峅寺", time: "14:17", stay: 20, memo: "高山植物約100種が楽しめる黒部平庭園。黒部湖と立山連峰を一望。", transit: { mode: "other", min: 7 }, fallbackLatLng: [36.5671451, 137.6501481] },
+        { name: "黒部ダム", wikiTitle: "黒部ダム", address: "中新川郡立山町芦峅寺", time: "15:00", stay: 95, memo: "日本一の高さとされるアーチ式ダム。夏季は迫力の観光放水も見られる。帰りは関電トンネル電気バスで扇沢へ抜け、信濃大町駅から帰路につく片道ルート。", transit: { mode: "other", min: 23 }, fallbackLatLng: [36.5658, 137.6486] },
       ],
     ],
   },
@@ -179,8 +192,8 @@ const ITINERARIES: HandmadeItinerary[] = [
     ],
   },
   {
-    title: "山梨県立美術館でミレーの「種をまく人」を鑑賞する、アート日帰りプラン",
-    description: "ミレーの「種をまく人」を所蔵することで知られる山梨県立美術館。バルビゾン派の絵画とともに、静かな芸術鑑賞を楽しむプランです。",
+    title: "山梨県立美術館とミレー、甲府城跡や武田神社をめぐるアート日帰りプラン",
+    description: "ミレーの「種をまく人」を所蔵する山梨県立美術館と隣接する山梨県立文学館、甲府城跡の舞鶴城公園、藤村式建築の藤村記念館、武田信玄を祀る武田神社まで。アートと歴史にふれる日帰りプランです。",
     nights: 0,
     prefectureName: "山梨県",
     areaNames: ["甲府"],
@@ -189,6 +202,12 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "山梨県立美術館", wikiTitle: "山梨県立美術館", address: "甲府市貢川1丁目4-27", time: "9:30", stay: 90, memo: "ミレーの「種をまく人」をはじめ、バルビゾン派の絵画コレクションで有名な美術館。" },
+        { name: "山梨県立文学館", wikiTitle: "", address: "甲府市貢川1丁目5-35", time: "11:03", stay: 60, memo: "美術館と同じ芸術の森公園内。樋口一葉ら山梨ゆかりの文学者の資料。", fallbackLatLng: [35.6601736, 138.5393353], transit: { mode: "walk", min: 3 } },
+        { name: "舞鶴城公園", wikiTitle: "", address: "甲府市丸の内1丁目", time: "12:23", stay: 90, memo: "日本百名城の一つ、甲府城の城跡を開放した公園。", fallbackLatLng: [35.6651191, 138.5713285], transit: { mode: "bus", min: 20 } },
+        { name: "藤村記念館", wikiTitle: "", address: "甲府市北口2丁目31", time: "13:58", stay: 30, memo: "国重要文化財、明治の擬洋風建築「藤村式建築」の旧睦沢学校校舎。", fallbackLatLng: [35.6678137, 138.5700537], transit: { mode: "walk", min: 5 } },
+        { name: "信玄ミュージアム", wikiTitle: "", address: "甲府市大手3丁目1-14", time: "14:38", stay: 45, memo: "国史跡・武田氏館跡を紹介するガイダンス施設。武田神社に隣接。", fallbackLatLng: [35.6852534, 138.5771355], transit: { mode: "bus", min: 10 } },
+        { name: "武田神社", wikiTitle: "", address: "甲府市古府中町2611", time: "15:26", stay: 45, memo: "躑躅ヶ崎館跡に鎮座する、武田信玄を祀る神社。", fallbackLatLng: [35.6867034, 138.5773899], transit: { mode: "walk", min: 3 } },
+        { name: "大泉寺", wikiTitle: "", address: "甲府市古府中町5015", time: "16:25", stay: 20, memo: "武田信虎の菩提寺。信虎・信玄・勝頼3代の肖像を祀る霊廟。", fallbackLatLng: [35.6769967, 138.580891], transit: { mode: "walk", min: 14 } },
       ],
     ],
   },
@@ -202,10 +221,21 @@ const ITINERARIES: HandmadeItinerary[] = [
     purposeNames: ["お寺", "城・史跡"],
     days: [
       [
-        { name: "甲斐善光寺", wikiTitle: "甲斐善光寺", address: "甲府市善光寺3丁目36-1", time: "10:00", stay: 50, memo: "武田信玄が信濃善光寺の焼失を恐れて建立した、東日本屈指の大伽藍。" },
+        { name: "甲斐善光寺", wikiTitle: "甲斐善光寺", address: "甲府市善光寺3丁目36-1", time: "9:00", stay: 60, memo: "武田信玄が信濃善光寺の焼失を恐れて建立した、東日本屈指の大伽藍。本堂下の「お戒壇めぐり」も見どころ。" },
+        { name: "酒折宮", wikiTitle: "酒折宮", address: "山梨県甲府市酒折3-1-13", time: "10:03", stay: 45, memo: "日本武尊の東征の行宮と伝わる、連歌発祥の地とされる古社。", transit: { mode: "car", min: 3 } },
+        { name: "舞鶴城公園", wikiTitle: "甲府城", address: "山梨県甲府市丸の内1-5-4", time: "10:55", stay: 60, memo: "甲府城跡の公園。稲荷櫓・鉄門など復元建物が見どころ。", transit: { mode: "car", min: 7 } },
+        { name: "山梨県立美術館", wikiTitle: "山梨県立美術館", address: "山梨県甲府市貢川1丁目4番27号", time: "12:03", stay: 100, memo: "ミレーの「種をまく人」をはじめ、バルビゾン派の絵画コレクションで有名な美術館。", transit: { mode: "car", min: 8 } },
+        { name: "山梨県立文学館", wikiTitle: "山梨県立文学館", address: "山梨県甲府市貢川1丁目5番35号", time: "13:46", stay: 50, memo: "美術館に隣接。芥川龍之介・飯田蛇笏のコレクションが中心。", transit: { mode: "walk", min: 3 } },
+        { name: "山梨県立考古博物館", wikiTitle: "山梨県立考古博物館", address: "山梨県甲府市下向山町1271", time: "14:53", stay: 100, memo: "曽根丘陵公園内の博物館。一の沢遺跡出土品(重要文化財)、隣接する甲斐銚子塚古墳(169m)も見どころ。", transit: { mode: "car", min: 17 }, fallbackLatLng: [35.5942852, 138.5831286] },
       ],
       [
-        { name: "藤村記念館", wikiTitle: "藤村記念館_(山梨県)", address: "甲府市北口2丁目14-1", time: "9:30", stay: 40, memo: "明治初期の擬洋風建築。旧睦沢学校校舎を移築した、山梨近代化の象徴。", fallbackLatLng: [35.6675, 138.5686] },
+        { name: "藤村記念館", wikiTitle: "藤村記念館_(山梨県)", address: "甲府市北口2丁目14-1", time: "9:00", stay: 50, memo: "明治初期の擬洋風建築。旧睦沢学校校舎を移築した、山梨近代化の象徴。", fallbackLatLng: [35.6675, 138.5686] },
+        { name: "甲州夢小路", wikiTitle: "甲州夢小路", address: "山梨県甲府市丸の内1丁目1-22", time: "9:52", stay: 95, memo: "城下町を再現した商業施設。「時の鐘」がシンボル。昼食を含む。お酒は20歳から、運転する人は飲酒不可。", transit: { mode: "walk", min: 2 } },
+        { name: "大泉寺", wikiTitle: "大泉寺_(甲府市)", address: "山梨県甲府市古府中町5015", time: "11:32", stay: 55, memo: "武田信虎の菩提寺。富士見池、信虎像などの重要文化財。", transit: { mode: "car", min: 5 } },
+        { name: "信玄ミュージアム", wikiTitle: "甲府市武田氏館跡歴史館", address: "山梨県甲府市大手3丁目1-14", time: "12:31", stay: 60, memo: "武田氏館跡歴史館。旧堀田古城園(登録有形文化財)も敷地内に。", transit: { mode: "car", min: 4 } },
+        { name: "武田神社", wikiTitle: "武田神社", address: "山梨県甲府市古府中町2611", time: "13:34", stay: 40, memo: "躑躅ヶ崎館跡に立つ、武田信玄を祀る神社。宝物殿も見どころ。例祭は春。", transit: { mode: "walk", min: 3 } },
+        { name: "積翠寺", wikiTitle: "積翠寺", address: "山梨県甲府市上積翠寺町984", time: "14:22", stay: 35, memo: "武田信玄公生誕の地と伝わる寺。産湯の井戸・産湯天神が残る。", transit: { mode: "car", min: 8 }, fallbackLatLng: [35.702633, 138.591904] },
+        { name: "要害山", wikiTitle: "要害山城", address: "山梨県甲府市上積翠寺町", time: "15:00", stay: 90, memo: "武田氏の詰城跡(国史跡)。信玄公生誕の地と伝わる。登山口から山頂まで徒歩35分ほど。", transit: { mode: "car", min: 3 }, fallbackLatLng: [35.7030748, 138.5985378] },
       ],
     ],
   },
@@ -324,7 +354,11 @@ const ITINERARIES: HandmadeItinerary[] = [
     days: [
       [
         { name: "名古屋城", wikiTitle: "名古屋城", address: "名古屋市中区本丸1-1", time: "9:30", stay: 100, memo: "金の鯱鉾で知られる、徳川家康が築いた尾張徳川家の居城。" },
-        { name: "徳川美術館", wikiTitle: "徳川美術館", address: "名古屋市東区徳川町1017", time: "11:50", stay: 60, memo: "尾張徳川家伝来の大名道具を展示する、国内屈指の大名道具コレクション。", transit: { mode: "car", min: 15 } },
+        { name: "名古屋市市政資料館", wikiTitle: "名古屋市市政資料館", address: "名古屋市東区白壁1丁目3番", time: "11:24", stay: 35, memo: "旧名古屋控訴院の重要文化財建築、文化のみちの起点。", transit: { mode: "walk", min: 14 }, fallbackLatLng: [35.1806657, 136.9095551] },
+        { name: "文化のみち二葉館", wikiTitle: "文化のみち二葉館", address: "名古屋市東区橦木町3丁目23番地", time: "12:10", stay: 70, memo: "川上貞奴が暮らした和洋折衷の邸宅を復元。見学後、このあたりで昼食を。", transit: { mode: "walk", min: 11 }, fallbackLatLng: [35.1804255, 136.9187346] },
+        { name: "建中寺", wikiTitle: "建中寺", address: "名古屋市東区筒井1丁目7番57号", time: "13:30", stay: 30, memo: "尾張徳川家の菩提寺。", transit: { mode: "walk", min: 10 }, fallbackLatLng: [35.1792303, 136.9269256] },
+        { name: "徳川美術館", wikiTitle: "徳川美術館", address: "名古屋市東区徳川町1017", time: "14:10", stay: 60, memo: "尾張徳川家伝来の大名道具を展示する、国内屈指の大名道具コレクション。", transit: { mode: "walk", min: 10 } },
+        { name: "徳川園", wikiTitle: "徳川園", address: "名古屋市東区徳川町1001", time: "15:12", stay: 90, memo: "徳川美術館のすぐ隣、名古屋市営の池泉回遊式大名庭園。", transit: { mode: "walk", min: 2 }, fallbackLatLng: [35.1847742, 136.9329354] },
       ],
     ],
   },

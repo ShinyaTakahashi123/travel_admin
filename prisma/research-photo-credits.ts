@@ -20,6 +20,7 @@ import fs from "fs";
 import path from "path";
 import sharp from "sharp";
 import { prisma } from "../src/lib/prisma";
+import { cleanAuthorName } from "./lib/pilot-gen";
 
 const UA = "tabishiori-photo-credits-research/1.0 (contact: st.83.53.abcd@gmail.com)";
 const PRISMA_DIR = __dirname;
@@ -228,7 +229,9 @@ async function main() {
       continue;
     }
     const meta = ii.extmetadata ?? {};
-    const author = stripHtml(meta.Artist?.value)?.slice(0, 100);
+    // 2026-09-30 企画運営の指摘(法務の気づき、#276)。pilot-gen.tsと同じcleanAuthorNameで
+    // 「photo: 」「(talk)」「Taken with ...」等の定型句を取り除いてから記録する
+    const author = cleanAuthorName(stripHtml(meta.Artist?.value))?.slice(0, 100);
     const license = meta.LicenseShortName?.value as string | undefined;
     const licenseUrl = meta.LicenseUrl?.value as string | undefined;
     const sourceUrl = ii.descriptionurl as string | undefined;
