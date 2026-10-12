@@ -142,7 +142,8 @@ export default async function PlannerAccountDetailPage({
 
         <div className="bg-card border border-border rounded-2xl p-5 px-5.5 flex-[1.4]">
           <div className="font-black text-base mb-3.5">投稿したしおり</div>
-          <table className="w-full border-collapse">
+          <div className="overflow-x-auto">
+          <table className="w-full border-collapse min-w-[480px]">
             <thead>
               <tr>
                 {["タイトル", "エリア", "閲覧数", "ステータス"].map((h) => (
@@ -179,6 +180,7 @@ export default async function PlannerAccountDetailPage({
               })}
             </tbody>
           </table>
+          </div>
         </div>
       </div>
     </div>

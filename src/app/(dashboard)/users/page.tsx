@@ -80,7 +80,8 @@ export default async function UserManagementPage({
       </div>
 
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
-        <table className="w-full border-collapse">
+        <div className="overflow-x-auto">
+        <table className="w-full border-collapse min-w-[920px]">
           <thead>
             <tr>
               {["ID", "名前", "メールアドレス", "登録日", "お気に入り数", "会員種別", "ステータス", ""].map((h) => (
@@ -131,6 +132,7 @@ export default async function UserManagementPage({
             })}
           </tbody>
         </table>
+        </div>
       </div>
       <Pagination basePath="/users" searchParams={{ plan, q }} {...pageInfo} />
     </div>

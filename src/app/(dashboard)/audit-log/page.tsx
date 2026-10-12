@@ -8,6 +8,14 @@ import { Pagination } from "@/components/ui/pagination";
 
 const TARGET_TYPES = ["itinerary", "user_account", "planner_account", "admin", "report", "inquiry"];
 
+// URLのfrom/toに日付として読めない値(手で書き換えた不正な値)が入っていても
+// 500エラーにせず、その値は無視する(企画運営2026-09-28指摘)
+function parseDateParam(value: string | undefined, time: "00:00:00" | "23:59:59"): Date | undefined {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return undefined;
+  const date = new Date(`${value}T${time}+09:00`);
+  return Number.isNaN(date.getTime()) ? undefined : date;
+}
+
 function targetHref(targetType: string, targetId: string): string | null {
   switch (targetType) {
     case "itinerary":
@@ -42,8 +50,8 @@ export default async function AuditLogPage({
     action: action || undefined,
     targetType: targetType || undefined,
     createdAt: {
-      gte: from ? new Date(`${from}T00:00:00+09:00`) : undefined,
-      lte: to ? new Date(`${to}T23:59:59+09:00`) : undefined,
+      gte: parseDateParam(from, "00:00:00"),
+      lte: parseDateParam(to, "23:59:59"),
     },
   };
   const totalCount = await prisma.adminAuditLog.count({ where });
@@ -153,7 +161,8 @@ export default async function AuditLogPage({
       </form>
 
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
-        <table className="w-full border-collapse">
+        <div className="overflow-x-auto">
+        <table className="w-full border-collapse min-w-[720px]">
           <thead>
             <tr className="bg-muted">
               {["日時", "管理者", "操作", "対象"].map((h) => (
@@ -197,6 +206,7 @@ export default async function AuditLogPage({
             })}
           </tbody>
         </table>
+        </div>
       </div>
       <Pagination basePath="/audit-log" searchParams={{ action, targetType, from, to }} {...pageInfo} />
     </div>

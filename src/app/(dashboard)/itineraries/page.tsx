@@ -102,7 +102,8 @@ export default async function ItineraryManagementPage({
       </div>
 
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
-        <table className="w-full border-collapse">
+        <div className="overflow-x-auto">
+        <table className="w-full border-collapse min-w-[880px]">
           <thead>
             <tr>
               {["ID", "タイトル", "投稿者", "エリア", "公開日", "閲覧数", "ステータス", ""].map((h) => (
@@ -158,6 +159,7 @@ export default async function ItineraryManagementPage({
             )}
           </tbody>
         </table>
+        </div>
       </div>
       <Pagination basePath="/itineraries" searchParams={{ status, q }} {...pageInfo} />
     </div>
