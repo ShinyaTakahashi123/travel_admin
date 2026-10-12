@@ -104,6 +104,9 @@ export function cleanAuthorName(s: string | undefined): string | undefined {
     .replace(/^(ja:)?User:/i, "")
     .replace(/^日:/, "")
     .replace(/^日本語版ウィキペディアの(.+)さん$/, "$1")
+    // 2026-10-12 写真の追加(7133c8fe)で発見。「〇〇 at Japanese Wikipedia」のような、
+    // どのウィキメディア系サイトの利用者かを示す定型句の末尾
+    .replace(/\s+at\s+(Japanese\s+)?Wikipedia$/i, "")
     .replace(/\s{2,}/g, " ")
     .trim() || undefined;
 }
