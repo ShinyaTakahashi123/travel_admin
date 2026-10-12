@@ -93,6 +93,8 @@ function stripHtml(s: string | undefined): string | undefined {
 export function cleanAuthorName(s: string | undefined): string | undefined {
   if (!s) return s;
   return s
+    // 2026-10-12 写真の追加(ca4cf898)で発見。MediaWikiが作者欄を自動推定したときの定型句
+    .replace(/^No machine-readable author provided\.\s*(.+?)\s+assumed\s*\(based on copyright claims\)\.?$/i, "$1")
     .replace(/^photo:\s*/i, "")
     // 2026-09-30 企画運営の指摘(法務の気づき)で「(talk)」だけでなく「(talk · contribs)」
     // 「(トーク・投稿記録)」のようにカッコ内に他の語が続く形も拾うよう広げた
