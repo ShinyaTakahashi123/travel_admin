@@ -27,7 +27,6 @@ const { PrismaPg } = require("@prisma/adapter-pg");
 const fs = require("fs");
 
 const COMMIT = process.argv.includes("--commit");
-const DEV_HOST_PREFIX = "ep-wispy-queen-"; // このworktreeの開発用DBのホスト名の一部
 
 const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
 
@@ -35,9 +34,23 @@ const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.e
   const host = new URL(process.env.DATABASE_URL).host;
   console.log("[接続先チェック] host:", host);
 
-  if (COMMIT && !host.startsWith(DEV_HOST_PREFIX)) {
-    console.error(`[中止] --commit は開発用DB(${DEV_HOST_PREFIX}...)以外では実行できないようにしています。本番への一括登録は、ユーザーの了承とバックアップ確認のあとで、別途はっきり判断してから行ってください。`);
+  // 接続先の確かめ方は scripts/assert-db-target.cjs と同じ考え方にそろえた(2026-10-12):
+  // ホスト名を数え上げて止めるのではなく、「開発用として登録済み」か「npm run prod --の
+  // 入口を通って明示的にSHIORIE_TARGET=prodが付いている」かだけを許可する(許可リスト方式)。
+  // これで、npm run prod -- node prisma/register-place-master.cjs --commit という
+  // 決まった入口からなら、本番でも--commitできるようにした(仕様書4-5節。それでも実際の
+  // 本番への一括登録は、ユーザーの了承とバックアップ確認のあとで、別途はっきり判断してから行う)
+  const isProd = process.env.SHIORIE_TARGET === "prod";
+  const isKnownDev = process.env.SHIORIE_DEV_DB_HOST && host === process.env.SHIORIE_DEV_DB_HOST;
+  if (COMMIT && !isProd && !isKnownDev) {
+    console.error(
+      "[中止] --commit は、開発用として登録されたDB、または npm run prod -- の入口(SHIORIE_TARGET=prod)からしか実行できません。" +
+        "本番への一括登録は、ユーザーの了承とバックアップ確認のあとで、別途はっきり判断してから行ってください。"
+    );
     process.exit(1);
+  }
+  if (COMMIT && isProd) {
+    console.log("[接続先] 本番へ書きかえます。ユーザーの了承とバックアップ確認が済んでいることを確認してください。");
   }
 
   const { placeCandidates } = JSON.parse(fs.readFileSync("prisma/_temp-master-candidates.json", "utf8"));
