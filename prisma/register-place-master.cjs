@@ -13,6 +13,11 @@
  *   確認モード: node prisma/register-place-master.cjs
  *   登録(開発DBのみ): node prisma/register-place-master.cjs --commit
  *
+ * 【2026-10-12追記】企画運営の指示により、写真は人の目での確認(法務の決め方)が終わってから
+ * 別途まとめて足す運用に変更。登録時に --no-photos を付けると、写真欄を空のまま登録する
+ * (名前・住所・位置・種類・滞在の目安・公式サイトURL・別名のみ)。写真は確認が済んだものから
+ * 100件ずつ、別のスクリプトで追加する想定。
+ *
  * 【2026-09-28追記】知覧特攻平和会館(id 8bb94ac7-2e72-4749-85bd-838fa2457ec7)、
  * 対馬丸記念館(id baa46908-2f4e-4333-8081-fe7ffd973272)を is_memorial に追加
  * (ユーザー了承 12:5x・14:3x)。開発用DBの該当行はどちらも直接UPDATE済み。
@@ -27,6 +32,9 @@ const { PrismaPg } = require("@prisma/adapter-pg");
 const fs = require("fs");
 
 const COMMIT = process.argv.includes("--commit");
+const NO_PHOTOS = process.argv.includes("--no-photos");
+// 慰霊の場所の範囲は、ユーザーの答え待ち(2026-10-12)。答えが出るまでは印を付けずに登録する
+const NO_MEMORIAL = process.argv.includes("--no-memorial");
 
 const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
 
@@ -55,14 +63,14 @@ const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.e
 
   const { placeCandidates } = JSON.parse(fs.readFileSync("prisma/_temp-master-candidates.json", "utf8"));
   console.log(COMMIT ? "=== 登録モード ===" : "=== 確認モード（書き込みなし） ===");
-  console.log(`候補 ${placeCandidates.length} 件(要確認28件は対象外)\n`);
+  console.log(`候補 ${placeCandidates.length} 件${NO_PHOTOS ? "（写真は空のまま登録。あとで別途追加）" : ""}\n`);
 
   const prefectures = await p.area.findMany({ where: { level: "prefecture" }, select: { id: true, name: true } });
   const prefMap = new Map(prefectures.map((a) => [a.name, a.id]));
 
   let created = 0, skippedExisting = 0, prefNotFound = 0;
   let spotLinksResolved = 0, spotLinksNotFound = 0;
-  let photosAttached = 0;
+  let photosAttached = 0, memorialSkipped = 0;
 
   for (const c of placeCandidates) {
     const prefectureAreaId = prefMap.get(c.prefecture) || null;
@@ -74,10 +82,13 @@ const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.e
       continue;
     }
 
-    const photo = c.photos[0] || null;
+    const photo = NO_PHOTOS ? null : c.photos[0] || null;
+    const isMemorial = NO_MEMORIAL ? false : c.isMemorial;
+    if (NO_MEMORIAL && c.isMemorial) memorialSkipped++;
 
     if (!COMMIT) {
       created++;
+      if (photo) photosAttached++;
       continue;
     }
 
@@ -90,7 +101,7 @@ const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.e
         prefectureAreaId,
         category: c.category,
         isWideArea: c.isWideArea,
-        isMemorial: c.isMemorial,
+        isMemorial,
         stayDurationMin: c.stayDurationMin,
         websiteUrl: c.websiteUrl,
         photoUrl: photo ? photo.url : null,
@@ -123,7 +134,8 @@ const p = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.e
   }
 
   console.log(`作成: ${created} 件 / 既存のためスキップ: ${skippedExisting} 件 / 都道府県が見つからず: ${prefNotFound} 件`);
-  console.log(`写真を付けた: ${photosAttached} 件`);
+  console.log(`写真を付けた: ${photosAttached} 件${NO_PHOTOS ? "(--no-photosのため常に0。あとで別途追加)" : ""}`);
+  if (NO_MEMORIAL) console.log(`慰霊の印を付けなかった(本来は対象): ${memorialSkipped} 件(ユーザーの答え待ちのため)`);
   if (COMMIT) {
     console.log(`スポットのplace_master_idを更新できた: ${spotLinksResolved} 件 / このDBに元のスポットが無く更新できなかった: ${spotLinksNotFound} 件`);
     console.log("(開発用DBは9/27時点の写しのため、本番の直近24本のしおりのスポットは元々存在せず、更新できなくて正常です)");
