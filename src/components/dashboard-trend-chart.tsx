@@ -26,6 +26,26 @@ function formatDiff(diff: number): { text: string; color?: string } {
   };
 }
 
+// 最多・最少のラベルが、グラフの左右の端で切れたり、点・線に重なったりしないようにする位置計算。
+// 左右: 端に近い点は中央揃え(middle)だと文字の半分がviewBoxの外にはみ出て切れるため、
+// 端では start/end 揃えにして内側へ寄せる。上下: 点の上下どちらか空いているほうに出す
+// (企画運営指摘 2026-10-14)
+function extremeLabelAnchor(px: number): "start" | "middle" | "end" {
+  if (px < 40) return "start";
+  if (px > W - 40) return "end";
+  return "middle";
+}
+function extremeLabelX(px: number, anchor: "start" | "middle" | "end"): number {
+  if (anchor === "start") return Math.max(px, 2);
+  if (anchor === "end") return Math.min(px, W - 2);
+  return px;
+}
+function extremeLabelY(py: number): number {
+  const roomAbove = py;
+  const roomBelow = H - py;
+  return roomAbove >= roomBelow ? Math.max(py - 8, 9) : Math.min(py + 16, H - 2);
+}
+
 export function TrendCard({
   label,
   value,
@@ -182,11 +202,12 @@ export function TrendCard({
               )}
               {showExtremes && (
                 <>
-                  {/* 点・線と重なっても読めるよう、文字の外側に白い縁取り(halo)を付ける */}
+                  {/* 点・線と重なっても読めるよう、文字の外側に白い縁取り(halo)を付ける。
+                      左右は端で切れないようstart/end揃え、上下は空いている側に出す */}
                   <text
-                    x={Math.min(Math.max(coords[iMax][0], 14), W - 14)}
-                    y={Math.max(coords[iMax][1] - 7, 9)}
-                    textAnchor="middle"
+                    x={extremeLabelX(coords[iMax][0], extremeLabelAnchor(coords[iMax][0]))}
+                    y={extremeLabelY(coords[iMax][1])}
+                    textAnchor={extremeLabelAnchor(coords[iMax][0])}
                     fontSize="10"
                     fontWeight="700"
                     fill="#6B7280"
@@ -198,9 +219,9 @@ export function TrendCard({
                     最多 {actualMax.toLocaleString()}
                   </text>
                   <text
-                    x={Math.min(Math.max(coords[iMin][0], 14), W - 14)}
-                    y={Math.min(coords[iMin][1] + 16, H)}
-                    textAnchor="middle"
+                    x={extremeLabelX(coords[iMin][0], extremeLabelAnchor(coords[iMin][0]))}
+                    y={extremeLabelY(coords[iMin][1])}
+                    textAnchor={extremeLabelAnchor(coords[iMin][0])}
                     fontSize="10"
                     fontWeight="700"
                     fill="#6B7280"
