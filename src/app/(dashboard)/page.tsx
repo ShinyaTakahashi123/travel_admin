@@ -2,82 +2,10 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { jstDateKeyDaysAgo, jstMidnightUtc, toJstDateKey } from "@/lib/format";
 import { botNameLabel } from "@/lib/bot-name-label";
+import { TrendCard } from "@/components/dashboard-trend-chart";
 
 const TAKEDOWN_INQUIRY_CATEGORY = "権利侵害・削除のご依頼";
-
-function TrendCard({
-  label,
-  value,
-  points,
-  dates,
-  footnote,
-}: {
-  label: string;
-  value: string;
-  points: number[];
-  dates: string[];
-  footnote?: string;
-}) {
-  const max = Math.max(...points, 1);
-  const min = Math.min(...points, 0);
-  const range = max - min || 1;
-  const w = 280;
-  const h = 90;
-  const step = points.length > 1 ? w / (points.length - 1) : 0;
-  const coords = points.map((p, i) => {
-    const x = i * step;
-    const y = h - ((p - min) / range) * (h - 15) - 5;
-    return [x, y] as const;
-  });
-  const polyline = coords.map(([x, y]) => `${x},${y}`).join(" ");
-  const polygon = `0,${h} ${polyline} ${w},${h}`;
-
-  return (
-    <div className="bg-card border border-border rounded-2xl p-4.5 px-5 flex-1">
-      <div className="text-sm text-muted-foreground font-bold mb-0.5">{label}</div>
-      <div className="text-2xl font-black mb-2.5">{value}</div>
-      {points.length >= 1 ? (
-        <>
-          <svg viewBox={`0 0 ${w} ${h}`} width="100%" height="90" preserveAspectRatio="none">
-            <line x1="0" y1="20" x2={w} y2="20" stroke="#EEF1F6" strokeWidth="1" />
-            <line x1="0" y1="50" x2={w} y2="50" stroke="#EEF1F6" strokeWidth="1" />
-            <line x1="0" y1="80" x2={w} y2="80" stroke="#EEF1F6" strokeWidth="1" />
-            {points.length > 1 && (
-              <>
-                <polygon points={polygon} fill="#6366F1" fillOpacity="0.08" />
-                <polyline
-                  points={polyline}
-                  fill="none"
-                  stroke="#6366F1"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </>
-            )}
-            {coords.map(([x, y], i) => (
-              <circle key={i} cx={x} cy={y} r={points.length > 1 ? 4 : 5} fill="#6366F1">
-                <title>
-                  {dates[i]}: {points[i].toLocaleString()}
-                </title>
-              </circle>
-            ))}
-          </svg>
-          <div className="flex justify-between text-xs text-muted-foreground mt-1">
-            <span>{dates[0]}</span>
-            <span>{dates[Math.floor(dates.length / 2)]}</span>
-            <span>{dates[dates.length - 1]}</span>
-          </div>
-        </>
-      ) : (
-        <div className="h-[90px] flex items-center justify-center text-sm text-muted-foreground">
-          日次データはまだありません
-        </div>
-      )}
-      {footnote && <div className="text-xs text-muted-foreground mt-2">{footnote}</div>}
-    </div>
-  );
-}
+const WEEKDAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"];
 
 export default async function DashboardPage() {
   // 「本日」は日本時間の0時区切りで判定する
@@ -128,6 +56,10 @@ export default async function DashboardPage() {
 
   const dailyMetrics = [...dailyMetricsDesc].reverse();
   const dates = dailyMetrics.map((m) => `${m.metricDate.getUTCMonth() + 1}/${m.metricDate.getUTCDate()}`);
+  // グラフの読み取り(選んだ日の行)用。曜日まで含めた表示にする
+  const dateLabels = dailyMetrics.map(
+    (m) => `${m.metricDate.getUTCMonth() + 1}/${m.metricDate.getUTCDate()}（${WEEKDAY_LABELS[m.metricDate.getUTCDay()]}）`
+  );
   const botFilterSinceLabel = earliestBotPageView
     ? (() => {
         const [, m, d] = toJstDateKey(earliestBotPageView.viewedAt).split("-").map(Number);
@@ -205,6 +137,7 @@ export default async function DashboardPage() {
           }
           points={dailyMetrics.map((m) => m.totalUserAccounts)}
           dates={dates}
+          dateLabels={dateLabels}
         />
         <TrendCard
           label="公開中のしおり数"
@@ -215,6 +148,7 @@ export default async function DashboardPage() {
           }
           points={dailyMetrics.map((m) => m.totalPublishedItineraries)}
           dates={dates}
+          dateLabels={dateLabels}
         />
         <TrendCard
           label={dailyMetrics.length ? `PV数（${dates[dates.length - 1]}まで）` : "PV数"}
@@ -225,6 +159,7 @@ export default async function DashboardPage() {
           }
           points={dailyMetrics.map((m) => m.pvCount)}
           dates={dates}
+          dateLabels={dateLabels}
           footnote={
             botFilterSinceLabel
               ? `${botFilterSinceLabel}より前はロボットのアクセスを含みます`
