@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
@@ -130,22 +131,55 @@ const ROLE_LABEL: Record<string, string> = {
 export function AdminSidebar({ name, role }: { name: string; role: string }) {
   const pathname = usePathname();
   const navItems = role === "super" ? [...NAV_ITEMS, ...SUPER_ONLY_NAV_ITEMS] : NAV_ITEMS;
+  const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
-  return (
-    <aside className="w-[230px] flex-shrink-0 bg-[#1E293B] py-5.5 flex flex-col justify-between h-full">
+  // 開いている間は背景をスクロールさせない。スマホの幅でのみ開けるので、
+  // パソコンの幅(ボタン自体が出ない)では常にfalseのまま影響しない
+  useEffect(() => {
+    if (!open) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [open]);
+
+  // Escで閉じる。閉じたらメニューを開くボタンにフォーカスを戻す
+  useEffect(() => {
+    if (!open) return;
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    }
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
+
+  // 開いたら、メニューの中の最初のリンクにフォーカスを移す
+  useEffect(() => {
+    if (open) navRef.current?.querySelector("a")?.focus();
+  }, [open]);
+
+  const navContent = (
+    <>
       <div className="flex items-center gap-2.5 px-6 pb-6.5">
         <div className="w-[30px] h-[30px] rounded-lg bg-primary flex items-center justify-center text-white font-black text-base">
           旅
         </div>
         <span className="text-white font-bold text-base">しおりえ 管理者サイト</span>
       </div>
-      <nav className="flex flex-col flex-1">
+      <nav ref={navRef} className="flex flex-col flex-1">
         {navItems.map((item) => {
           const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
           return (
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => setOpen(false)}
               className={`flex items-center gap-3 px-6 py-2.5 text-base font-medium ${
                 active
                   ? "text-white bg-primary/[.18] border-r-[3px] border-primary"
@@ -183,6 +217,57 @@ export function AdminSidebar({ name, role }: { name: string; role: string }) {
           ログアウト
         </button>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {/* スマホの幅だけの上の帯。パソコンの幅(md以上)では出さず、左のメニューを常に表示する */}
+      <header className="md:hidden sticky top-0 z-50 h-14 flex items-center justify-between gap-2 bg-[#1E293B] px-4 flex-shrink-0">
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center text-white font-black text-sm">
+            旅
+          </div>
+          <span className="text-white font-bold text-sm">しおりえ 管理者サイト</span>
+        </div>
+        <button
+          ref={menuButtonRef}
+          type="button"
+          aria-expanded={open}
+          aria-controls="admin-mobile-nav"
+          aria-label={open ? "メニューを閉じる" : "メニューを開く"}
+          onClick={() => setOpen((v) => !v)}
+          className="text-white p-2 -mr-2"
+        >
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            {open ? (
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+            )}
+          </svg>
+        </button>
+      </header>
+
+      {/* 背景(メニューの外)。押すと閉じる。スマホの幅でメニューが開いているときだけ出す */}
+      {open && (
+        <div
+          className="md:hidden fixed inset-0 z-30 bg-black/40"
+          onClick={() => setOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      <aside
+        id="admin-mobile-nav"
+        className={`bg-[#1E293B] py-5.5 flex flex-col justify-between
+          fixed left-0 top-14 bottom-0 z-40 w-[270px] transition-transform duration-200 ease-out
+          ${open ? "translate-x-0" : "-translate-x-full"}
+          md:static md:top-auto md:bottom-auto md:left-auto md:z-auto md:translate-x-0
+          md:w-[230px] md:flex-shrink-0 md:h-full`}
+      >
+        {navContent}
+      </aside>
+    </>
   );
 }

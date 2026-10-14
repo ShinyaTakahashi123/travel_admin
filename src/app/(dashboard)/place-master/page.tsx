@@ -61,58 +61,68 @@ export default async function PlaceMasterListPage({
       </form>
 
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              {["名前", "都道府県", "種類", "滞在目安", "印", "使用数", "最後に確認", ""].map((h) => (
-                <th key={h} className="text-left text-sm text-muted-foreground font-bold px-3.5 pb-2.5">
-                  {h}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {places.map((place) => (
-              <tr key={place.id} className="border-t border-muted">
-                <td className="text-base px-3.5 py-3">
-                  {place.name}
-                  {place.reading && <span className="text-sm text-muted-foreground ml-1.5">({place.reading})</span>}
-                </td>
-                <td className="text-base px-3.5 py-3">{place.prefectureArea?.name ?? "—"}</td>
-                <td className="text-base px-3.5 py-3">
-                  {place.category ? (PLACE_MASTER_CATEGORY_LABELS[place.category] ?? place.category) : "—"}
-                </td>
-                <td className="text-base px-3.5 py-3">{place.stayDurationMin != null ? `${place.stayDurationMin}分` : "—"}</td>
-                <td className="px-3.5 py-3">
-                  <div className="flex gap-1 flex-wrap">
-                    {place.isWideArea && (
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">広い場所</span>
-                    )}
-                    {place.isMemorial && (
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">慰霊</span>
-                    )}
-                  </div>
-                </td>
-                <td className="text-base px-3.5 py-3">{place._count.spots}件</td>
-                <td className="text-base px-3.5 py-3">
-                  {place.verifiedAt ? place.verifiedAt.toISOString().slice(0, 10) : "—"}
-                </td>
-                <td className="px-3.5 py-3">
-                  <Link href={`/place-master/${place.id}/edit`} className="text-sm font-bold text-primary">
-                    編集
-                  </Link>
-                </td>
-              </tr>
-            ))}
-            {places.length === 0 && (
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse min-w-[760px]">
+            <thead>
               <tr>
-                <td colSpan={8} className="text-center text-base text-muted-foreground py-8">
-                  該当する台帳はありません。
-                </td>
+                {["名前", "都道府県", "種類", "滞在目安", "印", "使用数", "最後に確認", ""].map((h) => (
+                  <th key={h} className="text-left text-sm text-muted-foreground font-bold px-3.5 pb-2.5">
+                    {h}
+                  </th>
+                ))}
               </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {places.map((place) => (
+                <tr key={place.id} className="border-t border-muted">
+                  <td className="text-base px-3.5 py-3">
+                    {place.name}
+                    {place.reading && (
+                      <span className="text-sm text-muted-foreground ml-1.5">({place.reading})</span>
+                    )}
+                  </td>
+                  <td className="text-base px-3.5 py-3">{place.prefectureArea?.name ?? "—"}</td>
+                  <td className="text-base px-3.5 py-3">
+                    {place.category ? (PLACE_MASTER_CATEGORY_LABELS[place.category] ?? place.category) : "—"}
+                  </td>
+                  <td className="text-base px-3.5 py-3">
+                    {place.stayDurationMin != null ? `${place.stayDurationMin}分` : "—"}
+                  </td>
+                  <td className="px-3.5 py-3">
+                    <div className="flex gap-1 flex-wrap">
+                      {place.isWideArea && (
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+                          広い場所
+                        </span>
+                      )}
+                      {place.isMemorial && (
+                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-700">
+                          慰霊
+                        </span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="text-base px-3.5 py-3">{place._count.spots}件</td>
+                  <td className="text-base px-3.5 py-3">
+                    {place.verifiedAt ? place.verifiedAt.toISOString().slice(0, 10) : "—"}
+                  </td>
+                  <td className="px-3.5 py-3">
+                    <Link href={`/place-master/${place.id}/edit`} className="text-sm font-bold text-primary">
+                      編集
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+              {places.length === 0 && (
+                <tr>
+                  <td colSpan={8} className="text-center text-base text-muted-foreground py-8">
+                    該当する台帳はありません。
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
       </div>
       <Pagination basePath="/place-master" searchParams={{ q }} {...pageInfo} />
     </div>
