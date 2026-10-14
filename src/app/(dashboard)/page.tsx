@@ -71,7 +71,7 @@ export default async function DashboardPage() {
     <div>
       <h1 className="text-xl font-black mb-5">ダッシュボード</h1>
 
-      <div className="flex gap-4 mb-7 flex-wrap">
+      <div className="flex flex-col gap-4 mb-7 sm:flex-row sm:flex-wrap">
         {[
           { label: "登録ユーザー数", value: userCount.toLocaleString() },
           { label: "公開中のしおり", value: publishedCount.toLocaleString() },
@@ -87,7 +87,10 @@ export default async function DashboardPage() {
             color: unreadReportCount > 0 ? "#EF4444" : undefined,
           },
         ].map((kpi) => (
-          <div key={kpi.label} className="bg-card border border-border rounded-2xl px-5 py-4.5 flex-1 min-w-[150px]">
+          <div
+            key={kpi.label}
+            className="bg-card border border-border rounded-2xl px-5 py-4.5 sm:flex-1 sm:min-w-[150px]"
+          >
             <div className="text-sm text-muted-foreground font-bold mb-1.5">{kpi.label}</div>
             <div className="text-2xl font-black" style={{ color: kpi.color }}>
               {kpi.value}
@@ -96,7 +99,7 @@ export default async function DashboardPage() {
         ))}
         <Link
           href={`/inquiries?category=${encodeURIComponent(TAKEDOWN_INQUIRY_CATEGORY)}`}
-          className="bg-card border border-border rounded-2xl px-5 py-4.5 flex-1 min-w-[150px] hover:border-[#EF4444] transition-colors"
+          className="bg-card border border-border rounded-2xl px-5 py-4.5 sm:flex-1 sm:min-w-[150px] hover:border-[#EF4444] transition-colors"
         >
           <div className="text-sm text-muted-foreground font-bold mb-1.5">未対応の権利侵害・削除依頼</div>
           <div className="text-2xl font-black" style={{ color: unreadTakedownCount > 0 ? "#EF4444" : undefined }}>
