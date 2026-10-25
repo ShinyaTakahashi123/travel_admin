@@ -28,6 +28,9 @@ function createPrismaClient() {
       itinerary: { submittedIp: true },
       deletedAccountRecord: { email: true, name: true },
       deletedAccountRecordItem: { body: true, ipAddress: true },
+      // セキュリティ指摘2026-10-25夜。読む側で `omit: { passwordHash: false }` のように
+      // 明示的に上書きしない限り、既定で取得しない(アカウント統合2-4-1節のレビュー)
+      userAccount: { passwordHash: true, resetToken: true, legacyEmailRecoveryToken: true },
     },
   }).$extends({
     query: {

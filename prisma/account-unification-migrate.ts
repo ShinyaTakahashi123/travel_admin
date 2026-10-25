@@ -123,6 +123,19 @@ async function main() {
     return;
   }
 
+  // セキュリティ指摘2026-10-25夜: RESEND_API_KEYが無いと、sendMail(src/lib/mail.ts)が
+  // 宛先・本文(回復の生の合言葉を含む)をそのままconsole.logへ出す。ケースCが1件以上あるのに
+  // この状態で--commitすると、本番実行時に会話の記録・ログへ本物のメールアドレスと
+  // 使える回復リンクが残ってしまうため、その前に止める
+  if (caseC.length > 0 && !process.env.RESEND_API_KEY) {
+    console.error(
+      `🔴 ケースC(未解消の重複)が${caseC.length}件ありますが、RESEND_API_KEYが設定されていません。` +
+        "このまま進めると、お知らせメールの宛先・回復リンクがログに出力されてしまうため中止します。" +
+        "RESEND_API_KEYを設定してから、もう一度実行してください。"
+    );
+    process.exit(1);
+  }
+
   const before = await countSentinels(prisma);
 
   const result = await prisma.$transaction(
@@ -288,7 +301,9 @@ async function main() {
   // Cのお知らせメール(2-4-1節4)は、トランザクションの成功後にまとめて送る。
   // 1件失敗しても残りの送信は続ける(全体を失敗させない)。宛先はログに出さない
   let notifiedCount = 0;
+  let caseCIndex = 0;
   for (const { legacyEmail, rawToken } of result.caseCNotifications) {
+    caseCIndex++;
     try {
       const url = `${PLANNER_SITE_URL}/account-link/recover-planner?token=${rawToken}`;
       await sendMail({
@@ -315,8 +330,9 @@ ${url}
 しおりえ運営`,
       });
       notifiedCount++;
-    } catch (err) {
-      console.error("[account-unification-migrate] お知らせメールの送信に失敗しました(1件):", err);
+    } catch {
+      // エラーの中身(宛先・本文を含みうる)はログに出さない(セキュリティ指摘2026-10-25夜)
+      console.error(`[account-unification-migrate] Cの${caseCIndex}件目: 送れませんでした`);
     }
   }
   console.log("Cのお知らせメール送信件数:", notifiedCount, "/", result.caseCNotifications.length);
