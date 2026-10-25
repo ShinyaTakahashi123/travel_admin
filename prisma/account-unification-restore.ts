@@ -1,17 +1,21 @@
 /**
- * account-unification-backup.tsで書き出した控えから、開発用DBを元に戻す。
+ * 【2026-10-25夜、練習で判明】このスクリプトはD・Cの取り消しもできない。
+ * Itinerary等の外部キーがON DELETE RESTRICTでUserAccountを指しているため、
+ * D・Cで作られたUserAccountの行にしおりが付け替わった(付いたままの)状態では、
+ * その行自体を削除しようとするとDBそのものが拒否する(しおりを先に消さない
+ * 限り削除できない)。しおりを先に消す「修正」は、まさに2026-10-25未明の事故と
+ * 同じ操作になるため行わない。したがって、**D・Cを含む練習をやり直すときも、
+ * A・Bと同じく3-4節のとおりNeonの「親から作り直す」が唯一の戻し方**
+ * (以下の本文・実装は、この制約が分かる前に書いたもので、--commitは失敗する。
+ * 読み取り専用の確認モードは、件数の目安を見るためだけに使える)
+ *
+ * account-unification-backup.tsで書き出した控えから、開発用DBを元に戻す試み。
  * 開発用DBでの練習をやり直すためだけのスクリプト(本番では使わない。
  * 本番はNeonの時点復元(PITR)を使う。仕様書3-5節)。
  *
- * 【できること】D・C(プランナー自身のIDをそのままUserAccountの行にしたもの)の取り消し。
- * 【できないこと】A・B(会員側の別IDへまとめたもの)の完全な取り消し。Itinerary等の外部キーが
- * UserAccountを指すようになった(3節)ため、しおりの持ち主を元のプランナー自身のID(当時は
- * UserAccountの行が存在しない)へ戻すことは、スキーマ上できない。A・Bを含む練習をやり直す
- * ときは、3-4節のとおりNeonの「親から作り直す」を使うこと。
- *
  * 実行方法:
  *   npx tsx prisma/account-unification-restore.ts <控えのパス>        (確認のみ)
- *   npx tsx prisma/account-unification-restore.ts <控えのパス> --commit (実際に戻す)
+ *   npx tsx prisma/account-unification-restore.ts <控えのパス> --commit (失敗する。上記参照)
  */
 import { readFileSync } from "fs";
 import { prisma } from "../src/lib/prisma";
