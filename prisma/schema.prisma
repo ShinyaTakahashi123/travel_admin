@@ -52,14 +52,15 @@ model Area {
   parent   Area?  @relation("AreaHierarchy", fields: [parentId], references: [id])
   children Area[] @relation("AreaHierarchy")
 
-  userAccountsHome     UserAccount[]        @relation("UserHomeArea")
-  plannerAccountsHome  PlannerAccount[]     @relation("PlannerHomeArea")
-  userWishlistAreas    UserWishlistArea[]
-  plannerServiceAreas  PlannerServiceArea[]
-  itineraryAreas       ItineraryArea[]
-  itinerariesAsPrimary Itinerary[]          @relation("ItineraryPrimaryArea")
-  prefectureVisits     PrefectureVisit[]
-  placeMasters         PlaceMaster[]        @relation("PlaceMasterPrefecture")
+  userAccountsHome        UserAccount[]        @relation("UserHomeArea")
+  plannerAccountsHome     PlannerAccount[]     @relation("PlannerHomeArea")
+  userAccountsPlannerHome UserAccount[]        @relation("UserPlannerHomeArea")
+  userWishlistAreas       UserWishlistArea[]
+  plannerServiceAreas     PlannerServiceArea[]
+  itineraryAreas          ItineraryArea[]
+  itinerariesAsPrimary    Itinerary[]          @relation("ItineraryPrimaryArea")
+  prefectureVisits        PrefectureVisit[]
+  placeMasters            PlaceMaster[]        @relation("PlaceMasterPrefecture")
 
   @@unique([parentId, slug])
   @@index([parentId])
@@ -174,6 +175,16 @@ model UserAccount {
   isPlanner                         Boolean   @default(false) @map("is_planner")
   // 旧PlannerAccount.isOfficialをそのまま引き継ぐ列。isPlannerがfalseの間は意味を持たない
   isOfficial                        Boolean   @default(false) @map("is_official")
+  // プランナーとして公開する性別・年代・居住都道府県(法務指摘2026-10-25)。
+  // 会員としてのgender/age/homeAreaId(非公開、旅の提案のための情報)とは別の列にする。
+  // 理由: (1)同じ列だと、会員がマイページで値を変えると公開中のプロフィールも
+  // 知らないうちに変わってしまう (2)移しかえで連携済みの組をまとめるとき、
+  // 会員側の値がプランナー側の公開用の値を上書きして公開されてしまう。
+  // 「プランナーになる」画面では、ここは空欄(未公開)から始め、本人が選んだ項目だけを
+  // 設定する(2-5節)
+  plannerGender                     String?   @map("planner_gender")
+  plannerAge                        Int?      @map("planner_age")
+  plannerHomeAreaId                 String?   @map("planner_home_area_id") @db.Uuid
   // プランナーとしての機能だけを止める印(会員としてのstatusとは別。2-3節)。
   // nullなら制限なし、値があればしおりの作成・編集・公開・審査通知の対象から外す
   plannerSuspendedAt                DateTime? @map("planner_suspended_at") @db.Timestamptz
@@ -192,6 +203,7 @@ model UserAccount {
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
   homeArea            Area?                 @relation("UserHomeArea", fields: [homeAreaId], references: [id])
+  plannerHomeArea     Area?                 @relation("UserPlannerHomeArea", fields: [plannerHomeAreaId], references: [id])
   wishlistAreas       UserWishlistArea[]
   interestTags        UserInterestTag[]
   subscription        Subscription?

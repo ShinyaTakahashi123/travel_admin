@@ -55,6 +55,8 @@ const SENTINEL_MODELS = [
   "deletedAccountRecord",
   "deletedAccountRecordItem",
   "accountLink",
+  "plannerServiceArea",
+  "plannerSpecialtyTag",
 ] as const;
 
 type SentinelCounts = Record<(typeof SENTINEL_MODELS)[number], number>;
@@ -131,7 +133,15 @@ async function main() {
       for (const { planner: p, targetUserAccountId } of [...caseA, ...caseB]) {
         await tx.userAccount.update({
           where: { id: targetUserAccountId },
-          data: { isPlanner: true, isOfficial: p.isOfficial || undefined },
+          data: {
+            isPlanner: true,
+            isOfficial: p.isOfficial || undefined,
+            // 法務指摘2026-10-25(2-5節): プランナー自身が公開用に入力した値は、
+            // 会員の非公開のgender/age/homeAreaIdとは別のplanner専用の列へ移す
+            plannerGender: p.gender,
+            plannerAge: p.age,
+            plannerHomeAreaId: p.homeAreaId,
+          },
         });
         await tx.itinerary.updateMany({ where: { plannerAccountId: p.id }, data: { plannerAccountId: targetUserAccountId } });
         // 複合主キー(plannerAccountId, areaId/tagId)の衝突を避けるため、まず会員側の
@@ -181,12 +191,20 @@ async function main() {
             googleId: p.googleId,
             iconUrl: p.iconUrl,
             profile: p.profile,
-            gender: p.gender,
-            age: p.age,
+            // 法務指摘2026-10-25(2-5節): gender/age/homeAreaIdは会員の非公開情報用の列。
+            // Dは会員の行が無い新規会員化なので、ここは空にし、プランナー自身が公開用に
+            // 入力した値はplannerGender/plannerAge/plannerHomeAreaIdへ移す
+            gender: null,
+            age: null,
+            homeAreaId: null,
             status: p.status,
-            homeAreaId: p.homeAreaId,
-            resetToken: p.resetToken,
-            resetTokenExpiresAt: p.resetTokenExpiresAt,
+            plannerGender: p.gender,
+            plannerAge: p.age,
+            plannerHomeAreaId: p.homeAreaId,
+            // セキュリティ指摘2026-10-25: 会員化にあたり、プランナー側のパスワード再設定
+            // トークンは持ち越さない(Cと同じ扱いに統一)
+            resetToken: null,
+            resetTokenExpiresAt: null,
             passwordChangedAt: p.passwordChangedAt,
             legalHold: p.legalHold,
             isPlanner: true,
@@ -214,10 +232,15 @@ async function main() {
             legacyGoogleId: p.googleId,
             iconUrl: p.iconUrl,
             profile: p.profile,
-            gender: p.gender,
-            age: p.age,
+            // 法務指摘2026-10-25(2-5節): Dと同じ理由でgender/age/homeAreaIdは空にし、
+            // プランナー公開用の値はplannerGender/plannerAge/plannerHomeAreaIdへ移す
+            gender: null,
+            age: null,
+            homeAreaId: null,
             status: p.status,
-            homeAreaId: p.homeAreaId,
+            plannerGender: p.gender,
+            plannerAge: p.age,
+            plannerHomeAreaId: p.homeAreaId,
             resetToken: null,
             resetTokenExpiresAt: null,
             passwordChangedAt: p.passwordChangedAt,
