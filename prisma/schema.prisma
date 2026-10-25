@@ -168,8 +168,28 @@ model UserAccount {
   // 権利侵害の申告・開示請求の対応中など、手続き中の保全の印(true=画面からの退会を止める)。
   // 管理者サイトのアカウント詳細でスーパー管理者のみ付け外しできる
   legalHold           Boolean   @default(false) @map("legal_hold")
-  createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  // ===== 会員とプランナーのアカウント統合(docs/specs/20261025-account-unification-detailed.md)
+  // 2節: この会員が、プランナーの情報(しおりの作成等)を持っているか
+  isPlanner                         Boolean   @default(false) @map("is_planner")
+  // 旧PlannerAccount.isOfficialをそのまま引き継ぐ列。isPlannerがfalseの間は意味を持たない
+  isOfficial                        Boolean   @default(false) @map("is_official")
+  // プランナーとしての機能だけを止める印(会員としてのstatusとは別。2-3節)。
+  // nullなら制限なし、値があればしおりの作成・編集・公開・審査通知の対象から外す
+  plannerSuspendedAt                DateTime? @map("planner_suspended_at") @db.Timestamptz
+  // 2-4-1節: 移しかえの時点で連携されていなかった重複(他の会員の行が同じメールアドレスを
+  // 持つ)を、emailの一意制約を保ったまま退避して移すための列。退避した行はisPendingRecovery
+  // がtrueになり、ログイン不可(auth.ts側で全経路拒否)。本人が受信箱の合言葉で回復するまで
+  // 保持する。回復・削除のどちらでも速やかにクリアする(期限を区切った自動削除はしない)
+  legacyEmail                       String?   @map("legacy_email")
+  legacyGoogleId                    String?   @map("legacy_google_id")
+  isPendingRecovery                 Boolean   @default(false) @map("is_pending_recovery")
+  legacyEmailRecoveryToken          String?   @map("legacy_email_recovery_token")
+  legacyEmailRecoveryTokenExpiresAt DateTime? @map("legacy_email_recovery_token_expires_at") @db.Timestamptz
+  // ===== ここまで
+
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
   homeArea            Area?                @relation("UserHomeArea", fields: [homeAreaId], references: [id])
   wishlistAreas       UserWishlistArea[]
@@ -186,6 +206,8 @@ model UserAccount {
   accountLinkReceipts AccountLinkReceipt[]
 
   @@index([homeAreaId])
+  @@index([legacyEmail])
+  @@index([legacyGoogleId])
   @@map("user_account")
 }
 
