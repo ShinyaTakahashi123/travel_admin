@@ -103,6 +103,9 @@ async function main() {
 
   await prisma.$transaction(async (tx) => {
     // UserAccount: email・google_id・reset_token・password_hash・icon_url
+    // legacy_email等(アカウント統合、docs/specs/20261025-account-unification-detailed.md
+    // 2-4-1節)も、元のプランナーのメールアドレス・googleId・回復用トークンを含むため、
+    // 同様に置き換える(セキュリティ指摘2026-10-25)
     await tx.$executeRaw`
       UPDATE user_account
       SET email = 'user-' || id || '@example.invalid',
@@ -110,7 +113,11 @@ async function main() {
           reset_token = NULL,
           reset_token_expires_at = NULL,
           password_hash = ${dummyPasswordHash},
-          icon_url = NULL
+          icon_url = NULL,
+          legacy_email = NULL,
+          legacy_google_id = NULL,
+          legacy_email_recovery_token = NULL,
+          legacy_email_recovery_token_expires_at = NULL
     `;
     // PlannerAccount: 同様
     await tx.$executeRaw`
