@@ -127,11 +127,11 @@ async function main() {
   // 宛先・本文(回復の生の合言葉を含む)をそのままconsole.logへ出す。ケースCが1件以上あるのに
   // この状態で--commitすると、本番実行時に会話の記録・ログへ本物のメールアドレスと
   // 使える回復リンクが残ってしまうため、その前に止める
-  if (caseC.length > 0 && !process.env.RESEND_API_KEY) {
+  if ((caseC.length > 0 || caseA.length + caseB.length > 0) && !process.env.RESEND_API_KEY) {
     console.error(
-      `🔴 ケースC(未解消の重複)が${caseC.length}件ありますが、RESEND_API_KEYが設定されていません。` +
-        "このまま進めると、お知らせメールの宛先・回復リンクがログに出力されてしまうため中止します。" +
-        "RESEND_API_KEYを設定してから、もう一度実行してください。"
+      `🔴 ケースC(未解消の重複)が${caseC.length}件、A・B(まとめ)が${caseA.length + caseB.length}件ありますが、` +
+        "RESEND_API_KEYが設定されていません。このまま進めると、お知らせメールの宛先・回復リンクが" +
+        "ログに出力されてしまうため中止します。RESEND_API_KEYを設定してから、もう一度実行してください。"
     );
     process.exit(1);
   }
@@ -144,10 +144,12 @@ async function main() {
       let convertedC = 0;
       let convertedD = 0;
       const caseCNotifications: { legacyEmail: string; rawToken: string }[] = [];
+      // 10節「まとめた人へ」のお知らせメール宛先(会員側の行のメールアドレス)
+      const mergedABNotifications: string[] = [];
 
       // A・B: 会員側の行へまとめる。PlannerAccountの行は削除しない
       for (const { planner: p, targetUserAccountId } of [...caseA, ...caseB]) {
-        await tx.userAccount.update({
+        const updated = await tx.userAccount.update({
           where: { id: targetUserAccountId },
           data: {
             isPlanner: true,
@@ -194,6 +196,8 @@ async function main() {
         // 削除してもCascadeで失われるデータは無い)
         await tx.accountLink.deleteMany({ where: { plannerAccountId: p.id } });
         mergedAB++;
+        // 1人が複数のPlannerAccountと紐づくことはない前提だが、念のため重複を避ける
+        if (!mergedABNotifications.includes(updated.email)) mergedABNotifications.push(updated.email);
       }
 
       // D: 重複なし。プランナー自身のIDをそのままUserAccountの行にする
@@ -286,7 +290,7 @@ async function main() {
         }
       }
 
-      return { mergedAB, convertedC, convertedD, before, after, caseCNotifications };
+      return { mergedAB, convertedC, convertedD, before, after, caseCNotifications, mergedABNotifications };
     },
     { timeout: 60000 }
   );
@@ -339,6 +343,28 @@ ${url}
     }
   }
   console.log("Cのお知らせメール送信件数:", notifiedCount, "/", result.caseCNotifications.length);
+
+  // A・Bのお知らせメール(10節「まとめた人へ」)。1件失敗しても残りの送信は続ける
+  let mergedNotifiedCount = 0;
+  let mergedIndex = 0;
+  for (const email of result.mergedABNotifications) {
+    mergedIndex++;
+    try {
+      await sendMail({
+        to: email,
+        subject: "【しおりえ】アカウントを1つにまとめました",
+        text: `ユーザーサイトとプランナーサイトのアカウントを1つにまとめました。これからは、このメールアドレスのアカウントで、両方のサイトにログインできます。最初にログインしたときに、改定後の利用規約などへの同意をお願いします。
+
+身に覚えがない場合は、お問い合わせページ（https://shiorietrip.com/contact ）からご連絡ください。
+
+しおりえ運営事務局`,
+      });
+      mergedNotifiedCount++;
+    } catch {
+      console.error(`[account-unification-migrate] A・Bの${mergedIndex}件目: 送れませんでした`);
+    }
+  }
+  console.log("A・Bのお知らせメール送信件数:", mergedNotifiedCount, "/", result.mergedABNotifications.length);
 
   await prisma.$disconnect();
 }

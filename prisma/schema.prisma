@@ -189,6 +189,11 @@ model UserAccount {
   // 「プランナーになる」はメールの確認・プランナー規約への同意・公開項目の選び直しが
   // そろったときだけ行う、という決まりの記録)
   plannerTermsAgreedAt              DateTime? @map("planner_terms_agreed_at") @db.Timestamptz
+  // 統合後の利用規約・プランナー規約・プライバシーポリシーへの同意日時(8節「最初の
+  // ログインのときの同意の画面」)。新規登録時はここで即座に埋める(そのときの規約が
+  // 最新のため、同意画面を出す必要がない)。移しかえ(account-unification-migrate.ts)で
+  // 作られた行はnullのままにし、移しかえ後の最初のログインでこの画面を出す対象にする
+  unifiedTermsAgreedAt               DateTime? @map("unified_terms_agreed_at") @db.Timestamptz
   // プランナーとしての機能だけを止める印(会員としてのstatusとは別。2-3節)。
   // nullなら制限なし、値があればしおりの作成・編集・公開・審査通知の対象から外す
   plannerSuspendedAt                DateTime? @map("planner_suspended_at") @db.Timestamptz
