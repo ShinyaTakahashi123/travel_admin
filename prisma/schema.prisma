@@ -191,7 +191,7 @@ model UserAccount {
   createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
   updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
-  homeArea            Area?                @relation("UserHomeArea", fields: [homeAreaId], references: [id])
+  homeArea            Area?                 @relation("UserHomeArea", fields: [homeAreaId], references: [id])
   wishlistAreas       UserWishlistArea[]
   interestTags        UserInterestTag[]
   subscription        Subscription?
@@ -204,6 +204,11 @@ model UserAccount {
   accountLink         AccountLink?
   accountLinkNonces   AccountLinkNonce[]
   accountLinkReceipts AccountLinkReceipt[]
+  // 2026-10-25、アカウント統合によりPlannerAccountから移ってきた関連(3節)。
+  // 名前はPlannerAccount時代のものをそのまま使う(読み出し側のコードを変えずに済むため)
+  serviceAreas        PlannerServiceArea[]
+  specialtyTags       PlannerSpecialtyTag[]
+  itineraries         Itinerary[]
 
   @@index([homeAreaId])
   @@index([legacyEmail])
@@ -274,10 +279,10 @@ model PlannerAccount {
   createdAt           DateTime  @default(now()) @map("created_at") @db.Timestamptz
   updatedAt           DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
-  homeArea            Area?                 @relation("PlannerHomeArea", fields: [homeAreaId], references: [id])
-  serviceAreas        PlannerServiceArea[]
-  specialtyTags       PlannerSpecialtyTag[]
-  itineraries         Itinerary[]
+  // 2026-10-25、アカウント統合によりserviceAreas・specialtyTags・itinerariesは
+  // UserAccount側へ移った(3節)。accountLink・accountLinkReceiptsは、移しかえの
+  // 処理自体がこの表の行を読んで解決するため、参照先はそのまま残している
+  homeArea            Area?                @relation("PlannerHomeArea", fields: [homeAreaId], references: [id])
   accountLink         AccountLink?
   accountLinkReceipts AccountLinkReceipt[]
 
@@ -285,12 +290,16 @@ model PlannerAccount {
   @@map("planner_account")
 }
 
+// 2026-10-25、会員とプランナーのアカウント統合(docs/specs/20261025-account-unification-detailed.md
+// 3節)に伴い、参照先をPlannerAccountからUserAccountへ付け替えた。移しかえが終わるまでの
+// 安全策として、onDelete: Restrictにしている(移しかえの間はUserAccountの行を削除させない。
+// セキュリティ指摘2026-10-25)。列名(planner_account_id)はそのまま
 model PlannerServiceArea {
   plannerAccountId String @map("planner_account_id") @db.Uuid
   areaId           String @map("area_id") @db.Uuid
 
-  plannerAccount PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
-  area           Area           @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  plannerAccount UserAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Restrict)
+  area           Area        @relation(fields: [areaId], references: [id], onDelete: Cascade)
 
   @@id([plannerAccountId, areaId])
   @@map("planner_service_area")
@@ -300,8 +309,8 @@ model PlannerSpecialtyTag {
   plannerAccountId String @map("planner_account_id") @db.Uuid
   tagId            String @map("tag_id") @db.Uuid
 
-  plannerAccount PlannerAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
-  tag            Tag            @relation(fields: [tagId], references: [id], onDelete: Cascade)
+  plannerAccount UserAccount @relation(fields: [plannerAccountId], references: [id], onDelete: Restrict)
+  tag            Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@id([plannerAccountId, tagId])
   @@map("planner_specialty_tag")
@@ -401,7 +410,9 @@ model Itinerary {
   sharedLinkCreatedAt DateTime? @map("shared_link_created_at") @db.Timestamptz
   sharedLinkConsentAt DateTime? @map("shared_link_consent_at") @db.Timestamptz
 
-  plannerAccount  PlannerAccount        @relation(fields: [plannerAccountId], references: [id], onDelete: Cascade)
+  // 2026-10-25、アカウント統合に伴いPlannerAccountからUserAccountへ参照先を付け替え。
+  // onDelete: Restrictは移しかえが終わるまでの安全策(3節参照)
+  plannerAccount  UserAccount           @relation(fields: [plannerAccountId], references: [id], onDelete: Restrict)
   primaryArea     Area?                 @relation("ItineraryPrimaryArea", fields: [primaryAreaId], references: [id])
   reviewedByAdmin Admin?                @relation(fields: [reviewedByAdminId], references: [id])
   copiedFrom      Itinerary?            @relation("ItineraryCopy", fields: [copiedFromId], references: [id], onDelete: SetNull)

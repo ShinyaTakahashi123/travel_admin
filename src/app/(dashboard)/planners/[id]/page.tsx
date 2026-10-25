@@ -13,8 +13,10 @@ export default async function PlannerAccountDetailPage({
   const { id } = await params;
   const admin = await getActiveAdmin();
 
-  const planner = await prisma.plannerAccount.findUnique({
-    where: { id },
+  // 2026-10-25、アカウント統合によりUserAccount(isPlanner: true)から読む
+  // (docs/specs/20261025-account-unification-detailed.md 3節)
+  const planner = await prisma.userAccount.findUnique({
+    where: { id, isPlanner: true },
     include: {
       homeArea: true,
       serviceAreas: { include: { area: true } },

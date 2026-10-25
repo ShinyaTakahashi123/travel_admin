@@ -11,13 +11,20 @@ export default async function PlannerManagementPage({
 }) {
   const { q, page: pageParam } = await searchParams;
 
+  // 2026-10-25、アカウント統合によりプランナーはUserAccount(isPlanner: true)として
+  // 保持される(docs/specs/20261025-account-unification-detailed.md 3節)。移しかえが
+  // まだ済んでいない環境では、PlannerAccountに残っている行はここに出ない(段階9まで
+  // PlannerAccountの行自体は消さないが、この一覧の対象はUserAccount側のみ)
   const where = q
-    ? { OR: [{ name: { contains: q, mode: "insensitive" as const } }, { email: { contains: q, mode: "insensitive" as const } }] }
-    : undefined;
-  const totalCount = await prisma.plannerAccount.count({ where });
+    ? {
+        isPlanner: true,
+        OR: [{ name: { contains: q, mode: "insensitive" as const } }, { email: { contains: q, mode: "insensitive" as const } }],
+      }
+    : { isPlanner: true };
+  const totalCount = await prisma.userAccount.count({ where });
   const pageInfo = buildPageInfo(pageParam, totalCount, ADMIN_PAGE_SIZE);
 
-  const planners = await prisma.plannerAccount.findMany({
+  const planners = await prisma.userAccount.findMany({
     where,
     orderBy: [{ createdAt: "desc" }, { id: "asc" }],
     skip: pageInfo.skip,
