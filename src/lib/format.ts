@@ -106,6 +106,9 @@ export const AUDIT_LOG_ACTION_LABEL: Record<string, string> = {
   mark_responded: "対応済みにする",
   mark_unresponded: "未対応に戻す",
   revoke_shared_link: "限定公開リンクを止める",
+  planner_suspend: "プランナー機能だけ止める",
+  planner_unsuspend: "プランナー機能の停止を解除",
+  remove_planner_role: "プランナーの役割を外す",
 };
 
 // AdminAuditLog.targetType の表示名

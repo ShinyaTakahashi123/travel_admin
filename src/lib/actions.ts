@@ -448,111 +448,130 @@ export async function setUserAccountLegalHold(userAccountId: string, legalHold: 
 }
 
 // 削除前6か月以内の投稿を、退会後の保存記録(DeletedAccountRecord)に移してから削除する
-// (利用者本人が画面から退会する場合と同じ扱い。user-site の deleteMyAccount と対応)
+// (利用者本人が画面から退会する場合と同じ扱い。user-site/planner-site の
+// deleteMyAccount と対応。アカウント統合(段階3、2026-10-25、3-2-2節 操作B)により、
+// isPlannerの行は、しおり等をON DELETE RESTRICTのため先に削除してから会員の行を
+// 削除する「アカウントを削除する」操作になる。公式プランナーは、操作ミス1回で
+// 公式しおりが全て消えることを防ぐため対象外(3-2-2節)
 export async function deleteUserAccount(userAccountId: string): Promise<ActionResult> {
   return run(async () => {
     const admin = await requireAdmin();
     const account = await prisma.userAccount.findUniqueOrThrow({ where: { id: userAccountId } });
 
+    if (account.isOfficial) fail("公式プランナーアカウントは削除できません");
+
     const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
-    const comments = await prisma.comment.findMany({
-      where: { userAccountId, createdAt: { gte: sixMonthsAgo } },
-      select: { body: true, ipAddress: true, createdAt: true },
-    });
+    const [comments, submissions] = await Promise.all([
+      prisma.comment.findMany({
+        where: { userAccountId, createdAt: { gte: sixMonthsAgo } },
+        select: { body: true, ipAddress: true, createdAt: true },
+      }),
+      account.isPlanner
+        ? prisma.itinerary.findMany({
+            where: { plannerAccountId: userAccountId, submittedAt: { gte: sixMonthsAgo }, submittedIp: { not: null } },
+            select: { title: true, submittedIp: true, submittedAt: true },
+          })
+        : Promise.resolve([]),
+    ]);
+    const itineraryCount = account.isPlanner
+      ? await prisma.itinerary.count({ where: { plannerAccountId: userAccountId } })
+      : 0;
 
     await prisma.$transaction([
       prisma.deletedAccountRecord.create({
         data: {
-          accountType: "user",
+          accountType: account.isPlanner ? "user+planner" : "user",
           originalAccountId: account.id,
           email: account.email,
           name: account.name,
           legalHold: account.legalHold,
           items: {
-            create: comments.map((c) => ({
-              kind: "comment",
-              body: c.body,
-              ipAddress: c.ipAddress,
-              occurredAt: c.createdAt,
-            })),
+            create: [
+              ...comments.map((c) => ({
+                kind: "comment",
+                body: c.body,
+                ipAddress: c.ipAddress,
+                occurredAt: c.createdAt,
+              })),
+              ...submissions.map((s) => ({
+                kind: "itinerary_submission",
+                body: s.title,
+                ipAddress: s.submittedIp,
+                occurredAt: s.submittedAt as Date,
+              })),
+            ],
           },
         },
       }),
+      // RESTRICT制約があるため、会員の行を消す前にプランナー側の持ち物を先に消す
+      prisma.plannerServiceArea.deleteMany({ where: { plannerAccountId: userAccountId } }),
+      prisma.plannerSpecialtyTag.deleteMany({ where: { plannerAccountId: userAccountId } }),
+      prisma.itinerary.deleteMany({ where: { plannerAccountId: userAccountId } }),
       prisma.userAccount.delete({ where: { id: userAccountId } }),
-      prisma.adminAuditLog.create({
-        data: { adminId: admin.id, action: "delete", targetType: "user_account", targetId: userAccountId, detail: {} },
-      }),
-    ]);
-    revalidatePath("/users");
-  });
-}
-
-export async function setPlannerAccountStatus(
-  plannerAccountId: string,
-  status: "active" | "suspended"
-): Promise<ActionResult> {
-  return run(async () => {
-    const admin = await requireAdmin();
-    const account = await prisma.plannerAccount.findUniqueOrThrow({ where: { id: plannerAccountId } });
-    // 公式プランナー(公式しおりの投稿元)は操作ミスによる利用停止を防ぐため対象外
-    if (account.isOfficial) fail("公式プランナーアカウントは操作できません");
-    await prisma.$transaction([
-      prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { status } }),
       prisma.adminAuditLog.create({
         data: {
           adminId: admin.id,
-          action: status === "suspended" ? "suspend" : "unsuspend",
-          targetType: "planner_account",
-          targetId: plannerAccountId,
-          detail: { fromStatus: account.status, toStatus: status },
+          action: "delete",
+          targetType: "user_account",
+          targetId: userAccountId,
+          // 件数のみ記録する(しおりの内容・会員の個人情報は記録しない。セキュリティ指摘2026-10-25)
+          detail: { deletedItineraryCount: itineraryCount },
+        },
+      }),
+    ]);
+    revalidatePath("/users");
+    revalidatePath("/planners");
+  });
+}
+
+// プランナー機能だけの利用停止(2-3節)。会員としてのstatus・ログイン自体には影響しない。
+// 公式プランナーは操作ミスによる利用停止を防ぐため対象外
+export async function setPlannerCapabilitySuspended(userAccountId: string, suspended: boolean): Promise<ActionResult> {
+  return run(async () => {
+    const admin = await requireAdmin();
+    const account = await prisma.userAccount.findUniqueOrThrow({ where: { id: userAccountId } });
+    if (account.isOfficial) fail("公式プランナーアカウントは操作できません");
+    await prisma.$transaction([
+      prisma.userAccount.update({
+        where: { id: userAccountId },
+        data: { plannerSuspendedAt: suspended ? new Date() : null },
+      }),
+      prisma.adminAuditLog.create({
+        data: {
+          adminId: admin.id,
+          action: suspended ? "planner_suspend" : "planner_unsuspend",
+          targetType: "user_account",
+          targetId: userAccountId,
+          detail: {},
         },
       }),
     ]);
     revalidatePath("/planners");
-    revalidatePath(`/planners/${plannerAccountId}`);
+    revalidatePath(`/planners/${userAccountId}`);
   });
 }
 
-// 手続き中(権利侵害の申告・開示請求の対応中など)の保全の印。スーパー管理者のみ付け外しできる
-export async function setPlannerAccountLegalHold(plannerAccountId: string, legalHold: boolean): Promise<ActionResult> {
-  return run(async () => {
-    const admin = await requireSuperAdmin();
-    await prisma.$transaction([
-      prisma.plannerAccount.update({ where: { id: plannerAccountId }, data: { legalHold } }),
-      prisma.adminAuditLog.create({
-        data: {
-          adminId: admin.id,
-          action: legalHold ? "legal_hold_on" : "legal_hold_off",
-          targetType: "planner_account",
-          targetId: plannerAccountId,
-          detail: { legalHold },
-        },
-      }),
-    ]);
-    revalidatePath(`/planners/${plannerAccountId}`);
-  });
-}
-
-// 削除前6か月以内のしおり公開申請(タイトルのみ)を、退会後の保存記録(DeletedAccountRecord)に
-// 移してから削除する(プランナー本人が画面から退会する場合と同じ扱い)
-export async function deletePlannerAccount(plannerAccountId: string): Promise<ActionResult> {
+// 「プランナーの役割を外す」(3-2-2節 操作A)。しおり等を削除したうえで、会員としては
+// 残す(isPlanner=falseに戻し、プランナー公開用の列もクリアする)。公式プランナーは
+// 操作ミス1回で公式しおりが全て消えることを防ぐため対象外
+export async function removePlannerRole(userAccountId: string): Promise<ActionResult> {
   return run(async () => {
     const admin = await requireAdmin();
-    const account = await prisma.plannerAccount.findUniqueOrThrow({ where: { id: plannerAccountId } });
-
-    // 公式プランナー(公式しおりの投稿元)は操作ミス1回で公式しおりが全て消えるため、削除の対象外
-    if (account.isOfficial) fail("公式プランナーアカウントは削除できません");
+    const account = await prisma.userAccount.findUniqueOrThrow({ where: { id: userAccountId } });
+    if (!account.isPlanner) fail("プランナーの情報を持っていません");
+    if (account.isOfficial) fail("公式プランナーアカウントは操作できません");
 
     const sixMonthsAgo = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
     const submissions = await prisma.itinerary.findMany({
-      where: { plannerAccountId, submittedAt: { gte: sixMonthsAgo }, submittedIp: { not: null } },
+      where: { plannerAccountId: userAccountId, submittedAt: { gte: sixMonthsAgo }, submittedIp: { not: null } },
       select: { title: true, submittedIp: true, submittedAt: true },
     });
+    const itineraryCount = await prisma.itinerary.count({ where: { plannerAccountId: userAccountId } });
 
     await prisma.$transaction([
       prisma.deletedAccountRecord.create({
         data: {
-          accountType: "planner",
+          accountType: "planner_role_removed",
           originalAccountId: account.id,
           email: account.email,
           name: account.name,
@@ -567,12 +586,32 @@ export async function deletePlannerAccount(plannerAccountId: string): Promise<Ac
           },
         },
       }),
-      prisma.plannerAccount.delete({ where: { id: plannerAccountId } }),
+      prisma.plannerServiceArea.deleteMany({ where: { plannerAccountId: userAccountId } }),
+      prisma.plannerSpecialtyTag.deleteMany({ where: { plannerAccountId: userAccountId } }),
+      prisma.itinerary.deleteMany({ where: { plannerAccountId: userAccountId } }),
+      prisma.userAccount.update({
+        where: { id: userAccountId },
+        data: {
+          isPlanner: false,
+          isOfficial: false,
+          plannerSuspendedAt: null,
+          plannerGender: null,
+          plannerAge: null,
+          plannerHomeAreaId: null,
+        },
+      }),
       prisma.adminAuditLog.create({
-        data: { adminId: admin.id, action: "delete", targetType: "planner_account", targetId: plannerAccountId, detail: {} },
+        data: {
+          adminId: admin.id,
+          action: "remove_planner_role",
+          targetType: "user_account",
+          targetId: userAccountId,
+          detail: { deletedItineraryCount: itineraryCount },
+        },
       }),
     ]);
     revalidatePath("/planners");
+    revalidatePath("/users");
   });
 }
 

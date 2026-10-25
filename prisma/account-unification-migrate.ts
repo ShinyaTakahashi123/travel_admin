@@ -26,10 +26,12 @@
  */
 import { createHash, randomBytes } from "crypto";
 import { prisma } from "../src/lib/prisma";
+import { sendMail } from "../src/lib/mail";
 
 require("../scripts/assert-db-target.cjs");
 
 const MIGRATED_EMAIL_DOMAIN = "migrated.invalid";
+const PLANNER_SITE_URL = process.env.PLANNER_SITE_URL ?? "https://planner.shiorietrip.com";
 
 function placeholderEmail(plannerAccountId: string): string {
   return `planner-${plannerAccountId}@${MIGRATED_EMAIL_DOMAIN}`;
@@ -128,6 +130,7 @@ async function main() {
       let mergedAB = 0;
       let convertedC = 0;
       let convertedD = 0;
+      const caseCNotifications: { legacyEmail: string; rawToken: string }[] = [];
 
       // A・B: 会員側の行へまとめる。PlannerAccountの行は削除しない
       for (const { planner: p, targetUserAccountId } of [...caseA, ...caseB]) {
@@ -253,8 +256,9 @@ async function main() {
             createdAt: p.createdAt,
           },
         });
-        // 合言葉の生の値は、ここではメール送信をまだ行わないため破棄する(段階4/5で、
-        // お知らせメールの送信とあわせて作り直す想定。DBにはハッシュのみ保存済み)
+        // 合言葉の生の値は、トランザクション成功後にまとめてメール送信する
+        // (トランザクション内で送ると、ロールバック時に送信済みメールだけ残ってしまうため)
+        caseCNotifications.push({ legacyEmail: p.email, rawToken });
         convertedC++;
       }
 
@@ -269,7 +273,7 @@ async function main() {
         }
       }
 
-      return { mergedAB, convertedC, convertedD, before, after };
+      return { mergedAB, convertedC, convertedD, before, after, caseCNotifications };
     },
     { timeout: 60000 }
   );
@@ -280,6 +284,43 @@ async function main() {
     "C(退避→回復待ち)": result.convertedC,
   });
   console.log("見張りの件数(前後、一致または増加のみ):", { before: result.before, after: result.after });
+
+  // Cのお知らせメール(2-4-1節4)は、トランザクションの成功後にまとめて送る。
+  // 1件失敗しても残りの送信は続ける(全体を失敗させない)。宛先はログに出さない
+  let notifiedCount = 0;
+  for (const { legacyEmail, rawToken } of result.caseCNotifications) {
+    try {
+      const url = `${PLANNER_SITE_URL}/account-link/recover-planner?token=${rawToken}`;
+      await sendMail({
+        to: legacyEmail,
+        subject: "【しおりえ】プランナーアカウントのご確認のお願い",
+        text: `しおりえをご利用いただきありがとうございます。
+
+ご利用中のプランナーのアカウントは、しおりえのアカウント統合に伴い、
+現在このメールアドレスでのログインができない状態です。
+
+下のリンクから、ご本人確認のうえ会員アカウントと結び付けてください。
+このお手続きが済むまで、プランナーとしてのしおりの編集・公開はできません。
+しおりの閲覧・公開状態・著作権は変わりません。
+
+${url}
+
+このリンクは30日間有効です。期限が切れた場合は、お手続き画面から再送できます。
+
+なお、このメールアドレスでは会員のご登録もあります。心当たりがない場合は、
+お問い合わせ、またはパスワードの再設定をご利用ください。
+
+ご不明な点がございましたら、お問い合わせページからご連絡ください。
+
+しおりえ運営`,
+      });
+      notifiedCount++;
+    } catch (err) {
+      console.error("[account-unification-migrate] お知らせメールの送信に失敗しました(1件):", err);
+    }
+  }
+  console.log("Cのお知らせメール送信件数:", notifiedCount, "/", result.caseCNotifications.length);
+
   await prisma.$disconnect();
 }
 

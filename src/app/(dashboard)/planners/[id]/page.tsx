@@ -15,10 +15,13 @@ export default async function PlannerAccountDetailPage({
 
   // 2026-10-25、アカウント統合によりUserAccount(isPlanner: true)から読む
   // (docs/specs/20261025-account-unification-detailed.md 3節)
+  // gender/age/homeAreaは会員の非公開情報用の列のため、プランナーの管理画面でも
+  // 使わず、プランナー公開用のplannerGender/plannerAge/plannerHomeAreaを使う
+  // (法務指摘2026-10-25、2-5節)
   const planner = await prisma.userAccount.findUnique({
     where: { id, isPlanner: true },
     include: {
-      homeArea: true,
+      plannerHomeArea: true,
       serviceAreas: { include: { area: true } },
       specialtyTags: { include: { tag: true } },
       itineraries: {
@@ -70,6 +73,14 @@ export default async function PlannerAccountDetailPage({
                   手続き中(保全)
                 </span>
               )}
+              {planner.plannerSuspendedAt && (
+                <span
+                  className="text-sm font-bold px-2.5 py-0.5 rounded-full"
+                  style={{ background: "#FEE2E2", color: "#B91C1C" }}
+                >
+                  プランナー機能停止中
+                </span>
+              )}
             </div>
             <div className="text-sm text-muted-foreground">
               P-{planner.id.slice(0, 4).toUpperCase()} ・ {planner.email} ・ 登録日 {formatDate(planner.createdAt)}
@@ -78,7 +89,7 @@ export default async function PlannerAccountDetailPage({
         </div>
         <PlannerAccountActions
           plannerId={planner.id}
-          status={planner.status}
+          plannerSuspended={Boolean(planner.plannerSuspendedAt)}
           legalHold={planner.legalHold}
           isOfficial={planner.isOfficial}
           isSuperAdmin={admin?.role === "super"}
@@ -104,15 +115,15 @@ export default async function PlannerAccountDetailPage({
           <div className="flex flex-col gap-2.5 text-base mb-3.5">
             <div className="flex justify-between">
               <span className="text-muted-foreground">性別</span>
-              <span>{planner.gender ?? "未設定"}</span>
+              <span>{planner.plannerGender ?? "未設定"}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">年齢</span>
-              <span>{planner.age ? `${planner.age}歳` : "未設定"}</span>
+              <span>{planner.plannerAge ? `${planner.plannerAge}歳` : "未設定"}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">住んでいる都道府県</span>
-              <span>{planner.homeArea?.name ?? "未設定"}</span>
+              <span>{planner.plannerHomeArea?.name ?? "未設定"}</span>
             </div>
           </div>
           <div className="h-px bg-muted my-3.5" />
