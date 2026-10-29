@@ -23,7 +23,9 @@ async function main() {
   const days = await prisma.day.findMany({
     where: { itineraryId },
     orderBy: { dayNumber: "asc" },
-    include: { spots: { orderBy: { orderNo: "asc" }, include: { transitLegs: true } } },
+    include: {
+      spots: { orderBy: { orderNo: "asc" }, include: { transitLegs: { orderBy: { orderNo: "asc" } } } },
+    },
   });
 
   let errorCount = 0;
@@ -31,11 +33,12 @@ async function main() {
     console.log(`\n=== Day ${day.dayNumber} ===`);
     let prevDepartMin: number | null = null;
     for (const s of day.spots) {
-      const leg = s.transitLegs[0];
+      const legs = s.transitLegs;
+      const legSum = legs.reduce((sum, l) => sum + (l.transitDurationMin ?? 0), 0);
       const arriveMin = s.visitTime ? minutesOf(s.visitTime) : null;
       let note = "";
-      if (prevDepartMin !== null && leg && leg.transitDurationMin !== null && arriveMin !== null) {
-        const expected: number = prevDepartMin + leg.transitDurationMin;
+      if (prevDepartMin !== null && legs.length > 0 && arriveMin !== null) {
+        const expected: number = prevDepartMin + legSum;
         if (expected !== arriveMin) {
           const eh = String(Math.floor(expected / 60)).padStart(2, "0");
           const em = String(expected % 60).padStart(2, "0");
@@ -43,9 +46,8 @@ async function main() {
           errorCount++;
         }
       }
-      console.log(
-        `${s.visitTime ? hm(s.visitTime) : "?"} ${leg ? `${leg.transitMode}/${leg.transitDurationMin}` : "-"} ${s.name}(${s.stayDurationMin}分)${note}`
-      );
+      const legLabel = legs.length > 0 ? legs.map((l) => `${l.transitMode}/${l.transitDurationMin}`).join("+") : "-";
+      console.log(`${s.visitTime ? hm(s.visitTime) : "?"} ${legLabel} ${s.name}(${s.stayDurationMin}分)${note}`);
       if (arriveMin !== null && s.stayDurationMin !== null) {
         prevDepartMin = arriveMin + s.stayDurationMin;
       } else {
