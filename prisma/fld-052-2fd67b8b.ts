@@ -260,9 +260,9 @@ async function main() {
     }));
   await prisma.$transaction(
     async (tx) => {
-      // 中央公会堂・東洋陶磁美術館を2日目へ移す（写真を残すため作り直さない。orderNo は一時的に大きな番号）
-      await tx.spot.update({ where: { id: KOKAI }, data: { dayId: DAY2_ID, orderNo: 9001 } });
-      await tx.spot.update({ where: { id: TOYO }, data: { dayId: DAY2_ID, orderNo: 9002 } });
+      // 中央公会堂・東洋陶磁美術館を2日目へ移す（写真を残すため作り直さない。orderNo は一時的に大きな番号。setDaySpotOrder の 9000 番台と重ならない 50000 番台）
+      await tx.spot.update({ where: { id: KOKAI }, data: { dayId: DAY2_ID, orderNo: 50001 } });
+      await tx.spot.update({ where: { id: TOYO }, data: { dayId: DAY2_ID, orderNo: 50002 } });
       await setDaySpotOrder(DAY1_ID, items(DAY1) as never, { tx });
       await setDaySpotOrder(DAY2_ID, items(DAY2) as never, { tx, remove: [OGI, REKI] });
       await tx.itinerary.update({ where: { id: ITINERARY_ID }, data: { description: it.description!.replace(DESC_FROM, DESC_TO) } });
