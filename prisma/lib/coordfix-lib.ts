@@ -77,6 +77,28 @@ export async function runCoordFix(itineraryId: string, fixes: SpotFix[]) {
     }
     if (Object.keys(data).length) ops.push(prisma.spot.update({ where: { id: s.id }, data }));
   }
+  // 直したあとの時刻のつながりを確かめる（前の着く時刻＋滞在＋移動の合計＝次の着く時刻）
+  const days = await prisma.day.findMany({
+    where: { itineraryId },
+    orderBy: { dayNumber: "asc" },
+    include: { spots: { orderBy: { orderNo: "asc" }, include: { transitLegs: true } } },
+  });
+  let gaps = 0;
+  for (const d of days) {
+    let prevEnd: number | null = null;
+    for (const s of d.spots) {
+      const f = fixes.find((x) => x.id === s.id);
+      const t = f?.time ? toDate(f.time.to) : s.visitTime;
+      const stay = f?.stay ? f.stay.to : s.stayDurationMin ?? 0;
+      const legSum = f?.legs ? f.legs.to.reduce((a, l) => a + l.min, 0) : s.transitLegs.reduce((a, l) => a + (l.transitDurationMin ?? 0), 0);
+      if (t && prevEnd !== null && t.getTime() !== prevEnd + legSum * 60000) {
+        gaps++;
+        console.log(`  ⚠ ${d.dayNumber}日目 ${s.name}: 着く時刻 ${fmt(t)}、前から計算すると ${fmt(new Date(prevEnd + legSum * 60000))}`);
+      }
+      if (t) prevEnd = t.getTime() + stay * 60000;
+    }
+  }
+  console.log(gaps ? `\n時刻のつながり: ⚠ ${gaps}件` : "\n時刻のつながり: すべて合っています");
   if (!COMMIT) return console.log("\n確認モードです。--commit で書き込みます。");
   await prisma.$transaction(ops);
   console.log("\n書き込みました。");
