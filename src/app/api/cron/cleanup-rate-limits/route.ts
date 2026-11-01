@@ -19,10 +19,11 @@ import { prisma } from "@/lib/prisma";
 //    実効性のためここで確実に消す)。「見られなくなった」の基準はtrip.original_kindで
 //    種類ごとに違う(src/lib/trip-availability.tsのisOriginalAvailableと同じ判定をSQLで表現):
 //    published=statusがpublishedでなくなったら／copy=本人が削除するまで見られる／
-//    shared_link=削除・プランナーの利用停止・リンクを止めた(shared_link_token_hashがnullに
-//    なった)・リンクを作り直した(ハッシュがtrip.original_shared_link_token_hashと違う)の
-//    いずれかで見られなくなった扱い(2026-09-28セキュリティの指摘で「リンクを止めただけなら
-//    残す」から変更・作り直しの検知を追加)
+//    shared_link=元のしおりがstatus='draft'で、プランナーが利用停止でなく、リンクが
+//    有効(shared_link_token_hashが旅を作った時点のものと同じ)、のすべてを満たすときだけ
+//    見られる扱い(許可リスト形式。2026-10-25セキュリティ指摘: 限定公開リンクの対象を
+//    一から作ったしおりにも広げたため、「deletedでなければよい」という拒否リスト形式だと、
+//    審査中・却下・公開中に変わった後も古いリンクで見え続けてしまう)
 //    ※ trip_spot.photo_urlは、Vercel Blobの「使われていない画像の削除」(cleanup-blobs、
 //    src/lib/blob-cleanup.ts)の「使用中」判定には含めない。写真は元のPhotoの複製ではなく
 //    URLの参照のみで、元のPhotoが消えれば「旅」側は写真なし表示になる仕様のため
@@ -84,7 +85,7 @@ export async function GET(request: Request) {
         WHERE i.id = trip.original_itinerary_id
           AND (
             (trip.original_kind = 'copy' AND i.status <> 'deleted')
-            OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
+            OR (trip.original_kind = 'shared_link' AND i.status = 'draft' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
             OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
           )
       )
@@ -101,7 +102,7 @@ export async function GET(request: Request) {
           WHERE i.id = trip.original_itinerary_id
             AND (
               (trip.original_kind = 'copy' AND i.status <> 'deleted')
-              OR (trip.original_kind = 'shared_link' AND i.status <> 'deleted' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
+              OR (trip.original_kind = 'shared_link' AND i.status = 'draft' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
               OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
             )
         )

@@ -213,6 +213,11 @@ export async function approveItinerary(itineraryId: string): Promise<ActionResul
           reviewedAt: new Date(),
           reviewedByAdminId: user.id,
           rejectionReason: null,
+          // statusがdraftでなくなるため、限定公開リンクも一緒に止める(2重の守り。
+          // 通常はsetVisibility("public")の時点で既に止まっている想定。セキュリティ指摘2026-10-25)
+          sharedLinkTokenHash: null,
+          sharedLinkCreatedAt: null,
+          sharedLinkConsentAt: null,
         },
         include: { plannerAccount: { select: { email: true, isOfficial: true } } },
       });
@@ -275,6 +280,11 @@ export async function rejectItinerary(itineraryId: string, reason: string): Prom
           reviewedAt: new Date(),
           reviewedByAdminId: user.id,
           rejectionReason: trimmed,
+          // statusがdraftでなくなるため、限定公開リンクも一緒に止める(2重の守り。
+          // 通常はsetVisibility("public")の時点で既に止まっている想定。セキュリティ指摘2026-10-25)
+          sharedLinkTokenHash: null,
+          sharedLinkCreatedAt: null,
+          sharedLinkConsentAt: null,
         },
         include: { plannerAccount: { select: { email: true, isOfficial: true } } },
       });
@@ -310,6 +320,8 @@ export async function rejectItinerary(itineraryId: string, reason: string): Prom
             "以下のURLから編集画面を開けます。",
             editUrl,
             "",
+            "このしおりで限定公開リンクを作成していた場合、そのリンクは止まっています。必要であれば、作り直してください。",
+            "",
             "ご不明な点があれば、お問い合わせページからご連絡ください。",
             "",
             "---",
@@ -331,7 +343,9 @@ export async function hideItinerary(itineraryId: string): Promise<ActionResult> 
     await prisma.$transaction(async (tx) => {
       const updated = await tx.itinerary.update({
         where: { id: itineraryId },
-        data: { status: "private" },
+        // statusがdraftでなくなるため、限定公開リンクも一緒に止める(2重の守り。
+        // セキュリティ指摘2026-10-25)
+        data: { status: "private", sharedLinkTokenHash: null, sharedLinkCreatedAt: null, sharedLinkConsentAt: null },
         select: { title: true },
       });
       await tx.adminAuditLog.create({
@@ -356,7 +370,9 @@ export async function deleteItineraryAsAdmin(itineraryId: string): Promise<Actio
     await prisma.$transaction(async (tx) => {
       const updated = await tx.itinerary.update({
         where: { id: itineraryId },
-        data: { status: "deleted" },
+        // statusがdraftでなくなるため、限定公開リンクも一緒に止める(2重の守り。
+        // セキュリティ指摘2026-10-25)
+        data: { status: "deleted", sharedLinkTokenHash: null, sharedLinkCreatedAt: null, sharedLinkConsentAt: null },
         select: { title: true },
       });
       await tx.adminAuditLog.create({
