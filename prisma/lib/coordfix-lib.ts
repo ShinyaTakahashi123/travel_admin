@@ -9,6 +9,7 @@ export type Leg = { mode: "walk" | "train" | "bus" | "car" | "taxi" | "other"; m
 export type SpotFix = {
   id: string;
   label: string; // 確認用のスポット名（DB の名前と一致すること）
+  rename?: string; // スポット名を変えるときの新しい名前
   point?: { from: [number, number]; to: [number, number]; source: string };
   time?: { from: string; to: string };
   stay?: { from: number; to: number };
@@ -36,6 +37,10 @@ export async function runCoordFix(itineraryId: string, fixes: SpotFix[]) {
     if (s.name !== f.label) throw new Error(`${f.label}: DB の名前は「${s.name}」です`);
     const data: Record<string, unknown> = {};
     console.log(`\n■ ${s.name}`);
+    if (f.rename) {
+      data.name = f.rename;
+      console.log(`  名前「${s.name}」→「${f.rename}」`);
+    }
     if (f.point) {
       if (Number(s.lat) !== f.point.from[0] || Number(s.lng) !== f.point.from[1]) throw new Error(`${s.name}: いまの座標が想定と違います（${s.lat},${s.lng}）`);
       data.lat = f.point.to[0];
