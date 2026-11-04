@@ -27,8 +27,9 @@ async function main() {
   console.log("【1. 緯度・経度の入れかえ】");
   const updates: { id: string; name: string; oldLat: number; oldLng: number; newLat: number; newLng: number }[] = [];
   for (const s of day.spots) {
-    const oldLat = s.lat;
-    const oldLng = s.lng;
+    if (s.lat === null || s.lng === null) throw new Error(`${s.name}: 現在の点がnullです`);
+    const oldLat = Number(s.lat);
+    const oldLng = Number(s.lng);
     const newLat = oldLng; // 入れかえ
     const newLng = oldLat;
     updates.push({ id: s.id, name: s.name, oldLat, oldLng, newLat, newLng });

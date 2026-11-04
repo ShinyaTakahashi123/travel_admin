@@ -28,7 +28,8 @@ async function main() {
 
   for (const f of FIXES) {
     const s = await prisma.spot.findUniqueOrThrow({ where: { id: f.id } });
-    if (Math.abs(s.lat - f.oldLat) > 0.00001 || Math.abs(s.lng - f.oldLng) > 0.00001) {
+    if (s.lat === null || s.lng === null) throw new Error(`${f.name}: 現在の点がnullです`);
+    if (Math.abs(Number(s.lat) - f.oldLat) > 0.00001 || Math.abs(Number(s.lng) - f.oldLng) > 0.00001) {
       throw new Error(`${f.name}: 現在値が期待と不一致 (現在 ${s.lat},${s.lng})`);
     }
     console.log(`\n[${f.name}]`);
