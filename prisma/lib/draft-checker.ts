@@ -183,6 +183,17 @@ async function checkLegDurations(day: DraftSpot[], dayNumber: number, warnings: 
     const prev = day[i - 1];
     const cur = day[i];
     const label = `${dayNumber}日目 ${prev.name}→${cur.name}`;
+    // レンタカーの駐車場までの徒歩など、1つのスポットに区間(legs)が複数あるときは、
+    // 下書きが持つ点(前後のスポットそのものの点)だけでは区間の境目(駐車場など)の座標が分からず、
+    // 前後のスポット間の全体の道のりを、どの区間にも当ててしまうと誤判定になる。
+    // 複数区間のときは、経路の計算での短すぎのチェックは行わず(目安は5の書き出し・結びの分の整合で見る)、
+    // 25分超えの注意だけ行う
+    if (cur.legs.length > 1) {
+      for (const leg of cur.legs) {
+        if (leg.mode === "walk" && leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
+      }
+      continue;
+    }
     for (const leg of cur.legs) {
       if (leg.mode === "walk") {
         if (leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
@@ -234,11 +245,15 @@ function checkMemoMinutesConsistency(day: DraftSpot[], dayNumber: number, warnin
     const actual = legSum(cur.legs);
     const label = `${dayNumber}日目 ${prev.name}→${cur.name}`;
 
-    const openingSlice = cur.memo.slice(0, 80);
+    // メモが短いと、80字の切り出しに結びの「この後は、…」まで入り込み、次の区間の分を誤って拾う
+    const closingInOpening = cur.memo.indexOf("この後は");
+    const openingSlice = cur.memo.slice(0, closingInOpening === -1 ? 80 : Math.min(80, closingInOpening));
     const openingMins = [...extractMinutesNear(openingSlice, /歩いて|車で/), ...extractTotalMinutes(openingSlice)];
     if (openingMins.length === 0) {
       warnings.push(`${label}: ${cur.name}の書き出しに移動の分の記載が見当たりません`);
-    } else if (!openingMins.includes(actual)) {
+      // 駐車場までの徒歩+運転のように、区間(legs)が複数のときは、内訳をそれぞれ書く形(「車でおよそ9分、
+      // 歩いておよそ3分」)もある。合計が実際の移動分と合えば、内訳の書き方として認める
+    } else if (!openingMins.includes(actual) && openingMins.reduce((a, b) => a + b, 0) !== actual) {
       warnings.push(`${label}: ${cur.name}の書き出しの分(${openingMins.join("/")})が実際の移動${actual}分とズレています`);
     }
 
@@ -250,7 +265,7 @@ function checkMemoMinutesConsistency(day: DraftSpot[], dayNumber: number, warnin
       const closingMins = [...extractMinutesNear(closingTail, /歩いて|車で/), ...extractTotalMinutes(closingTail)];
       if (closingMins.length === 0) {
         warnings.push(`${label}: ${prev.name}の結びに移動の分の記載が見当たりません`);
-      } else if (!closingMins.includes(actual)) {
+      } else if (!closingMins.includes(actual) && closingMins.reduce((a, b) => a + b, 0) !== actual) {
         warnings.push(`${label}: ${prev.name}の結びの分(${closingMins.join("/")})が実際の移動${actual}分とズレています`);
       }
     }

@@ -3,6 +3,8 @@
  * 点の出どころ・出典・開閉の時刻は、DBに記録がないため「既存データからの書き出し(検証用)」の
  * 決まった説明を入れる(確認の道具は欄が空かどうかだけを見るので、これでも通る)。
  * 使い方: npx tsx prisma/drafts/_test/export-existing-as-draft.ts <しおりIDの先頭8文字以上> <出力先.json>
+ * 本番の今の文を確かめたいときは、先頭に npm run prod -- を付ける(読み取りのみ)。付けなければ開発用DB。
+ * 開発用DBは本番の月1回の写しなので、本番で最近組み直した・直したしおりでは古い版を拾うことがある(2026-11-04、企画運営の指摘)
  */
 import { writeFileSync } from "node:fs";
 import { prisma } from "../../../src/lib/prisma";
