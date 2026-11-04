@@ -1,0 +1,220 @@
+{
+  "title": "奈良公園の大仏と古社をめぐる日帰りプラン",
+  "description": "奈良国立博物館で仏教美術にふれたあと、東大寺の大仏殿、春日大社の参道を歩き、奈良町の町家建築まで、歴史の重なる奈良公園のまわりを一日でめぐります。",
+  "nights": 0,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [
+    "定番観光"
+  ],
+  "purposeNames": [
+    "神社"
+  ],
+  "prefectureName": "奈良県",
+  "areaNames": [
+    "奈良市内"
+  ],
+  "cover": {
+    "commonsFile": "Todaiji01s3200.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Todaiji01s3200.jpg",
+    "author": "663highland",
+    "license": "CC BY 2.5"
+  },
+  "citations": [
+    {
+      "url": "https://www.narahaku.go.jp/",
+      "excerpt": "奈良国立博物館の沿革・開館年の記載"
+    },
+    {
+      "url": "https://www.todaiji.or.jp/",
+      "excerpt": "東大寺の創建・大仏開眼供養の由来"
+    },
+    {
+      "url": "https://www.kasugataisha.or.jp/",
+      "excerpt": "春日大社の創建・摂末社の数"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "奈良国立博物館",
+        "time": "09:00",
+        "stayDurationMin": 70,
+        "memo": "奈良国立博物館は、1895年に開館した、仏教美術を中心に収蔵する博物館です。なら仏像館には、飛鳥時代から鎌倉時代にかけての仏像が並び、間近でその表情を見ることができます。春と秋には正倉院展も開かれ、多くの人が訪れます。地下回廊でつながる新館では、写経や考古遺物の展示も見学できます。この後は、歩いておよそ15分、東大寺へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 34.6846,
+          "lng": 135.837542,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用の合成データ(実在のおおよその位置)"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "開館・閉館の時刻は公式サイトで確認済み(試し用)",
+          "sourceUrl": "https://www.narahaku.go.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.narahaku.go.jp/about/history.html",
+            "excerpt": "1895年開館、仏教美術中心の収蔵"
+          }
+        ]
+      },
+      {
+        "name": "東大寺",
+        "time": "10:35",
+        "stayDurationMin": 100,
+        "memo": "奈良国立博物館から歩いておよそ15分、次に訪れるのは東大寺です。728年に聖武天皇が建立を発願し、752年に大仏の開眼供養が行われました。幾度かの戦火と再建を経て、今の大仏殿は江戸時代に建て直されたものとされています。南大門の金剛力士像や、大仏殿の柱の穴をくぐる体験も見どころの一つです。今も多くの参拝者が訪れる神聖な場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ16分、奈良町にぎわいの家の近くへ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 15
+          }
+        ],
+        "point": {
+          "lat": 34.6889,
+          "lng": 135.8398,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用の合成データ(実在のおおよその位置)"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Todaiji01s3200.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Todaiji01s3200.jpg",
+            "author": "663highland",
+            "license": "CC BY 2.5"
+          }
+        ],
+        "marks": [
+          "temple"
+        ],
+        "hours": {
+          "note": "開門・閉門の時刻は公式サイトで確認済み(試し用)",
+          "sourceUrl": "https://www.todaiji.or.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.todaiji.or.jp/about/history/",
+            "excerpt": "728年発願、752年開眼供養"
+          }
+        ]
+      },
+      {
+        "name": "もちいどのセンター街",
+        "time": "12:21",
+        "stayDurationMin": 40,
+        "memo": "東大寺から歩いておよそ16分、もちいどのセンター街のあたりで昼食をとりましょう。アーケードの下には、奈良漬けや大和茶を扱う店、食事処が並び、観光客だけでなく地元の人も行き交います。鹿のオブジェが置かれた一角もあり、歩くだけでも奈良らしい雰囲気を味わえます。お腹を満たしたら、この後は、歩いておよそ24分、春日大社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 16
+          }
+        ],
+        "point": {
+          "lat": 34.685467,
+          "lng": 135.8321,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用の合成データ(実在のおおよその位置。昼食は店でなくアーケードの通りの点)"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "lunch"
+        ],
+        "hours": {
+          "note": "商店街そのものに営業時間はなし(試し用)",
+          "sourceUrl": "https://www.mochiidono.com/"
+        },
+        "citations": [
+          {
+            "url": "https://www.mochiidono.com/",
+            "excerpt": "もちいどのセンター街の紹介"
+          }
+        ]
+      },
+      {
+        "name": "春日大社",
+        "time": "13:25",
+        "stayDurationMin": 100,
+        "memo": "もちいどのセンター街から歩いておよそ24分、次に訪れるのは春日大社です。768年に創建されたと伝わるこの神社は、全国に約3000社あるという春日大社系列の神社の本社です。朱色の社殿と釣燈籠が並ぶ参道は、訪れる人を静かな気持ちにさせます。境内には国宝・重要文化財に指定された建物や美術品も多く伝わっています。今も多くの参拝者が訪れる神聖な場所ですので、静かに、敬意をもってお参りしましょう。この後は、車でおよそ15分、奈良町格子の家へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 24
+          }
+        ],
+        "point": {
+          "lat": 34.6818,
+          "lng": 135.8481,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用の合成データ(実在のおおよその位置)"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Kasugataisha_haiden.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kasugataisha_haiden.jpg",
+            "author": "663highland",
+            "license": "CC BY 2.5"
+          }
+        ],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "開門・閉門の時刻は公式サイトで確認済み(試し用)",
+          "sourceUrl": "https://www.kasugataisha.or.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.kasugataisha.or.jp/about/history/",
+            "excerpt": "768年創建と伝わる、摂末社の数"
+          }
+        ]
+      },
+      {
+        "name": "奈良町格子の家",
+        "time": "15:20",
+        "stayDurationMin": 80,
+        "memo": "春日大社から車でおよそ15分、旅の締めくくりに訪れるのは奈良町格子の家です。奈良町に伝わる伝統的な町家の造りを再現した施設で、通り庭や中庭、2階の格子窓などを間近に見ることができます。江戸時代から続く商家の暮らしぶりが伝わる造りで、当時の生活の工夫を知ることができます。見学を終えたら、今日の一日を振り返りながら、駅へ戻りましょう。",
+        "legs": [
+          {
+            "mode": "car",
+            "min": 15
+          }
+        ],
+        "point": {
+          "lat": 34.6788,
+          "lng": 135.8323,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用の合成データ(実在のおおよその位置)"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "開館・閉館の時刻は公式サイトで確認済み(試し用)",
+          "sourceUrl": "https://naramachiinfo.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://naramachiinfo.jp/spot/koushinoie/",
+            "excerpt": "町家の造りを再現した施設の紹介"
+          }
+        ]
+      }
+    ]
+  ]
+}
