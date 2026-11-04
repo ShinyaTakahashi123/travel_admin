@@ -18,7 +18,7 @@ import { uploadDraftPhoto } from "./lib/draft-photos";
 
 type Pair = { file: string; sha256: string; draft: DraftItinerary };
 
-async function loadAndVerify(file: string, expectedSha256: string): Promise<{ pair: Pair; errors: string[] }> {
+async function loadAndVerify(file: string, expectedSha256: string): Promise<{ pair: Pair; errors: string[]; notices: string[] }> {
   const errors: string[] = [];
   const actualSha256 = sha256OfFile(file);
   if (actualSha256 !== expectedSha256) {
@@ -26,12 +26,12 @@ async function loadAndVerify(file: string, expectedSha256: string): Promise<{ pa
   }
   const data = JSON.parse(readFileSync(file, "utf8"));
   const draft = validateDraftShape(data);
-  const warnings = await runChecks(draft);
+  const { warnings, notices } = await runChecks(draft);
   if (warnings.length > 0) {
     errors.push(`${file}: 確認の道具が ⚠ ${warnings.length}件を出しています`);
     warnings.forEach((w) => errors.push(`  - ${w}`));
   }
-  return { pair: { file, sha256: expectedSha256, draft }, errors };
+  return { pair: { file, sha256: expectedSha256, draft }, errors, notices: notices.map((n) => `${file}: ${n}`) };
 }
 
 const COMMIT_ONLY_PLACEHOLDER = "(アップロード前。--commitで取得します)";
@@ -77,6 +77,11 @@ async function main() {
     process.exitCode = 1;
     await prisma.$disconnect();
     return;
+  }
+  const allNotices = results.flatMap((r) => r.notices);
+  if (allNotices.length > 0) {
+    console.log(`\nℹ 人が確かめる注意 ${allNotices.length}件(⚠とは別。登録は止めません)`);
+    allNotices.forEach((n) => console.log(`  - ${n}`));
   }
 
   const blobPrefix = "drafts";

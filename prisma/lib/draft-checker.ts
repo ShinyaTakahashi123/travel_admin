@@ -6,7 +6,7 @@
  */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import type { DraftItinerary, DraftSpot, Mark } from "./draft-schema";
+import type { DraftItinerary, DraftSpot, Mark, TransitMode } from "./draft-schema";
 import wordRules from "./word-rules.json";
 
 export function sha256OfFile(path: string): string {
@@ -178,41 +178,57 @@ async function routeMeasure(
   }
 }
 
-async function checkLegDurations(day: DraftSpot[], dayNumber: number, warnings: string[]) {
+async function measureOneLeg(
+  label: string,
+  leg: { mode: TransitMode; min: number },
+  from: { lat: number; lng: number },
+  to: { lat: number; lng: number },
+  warnings: string[],
+) {
+  if (leg.mode === "walk") {
+    if (leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
+    const measured = await routeMeasure(from.lat, from.lng, to.lat, to.lng, "foot");
+    if (measured) {
+      const required = Math.ceil(measured.distanceM / 75);
+      if (leg.min < required) warnings.push(`${label}: 徒歩${leg.min}分だが、道のり${measured.distanceM.toFixed(0)}m(÷75m/分=${required}分)より短い`);
+    } else {
+      warnings.push(`${label}: 徒歩の道のりの計算に問い合わせできませんでした(routed-foot)`);
+    }
+  } else if (leg.mode === "car" || leg.mode === "taxi") {
+    const measured = await routeMeasure(from.lat, from.lng, to.lat, to.lng, "car");
+    if (measured) {
+      const required = Math.ceil(measured.durationS / 60) + 5;
+      if (leg.min < required) warnings.push(`${label}: ${leg.mode}${leg.min}分だが、OSRMの所要${(measured.durationS / 60).toFixed(1)}分を切り上げ+5分=${required}分より短い`);
+    } else {
+      warnings.push(`${label}: 車の道のりの計算に問い合わせできませんでした(OSRM)`);
+    }
+  }
+}
+
+async function checkLegDurations(day: DraftSpot[], dayNumber: number, warnings: string[], notices: string[]) {
   for (let i = 1; i < day.length; i++) {
     const prev = day[i - 1];
     const cur = day[i];
     const label = `${dayNumber}日目 ${prev.name}→${cur.name}`;
-    // レンタカーの駐車場までの徒歩など、1つのスポットに区間(legs)が複数あるときは、
-    // 下書きが持つ点(前後のスポットそのものの点)だけでは区間の境目(駐車場など)の座標が分からず、
-    // 前後のスポット間の全体の道のりを、どの区間にも当ててしまうと誤判定になる。
-    // 複数区間のときは、経路の計算での短すぎのチェックは行わず(目安は5の書き出し・結びの分の整合で見る)、
-    // 25分超えの注意だけ行う
-    if (cur.legs.length > 1) {
-      for (const leg of cur.legs) {
-        if (leg.mode === "walk" && leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
-      }
+
+    if (cur.legs.length <= 1) {
+      for (const leg of cur.legs) await measureOneLeg(label, leg, prev.point, cur.point, warnings);
       continue;
     }
-    for (const leg of cur.legs) {
-      if (leg.mode === "walk") {
-        if (leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
-        const measured = await routeMeasure(prev.point.lat, prev.point.lng, cur.point.lat, cur.point.lng, "foot");
-        if (measured) {
-          const required = Math.ceil(measured.distanceM / 75);
-          if (leg.min < required) warnings.push(`${label}: 徒歩${leg.min}分だが、道のり${measured.distanceM.toFixed(0)}m(÷75m/分=${required}分)より短い`);
-        } else {
-          warnings.push(`${label}: 徒歩の道のりの計算に問い合わせできませんでした(routed-foot)`);
-        }
-      } else if (leg.mode === "car" || leg.mode === "taxi") {
-        const measured = await routeMeasure(prev.point.lat, prev.point.lng, cur.point.lat, cur.point.lng, "car");
-        if (measured) {
-          const required = Math.ceil(measured.durationS / 60) + 5;
-          if (leg.min < required) warnings.push(`${label}: ${leg.mode}${leg.min}分だが、OSRMの所要${(measured.durationS / 60).toFixed(1)}分を切り上げ+5分=${required}分より短い`);
-        } else {
-          warnings.push(`${label}: 車の道のりの計算に問い合わせできませんでした(OSRM)`);
-        }
-      }
+
+    // レンタカーの駐車場までの徒歩＋運転など、1つのスポットに区間(legs)が複数あるとき。
+    // 各legの終わり(駐車場などの中継点)がwaypointとして全て書かれていれば、区間ごとに測り直せる。
+    // 書かれていなければ、前後スポット間の全体の道のりをどの区間にも当てると誤判定になるため、
+    // 経路の計算は行わず「人が確かめる」注意(⚠とは別)を出す(2026-11-04、企画運営の指摘)
+    const allWaypointsPresent = cur.legs.slice(0, -1).every((l) => l.waypoint);
+    if (!allWaypointsPresent) {
+      for (const leg of cur.legs) if (leg.mode === "walk" && leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
+      notices.push(`${label}: 区間が${cur.legs.length}件あり、中継点(waypoint)の記録がないため、経路の計算での確認を飛ばしています。人が確かめてください`);
+      continue;
+    }
+    const segPoints = [prev.point, ...cur.legs.slice(0, -1).map((l) => l.waypoint!), cur.point];
+    for (let li = 0; li < cur.legs.length; li++) {
+      await measureOneLeg(`${label}(区間${li + 1}/${cur.legs.length})`, cur.legs[li], segPoints[li], segPoints[li + 1], warnings);
     }
   }
 }
@@ -408,9 +424,11 @@ function checkPhotos(draft: DraftItinerary, warnings: string[]) {
 // まとめ
 // ============================================================
 export type RunChecksOptions = { skipSimilar?: boolean };
+export type RunChecksResult = { warnings: string[]; notices: string[] };
 
-export async function runChecks(draft: DraftItinerary, opts: RunChecksOptions = {}): Promise<string[]> {
+export async function runChecks(draft: DraftItinerary, opts: RunChecksOptions = {}): Promise<RunChecksResult> {
   const warnings: string[] = [];
+  const notices: string[] = [];
   const totalDays = draft.days.length;
 
   checkWords(draft.title, "題", warnings);
@@ -429,12 +447,12 @@ export async function runChecks(draft: DraftItinerary, opts: RunChecksOptions = 
   });
 
   for (let di = 0; di < draft.days.length; di++) {
-    await checkLegDurations(draft.days[di], di + 1, warnings);
+    await checkLegDurations(draft.days[di], di + 1, warnings, notices);
   }
 
   checkPhotos(draft, warnings);
 
   if (!opts.skipSimilar) await checkSimilarItineraries(draft, warnings);
 
-  return warnings;
+  return { warnings, notices };
 }

@@ -23,13 +23,18 @@ async function main() {
   const draft = validateDraftShape(data);
 
   console.log(`■ ${draft.title}（${draft.nights === 0 ? "日帰り" : `${draft.nights}泊${draft.nights + 1}日`}）`);
-  const warnings = await runChecks(draft, { skipSimilar });
+  const { warnings, notices } = await runChecks(draft, { skipSimilar });
 
   if (warnings.length === 0) {
     console.log("\n⚠ なし");
   } else {
     console.log(`\n⚠ ${warnings.length}件`);
     warnings.forEach((w, i) => console.log(`  ${i + 1}. ${w}`));
+  }
+
+  if (notices.length > 0) {
+    console.log(`\nℹ 人が確かめる注意 ${notices.length}件(⚠とは別。登録は止めない)`);
+    notices.forEach((n, i) => console.log(`  ${i + 1}. ${n}`));
   }
 
   const sha256 = sha256OfFile(file);

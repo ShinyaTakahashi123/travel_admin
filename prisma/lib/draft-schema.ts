@@ -6,10 +6,20 @@
 
 export type TransitMode = "walk" | "train" | "bus" | "car" | "taxi" | "other";
 
+// 駐車場など、区間(leg)の終わりの中継点。1つのスポットに区間が複数あるとき
+// (駐車場までの徒歩＋運転など)、このleg自身が終わる場所の点。最後の区間には不要
+// (終わりはスポットそのものの点になる)。これがあると、各区間を別々に測り直せる
+export type Waypoint = {
+  lat: number;
+  lng: number;
+  note?: string; // 「出雲大社第2駐車場」など
+};
+
 export type Leg = {
   mode: TransitMode;
   min: number;
   line?: string; // 路線名(電車・バスのときだけ)。会社名は書かない
+  waypoint?: Waypoint;
 };
 
 // 点の出どころ。OSMのnode/wayの番号、または国土地理院などの例外とその理由(7章)
@@ -128,11 +138,19 @@ function checkPoint(v: any, path: string): Point {
   return v as Point;
 }
 
+function checkWaypoint(v: any, path: string): Waypoint {
+  if (typeof v !== "object" || v === null) fail(path, "はオブジェクトが要ります");
+  if (typeof v.lat !== "number" || !Number.isFinite(v.lat)) fail(path, ".lat が数ではありません");
+  if (typeof v.lng !== "number" || !Number.isFinite(v.lng)) fail(path, ".lng が数ではありません");
+  return v as Waypoint;
+}
+
 function checkLeg(v: any, path: string): Leg {
   if (typeof v !== "object" || v === null) fail(path, "はオブジェクトが要ります");
   const modes: TransitMode[] = ["walk", "train", "bus", "car", "taxi", "other"];
   if (!modes.includes(v.mode)) fail(path, `.mode が不明です(${v.mode})`);
   if (typeof v.min !== "number" || v.min < 0) fail(path, ".min が数ではありません");
+  if (v.waypoint !== undefined) checkWaypoint(v.waypoint, `${path}.waypoint`);
   return v as Leg;
 }
 
