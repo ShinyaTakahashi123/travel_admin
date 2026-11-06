@@ -1,0 +1,236 @@
+{
+  "title": "確認の道具の試し用(似たしおり・並び順違い)",
+  "description": "確認の道具の試し用しおり(似たしおりの判定テスト・架空)",
+  "nights": 0,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [],
+  "purposeNames": [],
+  "prefectureName": "秋田県",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "test.jpg",
+    "sourceUrl": "https://example.com",
+    "author": "test",
+    "license": "CC0"
+  },
+  "citations": [
+    {
+      "url": "https://example.com",
+      "excerpt": "試し用"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "秋田市民市場",
+        "time": "09:00",
+        "stayDurationMin": 40,
+        "memo": "試し用のメモ。秋田市民市場について。この後は、歩いておよそ5分、次へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 39.7186,
+          "lng": 140.1122,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(似たしおりの判定テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "赤れんが郷土館",
+        "time": "10:00",
+        "stayDurationMin": 40,
+        "memo": "試し用のメモ。赤れんが郷土館について。この後は、歩いておよそ5分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 39.716723,
+          "lng": 140.115865,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(似たしおりの判定テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "川反",
+        "time": "11:00",
+        "stayDurationMin": 40,
+        "memo": "試し用のメモ。川反について。この後は、歩いておよそ5分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 39.7203,
+          "lng": 140.1144,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(似たしおりの判定テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "秋田市民俗芸能伝承館(ねぶり流し館)",
+        "time": "12:00",
+        "stayDurationMin": 40,
+        "memo": "試し用のメモ。秋田市民俗芸能伝承館(ねぶり流し館)について。この後は、歩いておよそ5分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 39.720361,
+          "lng": 140.116972,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(似たしおりの判定テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "秋田県立美術館",
+        "time": "13:00",
+        "stayDurationMin": 40,
+        "memo": "試し用のメモ。秋田県立美術館について。この後は、歩いておよそ5分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 39.717437,
+          "lng": 140.121572,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(似たしおりの判定テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "秋田市文化創造館",
+        "time": "14:00",
+        "stayDurationMin": 40,
+        "memo": "試し用のメモ。秋田市文化創造館について。この後は、歩いておよそ5分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 39.719266,
+          "lng": 140.122812,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(似たしおりの判定テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "千秋公園",
+        "time": "15:00",
+        "stayDurationMin": 40,
+        "memo": "試し用のメモ。千秋公園について。この後は、歩いておよそ5分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 39.722154,
+          "lng": 140.125238,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(似たしおりの判定テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      }
+    ]
+  ]
+}

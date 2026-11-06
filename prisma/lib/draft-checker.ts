@@ -355,7 +355,19 @@ function distanceM(lat1: number, lng1: number, lat2: number, lng2: number): numb
   return 6371000 * 2 * Math.asin(Math.sqrt(a));
 }
 
-export async function checkSimilarItineraries(draft: DraftItinerary, warnings: string[]): Promise<void> {
+type ExistingSpot = { name: string; lat: unknown; lng: unknown };
+
+function samePlace(ds: DraftSpot, es: ExistingSpot): boolean {
+  if (es.lat === null || es.lng === null) return false;
+  if (es.name.trim() === ds.name.trim()) return true;
+  return distanceM(ds.point.lat, ds.point.lng, Number(es.lat), Number(es.lng)) <= 200;
+}
+
+// 2026-11-06 企画運営の依頼(仕様書20261106-similar-check-relax.md)で、京都・大阪・東京のように
+// 行き先が重なりやすい地域でも登録できるよう、「ある1日の行き先の並びが、公開中・承認待ちの
+// しおりのある1日の並びと、同じ数・同じ順番で全部同じ場所」のときだけ⚠(登録を止める)にし、
+// それ以外のただの重なりはℹ(人が確かめる注意。登録は止めない)に下げた
+export async function checkSimilarItineraries(draft: DraftItinerary, warnings: string[], notices: string[]): Promise<void> {
   try {
     const { prisma } = await import("../../src/lib/prisma");
     const existing = await prisma.itinerary.findMany({
@@ -364,29 +376,43 @@ export async function checkSimilarItineraries(draft: DraftItinerary, warnings: s
         id: true,
         title: true,
         status: true,
-        days: { select: { spots: { select: { name: true, lat: true, lng: true } } } },
+        days: { select: { dayNumber: true, spots: { orderBy: { orderNo: "asc" }, select: { name: true, lat: true, lng: true } } } },
       },
     });
+
+    // ⚠: 下書きのある1日の並びが、既存のしおりのある1日の並びと、同じ数・同じ順番で全部同じ場所
+    draft.days.forEach((draftDay, di) => {
+      for (const it of existing) {
+        for (const exDay of it.days) {
+          if (exDay.spots.length !== draftDay.length) continue;
+          const allSame = draftDay.every((ds, idx) => samePlace(ds, exDay.spots[idx]));
+          if (allSame) {
+            warnings.push(
+              `似たしおり(移動ルートが同じ): ${di + 1}日目が、${it.id.slice(0, 8)}[${it.status}]「${it.title}」の${exDay.dayNumber}日目と同じ数(${draftDay.length}か所)・同じ順番・同じ場所`,
+            );
+          }
+        }
+      }
+    });
+
+    // ℹ: それ以外の、行き先単位の重なり(今までどおりの一覧の形)
     const draftSpots = draft.days.flat();
     const byItinerary = new Map<string, { title: string; status: string; overlaps: string[] }>();
     for (const it of existing) {
       const spots = it.days.flatMap((d) => d.spots);
       for (const ds of draftSpots) {
         for (const es of spots) {
-          if (es.lat === null || es.lng === null) continue;
+          if (!samePlace(ds, es)) continue;
+          const entry = byItinerary.get(it.id) ?? { title: it.title, status: it.status, overlaps: [] };
           const sameName = es.name.trim() === ds.name.trim();
-          const near = distanceM(ds.point.lat, ds.point.lng, Number(es.lat), Number(es.lng)) <= 200;
-          if (sameName || near) {
-            const entry = byItinerary.get(it.id) ?? { title: it.title, status: it.status, overlaps: [] };
-            const detail = sameName ? `${ds.name}(同じ名前)` : `${ds.name}≈${es.name}(200m以内)`;
-            if (!entry.overlaps.includes(detail)) entry.overlaps.push(detail);
-            byItinerary.set(it.id, entry);
-          }
+          const detail = sameName ? `${ds.name}(同じ名前)` : `${ds.name}≈${es.name}(200m以内)`;
+          if (!entry.overlaps.includes(detail)) entry.overlaps.push(detail);
+          byItinerary.set(it.id, entry);
         }
       }
     }
     for (const [id, e] of byItinerary) {
-      warnings.push(`似たしおり: ${id.slice(0, 8)}[${e.status}]「${e.title}」と重なり${e.overlaps.length}件(${e.overlaps.join("、")})`);
+      notices.push(`似たしおり: ${id.slice(0, 8)}[${e.status}]「${e.title}」と重なり${e.overlaps.length}件(${e.overlaps.join("、")})。同じ場所の点がそろっているか・文を写していないかを確かめてください`);
     }
   } catch (err) {
     warnings.push(`似たしおりの確認: 本番/開発の読み取りができませんでした(${(err as Error).message.slice(0, 200)})。あとで必ず確認する`);
@@ -452,7 +478,7 @@ export async function runChecks(draft: DraftItinerary, opts: RunChecksOptions = 
 
   checkPhotos(draft, warnings);
 
-  if (!opts.skipSimilar) await checkSimilarItineraries(draft, warnings);
+  if (!opts.skipSimilar) await checkSimilarItineraries(draft, warnings, notices);
 
   return { warnings, notices };
 }
