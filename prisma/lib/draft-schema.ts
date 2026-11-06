@@ -15,11 +15,21 @@ export type Waypoint = {
   note?: string; // 「出雲大社第2駐車場」など
 };
 
+// 万博記念公園の中央口→太陽の塔のように、OSMの歩きの経路が有料区域の門などでつながらず、
+// 大きく遠回りに出る区間。公式の案内(園内マップの距離など)で分を決めたときに書く。
+// これがあると、経路の計算による短すぎの⚠は出さず、出典つきのℹ(人が確かめる注意)にする
+export type LegBasis = {
+  kind: "official";
+  sourceUrl: string;
+  note?: string; // 「園内マップの距離」など
+};
+
 export type Leg = {
   mode: TransitMode;
   min: number;
   line?: string; // 路線名(電車・バスのときだけ)。会社名は書かない
   waypoint?: Waypoint;
+  basis?: LegBasis;
 };
 
 // 点の出どころ。OSMのnode/wayの番号、または国土地理院などの例外とその理由(7章)
@@ -145,12 +155,20 @@ function checkWaypoint(v: any, path: string): Waypoint {
   return v as Waypoint;
 }
 
+function checkLegBasis(v: any, path: string): LegBasis {
+  if (typeof v !== "object" || v === null) fail(path, "はオブジェクトが要ります");
+  if (v.kind !== "official") fail(path, `.kind が不明です(${v.kind})`);
+  if (!isNonEmptyString(v.sourceUrl)) fail(path, ".sourceUrl が空です");
+  return v as LegBasis;
+}
+
 function checkLeg(v: any, path: string): Leg {
   if (typeof v !== "object" || v === null) fail(path, "はオブジェクトが要ります");
   const modes: TransitMode[] = ["walk", "train", "bus", "car", "taxi", "other"];
   if (!modes.includes(v.mode)) fail(path, `.mode が不明です(${v.mode})`);
   if (typeof v.min !== "number" || v.min < 0) fail(path, ".min が数ではありません");
   if (v.waypoint !== undefined) checkWaypoint(v.waypoint, `${path}.waypoint`);
+  if (v.basis !== undefined) checkLegBasis(v.basis, `${path}.basis`);
   return v as Leg;
 }
 

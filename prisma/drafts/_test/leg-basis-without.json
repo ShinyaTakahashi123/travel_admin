@@ -1,0 +1,86 @@
+{
+  "title": "確認の道具の試し用(区間の基準・なし)",
+  "description": "確認の道具の試し用しおり(公式の案内による区間の分・架空)",
+  "nights": 0,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [],
+  "purposeNames": [],
+  "prefectureName": "大阪府",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "test.jpg",
+    "sourceUrl": "https://example.com",
+    "author": "test",
+    "license": "CC0"
+  },
+  "citations": [
+    {
+      "url": "https://example.com",
+      "excerpt": "試し用"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "中央口",
+        "time": "09:00",
+        "stayDurationMin": 10,
+        "memo": "試し用のメモ。中央口について。この後は、歩いておよそ3分、太陽の塔へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 34.802842,
+          "lng": 135.523731,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(基準つきの区間テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "太陽の塔",
+        "time": "09:13",
+        "stayDurationMin": 40,
+        "memo": "中央口から歩いておよそ3分、太陽の塔に着きます。試し用のメモ。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 3
+          }
+        ],
+        "point": {
+          "lat": 34.801915,
+          "lng": 135.526879,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(基準つきの区間テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      }
+    ]
+  ]
+}

@@ -180,11 +180,22 @@ async function routeMeasure(
 
 async function measureOneLeg(
   label: string,
-  leg: { mode: TransitMode; min: number },
+  leg: { mode: TransitMode; min: number; basis?: { kind: "official"; sourceUrl: string; note?: string } },
   from: { lat: number; lng: number },
   to: { lat: number; lng: number },
   warnings: string[],
+  notices: string[],
 ) {
+  // 万博記念公園の中央口→太陽の塔のように、OSMの歩きの経路が有料区域の門などでつながらず
+  // 大きく遠回りに出る区間。公式の案内で分を決めたと書かれていれば、経路の計算での短すぎの
+  // ⚠は出さず、出典つきのℹ(人が確かめる注意)にする(2026-11-06、企画運営の依頼)
+  if (leg.basis) {
+    if (leg.mode === "walk" && leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
+    notices.push(
+      `${label}: ${leg.mode}${leg.min}分は公式の案内による値(${leg.basis.sourceUrl}${leg.basis.note ? `、${leg.basis.note}` : ""})。経路の計算は行っていません。人が確かめてください`,
+    );
+    return;
+  }
   if (leg.mode === "walk") {
     if (leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
     const measured = await routeMeasure(from.lat, from.lng, to.lat, to.lng, "foot");
@@ -212,7 +223,7 @@ async function checkLegDurations(day: DraftSpot[], dayNumber: number, warnings: 
     const label = `${dayNumber}日目 ${prev.name}→${cur.name}`;
 
     if (cur.legs.length <= 1) {
-      for (const leg of cur.legs) await measureOneLeg(label, leg, prev.point, cur.point, warnings);
+      for (const leg of cur.legs) await measureOneLeg(label, leg, prev.point, cur.point, warnings, notices);
       continue;
     }
 
@@ -228,7 +239,7 @@ async function checkLegDurations(day: DraftSpot[], dayNumber: number, warnings: 
     }
     const segPoints = [prev.point, ...cur.legs.slice(0, -1).map((l) => l.waypoint!), cur.point];
     for (let li = 0; li < cur.legs.length; li++) {
-      await measureOneLeg(`${label}(区間${li + 1}/${cur.legs.length})`, cur.legs[li], segPoints[li], segPoints[li + 1], warnings);
+      await measureOneLeg(`${label}(区間${li + 1}/${cur.legs.length})`, cur.legs[li], segPoints[li], segPoints[li + 1], warnings, notices);
     }
   }
 }
