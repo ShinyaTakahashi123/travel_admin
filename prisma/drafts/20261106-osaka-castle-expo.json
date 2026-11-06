@@ -1,0 +1,590 @@
+{
+  "title": "大阪城と難波宮、太陽の塔と万博記念公園をめぐる1泊2日",
+  "description": "1日目は大阪歴史博物館と難波宮跡公園で古代の宮殿の跡をたどり、西の丸庭園から大阪城天守閣、豊国神社、玉造稲荷神社へ。2日目はモノレールで万博記念公園へ向かい、太陽の塔、国立民族学博物館、日本庭園、EXPO'70パビリオン、自然文化園の森をめぐる1泊2日です。",
+  "nights": 1,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [
+    "定番観光"
+  ],
+  "purposeNames": [
+    "城・史跡",
+    "美術館・博物館"
+  ],
+  "prefectureName": "大阪府",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "OsakaCastle-MainTower01.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:OsakaCastle-MainTower01.jpg",
+    "author": "inoue-hiro",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+  },
+  "citations": [
+    {
+      "url": "https://www.osakacastle.net/library/",
+      "excerpt": "大阪城天守閣の歴史"
+    },
+    {
+      "url": "https://www.city.osaka.lg.jp/kensetsu/page/0000537939.html",
+      "excerpt": "難波宮跡の史跡指定"
+    },
+    {
+      "url": "https://www.expo70-park.jp/cause/expo/tower-of-sun/",
+      "excerpt": "太陽の塔"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "大阪歴史博物館",
+        "time": "11:00",
+        "stayDurationMin": 70,
+        "memo": "旅の入口はJR大阪駅です。10時半ごろに着いたら、歩いておよそ8分の東梅田駅から地下鉄谷町線に乗り、およそ7分の谷町四丁目駅へ。駅から歩いておよそ7分で、大阪歴史博物館に着きます。平成13年（2001）11月に開館した博物館で、NHK大阪放送局の放送会館と一つの建物として、大阪市とNHKが共同で建てました。今からおよそ1350年ほど前の飛鳥時代、この敷地には難波長柄豊碕宮という宮殿が置かれていて、館内ではその遺構の一部を、掘り出したままの状態で見ることができます。エレベーターで上がる10階は地上57mの高さで、窓の向こうに史跡難波宮の跡が広がります。休みの日は、公式の案内で確かめましょう。この後は、歩いておよそ5分、難波宮跡公園へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 34.682618,
+          "lng": 135.520813,
+          "source": {
+            "kind": "osm_node",
+            "id": "4920617728",
+            "note": "tourism=museum「大阪歴史博物館」"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "9:30〜17:00（入館は閉館の30分前まで）。休みは火曜（祝日は翌日）と12/28〜1/4",
+          "sourceUrl": "https://www.osakamushis.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.osakamushis.jp/about/brief.html",
+            "excerpt": "平成13年(2001)11月3日 大阪歴史博物館開館／NHK大阪放送局の新放送会館との複合施設として、大阪市と日本放送協会との共同で建設されました／難波宮のサイトミュージアム"
+          },
+          {
+            "url": "https://www.osakamushis.jp/news/zyousetu/b1.html",
+            "excerpt": "今からおよそ1350年ほど前の飛鳥時代、この博物館が建つ敷地には難波長柄豊碕宮という宮殿が置かれていました／一部は掘り出したままの状態でご覧いただけます"
+          },
+          {
+            "url": "https://www.osakamushis.jp/news/zyousetu/index.html",
+            "excerpt": "エレベーターでいっきに10階に昇るとそこは地上57ｍ／大極殿から、史跡難波宮を望みます"
+          },
+          {
+            "url": "https://kensaku.osakametro.co.jp/timetable/subway/dia/station/26137/1020/1",
+            "excerpt": "東梅田（八尾南方面）10:54・11:00 発（谷町四丁目 11:01・11:07 発＝約7分。26032/1020/1）"
+          }
+        ]
+      },
+      {
+        "name": "難波宮跡公園",
+        "time": "12:15",
+        "stayDurationMin": 20,
+        "memo": "大阪歴史博物館から歩いておよそ5分、難波宮跡公園に着きます。昭和29年（1954）から続く発掘調査で、2つの時代の宮殿の跡が重なって見つかった場所で、下の層は孝徳天皇の時代の難波長柄豊碕宮、上の層は奈良時代の神亀3年（726）から聖武天皇の命で造営された難波宮とされます。約14.5万平方メートルが、国の史跡「難波宮跡附法円坂遺跡」に指定されています。公園には、後期の難波宮の大極殿の基壇や、前期の難波宮の八角形の建物の跡などが、形をわかるように表されています。令和7年（2025）3月に開園した北のブロックでは、AR（拡張現実）で、宮殿の建物をバーチャルの映像で見ることもできます。この後は、歩いておよそ10分、大阪城大手前のあたりへ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 34.68104,
+          "lng": 135.521464,
+          "source": {
+            "kind": "osm_node",
+            "id": "14298339415",
+            "note": "案内板「難波宮跡公園」tourism=information（広い公園の、着く側の名前の点）"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Naniwa Palace Site.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Naniwa_Palace_Site.jpg",
+            "author": "Sakai Yayoi",
+            "license": "CC0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          }
+        ],
+        "marks": [],
+        "hours": {
+          "note": "公園（時間の定めは公式に記載なし）",
+          "sourceUrl": "https://www.city.osaka.lg.jp/kensetsu/page/0000537939.html"
+        },
+        "citations": [
+          {
+            "url": "https://www.city.osaka.lg.jp/kensetsu/page/0000537939.html",
+            "excerpt": "約14.5万平方メートルが国史跡「難波宮跡附法円坂遺跡」として指定／上層が聖武朝の難波宮であり、下層が孝徳朝の難波長柄豊碕宮／昭和29年以降の発掘調査により…宮殿の遺構がみつかりました"
+          },
+          {
+            "url": "https://www.pref.osaka.lg.jp/o180150/bunkazaihogo/bunkazai/naniwamiyaatokouen.html",
+            "excerpt": "復元された後期難波宮の大極殿基壇（だいごくでんきだん）や前期難波宮の八角形建物などが立体的に遺構表示"
+          },
+          {
+            "url": "https://www.city.osaka.lg.jp/kensetsu/page/0000645558.html",
+            "excerpt": "難波宮跡公園（北部ブロック）を令和7年3月28日（金曜日）に開園／ARを活用して、後期内裏正殿等をバーチャル映像で追体験／後期難波宮は、奈良時代の神亀3年（726）から聖武天皇の命令で造営された宮殿"
+          }
+        ]
+      },
+      {
+        "name": "大阪城大手前のあたりで昼食",
+        "time": "12:45",
+        "stayDurationMin": 40,
+        "memo": "難波宮跡公園から歩いておよそ10分、大阪城の西にあたる大手前のバス停のあたりで、昼食にしましょう。このあたりは、国の特別史跡に指定された大阪城の一帯の西の端にあたります。この後は、歩いておよそ12分、西の丸庭園へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 10
+          }
+        ],
+        "point": {
+          "lat": 34.687012,
+          "lng": 135.520432,
+          "source": {
+            "kind": "osm_node",
+            "id": "7735611024",
+            "note": "バス停「大阪城大手前」（昼食の点は380行のバス停）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "lunch"
+        ],
+        "hours": {
+          "note": "昼食のあたり",
+          "sourceUrl": "https://www.city.osaka.lg.jp/kensetsu/page/0000537939.html"
+        },
+        "citations": [
+          {
+            "url": "https://www.osakacastle.net/library/",
+            "excerpt": "一帯は国の特別史跡"
+          }
+        ]
+      },
+      {
+        "name": "西の丸庭園",
+        "time": "13:37",
+        "stayDurationMin": 30,
+        "memo": "大阪城大手前のあたりから歩いておよそ12分、西の丸庭園に着きます。北政所の屋敷があった場所とされ、昭和40年（1965）に、約6.5haの芝生の庭園として開かれました。園内には約300本の桜が植えられています。休みの日は、公式の案内で確かめましょう。この後は、歩いておよそ13分、大阪城天守閣へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 12
+          }
+        ],
+        "point": {
+          "lat": 34.687097,
+          "lng": 135.523115,
+          "source": {
+            "kind": "osm_way",
+            "id": "159278501",
+            "note": "leisure=garden「西の丸庭園」の Nominatim の中心"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "9:00〜17:00（3〜10月）、9:00〜16:30（11〜2月）、入園は30分前まで。休みは毎週月曜・年末年始（大阪観光局）",
+          "sourceUrl": "https://osaka-info.jp/spot/osaka-castle-nishinomaru-garden/"
+        },
+        "citations": [
+          {
+            "url": "https://osaka-info.jp/spot/osaka-castle-nishinomaru-garden/",
+            "excerpt": "北政所の屋敷があった場所とされている／昭和40年（1965）…約6.5haの芝生庭園として開園／約300本のサクラ"
+          }
+        ]
+      },
+      {
+        "name": "大阪城天守閣",
+        "time": "14:20",
+        "stayDurationMin": 70,
+        "memo": "西の丸庭園から歩いておよそ13分、大阪城天守閣に着きます。豊臣時代、徳川時代に続く3代目の天守閣で、市民から寄せられた寄付金で、昭和6年（1931）に復興されました。平成9年（1997）に国の登録有形文化財に、令和7年（2025）には大阪市の指定有形文化財になっています。いま見られる石垣や堀は、すべて徳川時代より後のものです。城の一帯は国の特別史跡で、古い建物の多くは重要文化財に指定されています。8階の展望台は地上50mの高さです。天守閣の近くには、「大阪城 豊臣石垣館」もあり、豊臣大坂城の石垣のうち、江戸時代に地中に埋められたものを、地下に降りて見学できます。この後は、歩いておよそ8分、豊国神社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 13
+          }
+        ],
+        "point": {
+          "lat": 34.687488,
+          "lng": 135.525887,
+          "source": {
+            "kind": "osm_node",
+            "id": "13388509601",
+            "note": "tourism=museum「大阪城天守閣」"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "OsakaCastle-MainTower01.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:OsakaCastle-MainTower01.jpg",
+            "author": "inoue-hiro",
+            "license": "CC BY-SA 3.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+          }
+        ],
+        "marks": [],
+        "hours": {
+          "note": "9:00〜18:00（入館17:30まで）。休みは12/28〜1/1。入館予約は受け付けていない",
+          "sourceUrl": "https://www.osakacastle.net/guide/"
+        },
+        "citations": [
+          {
+            "url": "https://www.osakacastle.net/library/",
+            "excerpt": "天守閣は、豊臣時代・徳川時代に続く3代目のもので、昭和6年（1931）市民の寄付金によって復興／平成9年（1997）には国の登録有形文化財に、令和7年（2025）には大阪市指定有形文化財／一帯は国の特別史跡に、古建造物のほとんどは重要文化財に指定／いま見ることができる石垣や堀…はすべて徳川時代以後のもの"
+          },
+          {
+            "url": "https://www.osakacastle.net/exhibition/",
+            "excerpt": "8F 展望台 地上50mから／大阪城 豊臣石垣館 徳川幕府が地中に埋めた豊臣大坂城の石垣を、地下に降りてご覧いただく"
+          }
+        ]
+      },
+      {
+        "name": "豊国神社",
+        "time": "15:38",
+        "stayDurationMin": 20,
+        "memo": "大阪城天守閣から歩いておよそ8分、豊国神社に着きます。豊臣秀吉公・秀頼公・秀長卿をまつる神社で、明治13年（1880）に中之島で創立され、昭和36年（1961）に今の場所へ移されました。境内に立つ豊臣秀吉公像は、平成19年（2007）に再び建てられたもので、高さは5.2m、彫刻家・中村晋也の作です。作庭家・重森三玲の設計と指導で造られた石庭「秀石庭」もあります。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ20分、玉造稲荷神社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 8
+          }
+        ],
+        "point": {
+          "lat": 34.684242,
+          "lng": 135.526413,
+          "source": {
+            "kind": "osm_way",
+            "id": "1093296634",
+            "note": "amenity=place_of_worship「豊国神社」の Nominatim の中心"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "参拝はいつでも可能。社務所 9:00〜16:50",
+          "sourceUrl": "https://www.osaka-hokokujinja.org/qa/"
+        },
+        "citations": [
+          {
+            "url": "https://www.osaka-hokokujinja.org/yuisyo/",
+            "excerpt": "「豊臣秀吉公」「豊臣秀頼公」「豊臣秀長卿」を御祭神／明治13年に創立／昭和36年1月大阪市北区中之島より奉遷したのが現在の神域"
+          },
+          {
+            "url": "https://www.osaka-hokokujinja.org/precincts/",
+            "excerpt": "平成19年当社境内に再び建立されたのが現在の豊臣秀吉公像／中村晋也作…高さ5.2メートル／秀石庭…重森三玲氏の設計・指導のもと造られた庭園"
+          }
+        ]
+      },
+      {
+        "name": "玉造稲荷神社",
+        "time": "16:18",
+        "stayDurationMin": 20,
+        "memo": "豊国神社から歩いておよそ20分、玉造稲荷神社に着きます。社伝では、垂仁天皇18年（紀元前12年）の秋にまつられたのが始まりとされます。聖徳太子が「この栗の白木の箸に枝葉を生ぜしめよ」と祈ったという伝説も伝わります。慶長8年（1603）には豊臣秀頼が社殿と高殿（舞台）を再建し、「大坂城の鎮守神」としてあがめられてきました。境内には、高さ3mの豊臣秀頼公の銅像や、「是より神宮まで百七十キロ」と刻まれた、伊勢参りの起点を示す碑があります。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この夜は、梅田のまわりの宿に泊まりましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 20
+          }
+        ],
+        "point": {
+          "lat": 34.677888,
+          "lng": 135.530114,
+          "source": {
+            "kind": "osm_way",
+            "id": "341949747",
+            "note": "amenity=place_of_worship「玉造稲荷神社」の Nominatim の中心"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "参拝の時間は公式に記載なし。難波・玉造資料館は2026年4月から長期休館（行き先にしない）",
+          "sourceUrl": "https://www.inari.or.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.inari.or.jp/yuisho",
+            "excerpt": "垂仁天皇18年（紀元前12年）の秋に創祀され／この栗の白木の箸に枝葉を生ぜしめよ／慶長8年（1603）には豊臣秀頼により社殿、高殿（舞台）が再建／「大坂城の鎮守神」として崇敬"
+          },
+          {
+            "url": "https://www.inari.or.jp/keidaisekihi-shinboku",
+            "excerpt": "伊勢参り起点碑「是より神宮まで百七十キロ」"
+          },
+          {
+            "url": "https://www.inari.or.jp/hideyori",
+            "excerpt": "豊臣秀頼公像（銅像3m／台座3m）"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "name": "太陽の塔",
+        "time": "09:30",
+        "stayDurationMin": 50,
+        "memo": "梅田駅から地下鉄御堂筋線でおよそ21分の千里中央駅へ。大阪モノレールに乗りかえて6分の万博記念公園駅に着いたら、歩いておよそ5分で自然文化園の中央口です。門を入ると、目の前に太陽の塔が立っています。芸術家・岡本太郎がデザインした高さ約71mの塔で、3つの顔を持ちます。第4の顔とされる「地底の太陽」は、今は行方がわからない状態です。塔の中には、高さ約41mの「生命の樹」があり、2018年3月から公開されています。中に入るには前日までの予約が要るので、公式の案内で確かめましょう。公園の休みの日も、公式の案内で確かめましょう。この後は、歩いておよそ10分、国立民族学博物館へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 34.809513,
+          "lng": 135.532397,
+          "source": {
+            "kind": "osm_way",
+            "id": "1368703227",
+            "note": "tourism=artwork「太陽の塔」の Nominatim の中心"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "万博記念公園 9:30〜17:00（入園は30分前まで）。休みは水曜（4/1〜5/2・10月・11月は無休）と年末年始。塔の中は前日までの事前予約制（11月は10:00〜17:00）",
+          "sourceUrl": "https://www.expo70-park.jp/guide/check/"
+        },
+        "citations": [
+          {
+            "url": "https://www.expo70-park.jp/cause/expo/tower-of-sun/",
+            "excerpt": "芸術家の岡本太郎がデザイン／3つの顔／高さ約71メートル／「生命の樹」（高さ約41メートル）…2018年（平成30年）3月より公開／第4の顔「地底の太陽」…行方がわからない状態"
+          },
+          {
+            "url": "https://taiyounotou-expo70.jp/reserve/",
+            "excerpt": "太陽の塔への入館は、前日までの事前予約制（先着順）です"
+          },
+          {
+            "url": "https://www.osaka-monorail.co.jp/guide/access/expo/",
+            "excerpt": "中央口まで徒歩約5分"
+          },
+          {
+            "url": "https://www.osaka-monorail.co.jp/ticket/result/?departure=15&arrival=17&lang=jpn",
+            "excerpt": "所要時間 6分（千里中央→万博記念公園）"
+          },
+          {
+            "url": "https://kensaku.osakametro.co.jp/timetable/subway/dia/station/29089/1019/2",
+            "excerpt": "梅田（箕面萱野方面）11:01 発 → 千里中央 11:22（26006/1019/2）＝約21分"
+          }
+        ]
+      },
+      {
+        "name": "国立民族学博物館",
+        "time": "10:30",
+        "stayDurationMin": 100,
+        "memo": "太陽の塔から歩いておよそ10分、国立民族学博物館に着きます。世界の諸民族の社会と文化を伝えることを目的に、昭和49年（1974）に創設され、昭和52年（1977）11月に、1970年の万博の跡地に開館しました。展示は、世界の地域ごとの「地域展示」と、地域をこえてくらべる「通文化展示」に分かれています。休館日は、公式の案内で確かめましょう。この後は、歩いておよそ8分、自然文化園・日本庭園中央のあたりへ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 10
+          }
+        ],
+        "point": {
+          "lat": 34.812822,
+          "lng": 135.528938,
+          "source": {
+            "kind": "exception",
+            "reason": "OSM relation10274975（tourism=museum「国立民族学博物館」）の Nominatim の中心。source の種類に relation がないため exception に書く"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "10:00〜17:00（入館は16:30まで）。休みは水曜（祝日は直後の平日）と12/28〜1/4",
+          "sourceUrl": "https://www.minpaku.ac.jp/information/basis"
+        },
+        "citations": [
+          {
+            "url": "https://www.minpaku.ac.jp/aboutus/history",
+            "excerpt": "世界の諸民族の社会と文化に関する情報を人々に提供し…1974（昭和49）年に創設され、1977（昭和52）年11月に開館しました"
+          },
+          {
+            "url": "https://www.minpaku.ac.jp/aboutus",
+            "excerpt": "1977年に大阪・千里の70年万博跡地に開館しました"
+          }
+        ]
+      },
+      {
+        "name": "自然文化園・日本庭園中央のあたりで昼食",
+        "time": "12:18",
+        "stayDurationMin": 40,
+        "memo": "国立民族学博物館から歩いておよそ8分、園内の乗り物の停留所「自然文化園・日本庭園中央」のあたりで、昼食にしましょう。今の自然文化園の森は、博覧会のあとにパビリオンを撤収した土地に、木を植えて育てた森です。この後は、歩いておよそ3分、日本庭園へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 8
+          }
+        ],
+        "point": {
+          "lat": 34.811749,
+          "lng": 135.533427,
+          "source": {
+            "kind": "osm_node",
+            "id": "2647420221",
+            "note": "園内の乗り物の停留所「自然文化園・日本庭園中央」highway=bus_stop（昼食の点は380行。企画運営OK 11/06）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "lunch"
+        ],
+        "hours": {
+          "note": "昼食のあたり（万博記念公園の中）",
+          "sourceUrl": "https://www.expo70-park.jp/guide/check/"
+        },
+        "citations": [
+          {
+            "url": "https://www.expo70-park.jp/facility/nature/",
+            "excerpt": "パビリオンを撤収し、人工地盤の上に…自然の森を再生"
+          }
+        ]
+      },
+      {
+        "name": "日本庭園（万博記念公園）",
+        "time": "13:01",
+        "stayDurationMin": 90,
+        "memo": "自然文化園・日本庭園中央のあたりから歩いておよそ3分、日本庭園前ゲートから日本庭園に入ります。日本万国博覧会のときに、政府の出展施設として造られた庭園で、広さは26ha、東西に約1300m、南北に約200mの細長い形をしています。西から東へ歩くにつれて、上代・中世・近世・現代の4つの時代の庭の様式が順に現れるように造られています。2024年10月には、国の登録記念物（名勝地関係）になりました。この後は、歩いておよそ9分、EXPO'70パビリオンへ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 3
+          }
+        ],
+        "point": {
+          "lat": 34.811613,
+          "lng": 135.531655,
+          "source": {
+            "kind": "osm_way",
+            "id": "424953968",
+            "note": "「日本庭園前ゲート」building の Nominatim の中心（26haの広い庭園の、着く側の入口）"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Japanese Garden of Expo’70 Commemorative Park.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Japanese_Garden_of_Expo%E2%80%9970_Commemorative_Park.jpg",
+            "author": "Bindyeyes",
+            "license": "CC0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          }
+        ],
+        "marks": [],
+        "hours": {
+          "note": "万博記念公園 9:30〜17:00（入園は30分前まで）。休みは水曜（4/1〜5/2・10月・11月は無休）と年末年始",
+          "sourceUrl": "https://www.expo70-park.jp/guide/check/"
+        },
+        "citations": [
+          {
+            "url": "https://www.expo70-park.jp/facility/japanese-garden/",
+            "excerpt": "日本万国博覧会に政府出展施設として…造られた名園／面積26ヘクタール、東西1,300メートル、南北200メートル／上代から中世、近世、現代へと4つの造園様式／2024年（令和6年）10月11日に国登録記念物（名勝地関係）として文化財登録"
+          }
+        ]
+      },
+      {
+        "name": "EXPO'70パビリオン",
+        "time": "14:40",
+        "stayDurationMin": 45,
+        "memo": "日本庭園から歩いておよそ9分、EXPO'70パビリオンに着きます。博覧会で出展施設だった鉄鋼館の建物を使って、2010年3月に開かれた記念館です。2023年8月からは、別館で「黄金の顔」が展示されています。休館日は、公式の案内で確かめましょう。この後は、歩いておよそ15分、自然観察学習館へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 9
+          }
+        ],
+        "point": {
+          "lat": 34.80918,
+          "lng": 135.535716,
+          "source": {
+            "kind": "osm_way",
+            "id": "1432537637",
+            "note": "amenity=exhibition_centre「EXPO'70 パビリオン」の Nominatim の中心"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "10:00〜17:00（入館は16:30まで）。休みは水曜（4/1〜5/2・10月・11月は無休）と年末年始",
+          "sourceUrl": "https://www.expo70-park.jp/facility/watchlearn/other-07/"
+        },
+        "citations": [
+          {
+            "url": "https://www.expo70-park.jp/facility/watchlearn/other-07/",
+            "excerpt": "出展施設であった鉄鋼館を利用し…2010年（平成22年）3月13日にオープン／別館…「黄金の顔」の展示…2023年8月11日／1008個ものスピーカー"
+          }
+        ]
+      },
+      {
+        "name": "自然観察学習館（moricara）",
+        "time": "15:40",
+        "stayDurationMin": 20,
+        "memo": "EXPO'70パビリオンから歩いておよそ15分、自然観察学習館に着きます。愛称は「moricara（モリカラ）」です。博覧会の会場だった土地は、半世紀以上をへて、多くの野鳥や昆虫がすむ緑の公園になりました。館内では、その森の生き物を、円柱の水槽や大型の水槽、標本などで紹介しています。休館日は、公式の案内で確かめましょう。この後は、歩いておよそ5分、ソラード（森の空中観察路）へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 15
+          }
+        ],
+        "point": {
+          "lat": 34.809174,
+          "lng": 135.525604,
+          "source": {
+            "kind": "osm_way",
+            "id": "222438763",
+            "note": "building「自然観察学習館」の Nominatim の中心"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "10:00〜16:00。休みは水曜（4/1〜5/2・10月・11月は無休）と12/27〜1/4",
+          "sourceUrl": "https://www.expo70-park.jp/facility/watchlearn/nature-01/"
+        },
+        "citations": [
+          {
+            "url": "https://www.expo70-park.jp/facility/watchlearn/nature-01/",
+            "excerpt": "日本万国博覧会の会場が、半世紀以上の月日を経て、園内では数多くの野鳥や昆虫が生息する緑豊かな公園になりました／愛称を「moricara（モリカラ）」と名付け、展示室には円柱水槽、大型水槽を導入／標本や魚、昆虫の飼育・工作見本作品も展示"
+          }
+        ]
+      },
+      {
+        "name": "ソラード（森の空中観察路）",
+        "time": "16:05",
+        "stayDurationMin": 30,
+        "memo": "自然観察学習館から歩いておよそ5分、ソラード（森の空中観察路）に着きます。園内でもっとも高い位置にあるとされる空中の観察路で、木々の高さから、森の表情を立体的に眺められます。道の途中には、鏡で森の景色を映す「森の万華鏡」や、鳥の声や葉のそよぐ音に耳をすます「森の集音器」、日時計などが置かれています。展望タワーは、立ち入りが止められていることがあるので、公式の案内で確かめましょう。見学を終えたら、中央口へ戻り、万博記念公園駅から大阪モノレールと地下鉄で梅田へ戻りましょう（中央口までは歩いて約20分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 34.809872,
+          "lng": 135.523025,
+          "source": {
+            "kind": "osm_node",
+            "id": "8148212418",
+            "note": "案内板「ソラード（森の空中観察路）へようこそ」tourism=information（入口の名前の点）"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "万博記念公園に準じる。展望タワーは2026年8月20日から当面立ち入り禁止",
+          "sourceUrl": "https://www.expo70-park.jp/facility/watchlearn/nature-03/"
+        },
+        "citations": [
+          {
+            "url": "https://www.expo70-park.jp/facility/nature/",
+            "excerpt": "ここは園内で最も高い位置にあり、万博記念公園の森の表情を立体的に観察できる空中観察路です"
+          },
+          {
+            "url": "https://www.expo70-park.jp/facility/watchlearn/nature-03/",
+            "excerpt": "ソラード展望タワー立ち入り禁止のお知らせ／森の万華鏡／日時計／森の集音器"
+          }
+        ]
+      }
+    ]
+  ]
+}

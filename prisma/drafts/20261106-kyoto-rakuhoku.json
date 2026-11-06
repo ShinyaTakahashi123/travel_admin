@@ -1,0 +1,734 @@
+{
+  "title": "下鴨神社と鞍馬・貴船、洛北の古社と山道をめぐる1泊2日",
+  "description": "1日目は京都御所から鴨川デルタ、旧三井家下鴨別邸を経て、糺の森の河合神社と下鴨神社へ。2日目は叡山電車で鞍馬へ向かい、鞍馬寺から山道を歩いて貴船神社の三社をめぐり、午後は一乗寺の詩仙堂や圓光寺、曼殊院門跡を訪ねる、洛北の1泊2日です。",
+  "nights": 1,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [
+    "定番観光"
+  ],
+  "purposeNames": [
+    "神社",
+    "お寺"
+  ],
+  "prefectureName": "京都府",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "KTO2110-002 (51778435080).jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:KTO2110-002_(51778435080).jpg",
+    "author": "nobu3withfoxy",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "citations": [
+    {
+      "url": "https://kyoto-gosho.kunaicho.go.jp/change",
+      "excerpt": "京都御所の沿革"
+    },
+    {
+      "url": "https://www.shimogamo-jinja.or.jp/about",
+      "excerpt": "賀茂御祖神社の由緒"
+    },
+    {
+      "url": "https://www.kuramadera.or.jp/access.html",
+      "excerpt": "鞍馬駅→山門→本殿金堂→魔王殿→貴船神社の徒歩の目安"
+    },
+    {
+      "url": "https://kifunejinja.jp/info/",
+      "excerpt": "三社詣・本宮の移転"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "京都御所",
+        "time": "11:00",
+        "stayDurationMin": 50,
+        "memo": "旅の入口はJR京都駅です。10時半ごろに着いたら、地下鉄の烏丸線に乗りかえて、およそ10分の今出川駅へ。3番出口から歩いておよそ8分で、京都御所の入口の清所門に着きます。京都御所は、元弘元年（1331）にこの地に定まり、明治2年（1869）まで歴代の天皇のお住まいとして使われてきた場所です。今の建物は、幕末の安政2年（1855）に造営されたもので、平安京の大内裏の建物の古い形を今に伝えています。通年の公開では、諸大夫の間・清涼殿・小御所の室内を見ることができます。入場のときには手荷物の検査があります。公開の休みの日は、公式の案内で確かめましょう。この後は、歩いておよそ8分、烏丸今出川のあたりへ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 35.025813,
+          "lng": 135.760926,
+          "source": {
+            "kind": "osm_node",
+            "id": "5679163221",
+            "note": "京都御所入口（清所門）tourism=attraction。公式「入場門 清所門からお入りください」"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "11月は9:00〜15:20受付・16:00最終退出（季節で変わる）。休みは月曜（祝日は翌日）・12/28〜1/4・行事の日",
+          "sourceUrl": "https://kyoto-gosho.kunaicho.go.jp/visit"
+        },
+        "citations": [
+          {
+            "url": "https://kyoto-gosho.kunaicho.go.jp/change",
+            "excerpt": "元弘元年（1331）に現在の地に定着／明治2年（1869）まで、歴代の天皇のお住まいとして／安政2年（1855）に造営された現在の京都御所／平安京の大内裏の建築空間の古制を今に伝える"
+          },
+          {
+            "url": "https://kyoto-gosho.kunaicho.go.jp/faq",
+            "excerpt": "通年公開では、諸大夫の間・清涼殿・小御所のみ室内を見ることが可能です／京都市営地下鉄今出川駅３番出口から徒歩約５分"
+          },
+          {
+            "url": "https://kyoto-gosho.kunaicho.go.jp/visit",
+            "excerpt": "入場門 清所門からお入りください／入場時に手荷物検査を行います／所要時間は約50分です"
+          },
+          {
+            "url": "https://www2.city.kyoto.lg.jp/kotsu/webguide/ja/tika/travel_time.html",
+            "excerpt": "地下鉄の駅間の所要時分（京都〜五条〜四条〜烏丸御池〜丸太町〜今出川 各2分＝10分）"
+          }
+        ]
+      },
+      {
+        "name": "烏丸今出川のあたりで昼食",
+        "time": "11:58",
+        "stayDurationMin": 40,
+        "memo": "京都御所から歩いておよそ8分、地下鉄の今出川駅の出入口がある烏丸今出川のあたりで、昼食にしましょう。烏丸通と今出川通が交わるこのあたりは、京都御苑の北西の角にあたります。この後は、今出川通を東へ歩いておよそ16分、鴨川デルタへ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 8
+          }
+        ],
+        "point": {
+          "lat": 35.029011,
+          "lng": 135.760165,
+          "source": {
+            "kind": "osm_node",
+            "id": "3004973167",
+            "note": "バス停「烏丸今出川（地下鉄今出川駅）」（昼食の点は380行のバス停）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "lunch"
+        ],
+        "hours": {
+          "note": "昼食のあたり（行き先の開く時刻なし）",
+          "sourceUrl": "https://kyoto-gosho.kunaicho.go.jp/faq"
+        },
+        "citations": [
+          {
+            "url": "https://kyoto-gosho.kunaicho.go.jp/faq",
+            "excerpt": "京都市営地下鉄今出川駅３番出口から徒歩約５分"
+          }
+        ]
+      },
+      {
+        "name": "鴨川デルタ",
+        "time": "12:54",
+        "stayDurationMin": 15,
+        "memo": "烏丸今出川のあたりから歩いておよそ16分、賀茂川と高野川が合わさる鴨川デルタに着きます。2つの川にはさまれた土地は、ギリシャ文字のΔ（デルタ）に似た形をしています。川には、亀や鳥などの形をした飛び石が置かれています。飛び石は水面に近く、雨のあとは川の水かさが増すので、無理に渡らないようにしましょう。この後は、歩いておよそ4分、旧三井家下鴨別邸へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 16
+          }
+        ],
+        "point": {
+          "lat": 35.030123,
+          "lng": 135.771741,
+          "source": {
+            "kind": "osm_way",
+            "id": "278411068",
+            "note": "leisure=park「鴨川デルタ」（狭い公園で、中心が歩いて入れる河原に落ちる。7章377行）"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "府立鴨川公園の河原（時間の定めは見当たらない）",
+          "sourceUrl": "https://ja.kyoto.travel/tourism/single01.php?category_id=8&tourism_id=2493"
+        },
+        "citations": [
+          {
+            "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=8&tourism_id=2493",
+            "excerpt": "鴨川（賀茂川）と高野川が合流するギリシャ文字のΔ（デルタ）に似た形の場所…亀や鳥などの形の飛び石が有名"
+          }
+        ]
+      },
+      {
+        "name": "旧三井家下鴨別邸",
+        "time": "13:13",
+        "stayDurationMin": 45,
+        "memo": "鴨川デルタから歩いておよそ4分、旧三井家下鴨別邸に着きます。豪商・三井家の旧別邸で、明治42年（1909）にこの地へ移された三井家の祖霊社「顕名霊社」にお参りするときの休憩所として、大正14年（1925）に建てられました。主屋は、木屋町三条上るにあった明治13年（1880）建築の別邸を移したもので、3階には東山を眺める望楼が設けられています。近代の和風建築として価値が高いことから、平成23年（2011）に重要文化財に指定されました。主屋の2階と3階は、ふだんは公開されていません。苔の庭の南には、泉川から水を引いた、ひょうたんの形の池があります。休館日は、公式の案内で確かめましょう。この後は、歩いておよそ6分、河合神社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 4
+          }
+        ],
+        "point": {
+          "lat": 35.031761,
+          "lng": 135.771885,
+          "source": {
+            "kind": "osm_way",
+            "id": "515857420",
+            "note": "historic=manor「旧三井家下鴨別邸」"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "9:00〜17:00・受付16:30。休みは毎週水曜（祝休日は翌日）と12/29〜12/31",
+          "sourceUrl": "https://ja.kyoto.travel/tourism/article/mitsuike/access.php"
+        },
+        "citations": [
+          {
+            "url": "https://ja.kyoto.travel/tourism/article/mitsuike/about.php",
+            "excerpt": "明治42年（1909）に三井家の祖霊社である顕名霊社が遷座…参拝の際の休憩所とするため、大正14年（1925）に建築／明治13年（1880）建築の三井家の木屋町別邸が主屋として移築／平成23年（2011）に重要文化財に指定／3階には望楼／2階-3階部分は通常非公開／泉川から水を取り入れた滝流れを持つひょうたん型の池"
+          }
+        ]
+      },
+      {
+        "name": "河合神社",
+        "time": "14:04",
+        "stayDurationMin": 25,
+        "memo": "旧三井家下鴨別邸から歩いておよそ6分、糺の森の南にある河合神社に着きます。下鴨神社の摂社で、玉依姫命をまつり、玉のように美しいことから「美麗の神」として信仰されてきました。鎌倉時代の初めの随筆家として知られる鴨長明は、河合神社の禰宜の息子として幼いころを過ごしたとされます。長明が暮らした方丈の庵を復元したものが、神宮寺の旧跡の拝観の場所に展示されています。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、糺の森の参道を北へ歩いておよそ5分、下鴨神社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 6
+          }
+        ],
+        "point": {
+          "lat": 35.034705,
+          "lng": 135.771936,
+          "source": {
+            "kind": "osm_way",
+            "id": "351136449",
+            "note": "amenity=place_of_worship「河合神社」"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "河合社 6:30〜16:30（神事で変わることがある）",
+          "sourceUrl": "https://www.shimogamo-jinja.or.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.shimogamo-jinja.or.jp/bireikigan",
+            "excerpt": "下鴨神社の摂社／玉依姫命が玉の様に美しいことから「美麗の神」／鴨長明は河合神社の禰宜の息子として幼少時代を過ごしました／方丈の庵…の復元…を神宮寺旧跡の拝観エリアにて展示"
+          }
+        ]
+      },
+      {
+        "name": "下鴨神社（賀茂御祖神社）",
+        "time": "14:34",
+        "stayDurationMin": 50,
+        "memo": "河合神社から歩いておよそ5分、糺の森の参道を北へ進むと、下鴨神社（賀茂御祖神社）の楼門に着きます。世界文化遺産の一つで、国宝の本殿2棟をはじめ、多くの文化財が伝わります。崇神天皇7年（紀元前90年）に神社の瑞垣を修造したという記録があるとされ、長元9年（1036）からは、社殿を造り替える式年遷宮の制度が続いてきました。参道を包む糺の森は、広さ約12万4000平方メートル、清らかな小川が流れる森です。境内の池に湧き出る水の泡をかたどったのが「みたらし団子」の始まりといわれています。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ24分、京都府立植物園へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 35.036992,
+          "lng": 135.772451,
+          "source": {
+            "kind": "osm_way",
+            "id": "98106488",
+            "note": "amenity=place_of_worship「下鴨神社」"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "KTO1910-043 (48892045426).jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:KTO1910-043_(48892045426).jpg",
+            "author": "nobu3withfoxy",
+            "license": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+          }
+        ],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "楼門内 6:30〜17:00、定休日なし（神事等で変わることがある）",
+          "sourceUrl": "https://www.shimogamo-jinja.or.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.shimogamo-jinja.or.jp/about",
+            "excerpt": "国宝の本殿２棟をはじめとした多くの文化財／崇神天皇の7年（BC90）に神社の瑞垣の修造がおこなわれたという記録／世界文化遺産である賀茂御祖神社／長元9年(1036)を第1回として式年遷宮の制度が確立"
+          },
+          {
+            "url": "https://www.shimogamo-jinja.or.jp/ground",
+            "excerpt": "広さ12万4000平方メートル。清らかな小川が流れ原野の姿をとどめる森／この池に湧き出る水あわをかたどったのが「みたらし団子」の発祥といわれています"
+          }
+        ]
+      },
+      {
+        "name": "京都府立植物園",
+        "time": "15:48",
+        "stayDurationMin": 45,
+        "memo": "下鴨神社から歩いておよそ24分、京都府立植物園の正門に着きます。大正13年（1924）の1月1日に「大典記念京都植物園」として開園した植物園で、戦後の昭和21年（1946）からの12年間は連合軍に接収されていました。昭和36年（1961）に再び公開され、今では、熱帯の植物などを育てる観覧温室が、日本最大級の規模の温室とされています。園の北半分には、園内でただ一つの自然林とされる半木（なからぎ）の森があります。入園の時間は、公式の案内で確かめましょう。この夜は、出町柳駅のまわりの宿に泊まりましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 24
+          }
+        ],
+        "point": {
+          "lat": 35.046582,
+          "lng": 135.761398,
+          "source": {
+            "kind": "osm_node",
+            "id": "9878232824",
+            "note": "正門そばの案内板「京都府立植物園」tourism=information（広い園なので着く側の入口の点。企画運営OK 11/06）"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "9:00〜17:00（入園は16:00まで）。休みは12/28〜1/4",
+          "sourceUrl": "https://www.pref.kyoto.jp/plant/usageguidance.html"
+        },
+        "citations": [
+          {
+            "url": "https://www.pref.kyoto.jp/plant/11900026.html",
+            "excerpt": "同13年（1924）1月1日に「大典記念京都植物園」として開園／昭和21年（1946）から12年間連合軍に接収／昭和36年（1961）4月…再び公開／観覧温室は…日本最大級の温室／園内唯一の自然林である半木（なからぎ）の森"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "name": "鞍馬寺",
+        "time": "09:00",
+        "stayDurationMin": 70,
+        "memo": "出町柳駅から叡山電車でおよそ31分の鞍馬駅へ。駅から歩いておよそ3分で、鞍馬寺の仁王門に着きます。寺伝では、宝亀元年（770）に鑑真和上の高弟・鑑禎上人が、毘沙門天をまつる草庵を結んだのが始まりとされます。幼い源義経（牛若丸）が7歳ごろに入山し、夜は僧正ガ谷で天狗に兵法を授けられたという伝説も残ります。仁王門から本殿金堂までは、清少納言が「近うて遠きもの」に挙げた九十九折の参道を、歩いておよそ25分のぼります。ケーブルを使うと、多宝塔駅まで2分ほどです。霊宝殿には、国宝の毘沙門天三尊立像が伝わります。霊宝殿の休館日は、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、本殿金堂から山道を歩いておよそ30分、奥の院魔王殿へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 35.11431,
+          "lng": 135.772936,
+          "source": {
+            "kind": "osm_way",
+            "id": "319332798",
+            "note": "仁王門 building=gatehouse（広い境内の着く門。次の歩きは本殿金堂 way1243730752 から測る＝7章388行。企画運営OK 11/06）"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Kurama-Dera (Kyoto Sakyo-ku) Temple hdsr S5 24.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kurama-Dera_(Kyoto_Sakyo-ku)_Temple_hdsr_S5_24.jpg",
+            "author": "Hyppolyte de Saint-Rambert",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+          }
+        ],
+        "marks": [
+          "temple"
+        ],
+        "hours": {
+          "note": "本殿開扉 9:00〜16:15。霊宝殿 9:00〜16:00・火曜休・冬期12/12〜2月末休館。ケーブル 8:40〜16:25ごろ",
+          "sourceUrl": "https://www.kuramadera.or.jp/nyuzan.html"
+        },
+        "citations": [
+          {
+            "url": "https://www.kuramadera.or.jp/rekishi.html",
+            "excerpt": "宝亀元年（７７０）…鑑真和上…の高弟・鑑禎上人は…毘沙門天を祀る草庵を結びました／源義経（幼名牛若丸）は、７歳頃に鞍馬寺に入山／夜は僧正ガ谷で天狗に兵法を授けられたという伝説／近うて遠きもの、くらまのつづらをりといふ道"
+          },
+          {
+            "url": "https://www.kuramadera.or.jp/access.html",
+            "excerpt": "鞍馬駅→徒歩３分→山門（仁王門）→徒歩5分→由岐神社 → 徒歩20分（九十九折参道）→鞍馬寺本殿金堂／２分で多宝塔駅に到着"
+          },
+          {
+            "url": "https://www.kuramadera.or.jp/bunkazai.html",
+            "excerpt": "毘沙門天三尊立像（国宝）平安時代"
+          },
+          {
+            "url": "https://eizandensha.co.jp/uploads/423_file_path1.pdf",
+            "excerpt": "出町柳→鞍馬 所要時分31分（昼間時間帯の標準的な所要時分）"
+          }
+        ]
+      },
+      {
+        "name": "奥の院魔王殿",
+        "time": "10:40",
+        "stayDurationMin": 15,
+        "memo": "本殿金堂から山道を歩いておよそ30分、奥の院魔王殿に着きます。途中には、木の根が地面をはうように広がる「木の根道」があります。このあたりの砂岩がマグマの熱で硬くなり、根が地下に伸びられなかったためとされます。魔王殿は、太古に護法魔王尊が降り立った磐座・磐境として、あがめられてきた場所です。鞍馬山の参道と山道は、石段や木の根が続き、雨のあとは滑りやすいので、歩きやすい靴で、天候を確かめてから歩きましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、山道を歩いておよそ20分、下って貴船神社の結社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 30,
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://www.kuramadera.or.jp/access.html",
+              "note": "鞍馬寺の公式「鞍馬寺本殿金堂・金剛床 →徒歩30分→ 魔王殿」（山道。routed-foot は本殿金堂から 11.16分）"
+            }
+          }
+        ],
+        "point": {
+          "lat": 35.121264,
+          "lng": 135.765893,
+          "source": {
+            "kind": "osm_way",
+            "id": "343451573",
+            "note": "「奥の院魔王殿」historic=wayside_shrine,building=yes"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "temple"
+        ],
+        "hours": {
+          "note": "鞍馬寺の境内（本殿開扉 9:00〜16:15）",
+          "sourceUrl": "https://www.kuramadera.or.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://www.kuramadera.or.jp/annai.html",
+            "excerpt": "木の根道…砂岩が、灼熱のマグマの貫入によって硬化したために根が地下に伸びることが出来なかった／魔王殿…太古、護法魔王尊が降臨した磐坐・磐境として崇拝"
+          }
+        ]
+      },
+      {
+        "name": "貴船神社 結社",
+        "time": "11:15",
+        "stayDurationMin": 15,
+        "memo": "奥の院魔王殿から山道を歩いておよそ20分、下って鞍馬寺の西門を出ると、貴船神社の結社に着きます。貴船神社では、本宮・奥宮・結社の3つのお社をめぐることを「三社詣」と呼んでいます。結社は、和泉式部がお参りしたと伝わり、「恋の宮」とも呼ばれてきました。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ5分、奥宮へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 20,
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://www.kuramadera.or.jp/access.html",
+              "note": "鞍馬寺の公式「魔王殿→徒歩２0分→貴船神社」（山道。西門から貴船へ）"
+            }
+          }
+        ],
+        "point": {
+          "lat": 35.125725,
+          "lng": 135.764202,
+          "source": {
+            "kind": "osm_way",
+            "id": "343901105",
+            "note": "amenity=place_of_worship「結社」"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "貴船神社 本宮 6:00〜20:00（5/1〜11/30）。結社・奥宮の時間は公式に別の記載なし",
+          "sourceUrl": "https://kifunejinja.jp/info/"
+        },
+        "citations": [
+          {
+            "url": "https://kifunejinja.jp/info/",
+            "excerpt": "三社詣といい…本宮、奥宮、結社を参ります／結社…和泉式部が…参拝し…「恋の宮」と称されました"
+          },
+          {
+            "url": "https://www.kuramadera.or.jp/access.html",
+            "excerpt": "山門から貴船に至る西門まで歩く「修行の道」"
+          }
+        ]
+      },
+      {
+        "name": "貴船神社 奥宮",
+        "time": "11:35",
+        "stayDurationMin": 25,
+        "memo": "結社から歩いておよそ5分、貴船神社の奥宮に着きます。もとはこの奥宮の地に本宮があり、洪水で社殿が流されたため、天喜3年（1055）に今の本宮の場所へ移されたと伝えられています。奥宮の「龍穴」は、日本三大龍穴のひとつとされています。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ12分、本宮へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 35.128659,
+          "lng": 135.765032,
+          "source": {
+            "kind": "osm_way",
+            "id": "343907933",
+            "note": "amenity=place_of_worship「貴船神社 奥宮」"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "時間の別の記載なし（本宮 6:00〜20:00 5/1〜11/30）",
+          "sourceUrl": "https://kifunejinja.jp/info/"
+        },
+        "citations": [
+          {
+            "url": "https://kifunejinja.jp/info/",
+            "excerpt": "奥宮が洪水で流損したため、天喜三年（一○五五年）現在の地に本宮が移されました／龍穴…日本三大龍穴のひとつとされています"
+          }
+        ]
+      },
+      {
+        "name": "貴船神社 本宮",
+        "time": "12:12",
+        "stayDurationMin": 25,
+        "memo": "奥宮から歩いておよそ12分、貴船神社の本宮に着きます。全国におよそ二千社ある水の神をまつる神社の総本宮とされ、白鳳6年には、すでに社殿を造り替えた記録があるといわれます。水にひたして占う「水占みくじ」でも知られています。参拝できる時間は、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ6分、貴船のバス停のあたりへ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 12
+          }
+        ],
+        "point": {
+          "lat": 35.121889,
+          "lng": 135.762936,
+          "source": {
+            "kind": "osm_way",
+            "id": "343853160",
+            "note": "amenity=place_of_worship「貴船神社」（本宮）"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "KTO2110-002 (51778435080).jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:KTO2110-002_(51778435080).jpg",
+            "author": "nobu3withfoxy",
+            "license": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+          }
+        ],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "本宮 6:00〜20:00（5/1〜11/30）、年中無休。冬の時間は公式に記載なし",
+          "sourceUrl": "https://kifunejinja.jp/info/"
+        },
+        "citations": [
+          {
+            "url": "https://kifunejinja.jp/",
+            "excerpt": "全国二千社を数える水神の総本宮／白鳳六年にはすでに社殿造替の記録"
+          },
+          {
+            "url": "https://kifunejinja.jp/info/",
+            "excerpt": "水占みくじ"
+          }
+        ]
+      },
+      {
+        "name": "貴船のあたりで昼食",
+        "time": "12:43",
+        "stayDurationMin": 40,
+        "memo": "本宮から歩いておよそ6分、貴船のバス停のあたりで、昼食にしましょう。叡山電車の貴船口駅からは、およそ2kmの山あいの道で、駅との間にはバスも通っています。この後は、貴船口駅まで歩いておよそ23分、叡山電車に乗りかえて一乗寺駅へ行き、詩仙堂へ向かいましょう（駅での待ちを含めて、あわせておよそ64分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 6
+          }
+        ],
+        "point": {
+          "lat": 35.118859,
+          "lng": 135.762444,
+          "source": {
+            "kind": "osm_node",
+            "id": "469083921",
+            "note": "バス停「貴船」（昼食の点は380行のバス停）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "lunch"
+        ],
+        "hours": {
+          "note": "昼食のあたり",
+          "sourceUrl": "https://kifunejinja.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://kifunejinja.jp/",
+            "excerpt": "貴船口駅下車、京都バスに乗り換え「貴船」下車 貴船口駅から徒歩の場合は約30分（2km）"
+          }
+        ]
+      },
+      {
+        "name": "詩仙堂",
+        "time": "14:27",
+        "stayDurationMin": 35,
+        "memo": "貴船のあたりから、歩いて貴船口駅へ、叡山電車で一乗寺駅へ、駅から歩いて、詩仙堂丈山寺に着きます（貴船口駅での電車の待ちを含めて、あわせておよそ64分）。江戸時代の文人・石川丈山が営んだ山荘で、正しくは「凹凸窠（おうとつか）」といいます。寛永18年（1641）、丈山が59歳のときに完成しました。室内には、狩野探幽が描いた中国の詩人三十六人の肖像画が掲げられ、丈山が隷書で記した漢詩が添えられています。庭には、丈山が考え出したといわれる鹿おどし（僧都）があり、竹の音が響きます。今は曹洞宗の寺院です。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ3分、八大神社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 23
+          },
+          {
+            "mode": "other",
+            "min": 5
+          },
+          {
+            "mode": "train",
+            "min": 23,
+            "line": "叡山電車鞍馬線"
+          },
+          {
+            "mode": "walk",
+            "min": 13
+          }
+        ],
+        "point": {
+          "lat": 35.04373,
+          "lng": 135.796194,
+          "source": {
+            "kind": "osm_way",
+            "id": "503289189",
+            "note": "amenity=place_of_worship「詩仙堂丈山寺」"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Shisendo-M9537.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shisendo-M9537.jpg",
+            "author": "Fg2",
+            "license": "Public domain"
+          }
+        ],
+        "marks": [
+          "temple"
+        ],
+        "hours": {
+          "note": "9:00〜17:00（受付16:45）。拝観休止日 5月23日。予約不要",
+          "sourceUrl": "https://kyoto-shisendo.net/about"
+        },
+        "citations": [
+          {
+            "url": "https://kyoto-shisendo.net/about",
+            "excerpt": "正しくは「凹凸窠」（おうとつか）／狩野探幽…が描いた中国の…詩人三十六人の肖像画…丈山が隷書体にて記した漢詩／曹洞宗大本山永平寺の末寺"
+          },
+          {
+            "url": "https://kyoto-shisendo.net/chronology",
+            "excerpt": "1641年 (寛永18年) 59歳 詩仙堂落成"
+          },
+          {
+            "url": "https://kyoto-shisendo.net/",
+            "excerpt": "丈山考案の鹿おどし（僧都）"
+          },
+          {
+            "url": "https://eizandensha.co.jp/uploads/438_file_path2.pdf",
+            "excerpt": "貴船口→一乗寺 所要時分23分"
+          }
+        ]
+      },
+      {
+        "name": "八大神社",
+        "time": "15:05",
+        "stayDurationMin": 15,
+        "memo": "詩仙堂から歩いておよそ3分、八大神社に着きます。永仁2年（1294）に創建されたと伝わり、素盞嗚命・稲田姫命・八王子命をまつっています。剣豪の宮本武蔵が、吉岡一門との一乗寺下り松の戦いの前に立ち寄ったと伝えられ、その縁から、ゆかりの下り松の古木が本殿の西に残されています。今の本殿は、大正15年（1926）に造られたものです。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ5分、圓光寺へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 3
+          }
+        ],
+        "point": {
+          "lat": 35.043672,
+          "lng": 135.796653,
+          "source": {
+            "kind": "osm_way",
+            "id": "726006269",
+            "note": "amenity=place_of_worship「八大神社」"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "参拝は自由（京都市の観光サイト）",
+          "sourceUrl": "https://ja.kyoto.travel/tourism/single01.php?category_id=7&tourism_id=567"
+        },
+        "citations": [
+          {
+            "url": "https://ja.kyoto.travel/tourism/single01.php?category_id=7&tourism_id=567",
+            "excerpt": "永仁二年（1294）に創建された…素盞嗚命、稲田姫命、八王子命を祀っている／宮本武蔵が吉岡一門との「一乗寺下り松の戦」の前に八大神社に立ち寄った縁から、由緒ある下り松の古木が本殿西に保存／現在の本殿は大正十五年造営／参拝は自由"
+          }
+        ]
+      },
+      {
+        "name": "圓光寺",
+        "time": "15:25",
+        "stayDurationMin": 40,
+        "memo": "八大神社から歩いておよそ5分、圓光寺に着きます。慶長6年（1601）、徳川家康が三要元佶禅師を招いて、伏見に学校として建てたのが始まりとされます。寺には、日本最古とされる木製の活字約5万個（重要文化財）が伝わります。庭は「十牛之庭」と呼ばれ、洛北でもっとも古い池といわれる栖龍池があります。境内には、家康の遺言によって歯を埋めたと伝えられる墓と、東照宮もあります。拝観の方法や時期ごとの案内は、公式の案内で確かめましょう。祈りの場で、お墓もあるので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ15分、曼殊院門跡へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 35.044975,
+          "lng": 135.797305,
+          "source": {
+            "kind": "osm_way",
+            "id": "656882145",
+            "note": "amenity=place_of_worship「円光寺」（圓光寺）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "temple",
+          "grave"
+        ],
+        "hours": {
+          "note": "9:00〜17:00。特別紅葉拝観（11/10〜12/10）は日時指定の予約制。定休日の記載なし",
+          "sourceUrl": "https://www.enkouji.jp/news/"
+        },
+        "citations": [
+          {
+            "url": "https://www.enkouji.jp/about/",
+            "excerpt": "慶長6年（1601年）、徳川家康は…三要元佶…禅師を招き、伏見に圓光寺を建立し学校としました／日本最古の木製活字約五万個（重文）／十牛之庭／洛北でもっとも古い池といわれる栖龍池"
+          },
+          {
+            "url": "https://www.enkouji.jp/grounds/",
+            "excerpt": "徳川家康公の遺言により歯を埋めた墓と東照宮"
+          }
+        ]
+      },
+      {
+        "name": "曼殊院門跡",
+        "time": "16:20",
+        "stayDurationMin": 30,
+        "memo": "圓光寺から歩いておよそ15分、曼殊院門跡に着きます。勅使門の両側の塀には5本の白い筋が引かれていて、皇室の一門の方々が住職を務めた「門跡」の寺の格式を、今に伝えています。今の地に堂宇を構えたのは、八条宮智仁親王の皇子・良尚法親王で、桂離宮を完成させたといわれる兄・智忠親王の助言を受けて造られたと伝えられます。書院の釘隠しや引き手、欄間には桂離宮と共通の意匠が見られ、「小さな桂離宮」とも呼ばれます。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。見学を終えたら、修学院駅まで歩いておよそ21分、叡山電車で出町柳駅へ戻り、帰路につきましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 15
+          }
+        ],
+        "point": {
+          "lat": 35.048949,
+          "lng": 135.803103,
+          "source": {
+            "kind": "exception",
+            "reason": "OSM relation15519150（amenity=place_of_worship「曼殊院」）の Nominatim の中心。source の種類に relation がないため exception に書く"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "temple"
+        ],
+        "hours": {
+          "note": "9:00〜17:00（最終受付16:30）",
+          "sourceUrl": "https://manshuinmonzeki.jp/visit/"
+        },
+        "citations": [
+          {
+            "url": "https://manshuinmonzeki.jp/history/",
+            "excerpt": "延暦年間(782~806)、宗祖伝教大師最澄により、鎮護国家の道場として比叡の地に創建／明暦二年(1656)…良尚法親王が入寺され、現在の地に堂宇を移し／門跡というのは、皇室一門の方々が住職であったことを意味し、勅使門の両側の塀に残る五本の白い筋はその格式を今に伝える／書院の釘隠しや引き手、欄間などが桂離宮と共通した意匠…『小さな桂離宮』といわれています"
+          }
+        ]
+      }
+    ]
+  ]
+}
