@@ -61,34 +61,64 @@ async function throttleOsm(): Promise<void> {
 // 6けたに丸めて同じなら誤検出ではない)。会員・メールアドレスはUser-Agentに入れない
 const OSM_UA = "shiorie-draft-checker/1.0";
 
-async function fetchOsmPoint(source: PointSource): Promise<{ lat: number; lng: number } | null> {
+async function fetchOverpassWayCenter(id: string): Promise<{ lat: number; lng: number } | null> {
   try {
-    if (source.kind === "osm_node") {
-      await throttleOsm();
-      const res = await fetch(`https://api.openstreetmap.org/api/0.6/node/${source.id}.json`, { headers: { "User-Agent": OSM_UA } });
-      if (!res.ok) return null;
-      const json = await res.json();
-      const el = json.elements?.[0];
-      if (!el) return null;
-      return { lat: el.lat, lng: el.lon };
-    }
-    if (source.kind === "osm_way") {
-      await throttleOsm();
-      const res = await fetch("https://overpass-api.de/api/interpreter", {
-        method: "POST",
-        headers: { "User-Agent": OSM_UA, "Content-Type": "text/plain" },
-        body: `[out:json];way(${source.id});out center;`,
-      });
-      if (!res.ok) return null;
-      const json = await res.json();
-      const el = json.elements?.[0];
-      if (!el?.center) return null;
-      return { lat: el.center.lat, lng: el.center.lon };
-    }
+    await throttleOsm();
+    const res = await fetch("https://overpass-api.de/api/interpreter", {
+      method: "POST",
+      headers: { "User-Agent": OSM_UA, "Content-Type": "text/plain" },
+      body: `[out:json];way(${id});out center;`,
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const el = json.elements?.[0];
+    if (!el?.center) return null;
+    return { lat: el.center.lat, lng: el.center.lon };
   } catch {
     return null;
   }
-  return null;
+}
+
+// Nominatimのlookup(osm_ids=W<id>)が返す中心は、Overpassのout center(外枠の中心)とは
+// 別の計算(centroid)のことがあり、7章のとおり制作はこれまでNominatimの値を使ってきた
+// (2026-11-06、企画運営の指摘。貴船神社本宮・詩仙堂がOverpassの値とだけ比べると不一致になった)
+async function fetchNominatimWayCenter(id: string): Promise<{ lat: number; lng: number } | null> {
+  try {
+    await throttleOsm();
+    const res = await fetch(`https://nominatim.openstreetmap.org/lookup?osm_ids=W${id}&format=json`, { headers: { "User-Agent": OSM_UA, "Accept-Language": "ja" } });
+    if (!res.ok) return null;
+    const json = await res.json();
+    const el = json?.[0];
+    if (!el) return null;
+    return { lat: Number(el.lat), lng: Number(el.lon) };
+  } catch {
+    return null;
+  }
+}
+
+// DMS?の誤検出確認で比べる、OSMの元の値の候補一覧。nodeは1つ、wayはOverpassとNominatimの
+// 両方を候補にし、どちらかと6けたで一致すればよいことにする
+async function fetchOsmCandidatePoints(source: PointSource): Promise<{ lat: number; lng: number }[]> {
+  if (source.kind === "osm_node") {
+    try {
+      await throttleOsm();
+      const res = await fetch(`https://api.openstreetmap.org/api/0.6/node/${source.id}.json`, { headers: { "User-Agent": OSM_UA } });
+      if (!res.ok) return [];
+      const json = await res.json();
+      const el = json.elements?.[0];
+      if (!el) return [];
+      return [{ lat: el.lat, lng: el.lon }];
+    } catch {
+      return [];
+    }
+  }
+  if (source.kind === "osm_way") {
+    // 2つの問い合わせを順に行い、throttleOsm()が間隔を確実に空けられるようにする(並列にしない)
+    const overpass = await fetchOverpassWayCenter(source.id);
+    const nominatim = await fetchNominatimWayCenter(source.id);
+    return [overpass, nominatim].filter((p): p is { lat: number; lng: number } => p !== null);
+  }
+  return [];
 }
 
 function round6(n: number): number {
@@ -113,12 +143,13 @@ async function checkCoordinate(spot: DraftSpot, label: string, warnings: string[
   const dmsLat = looksLikeDmsConversion(lat);
   const dmsLng = looksLikeDmsConversion(lng);
   if (dmsLat || dmsLng) {
-    // point.sourceがOSMのnode/wayなら、OSMの元の値を取り、6けたに丸めて同じかどうかで
-    // ⚠(本当にDMSの疑いがある)かℹ(OSMの本物の点で、6けたの丸めがたまたまDMSの形になっただけ)かを分ける
-    const osm = source.kind === "osm_node" || source.kind === "osm_way" ? await fetchOsmPoint(source) : null;
-    if (osm) {
-      const matches = round6(osm.lat) === round6(lat) && round6(osm.lng) === round6(lng);
-      if (matches) {
+    // point.sourceがOSMのnode/wayなら、OSMの元の値(wayはOverpassの中心・Nominatimの中心の
+    // どちらも候補にする)を取り、6けたに丸めて同じかどうかで⚠(本当にDMSの疑いがある)か
+    // ℹ(OSMの本物の点で、6けたの丸めがたまたまDMSの形になっただけ)かを分ける
+    const candidates = source.kind === "osm_node" || source.kind === "osm_way" ? await fetchOsmCandidatePoints(source) : [];
+    const matched = candidates.find((osm) => round6(osm.lat) === round6(lat) && round6(osm.lng) === round6(lng));
+    if (candidates.length > 0) {
+      if (matched) {
         notices.push(`${label}: 座標が度分秒をそのまま直した値の形に見えますが、OSMの元の値(${source.kind} ${(source as { id: string }).id})を6けたに丸めると今の値と同じです。DMS?は誤検出`);
       } else {
         if (dmsLat) warnings.push(`${label}: 緯度${lat}が度分秒をそのまま直した値(0.1秒きざみ)の疑いがあります。DMS?(OSMの元の値と不一致)`);

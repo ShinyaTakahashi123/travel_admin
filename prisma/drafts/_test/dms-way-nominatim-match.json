@@ -1,0 +1,56 @@
+{
+  "title": "確認の道具の試し用(DMS?・way・Nominatimで一致)",
+  "description": "確認の道具の試し用しおり(DMS?のOSM確認・架空)",
+  "nights": 0,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [],
+  "purposeNames": [],
+  "prefectureName": "京都府",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "test.jpg",
+    "sourceUrl": "https://example.com",
+    "author": "test",
+    "license": "CC0"
+  },
+  "citations": [
+    {
+      "url": "https://example.com",
+      "excerpt": "試し用"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "貴船神社本宮(試し用)",
+        "time": "09:00",
+        "stayDurationMin": 30,
+        "memo": "試し用のメモ。",
+        "legs": [],
+        "point": {
+          "lat": 35.121889,
+          "lng": 135.762936,
+          "source": {
+            "kind": "osm_way",
+            "id": "343853160"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      }
+    ]
+  ]
+}
