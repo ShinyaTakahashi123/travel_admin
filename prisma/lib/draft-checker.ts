@@ -6,7 +6,7 @@
  */
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-import type { DraftItinerary, DraftSpot, Mark, TransitMode } from "./draft-schema";
+import type { DraftItinerary, DraftSpot, Mark, PointSource, TransitMode } from "./draft-schema";
 import wordRules from "./word-rules.json";
 
 export function sha256OfFile(path: string): string {
@@ -50,7 +50,52 @@ function looksLikeDmsConversion(deg: number): boolean {
   return Math.abs(tenthArcsec - nearestInt) < 0.02;
 }
 
-function checkCoordinate(spot: DraftSpot, label: string, warnings: string[]) {
+let lastOsmCallAt = 0;
+async function throttleOsm(): Promise<void> {
+  const wait = lastOsmCallAt + 1100 - Date.now();
+  if (wait > 0) await new Promise((r) => setTimeout(r, wait));
+  lastOsmCallAt = Date.now();
+}
+
+// OSMの名前のある地物(node/way)の元の値を取る(7章の注: DMS?は目安で、OSMの元の点と
+// 6けたに丸めて同じなら誤検出ではない)。会員・メールアドレスはUser-Agentに入れない
+const OSM_UA = "shiorie-draft-checker/1.0";
+
+async function fetchOsmPoint(source: PointSource): Promise<{ lat: number; lng: number } | null> {
+  try {
+    if (source.kind === "osm_node") {
+      await throttleOsm();
+      const res = await fetch(`https://api.openstreetmap.org/api/0.6/node/${source.id}.json`, { headers: { "User-Agent": OSM_UA } });
+      if (!res.ok) return null;
+      const json = await res.json();
+      const el = json.elements?.[0];
+      if (!el) return null;
+      return { lat: el.lat, lng: el.lon };
+    }
+    if (source.kind === "osm_way") {
+      await throttleOsm();
+      const res = await fetch("https://overpass-api.de/api/interpreter", {
+        method: "POST",
+        headers: { "User-Agent": OSM_UA, "Content-Type": "text/plain" },
+        body: `[out:json];way(${source.id});out center;`,
+      });
+      if (!res.ok) return null;
+      const json = await res.json();
+      const el = json.elements?.[0];
+      if (!el?.center) return null;
+      return { lat: el.center.lat, lng: el.center.lon };
+    }
+  } catch {
+    return null;
+  }
+  return null;
+}
+
+function round6(n: number): number {
+  return Math.round(n * 1e6) / 1e6;
+}
+
+async function checkCoordinate(spot: DraftSpot, label: string, warnings: string[], notices: string[]) {
   const { lat, lng, source } = spot.point;
   if (lat < 24 || lat > 46) {
     if (lng >= 24 && lng <= 46) warnings.push(`${label}: 座標 緯度${lat}が範囲外(24〜46)。緯度と経度が入れかわっている疑いがあります`);
@@ -64,8 +109,27 @@ function checkCoordinate(spot: DraftSpot, label: string, warnings: string[]) {
   if (decimalPlaces(lng) > 6) warnings.push(`${label}: 経度${lng}の小数が6けたを超えています`);
   if (decimalPlaces(lat) < 4) warnings.push(`${label}: 緯度${lat}の小数が浅すぎます(目安4けた以上)`);
   if (decimalPlaces(lng) < 4) warnings.push(`${label}: 経度${lng}の小数が浅すぎます(目安4けた以上)`);
-  if (looksLikeDmsConversion(lat)) warnings.push(`${label}: 緯度${lat}が度分秒をそのまま直した値(0.1秒きざみ)の疑いがあります。DMS?`);
-  if (looksLikeDmsConversion(lng)) warnings.push(`${label}: 経度${lng}が度分秒をそのまま直した値(0.1秒きざみ)の疑いがあります。DMS?`);
+
+  const dmsLat = looksLikeDmsConversion(lat);
+  const dmsLng = looksLikeDmsConversion(lng);
+  if (dmsLat || dmsLng) {
+    // point.sourceがOSMのnode/wayなら、OSMの元の値を取り、6けたに丸めて同じかどうかで
+    // ⚠(本当にDMSの疑いがある)かℹ(OSMの本物の点で、6けたの丸めがたまたまDMSの形になっただけ)かを分ける
+    const osm = source.kind === "osm_node" || source.kind === "osm_way" ? await fetchOsmPoint(source) : null;
+    if (osm) {
+      const matches = round6(osm.lat) === round6(lat) && round6(osm.lng) === round6(lng);
+      if (matches) {
+        notices.push(`${label}: 座標が度分秒をそのまま直した値の形に見えますが、OSMの元の値(${source.kind} ${(source as { id: string }).id})を6けたに丸めると今の値と同じです。DMS?は誤検出`);
+      } else {
+        if (dmsLat) warnings.push(`${label}: 緯度${lat}が度分秒をそのまま直した値(0.1秒きざみ)の疑いがあります。DMS?(OSMの元の値と不一致)`);
+        if (dmsLng) warnings.push(`${label}: 経度${lng}が度分秒をそのまま直した値(0.1秒きざみ)の疑いがあります。DMS?(OSMの元の値と不一致)`);
+      }
+    } else {
+      if (dmsLat) warnings.push(`${label}: 緯度${lat}が度分秒をそのまま直した値(0.1秒きざみ)の疑いがあります。DMS?`);
+      if (dmsLng) warnings.push(`${label}: 経度${lng}が度分秒をそのまま直した値(0.1秒きざみ)の疑いがあります。DMS?`);
+    }
+  }
+
   if (source.kind === "osm_node" || source.kind === "osm_way") {
     if (!source.id?.trim()) warnings.push(`${label}: 点の出どころ(${source.kind})のidが空です`);
   } else if (source.kind === "gsi" || source.kind === "exception") {
@@ -190,7 +254,9 @@ async function measureOneLeg(
   // 大きく遠回りに出る区間。公式の案内で分を決めたと書かれていれば、経路の計算での短すぎの
   // ⚠は出さず、出典つきのℹ(人が確かめる注意)にする(2026-11-06、企画運営の依頼)
   if (leg.basis) {
-    if (leg.mode === "walk" && leg.min > 25) warnings.push(`${label}: 徒歩${leg.min}分(25分を超えています)`);
+    // 鞍馬寺→奥の院魔王殿のように、公式の案内による区間は、徒歩25分超えの注意も
+    // ⚠でなくℹにする(2026-11-06、企画運営の依頼)
+    if (leg.mode === "walk" && leg.min > 25) notices.push(`${label}: 徒歩${leg.min}分(25分を超えていますが、公式の案内による値のため人が確かめる注意のみ)`);
     notices.push(
       `${label}: ${leg.mode}${leg.min}分は公式の案内による値(${leg.basis.sourceUrl}${leg.basis.note ? `、${leg.basis.note}` : ""})。経路の計算は行っていません。人が確かめてください`,
     );
@@ -247,6 +313,10 @@ async function checkLegDurations(day: DraftSpot[], dayNumber: number, warnings: 
 // ============================================================
 // 5. メモの分と区間の分の整合
 // ============================================================
+// 移動の手段を言う言い方。「〇〇線で」「〇〇電車で」は路線名を問わず「線で」「電車で」で終わる形で拾う
+// (2026-11-06、企画運営の依頼。東京の下書きで「都営大江戸線で」「叡山電車で」などがひっかからなかった)
+const TRANSIT_VERB_PATTERN = /歩いて|車で|線で|電車で|地下鉄で|バスで|モノレールで/;
+
 function extractMinutesNear(text: string, verbPattern: RegExp): number[] {
   const re = new RegExp(`(?:${verbPattern.source})(?:およそ)?(\\d+)分`, "g");
   const out: number[] = [];
@@ -275,7 +345,7 @@ function checkMemoMinutesConsistency(day: DraftSpot[], dayNumber: number, warnin
     // メモが短いと、80字の切り出しに結びの「この後は、…」まで入り込み、次の区間の分を誤って拾う
     const closingInOpening = cur.memo.indexOf("この後は");
     const openingSlice = cur.memo.slice(0, closingInOpening === -1 ? 80 : Math.min(80, closingInOpening));
-    const openingMins = [...extractMinutesNear(openingSlice, /歩いて|車で/), ...extractTotalMinutes(openingSlice)];
+    const openingMins = [...extractMinutesNear(openingSlice, TRANSIT_VERB_PATTERN), ...extractTotalMinutes(openingSlice)];
     if (openingMins.length === 0) {
       warnings.push(`${label}: ${cur.name}の書き出しに移動の分の記載が見当たりません`);
       // 駐車場までの徒歩+運転のように、区間(legs)が複数のときは、内訳をそれぞれ書く形(「車でおよそ9分、
@@ -289,7 +359,7 @@ function checkMemoMinutesConsistency(day: DraftSpot[], dayNumber: number, warnin
       warnings.push(`${label}: ${prev.name}の結びに「この後は、…」の一文が見当たりません`);
     } else {
       const closingTail = prev.memo.slice(closingIdx);
-      const closingMins = [...extractMinutesNear(closingTail, /歩いて|車で/), ...extractTotalMinutes(closingTail)];
+      const closingMins = [...extractMinutesNear(closingTail, TRANSIT_VERB_PATTERN), ...extractTotalMinutes(closingTail)];
       if (closingMins.length === 0) {
         warnings.push(`${label}: ${prev.name}の結びに移動の分の記載が見当たりません`);
       } else if (!closingMins.includes(actual) && closingMins.reduce((a, b) => a + b, 0) !== actual) {
@@ -471,17 +541,18 @@ export async function runChecks(draft: DraftItinerary, opts: RunChecksOptions = 
   checkWords(draft.title, "題", warnings);
   checkWords(draft.description, "説明文", warnings);
 
-  draft.days.forEach((day, di) => {
+  for (let di = 0; di < draft.days.length; di++) {
+    const day = draft.days[di];
     const dayNumber = di + 1;
-    day.forEach((spot) => {
-      checkCoordinate(spot, `${dayNumber}日目 ${spot.name}`, warnings);
+    for (const spot of day) {
+      await checkCoordinate(spot, `${dayNumber}日目 ${spot.name}`, warnings, notices);
       checkFixedSentences(spot, `${dayNumber}日目 ${spot.name}`, warnings);
       checkWords(spot.memo, `${dayNumber}日目 ${spot.name}のメモ`, warnings);
-    });
+    }
     checkTimeContinuity(day, dayNumber, warnings);
     checkDayFrame(day, di, totalDays, draft.nights, warnings);
     checkMemoMinutesConsistency(day, dayNumber, warnings);
-  });
+  }
 
   for (let di = 0; di < draft.days.length; di++) {
     await checkLegDurations(draft.days[di], di + 1, warnings, notices);

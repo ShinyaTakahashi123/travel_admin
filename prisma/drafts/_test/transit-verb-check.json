@@ -1,0 +1,177 @@
+{
+  "title": "確認の道具の試し用(電車・バスの書き方)",
+  "description": "確認の道具の試し用しおり(電車・バスの書き方テスト・架空)",
+  "nights": 0,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [],
+  "purposeNames": [],
+  "prefectureName": "東京都",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "test.jpg",
+    "sourceUrl": "https://example.com",
+    "author": "test",
+    "license": "CC0"
+  },
+  "citations": [
+    {
+      "url": "https://example.com",
+      "excerpt": "試し用"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "出発点",
+        "time": "09:00",
+        "stayDurationMin": 30,
+        "memo": "出発点のメモ。この後は、都営大江戸線でおよそ15分、次へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 35,
+          "lng": 135.7,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(電車・バスの書き方テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "地点2(路線名)",
+        "time": "09:15",
+        "stayDurationMin": 30,
+        "memo": "前の場所から都営大江戸線でおよそ15分、地点2(路線名)に着きます。試し用のメモ。この後は、電車でおよそ99分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "train",
+            "min": 15,
+            "line": "都営大江戸線"
+          }
+        ],
+        "point": {
+          "lat": 35,
+          "lng": 135.7,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(電車・バスの書き方テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "地点3(地下鉄)",
+        "time": "09:49",
+        "stayDurationMin": 30,
+        "memo": "前の場所から地下鉄でおよそ10分、地点3(地下鉄)に着きます。試し用のメモ。この後は、バスでおよそ99分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "train",
+            "min": 10
+          }
+        ],
+        "point": {
+          "lat": 35,
+          "lng": 135.7,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(電車・バスの書き方テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "地点4(叡山電車)",
+        "time": "10:14",
+        "stayDurationMin": 30,
+        "memo": "前の場所から叡山電車でおよそ8分、地点4(叡山電車)に着きます。試し用のメモ。この後は、歩いておよそ99分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "train",
+            "min": 8
+          }
+        ],
+        "point": {
+          "lat": 35,
+          "lng": 135.7,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(電車・バスの書き方テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      },
+      {
+        "name": "地点5(バス)",
+        "time": "10:30",
+        "stayDurationMin": 30,
+        "memo": "前の場所からバスでおよそ12分、地点5(バス)に着きます。試し用のメモ。この後は、車でおよそ99分、次へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "bus",
+            "min": 12
+          }
+        ],
+        "point": {
+          "lat": 35,
+          "lng": 135.7,
+          "source": {
+            "kind": "exception",
+            "reason": "確認の道具の試し用(電車・バスの書き方テスト)"
+          }
+        },
+        "hours": {
+          "note": "試し用",
+          "sourceUrl": "https://example.com"
+        },
+        "citations": [
+          {
+            "url": "https://example.com",
+            "excerpt": "試し用"
+          }
+        ]
+      }
+    ]
+  ]
+}
