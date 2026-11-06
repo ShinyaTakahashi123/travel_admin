@@ -1,0 +1,309 @@
+{
+  "title": "皇居外苑・銀座・東京タワーと、新宿御苑・六本木ヒルズをめぐる東京1泊2日",
+  "description": "江戸城の面影を残す皇居外苑や日比谷公園、にぎわう銀座の通りを歩き、増上寺から東京タワーへ向かう1日目。2日目は、緑豊かな新宿御苑や東京都庁舎の展望室、毛利家の屋敷跡に広がる六本木ヒルズ、国立新美術館と東京ミッドタウンをめぐります。",
+  "nights": 1,
+  "seasons": ["spring", "summer", "autumn", "winter"],
+  "tagNames": ["定番観光"],
+  "purposeNames": ["絶景・フォトスポット", "城・史跡"],
+  "prefectureName": "東京都",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "Tokyo Tower, Tokyo, 20240821 1724 5273.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower,_Tokyo,_20240821_1724_5273.jpg",
+    "author": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "citations": [
+    { "url": "https://www.env.go.jp/garden/kokyogaien/1_intro/outline.html", "excerpt": "皇居外苑は、昭和24年に旧皇室苑地の一部が、国民公園として、開放されたものです" },
+    { "url": "https://www.tokyotower.co.jp/company/", "excerpt": "昭和33年 東京タワー営業開始" },
+    { "url": "https://www.tokyo-midtown.com/jp/about/history/", "excerpt": "2007年3月30日のグランドオープン" }
+  ],
+  "days": [
+    [
+      {
+        "name": "皇居外苑",
+        "time": "11:18",
+        "stayDurationMin": 40,
+        "memo": "東京駅丸の内駅舎から歩いておよそ18分、皇居外苑の「二重橋前」に着きます。皇居外苑は、昭和24年(1949)に旧皇室苑地の一部が国民公園として開放されたものです。目の前に見える二重橋は、奥に架かる皇居正門鉄橋を指し、名前は、もとの下乗橋の橋桁を支える台が二重の構造になっていたことに由来すると伝えられています。今の鉄橋は昭和39年(1964)に架け替えられました。国家行事などの際は、警備のため立ち入りが規制されることがあります。この後は、歩いておよそ13分、日比谷公園へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 35.680260,
+          "lng": 139.754672,
+          "source": { "kind": "osm_node", "id": "4736323978", "note": "「二重橋前」(tourism=viewpoint)。二重橋(皇居正門鉄橋)は一般の人が渡れないため、見る人が立つ皇居前広場側の名前のある点を使う(企画運営11/06指示)。東京駅丸の内駅舎(relation4856156)から測って歩き18分" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "常時開放・無休(国家行事等の特別警備時は規制あり)",
+          "sourceUrl": "https://www.env.go.jp/garden/kokyogaien/2_guide/kokyomaehiroba_wadakurafunsuikouen.html"
+        },
+        "citations": [
+          { "url": "https://www.env.go.jp/garden/kokyogaien/1_intro/outline.html", "excerpt": "皇居外苑は、昭和24年に旧皇室苑地の一部が、国民公園として、開放されたものです" },
+          { "url": "https://www.env.go.jp/garden/kokyogaien/1_intro/his_04.html", "excerpt": "奥の橋はかつて、『下乗橋』と言われ、橋桁を支えるため、途中に台があって二重構造となっていたことからこの名がつきました" }
+        ]
+      },
+      {
+        "name": "日比谷公園",
+        "time": "12:11",
+        "stayDurationMin": 30,
+        "memo": "皇居外苑から歩いておよそ13分、日比谷公園に着きます。明治36年(1903)6月1日に開園した、日本で初めての「西洋風」公園とされ、設計は本多静六博士が手がけました。江戸時代は大名屋敷が並び、明治時代には陸軍の練兵場として使われていた土地です。都心にいながら落ち着いたひとときを過ごせる場所です。この後は、歩いておよそ6分、有楽町駅のあたりへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 13 }],
+        "point": {
+          "lat": 35.675168,
+          "lng": 139.758775,
+          "source": { "kind": "osm_node", "id": "9081235700", "note": "日比谷門跡。広い日比谷公園の、有楽町・銀座側から着く入口にあたる名前のある地物の点(7章)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "常時開園(サービスセンターは8:30〜17:30、年末年始休み)",
+          "sourceUrl": "https://www.tokyo-park.or.jp/park/hibiya/index.html"
+        },
+        "citations": [
+          { "url": "https://www.tokyo-park.or.jp/park/hibiya/index.html", "excerpt": "明治36年（1903年）6月1日開園、日本初の「西洋風」公園として誕生、設計は本多静六博士" }
+        ]
+      },
+      {
+        "name": "有楽町駅のあたりで昼食",
+        "time": "12:47",
+        "stayDurationMin": 40,
+        "memo": "日比谷公園から歩いておよそ6分、有楽町駅のあたりに着きます。このあたりで昼食にしましょう。この後は、歩いておよそ10分、銀座四丁目交差点へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 6 }],
+        "point": {
+          "lat": 35.675969,
+          "lng": 139.762136,
+          "source": { "kind": "osm_node", "id": "6193611538", "note": "有楽町駅(丸の内側)。昼食の点はバス停・駅などお店でない名前の点を使う(7章・昼食のスポットの決まり)" }
+        },
+        "photos": [],
+        "marks": ["lunch"],
+        "hours": {
+          "note": "駅のため営業時間の区分なし",
+          "sourceUrl": "https://www.tokyometro.jp/station/yurakucho/index.html"
+        },
+        "citations": [
+          { "url": "https://www.tokyometro.jp/station/yurakucho/index.html", "excerpt": "有楽町駅について(有楽町線、東京都千代田区有楽町1-11-1)" }
+        ]
+      },
+      {
+        "name": "銀座四丁目交差点",
+        "time": "13:37",
+        "stayDurationMin": 60,
+        "memo": "有楽町駅のあたりから歩いておよそ10分、銀座四丁目交差点に着きます。「銀座」の地名は、江戸時代にこの地に銀貨の鋳造を行う「銀座役所」が置かれたことに由来すると伝えられ、1603年に江戸幕府を開いた徳川家康が、駿府にあった銀貨鋳造所をこの地に移したとされています。交差点はかつて「尾張町交差点」とも呼ばれ、今も中央通り沿いに店が並び、多くの人でにぎわう通りのひとつです。中央通りを歩きながら、銀座らしい街並みを楽しみましょう。この後は、電車でおよそ20分、増上寺へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 10 }],
+        "point": {
+          "lat": 35.671220,
+          "lng": 139.765036,
+          "source": { "kind": "osm_node", "id": "6346639685", "note": "銀座四丁目交差点(tourism=attraction)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "公共の交差点のため区分なし",
+          "sourceUrl": "https://www.ginza.jp/history"
+        },
+        "citations": [
+          { "url": "https://www.ginza.jp/history", "excerpt": "「銀座」の地名は、江戸時代の「銀座役所」に由来します。1603年に江戸幕府をひらいた徳川家康は、駿府にあった銀貨鋳造所を現在の銀座2丁目に移しました。" }
+        ]
+      },
+      {
+        "name": "増上寺",
+        "time": "14:57",
+        "stayDurationMin": 40,
+        "memo": "銀座四丁目交差点から電車でおよそ20分、増上寺に着きます。明徳4年(1393)に浄土宗第八祖・酉誉聖聰上人によって開かれ、天正18年(1590)には徳川家の菩提寺として選ばれました。慶長3年(1598)に現在の芝の地へ移転し、境内の徳川将軍家墓所には6人の将軍が葬られています。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ8分、東京タワーへ向かいましょう。",
+        "legs": [{ "mode": "train", "min": 20, "line": "都営三田線", "basis": { "kind": "official", "sourceUrl": "https://www.zojoji.or.jp/", "note": "日比谷駅(三田線)から御成門駅(1駅)を経て徒歩。御成門駅から徒歩9分はrouted-footで計測" } }],
+        "point": {
+          "lat": 35.657191,
+          "lng": 139.748212,
+          "source": { "kind": "osm_way", "id": "744348814", "note": "増上寺(amenity=place_of_worship)。OSMのopening_hoursタグは24/7" }
+        },
+        "photos": [],
+        "marks": ["temple"],
+        "hours": {
+          "note": "境内はOSMのタグで24/7(終日)。開門・閉門時刻の公式の記載は見当たらず(訪問時に確認)。三解脱門(三門)は令和7年(2025)1月〜令和14年(2032)6月(予定)まで保存修理工事中",
+          "sourceUrl": "https://www.zojoji.or.jp/keidai/"
+        },
+        "citations": [
+          { "url": "https://www.zojoji.or.jp/info/history.html", "excerpt": "増上寺は、明徳四年（1393年）、浄土宗第八祖酉誉聖聰（ゆうよしょうそう）上人によって開かれました。徳川家の菩提寺として増上寺が選ばれました（天正十八年、1590年）。慶長三年（1598年）には、現在の芝の地に移転。" }
+        ]
+      },
+      {
+        "name": "東京タワー",
+        "time": "15:45",
+        "stayDurationMin": 60,
+        "memo": "増上寺から歩いておよそ8分、東京タワーに着きます。昭和33年(1958)に営業を開始した、高さ333メートルの電波塔です。メインデッキ(150m)・トップデッキツアー(150m+250m)など複数の展望台があり、東京の街並みを見渡せます。この夜は、都内の宿に泊まりましょう。",
+        "legs": [{ "mode": "walk", "min": 8 }],
+        "point": {
+          "lat": 35.658449,
+          "lng": 139.745536,
+          "source": { "kind": "osm_way", "id": "4247312", "note": "東京タワー。OSM上はrelation(man_made=tower)だが、下書きの型にrelationの区分がないためosm_wayで記録" }
+        },
+        "photos": [
+          {
+            "commonsFile": "Tokyo Tower, Tokyo, 20240821 1724 5273.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tokyo_Tower,_Tokyo,_20240821_1724_5273.jpg",
+            "author": "Jakub Hałun",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+          }
+        ],
+        "marks": [],
+        "hours": {
+          "note": "メインデッキ9:00〜23:00・通年無休(訪問時に公式で確認)",
+          "sourceUrl": "https://www.tokyotower.co.jp/"
+        },
+        "citations": [
+          { "url": "https://www.tokyotower.co.jp/company/", "excerpt": "昭和33年 東京タワー営業開始" },
+          { "url": "https://www.tokyotower.co.jp/", "excerpt": "東京タワーは高さ333メートルを誇る東京のランドマーク。メインデッキ（150m）9:00 ～ 23:00、トップデッキツアー（150m + 250m）9:00 ～ 22:45" }
+        ]
+      }
+    ],
+    [
+      {
+        "name": "新宿御苑(新宿門)",
+        "time": "09:20",
+        "stayDurationMin": 90,
+        "memo": "宿からJR中央線快速でおよそ14分、新宿駅へ。南口から歩いておよそ11分、新宿御苑の新宿門に着きます。江戸時代はここに譜代大名・内藤家の屋敷地があり、明治12年(1879)に皇室に献納されたのち、明治39年(1906)に皇室庭園「新宿御苑」として開苑しました。昭和24年(1949)5月21日には「国民公園新宿御苑」として、広く一般に公開されています。休みの日は、公式の案内で確かめましょう。この後は、歩いておよそ24分、東京都庁舎へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 35.688330,
+          "lng": 139.707463,
+          "source": { "kind": "osm_way", "id": "149732540", "note": "新宿門(building=yes、name=新宿門)。API(/api/0.6/way/149732540)で直接確認済み。新宿駅南口(way887779302)から測って歩き11分" }
+        },
+        "photos": [
+          {
+            "commonsFile": "Shinjuku Gyoen National Garden, Tokyo, 20240822 1443 5433.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Shinjuku_Gyoen_National_Garden,_Tokyo,_20240822_1443_5433.jpg",
+            "author": "Jakub Hałun",
+            "license": "CC BY 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/4.0/"
+          }
+        ],
+        "marks": [],
+        "hours": {
+          "note": "月曜休園(祝日の場合は翌平日)・年末年始(12/29〜1/3)休園。有料。時間は季節で変動(10/1〜3/14は9:00〜16:30、3/15〜6/10・8/1〜9/30は9:00〜18:00、6/11〜7/31は9:00〜19:00)",
+          "sourceUrl": "https://fng.or.jp/shinjuku/guide/"
+        },
+        "citations": [
+          { "url": "https://fng.or.jp/shinjuku/gyoen/history/", "excerpt": "明治12年献納、明治39年に皇室庭園「新宿御苑」として開苑、昭和24年5月21日に国民公園として正式公開" }
+        ]
+      },
+      {
+        "name": "東京都庁舎第一本庁舎",
+        "time": "11:14",
+        "stayDurationMin": 45,
+        "memo": "新宿御苑から歩いておよそ24分、東京都庁舎第一本庁舎に着きます。平成3年(1991)に完成したこの庁舎には、地上202メートルの高さに展望室があり、晴れた日には新宿の高層ビル群や遠くの山並みを見渡せます。南北2つの展望室があり、点検や改修などで交互に休室することがあります。休みの日は、公式の案内で確かめましょう。この後は、歩いておよそ5分、都庁前駅のあたりへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 24 }],
+        "point": {
+          "lat": 35.689496,
+          "lng": 139.691709,
+          "source": { "kind": "osm_way", "id": "89877471", "note": "東京都庁舎第一本庁舎(office=government)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "9:30〜22:00(北展望室は17:00まで)。南展望室は毎月第1・第3火曜休、北展望室は第2・第4月曜休(祝日と重なれば翌日)。年末年始(12/29〜31・1/2・1/3)と都庁舎点検日は両方休室",
+          "sourceUrl": "https://www.zaimu.metro.tokyo.lg.jp/tochousha/goannai/tenbou"
+        },
+        "citations": [
+          { "url": "https://www.zaimu.metro.tokyo.lg.jp/tochousha/goannai/tenbou", "excerpt": "地上202メートルの展望室" }
+        ]
+      },
+      {
+        "name": "都庁前駅のあたりで昼食",
+        "time": "12:04",
+        "stayDurationMin": 40,
+        "memo": "東京都庁舎から歩いておよそ5分、都庁前駅のあたりに着きます。このあたりで昼食にしましょう。この後は、都営大江戸線でおよそ10分、六本木ヒルズへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 5 }],
+        "point": {
+          "lat": 35.690607,
+          "lng": 139.692814,
+          "source": { "kind": "osm_node", "id": "6203591949", "note": "都庁前駅。昼食の点は駅などお店でない名前の点を使う" }
+        },
+        "photos": [],
+        "marks": ["lunch"],
+        "hours": {
+          "note": "駅のため営業時間の区分なし",
+          "sourceUrl": "https://www.kotsu.metro.tokyo.jp/pickup_information/news/pdf/2017/sub_p_20170412_h_01.pdf"
+        },
+        "citations": [
+          { "url": "https://www.kotsu.metro.tokyo.jp/pickup_information/news/pdf/2017/sub_p_20170412_h_01.pdf", "excerpt": "都営大江戸線の３駅(都庁前駅を含む)でストリートビューを公開" }
+        ]
+      },
+      {
+        "name": "六本木ヒルズ森タワー",
+        "time": "12:54",
+        "stayDurationMin": 70,
+        "memo": "都庁前駅から都営大江戸線でおよそ10分、六本木駅で降りて、六本木ヒルズに着きます。この地には江戸時代、長門府中藩(長府藩)毛利家の上屋敷がありました。明治20年(1887)には中央大学初代校長・増島六一郎の邸宅となり、昭和27年(1952)にはニッカウヰスキーの東京工場、昭和52年(1977)にはテレビ朝日の敷地となるなど、持ち主や使われ方が幾度も変わってきた土地です。平成15年(2003)に六本木ヒルズが開業し、屋敷跡の面影を伝える毛利庭園が新たに整備されました。森タワー52階には展望施設「東京シティビュー」があり、東京タワーや遠くの街並みを一望できます。この後は、歩いておよそ13分、国立新美術館へ向かいましょう。",
+        "legs": [{ "mode": "train", "min": 10, "line": "都営大江戸線" }],
+        "point": {
+          "lat": 35.660456,
+          "lng": 139.729277,
+          "source": { "kind": "osm_way", "id": "153924771", "note": "六本木ヒルズ森タワー(building=office)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "東京シティビュー 10:00〜22:00(最終入館21:30)。有料。展示替え等で臨時休館あり",
+          "sourceUrl": "https://tcv.roppongihills.com/jp/"
+        },
+        "citations": [
+          { "url": "https://www.city.minato.tokyo.jp/azabuchikusei/mirai/bukeyashiki.html", "excerpt": "この地には長門府中藩*毛利家の上屋敷が置かれた。明治20年（1887年）、増島六一郎（中央大学初代校長）の邸宅となる。昭和27年（1952年）にニッカウヰスキー東京工場、昭和52年（1977年）にはテレビ朝日の敷地となった。平成15年（2003年）に六本木ヒルズがオープン、現在の毛利庭園が誕生した。" },
+          { "url": "https://art-view.roppongihills.com/jp/info/", "excerpt": "52F「東京シティビュー」" }
+        ]
+      },
+      {
+        "name": "国立新美術館",
+        "time": "14:17",
+        "stayDurationMin": 60,
+        "memo": "六本木ヒルズから歩いておよそ13分、国立新美術館に着きます。平成19年(2007)に、独立行政法人国立美術館に属する5番目の施設として開館しました。波を思わせるガラスの外壁が特徴的な建物で、設計は黒川紀章・日本設計共同体によるもので、平成18年(2006)5月31日に竣工しました。休みの日は、公式の案内で確かめましょう。この後は、歩いておよそ17分、東京ミッドタウンへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 13 }],
+        "point": {
+          "lat": 35.665337,
+          "lng": 139.726441,
+          "source": { "kind": "osm_way", "id": "103425086", "note": "国立新美術館(tourism=museum)" }
+        },
+        "photos": [
+          {
+            "commonsFile": "National Art Center Tokyo 2008.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:National_Art_Center_Tokyo_2008.jpg",
+            "author": "Wiiii",
+            "license": "CC BY-SA 3.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+          }
+        ],
+        "marks": [],
+        "hours": {
+          "note": "10:00〜18:00(入場は閉館30分前まで)。毎週火曜休館(祝日・振替休日は開館し翌平日休館)",
+          "sourceUrl": "https://www.nact.jp/"
+        },
+        "citations": [
+          { "url": "https://www.nact.jp/", "excerpt": "2007年、独立行政法人国立美術館に属する5番目の施設として開館しました。" },
+          { "url": "https://www.nact.jp/introduce/architecture.html", "excerpt": "設計者　黒川紀章・日本設計共同体。竣工　2006（平成18）年5月31日" }
+        ]
+      },
+      {
+        "name": "東京ミッドタウン(檜町公園)",
+        "time": "15:34",
+        "stayDurationMin": 70,
+        "memo": "国立新美術館から歩いておよそ17分、東京ミッドタウンに着きます。この地には江戸時代、萩藩(長州藩)毛利家の下屋敷があり、明治時代には陸軍の駐屯地、戦後は米軍将校の宿舎、日本への返還後は防衛庁檜町庁舎として、長く一般には閉ざされた土地でした。平成12年(2000)に防衛庁本庁が市ヶ谷へ移転したことをきっかけに再開発が始まり、平成13年(2001)9月にコンソーシアム6社がこの土地を取得、平成19年(2007)3月30日にグランドオープンしました。敷地の一角に広がる港区立檜町公園は、この再開発にあわせて整備された緑地です。東京の旅を、ここで締めくくりましょう。見学を終えたら、歩いておよそ8分の六本木駅から、東京メトロ日比谷線などでおよそ16分、東京駅方面へ戻りましょう。",
+        "legs": [{ "mode": "walk", "min": 17 }],
+        "point": {
+          "lat": 35.666829,
+          "lng": 139.732631,
+          "source": { "kind": "exception", "reason": "檜町公園(way645538985、leisure=park)は南北150m・東西180mほどの狭い公園で、中心が歩いて入れる場所に落ちるため、境界の中心を使う例外(7章)。名前のある門は見つからなかった(企画運営11/06、認める旨の返信あり)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "檜町公園は常時開放(詳しい出典は未確認。訪問時に公式で確認)",
+          "sourceUrl": "https://www.tokyo-midtown.com/jp/about/history/"
+        },
+        "citations": [
+          { "url": "https://www.tokyo-midtown.com/jp/about/history/", "excerpt": "かつて、ここは、江戸時代　萩藩　毛利家下屋敷でした。明治時代に陸軍駐屯地となり、終戦後には米軍将校の宿舎、日本に返還された後は防衛庁の檜町庁舎として、実に400年あまりの間、一般には閉ざされた土地として使われていました。2000年、防衛庁本庁が檜町から市ヶ谷に移転したことから、この街の新しい都市計画が始まりました。2001年9月、コンソーシアム6社がこの土地を落札することで、このプロジェクトはスタートしました。広大な緑を臨む港区立檜町公園を含めた再開発事業です。2007年3月にグランドオープンを迎えました。" },
+          { "url": "https://www.tokyo-midtown.com/jp/about/", "excerpt": "2007年3月30日、六本木で開業した東京ミッドタウンは、…" }
+        ]
+      }
+    ]
+  ]
+}
