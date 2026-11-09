@@ -75,18 +75,22 @@ export async function GET(request: Request) {
     where: { createdAt: { lt: auditLogCutoff }, legalHold: false },
   });
 
+  // 2026-10-25のアカウント統合で、itinerary.planner_account_idの参照先がplanner_account
+  // からuser_accountへ付け替わった(段階3)。生SQLはPrismaのリレーションを経由しないため、
+  // ここは手で直す必要がある。プランナー機能だけの利用停止(planner_suspended_at)も見る
+  // (2026-11-09、セキュリティ指摘)
   const tripDescriptionsCleared = await prisma.$executeRaw`
     UPDATE trip
     SET description = NULL
     WHERE description IS NOT NULL
       AND NOT EXISTS (
         SELECT 1 FROM itinerary i
-        JOIN planner_account p ON p.id = i.planner_account_id
+        JOIN user_account p ON p.id = i.planner_account_id
         WHERE i.id = trip.original_itinerary_id
           AND (
             (trip.original_kind = 'copy' AND i.status <> 'deleted')
-            OR (trip.original_kind = 'shared_link' AND i.status = 'draft' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
-            OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
+            OR (trip.original_kind = 'shared_link' AND i.status = 'draft' AND p.status <> 'suspended' AND p.planner_suspended_at IS NULL AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
+            OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended' AND p.planner_suspended_at IS NULL)
           )
       )
   `;
@@ -98,12 +102,12 @@ export async function GET(request: Request) {
         SELECT trip.id FROM trip
         WHERE NOT EXISTS (
           SELECT 1 FROM itinerary i
-          JOIN planner_account p ON p.id = i.planner_account_id
+          JOIN user_account p ON p.id = i.planner_account_id
           WHERE i.id = trip.original_itinerary_id
             AND (
               (trip.original_kind = 'copy' AND i.status <> 'deleted')
-              OR (trip.original_kind = 'shared_link' AND i.status = 'draft' AND p.status <> 'suspended' AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
-              OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended')
+              OR (trip.original_kind = 'shared_link' AND i.status = 'draft' AND p.status <> 'suspended' AND p.planner_suspended_at IS NULL AND i.shared_link_token_hash IS NOT NULL AND i.shared_link_token_hash = trip.original_shared_link_token_hash)
+              OR (trip.original_kind NOT IN ('copy', 'shared_link') AND i.status = 'published' AND p.status <> 'suspended' AND p.planner_suspended_at IS NULL)
             )
         )
       )
