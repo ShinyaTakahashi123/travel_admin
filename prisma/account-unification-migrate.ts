@@ -37,7 +37,12 @@ function placeholderEmail(plannerAccountId: string): string {
   return `planner-${plannerAccountId}@${MIGRATED_EMAIL_DOMAIN}`;
 }
 
-// セキュリティ指摘2026-10-25: しおり関連の件数を処理の前後で見張る対象
+// セキュリティ指摘2026-10-25: しおり関連の件数を処理の前後で見張る対象。
+// accountLink・plannerServiceArea・plannerSpecialtyTagは、ケースA・Bのまとめ処理が
+// 成功したときに意図して減る(0になる)連携・公開項目の印であって「しおり関連」ではないため、
+// ここには含めない(2026-11-10 ラウンド2の練習で判明: 含めたままだと、本番に実在する
+// ケースA・Bのまとめが常にこの見張りに引っかかって中断してしまう=本番に1件あるケースAの
+// 処理そのものが成功しない不具合だった)
 const SENTINEL_MODELS = [
   "itinerary",
   "day",
@@ -56,9 +61,6 @@ const SENTINEL_MODELS = [
   "featureItem",
   "deletedAccountRecord",
   "deletedAccountRecordItem",
-  "accountLink",
-  "plannerServiceArea",
-  "plannerSpecialtyTag",
 ] as const;
 
 type SentinelCounts = Record<(typeof SENTINEL_MODELS)[number], number>;
