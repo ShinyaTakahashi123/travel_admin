@@ -310,7 +310,7 @@ async function main() {
     caseCIndex++;
     try {
       const url = `${PLANNER_SITE_URL}/account-link/recover-planner?token=${rawToken}`;
-      await sendMail({
+      const sent = await sendMail({
         to: legacyEmail,
         subject: "【しおりえ】プランナーアカウントのご確認のお願い",
         text: `しおりえをご利用いただきありがとうございます。
@@ -336,7 +336,13 @@ ${url}
 
 しおりえ運営事務局`,
       });
-      notifiedCount++;
+      // sendMailは失敗しても例外を投げず戻り値で知らせる作りのため、戻り値で数える
+      // (セキュリティ指摘2026-11-10: 例外のcatchだけでは、送れていないのに送れた件数に数えてしまう)
+      if (sent) {
+        notifiedCount++;
+      } else {
+        console.error(`[account-unification-migrate] Cの${caseCIndex}件目: 送れませんでした`);
+      }
     } catch {
       // エラーの中身(宛先・本文を含みうる)はログに出さない(セキュリティ指摘2026-10-25夜)
       console.error(`[account-unification-migrate] Cの${caseCIndex}件目: 送れませんでした`);
@@ -350,7 +356,7 @@ ${url}
   for (const email of result.mergedABNotifications) {
     mergedIndex++;
     try {
-      await sendMail({
+      const sent = await sendMail({
         to: email,
         subject: "【しおりえ】アカウントを1つにまとめました",
         text: `ユーザーサイトとプランナーサイトのアカウントを1つにまとめました。これからは、このメールアドレスのアカウントで、両方のサイトに同じアカウントでログインできます（ログインの状態の共有は、のちに始めます）。最初にログインしたときに、改定後の利用規約などへの同意をお願いします。
@@ -359,7 +365,11 @@ ${url}
 
 しおりえ運営事務局`,
       });
-      mergedNotifiedCount++;
+      if (sent) {
+        mergedNotifiedCount++;
+      } else {
+        console.error(`[account-unification-migrate] A・Bの${mergedIndex}件目: 送れませんでした`);
+      }
     } catch {
       console.error(`[account-unification-migrate] A・Bの${mergedIndex}件目: 送れませんでした`);
     }
