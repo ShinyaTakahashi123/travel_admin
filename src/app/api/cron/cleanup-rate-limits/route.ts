@@ -40,6 +40,25 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
+  // アカウント統合(段階3)の当日、スキーマ適用(itinerary.planner_account_idの参照先が
+  // user_accountへ付け替わる)のあと、移しかえスクリプトがまだ終わっていない間は、
+  // 既存の行のplanner_account_idの値がまだ古いPlannerAccountのIDのままで、
+  // user_accountのどの行とも一致しない。この状態でこのCronが動くと、下の生SQL(NOT EXISTS)が
+  // ほぼ全件に真と判定し、旅の記録(description・メモ・写真)を誤って消してしまう
+  // (2026-11-09、セキュリティ指摘)。そのため、動き始めにこの不一致を確かめ、1件でもあれば
+  // 何もせず終わる(安全のため、この回のCronは丸ごと見送る。日次なので翌日また動く)
+  const orphanedItineraryCount = await prisma.$queryRaw<{ count: bigint }[]>`
+    SELECT count(*) AS count FROM itinerary i
+    WHERE NOT EXISTS (SELECT 1 FROM user_account u WHERE u.id = i.planner_account_id)
+  `;
+  if (Number(orphanedItineraryCount[0]?.count ?? 0) > 0) {
+    console.warn(
+      "[cleanup-rate-limits] アカウント統合の移しかえが途中の可能性があるため、何もせず終了します。" +
+        `user_accountに無いplanner_account_idを持つitinerary: ${orphanedItineraryCount[0].count}件`
+    );
+    return NextResponse.json({ skipped: "account_unification_migration_in_progress", orphanedItineraryCount: Number(orphanedItineraryCount[0].count) });
+  }
+
   const rateLimitCutoff = new Date(Date.now() - 24 * 60 * 60 * 1000);
   const ipCutoff = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
   const deletedAccountCutoff = new Date(Date.now() - 6 * 30 * 24 * 60 * 60 * 1000);
