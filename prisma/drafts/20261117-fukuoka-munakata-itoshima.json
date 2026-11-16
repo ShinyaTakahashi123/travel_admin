@@ -1,0 +1,742 @@
+{
+  "title": "宗像大社と宮地嶽神社、志賀島の金印公園、糸島の二見ヶ浦と芥屋の大門をめぐる福岡1泊2日",
+  "description": "博多駅でレンタカーを借りて、1日目は世界遺産の宗像大社 辺津宮から宮地嶽神社へ。海の中道を渡って志賀島の金印公園と志賀海神社を訪ねます。2日目は糸島へ向かい、桜井二見ヶ浦の夫婦岩、櫻井神社、芥屋の大門、白糸の滝、雷山千如寺大悲王院をめぐり、伊都国歴史博物館で弥生時代の国宝の鏡を見る1泊2日です。",
+  "nights": 1,
+  "seasons": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+  ],
+  "tagNames": [
+    "定番観光"
+  ],
+  "purposeNames": [
+    "神社",
+    "絶景・フォトスポット"
+  ],
+  "prefectureName": "福岡県",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "Futamigaura Beach from Futamigaura Cemetery 1.JPG",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Futamigaura_Beach_from_Futamigaura_Cemetery_1.JPG",
+    "author": "そらみみ (Soramimi)",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+  },
+  "citations": [
+    {
+      "url": "https://munakata-taisha.or.jp/about_hetsu.html",
+      "excerpt": "宗像大社 辺津宮"
+    },
+    {
+      "url": "https://www.miyajidake.or.jp/history/nihonichi",
+      "excerpt": "宮地嶽神社"
+    },
+    {
+      "url": "https://kanko-itoshima.jp/spot/sakuraihutamigaura/",
+      "excerpt": "桜井二見ヶ浦"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "宗像大社 辺津宮",
+        "time": "11:25",
+        "stayDurationMin": 75,
+        "memo": "旅の入口はJR博多駅です。10時半ごろに着いたら、駅の近くでレンタカーを借りて（手続きに15分ほど）、車でおよそ38分、宗像大社の駐車場へ。車を止めて歩いておよそ2分で、辺津宮に着きます。辺津宮は、宗像三女神のうち市杵島姫神をまつる宮で、今の本殿は天正6年（1578）、拝殿は天正18年（1590）に建てられ、どちらも国の重要文化財です。本殿のまわりには大小24の社があり、121の神様がまつられています。第二宮と第三宮は、伊勢神宮の古い社殿を受け継いだもので、第二宮には田心姫神、第三宮には湍津姫神がまつられています。本殿の背後の宗像山へ階段を上った先にある高宮祭場は、市杵島姫神が降り立った地とされ、社殿のない古代の祭場です。神宝館には、沖ノ島から見つかった、8万点におよぶ国宝の神宝などが展示されています。これらは2017年に、世界遺産「『神宿る島』宗像・沖ノ島と関連遺産群」の一部として登録されました。神宝館の見学の案内は、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、駐車場まで歩いておよそ2分、車でおよそ16分で宮地嶽神社の駐車場へ。そこから歩いておよそ8分の参道のあたりへ向かいましょう（あわせておよそ26分）。",
+        "legs": [],
+        "point": {
+          "lat": 33.830241,
+          "lng": 130.514542,
+          "source": {
+            "kind": "osm_way",
+            "id": "427344589",
+            "note": "amenity=place_of_worship「宗像大社 辺津宮」の Nominatim の中心（名前つきの門・鳥居の点が OSM になし）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine",
+          "rental_pickup"
+        ],
+        "hours": {
+          "note": "境内の時間の定めは記載なし。神宝館 9:00〜16:30（最終入館16:00）、年中無休",
+          "sourceUrl": "https://munakata-taisha.or.jp/shinpoukan.html"
+        },
+        "citations": [
+          {
+            "url": "https://munakata-taisha.or.jp/about_hetsu.html",
+            "excerpt": "本殿：重要文化財 天正 6年 (1578)／拝殿：重要文化財 天正18年 (1590)／本殿の周辺には大小のお社が24社あり、121の神様が祀られています／高宮祭場…市杵島姫神の降臨の地とされ、社殿がない古代祭場です／第二宮 第三宮…伊勢神宮の古い社殿を頂戴したもの"
+          },
+          {
+            "url": "https://www.okinoshima-heritage.jp/know/hetsumiya.html",
+            "excerpt": "本殿・拝殿だけでなく、第二宮、第三宮にも参拝することで、宗像三女神の三柱にお参りしたことになります／背後の宗像山へ階段を昇って行くと、高宮祭場があらわれます"
+          },
+          {
+            "url": "https://munakata-taisha.or.jp/shinpoukan.html",
+            "excerpt": "沖ノ島神宝(8万点の国宝)を中心に、宗像大社に伝承されてきた重要文化財などが収蔵展示されています"
+          },
+          {
+            "url": "https://www.okinoshima-heritage.jp/know/registration.html",
+            "excerpt": "2017年（平成29年） 7月 第41回世界遺産委員会にて全8資産が世界遺産に登録"
+          },
+          {
+            "url": "https://www.ekiren.co.jp/office/area/kyushu",
+            "excerpt": "博多駅 01/01-12/31 08:00-20:00（駅の近くでレンタカーを借りられる出典。店名は本文に書かない）"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "博多駅 way72653571 の中心→宗像大社の駐車場 way568646625 34.55km 1960.4秒（32.67分）→ ceil+5＝38分。駐車場→辺津宮 routed-foot 103m 1.37分→2分"
+          }
+        ]
+      },
+      {
+        "name": "宮地嶽神社の参道のあたりで昼食",
+        "time": "13:06",
+        "stayDurationMin": 40,
+        "memo": "宗像大社から車でおよそ16分、宮地嶽神社の駐車場に車を止め、歩いておよそ8分（あわせておよそ26分）、神社から海へ一直線にのびる参道のあたりで、昼食にしましょう。参道には、土産物の店や食事のできる店が並んでいます。この後は、歩いておよそ6分、宮地嶽神社へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 2,
+            "waypoint": {
+              "lat": 33.829993,
+              "lng": 130.515113,
+              "note": "宗像大社の駐車場 OSM way568646625 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 16,
+            "waypoint": {
+              "lat": 33.777262,
+              "lng": 130.484238,
+              "note": "宮地嶽神社 第1駐車場 OSM way31232298 の中心"
+            }
+          },
+          {
+            "mode": "walk",
+            "min": 8
+          }
+        ],
+        "point": {
+          "lat": 33.780133,
+          "lng": 130.482269,
+          "source": {
+            "kind": "osm_way",
+            "id": "737450444",
+            "note": "「つばき通り」highway=secondary の Nominatim の中心。参道から海へ延びる通りの線。バス停・案内板なし"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "lunch"
+        ],
+        "hours": {
+          "note": "昼食のあたり",
+          "sourceUrl": "https://www.crossroadfukuoka.jp/spot/10236"
+        },
+        "citations": [
+          {
+            "url": "https://www.crossroadfukuoka.jp/spot/10236",
+            "excerpt": "参道の土産屋や飲食店も月1回のこの日は深夜も営業し（昼食のあたりに食事の場所がある出典。店名は本文に書かない）"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "宗像大社の駐車場→宮地嶽神社 第1駐車場 10.26km 613.5秒（10.22分）→ ceil+5＝16分。辺津宮→駐車場 routed-foot 103m→2分。第1駐車場→つばき通り routed-foot 569m 7.62分→8分"
+          }
+        ]
+      },
+      {
+        "name": "宮地嶽神社",
+        "time": "13:52",
+        "stayDurationMin": 60,
+        "memo": "参道のあたりから歩いておよそ6分、宮地嶽神社に着きます。拝殿にかかる大注連縄は、直径2.6m、長さ11m、重さ3tで、日本一の大きさとされ、毎年掛け替えられています。鈴堂には、重さ450kgの銅製の大鈴が納められています。神社から西へ一直線にのびる参道は、例年2月と10月ごろ、玄界灘に沈む夕日が参道の先に重なる「光の道」で知られています（天気によって見られないこともあります）。境内の奥の奥之宮には、6世紀末から7世紀初めの横穴式石室の古墳があり、全長23mの石室は国内でも最大級といわれます。古墳から見つかった品のうち20点が国宝に指定されていて、石室の中には不動神社がまつられています。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、駐車場まで歩いておよそ7分、海の中道を通って車でおよそ36分、駐車場から歩いておよそ2分で、志賀島の金印公園へ向かいましょう（あわせておよそ45分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 6
+          }
+        ],
+        "point": {
+          "lat": 33.780017,
+          "lng": 130.485876,
+          "source": {
+            "kind": "exception",
+            "reason": "OSM relation11211626「宮地嶽神社」amenity=place_of_worship の Nominatim の中心 33.7800170,130.4858760（relation のため exception。法務2 11/17 使ってよい）"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Miyajidake-jinja Torii Otokozaka 001.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Miyajidake-jinja_Torii_Otokozaka_001.jpg",
+            "author": "Naokijp",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        ],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "時間の定めは公式に記載なし",
+          "sourceUrl": "https://www.miyajidake.or.jp/history"
+        },
+        "citations": [
+          {
+            "url": "https://www.miyajidake.or.jp/history/nihonichi",
+            "excerpt": "直径2.6メートル、長さ11メートル、重さ3トンの日本一の大注連縄は当社のシンボルでもあります。 この注連縄は、毎年掛け替えられ／重さは450kgもある銅製の大鈴…今日では鈴堂を建立し、大太鼓と共に奉安しています"
+          },
+          {
+            "url": "https://www.miyajidake.or.jp/okunomiya/fudoujinjya",
+            "excerpt": "奥之宮三番社不動神社は日本一の大きさを誇る、横穴式石室古墳の中に霊験あらたかなる「お不動様」をお祀りしております／20点が国宝に指定を受けています"
+          },
+          {
+            "url": "https://www.miyajidake.or.jp/midokoro/houmotsu",
+            "excerpt": "六世紀末から七世紀始めのものです。全長23ｍという大規模な石室"
+          },
+          {
+            "url": "https://www.crossroadfukuoka.jp/spot/10236",
+            "excerpt": "2月と10月には夕日が参道に一直線に沈む「光の道」"
+          },
+          {
+            "url": "https://www.crossroadfukuoka.jp/feature/miyajidake",
+            "excerpt": "神社から西へまっすぐのびる参道の先に、玄界灘に沈む夕陽がぴたりと重なり"
+          },
+          {
+            "url": "https://routing.openstreetmap.de/routed-foot/",
+            "excerpt": "つばき通り→宮地嶽神社 440m 5.89分→6分"
+          }
+        ]
+      },
+      {
+        "name": "金印公園",
+        "time": "15:37",
+        "stayDurationMin": 20,
+        "memo": "宮地嶽神社から、海の中道を通って車でおよそ36分、駐車場から歩いておよそ2分（あわせておよそ45分）で、志賀島の金印公園に着きます。天明4年（1784）に、志賀島の農民が大きな石の下から「漢委奴國王」の金印を見つけたと伝えられる場所です。金印は、西暦57年に後漢の光武帝が倭国の使者に与えたものとされ、昭和29年（1954）に国宝に指定されました。実物は福岡市博物館に展示されています。このあたりの調査では金印にかかわる遺構は見つかっておらず、金印が出てきた謎は、今も解かれていません。公園の入口には「漢委奴國王金印発光之処」の記念碑が建ち、海をはさんで能古島と向かい合っています。海に近い場所なので、足もとに気をつけて歩きましょう。この後は、車でおよそ10分、神社の横の駐車場から歩いておよそ5分で、志賀海神社へ向かいましょう（あわせておよそ17分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 7,
+            "waypoint": {
+              "lat": 33.777262,
+              "lng": 130.484238,
+              "note": "宮地嶽神社 第1駐車場 OSM way31232298 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 36,
+            "waypoint": {
+              "lat": 33.660181,
+              "lng": 130.301102,
+              "note": "金印公園の駐車場 OSM way377687575 の中心"
+            }
+          },
+          {
+            "mode": "walk",
+            "min": 2
+          }
+        ],
+        "point": {
+          "lat": 33.660387,
+          "lng": 130.301133,
+          "source": {
+            "kind": "osm_node",
+            "id": "934923286",
+            "note": "historic=memorial「金印公園」（公園の名前の碑の点）"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "時間の定めは記載なし",
+          "sourceUrl": "https://bunkazai.city.fukuoka.lg.jp/cultural_properties/detail/478"
+        },
+        "citations": [
+          {
+            "url": "https://bunkazai.city.fukuoka.lg.jp/cultural_properties/detail/478",
+            "excerpt": "天明４年（1784）、志賀島の農民甚兵衛が、大石の下から「漢委奴國王」金印を発見したと伝えられる所である。この金印は西暦57年後漢の光武帝が倭国の使者に与えたものである。現在、国宝に指定され、福岡市博物館に展示している／この付近の調査を行ったが、金印に関係する遺構は発見されなかった／金印出土の謎はいまだ解決されていない。 海をはさみ能古島の也良岬と向かい合う公園の入口には、「漢委奴國王金印発光之処」記念碑が建つ"
+          },
+          {
+            "url": "https://bunkazai.city.fukuoka.lg.jp/cultural_properties/detail/313",
+            "excerpt": "昭和29（1954）年に国宝に指定された"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "宮地嶽神社→第1駐車場 routed-foot 508m 6.78分→7分。第1駐車場→金印公園の駐車場 28.19km 1831.7秒（30.53分）→ ceil+5＝36分。駐車場→金印公園 routed-foot 83m 1.11分→2分"
+          }
+        ]
+      },
+      {
+        "name": "志賀海神社",
+        "time": "16:14",
+        "stayDurationMin": 40,
+        "memo": "金印公園から車でおよそ10分、神社の横の駐車場に車を止め、歩いておよそ5分（あわせておよそ17分）で志賀海神社に着きます。古くから「海神の総本社」「龍の都」とたたえられ、博多湾の総鎮守として志賀島にまつられてきた神社です。海の底・中・表を守る綿津見三神をまつり、海の安全を見守ってきました。境内には摂社の今宮神社や12の末社のほか、県の文化財に指定された宝篋印塔や、万葉集の歌の碑があります。参拝のしきたりは、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この夜は、博多駅のまわりの宿に泊まりましょう（駐車場まで歩いておよそ5分、車でおよそ29分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 2,
+            "waypoint": {
+              "lat": 33.660181,
+              "lng": 130.301102,
+              "note": "金印公園の駐車場 OSM way377687575 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 10,
+            "waypoint": {
+              "lat": 33.667224,
+              "lng": 130.313786,
+              "note": "志賀海神社参拝者駐車場 OSM way528928784 の中心"
+            }
+          },
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 33.668077,
+          "lng": 130.313156,
+          "source": {
+            "kind": "osm_node",
+            "id": "7077424152",
+            "note": "amenity=place_of_worship「志賀海神社」"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "時間の定めは記載なし（祈願の受付 9:00〜17:00）",
+          "sourceUrl": "http://www.shikaumi-jinja.jp/"
+        },
+        "citations": [
+          {
+            "url": "http://www.shikaumi-jinja.jp/about/index.html",
+            "excerpt": "古来より「海神の総本社」「龍の都」と称えられ、玄界灘に臨む海上交通の要衝である博多湾の総鎮守として志賀島に鎮座し／綿津見三神を奉祭しています。 ご祭神「綿津見三神」は海の底、中、表を守り給う海の主宰神です"
+          },
+          {
+            "url": "http://www.shikaumi-jinja.jp/keidai/index.html",
+            "excerpt": "摂社今宮神社、12社の末社があります。 また、県指定重要有形文化財の宝篋印塔、万葉歌碑1号があります"
+          },
+          {
+            "url": "http://www.shikaumi-jinja.jp/",
+            "excerpt": "駐車場は志賀海神社横の駐車場をご利用ください／しきたりにより…ご参拝も極力お控えいただいております（本文は「参拝のしきたりは、公式の案内で確かめましょう。」だけ）"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "金印公園→駐車場 routed-foot 83m→2分。金印公園の駐車場→志賀海神社参拝者駐車場 1.86km 289秒（4.82分）→ ceil+5＝10分。駐車場→志賀海神社 routed-foot 350m 4.67分→5分。志賀海神社参拝者駐車場→博多駅 23.65km 1417.8秒（23.63分）→ 約29分"
+          }
+        ]
+      }
+    ],
+    [
+      {
+        "name": "桜井二見ヶ浦",
+        "time": "09:30",
+        "stayDurationMin": 40,
+        "memo": "博多駅のまわりの宿から車でおよそ33分、二見ヶ浦の駐車場に車を止め、歩いておよそ3分で、浜に立つ白い鳥居の前に着きます。海岸から約150m沖に浮かぶ夫婦岩はご神体とされ、高さ11.8mの男岩と11.2mの女岩を、長さ30m、重さ約1tの大注連縄が結んでいます。大注連縄は、毎年4月下旬から5月上旬の大潮にあわせて掛け替えられます。白い鳥居は昭和43年（1968）に建てられ、白い色には、清らかさと、景色をそこなわないようにという思いが込められています。「夕日の二見ヶ浦」として知られる場所です。波や潮の満ち引きに気をつけ、岩には渡らないようにしましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、駐車場まで歩いておよそ3分、車でおよそ9分、駐車場から歩いておよそ4分で、櫻井神社へ向かいましょう（あわせておよそ16分）。",
+        "legs": [],
+        "point": {
+          "lat": 33.63954,
+          "lng": 130.197004,
+          "source": {
+            "kind": "osm_node",
+            "id": "6576409000",
+            "note": "man_made=ceremonial_gate 名前が「桜井二見ヶ浦」の鳥居。浜の上で、見る人が立つ場所。夫婦岩の点 node6386259585 は海の中"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Futamigaura Beach from Futamigaura Cemetery 1.JPG",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Futamigaura_Beach_from_Futamigaura_Cemetery_1.JPG",
+            "author": "そらみみ (Soramimi)",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        ],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "時間の定めなし",
+          "sourceUrl": "https://kanko-itoshima.jp/spot/sakuraihutamigaura/"
+        },
+        "citations": [
+          {
+            "url": "https://kanko-itoshima.jp/spot/sakuraihutamigaura/",
+            "excerpt": "「夕日の二見ヶ浦」として有名です／海岸から約150ｍ沖に浮かぶご神体の夫婦岩は…男岩）が高さ11.8m、左の岩（女岩）が高さ11.2m／二つの岩を結ぶ大注連縄の長さは30m、直径50㎝、重さ約1ｔもあり、毎年4月下旬から5月上旬の大潮にあわせ…大注連縄のかけ替えが行われます"
+          },
+          {
+            "url": "https://sakuraijinja.com/futamigaura/",
+            "excerpt": "昭和４３年４月２５日建立されました／白は清浄な色であるとともに、景観をそこなわないように配慮され"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "博多駅 way72653571 の中心→二見ヶ浦Ｐ 29.37km 1645.5秒（27.43分）→ ceil+5＝33分。駐車場→鳥居 routed-foot 162m 2.16分→3分"
+          }
+        ]
+      },
+      {
+        "name": "櫻井神社",
+        "time": "10:26",
+        "stayDurationMin": 45,
+        "memo": "二見ヶ浦から車でおよそ9分、駐車場から歩いておよそ4分（あわせておよそ16分）で、櫻井神社に着きます。江戸時代の初め、福岡藩の2代藩主・黒田忠之が建てた神社で、本殿は寛永9年（1632）に建てられました。本殿・拝殿・楼門は、令和5年（2023）に国の重要文化財に指定されています。境内の櫻井大神宮は修理中のことがあるので、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、駐車場まで歩いておよそ4分、車でおよそ21分、駐車場から歩いておよそ5分で、芥屋の大門へ向かいましょう（あわせておよそ30分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 3,
+            "waypoint": {
+              "lat": 33.638118,
+              "lng": 130.196165,
+              "note": "二見ヶ浦Ｐ OSM way658721630 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 9,
+            "waypoint": {
+              "lat": 33.629006,
+              "lng": 130.19238,
+              "note": "櫻井神社の駐車場 OSM way700608619 の中心"
+            }
+          },
+          {
+            "mode": "walk",
+            "min": 4
+          }
+        ],
+        "point": {
+          "lat": 33.628196,
+          "lng": 130.191989,
+          "source": {
+            "kind": "osm_node",
+            "id": "5126583221",
+            "note": "amenity=place_of_worship「櫻井神社」"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "shrine"
+        ],
+        "hours": {
+          "note": "参拝24時間、授与所 9:00〜17:00頃",
+          "sourceUrl": "https://kanko-itoshima.jp/spot/sakuraijinja/"
+        },
+        "citations": [
+          {
+            "url": "https://kanko-itoshima.jp/spot/sakuraijinja/",
+            "excerpt": "江戸時代初期、福岡藩2代藩主・黒田忠之公により建立されました／本殿は、寛永9（1632）年の創建で"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/s033/010/020/010/050/010/bunkazai1.html",
+            "excerpt": "所有者・管理者：桜井神社 指定年月日：令和5年9月25日（国指定） 内容：寛永9（1632）年［棟札］"
+          },
+          {
+            "url": "https://sakuraijinja.com/news/",
+            "excerpt": "2024.02.21 櫻井大神宮保存修復工事並びに茅葺屋根葺き替え（終わったお知らせなし。2026-11-17 確認）"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "鳥居→二見ヶ浦Ｐ routed-foot 162m→3分。二見ヶ浦Ｐ→櫻井神社の駐車場 2.51km 184.5秒（3.08分）→ ceil+5＝9分。駐車場→櫻井神社 routed-foot 240m 3.23分→4分"
+          }
+        ]
+      },
+      {
+        "name": "芥屋の大門",
+        "time": "11:41",
+        "stayDurationMin": 40,
+        "memo": "櫻井神社から車でおよそ21分、芥屋の駐車場に車を止め、歩いておよそ5分（あわせておよそ30分）で、芥屋の大門を見渡す場所に着きます。玄界灘に面した玄武岩の大きな洞窟で、高さ64m、奥行き90m、入口の幅は10mあり、国内でも最大の玄武岩の洞窟とされます。六角形や八角形の柱のような岩が並ぶ柱状節理は、昭和41年（1966）に国の天然記念物に指定されました。洞窟の中は陸からは見えず、海からの遊覧船は季節によって運航しないので、公式の案内で確かめましょう。崖や磯のまわりでは、柵の外に出たり、崖のふちに近づいたりしないようにしましょう。この後は、歩いておよそ5分、芥屋のあたりへ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 4,
+            "waypoint": {
+              "lat": 33.629006,
+              "lng": 130.19238,
+              "note": "櫻井神社の駐車場 OSM way700608619 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 21,
+            "waypoint": {
+              "lat": 33.593748,
+              "lng": 130.108161,
+              "note": "芥屋の駐車場 OSM way1086224010 の中心"
+            }
+          },
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 33.596453,
+          "lng": 130.107597,
+          "source": {
+            "kind": "osm_node",
+            "id": "2443918388",
+            "note": "tourism=viewpoint「芥屋の大門」"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Keya no ooto.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Keya_no_ooto.jpg",
+            "author": "水だらけのプール",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+          }
+        ],
+        "marks": [],
+        "hours": {
+          "note": "時間の定めなし。遊覧船は4月〜11月（12月〜3月は運休）",
+          "sourceUrl": "https://kanko-itoshima.jp/spot/keyanooto/"
+        },
+        "citations": [
+          {
+            "url": "https://kanko-itoshima.jp/spot/keyanooto/",
+            "excerpt": "日本最大の玄武岩洞で、高さ64m、奥行き90m、間口10mの洞窟は神秘的な景観を呈しています。 六角形や八角形の玄武岩柱状節理は国の天然記念物に指定され、4月から11月にかけては芥屋漁港から観光遊覧船も運航中"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/s033/010/020/010/050/050/bunkazai5.html",
+            "excerpt": "芥屋大門（けやのおおと） 指定主体：国 指定年月日：昭和41年3月3日"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "櫻井神社→駐車場 routed-foot 240m→4分。櫻井神社の駐車場→芥屋の駐車場 10.78km 929.1秒（15.49分）→ ceil+5＝21分。駐車場→芥屋の大門 routed-foot 305m 4.06分→5分"
+          }
+        ]
+      },
+      {
+        "name": "芥屋のあたりで昼食",
+        "time": "12:26",
+        "stayDurationMin": 40,
+        "memo": "芥屋の大門から歩いておよそ5分、芥屋のあたりで昼食にしましょう。芥屋には、地元でとれた魚を出す海鮮料理の店などが集まっています。この後は、駐車場まで歩いておよそ2分、車でおよそ29分、駐車場から歩いておよそ5分で、白糸の滝へ向かいましょう（あわせておよそ36分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 33.593564,
+          "lng": 130.108581,
+          "source": {
+            "kind": "osm_way",
+            "id": "1086494812",
+            "note": "「県道604号」highway=secondary の Nominatim の中心。バス停・案内板なし"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "lunch"
+        ],
+        "hours": {
+          "note": "昼食のあたり",
+          "sourceUrl": "https://kanko-itoshima.jp/event/keya2024/"
+        },
+        "citations": [
+          {
+            "url": "https://kanko-itoshima.jp/event/keya2024/",
+            "excerpt": "海鮮料理の店（最近ではカレーやハンバーグのお店なども）など、１つのエリアでいろいろな楽しみ方ができるのが、芥屋の魅力（昼食のあたりに食事の場所がある出典。店名は本文に書かない）"
+          },
+          {
+            "url": "https://routing.openstreetmap.de/routed-foot/",
+            "excerpt": "芥屋の大門→県道604号 363m 4.87分→5分"
+          }
+        ]
+      },
+      {
+        "name": "白糸の滝",
+        "time": "13:42",
+        "stayDurationMin": 35,
+        "memo": "芥屋から山あいの道を車でおよそ29分、駐車場から歩いておよそ5分（あわせておよそ36分）で、白糸の滝に着きます。羽金山の中腹、標高約530mにある福岡県指定の名勝で、落差約24mの岩はだを、水が白い糸のように流れ落ちます。6月中旬から7月上旬ごろには、アジサイが咲くことでも知られています。滝のまわりの岩はぬれて滑りやすいので、足もとに気をつけましょう。冬は山道に雪や路面の凍結があることもあるので、車は冬用のタイヤやチェーンを用意しましょう。この後は、駐車場まで歩いておよそ5分、車でおよそ22分、駐車場から歩いておよそ2分で、雷山千如寺大悲王院へ向かいましょう（あわせておよそ29分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 2,
+            "waypoint": {
+              "lat": 33.593748,
+              "lng": 130.108161,
+              "note": "芥屋の駐車場 OSM way1086224010 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 29,
+            "waypoint": {
+              "lat": 33.481578,
+              "lng": 130.174727,
+              "note": "白糸の滝の駐車場 OSM way706915820 の中心"
+            }
+          },
+          {
+            "mode": "walk",
+            "min": 5
+          }
+        ],
+        "point": {
+          "lat": 33.480083,
+          "lng": 130.175488,
+          "source": {
+            "kind": "osm_node",
+            "id": "6643050593",
+            "note": "waterway=waterfall「白糸の滝」"
+          }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": {
+          "note": "滝の時間の定めなし。まわりの施設は 9:00〜17:00、12〜3月は水曜休み",
+          "sourceUrl": "https://kanko-itoshima.jp/spot/shiraitonotaki/"
+        },
+        "citations": [
+          {
+            "url": "https://kanko-itoshima.jp/spot/shiraitonotaki/",
+            "excerpt": "福岡県指定の名勝である「白糸の滝」は、羽金山の中腹標高530ｍに位置にあります。 文字通り岩肌を白い糸のように流れるやさしい雰囲気の滝（落差約24ｍ）／６月中旬から７月上旬ごろまで約5,000株10万本のアジサイが咲き誇り"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "県道604号→芥屋の駐車場 routed-foot 95m 1.27分→2分。芥屋の駐車場→白糸の滝の駐車場 21.07km 1419.9秒（23.67分）→ ceil+5＝29分。駐車場→白糸の滝 routed-foot 363m 4.82分→5分"
+          }
+        ]
+      },
+      {
+        "name": "雷山千如寺大悲王院",
+        "time": "14:46",
+        "stayDurationMin": 50,
+        "memo": "白糸の滝から車でおよそ22分、駐車場から歩いておよそ2分（あわせておよそ29分）で、雷山の中腹にある雷山千如寺大悲王院に着きます。成務天皇48年（178）に清賀上人がひらいたと伝えられる寺で、今の大悲王院は、宝暦3年（1753）に福岡藩主の黒田継高が建てました。観音堂にまつられる木造千手観音立像は、鎌倉時代の像で、高さは464cmあり、国の重要文化財に指定されています。千手観音は手を48本に略して表すことが多いなか、この像は、実際に千の手を持つ像として造られています。境内の大きな楓は、福岡県の天然記念物です。受付の時刻は、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、駐車場まで歩いておよそ2分、車でおよそ14分、伊都国歴史博物館へ向かいましょう（あわせておよそ16分）。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 5,
+            "waypoint": {
+              "lat": 33.481578,
+              "lng": 130.174727,
+              "note": "白糸の滝の駐車場 OSM way706915820 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 22,
+            "waypoint": {
+              "lat": 33.49524,
+              "lng": 130.229391,
+              "note": "千如寺の駐車場 OSM way303422733 の中心"
+            }
+          },
+          {
+            "mode": "walk",
+            "min": 2
+          }
+        ],
+        "point": {
+          "lat": 33.494502,
+          "lng": 130.228662,
+          "source": {
+            "kind": "osm_node",
+            "id": "6006912986",
+            "note": "amenity=place_of_worship・religion=buddhist、name:en「Raizansennyoji Taihion」、addr:housenumber 626（公式の所在地 雷山626 と同じ。日本語の name なし）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "temple"
+        ],
+        "hours": {
+          "note": "受付 9:00〜16:30",
+          "sourceUrl": "https://sennyoji.or.jp/"
+        },
+        "citations": [
+          {
+            "url": "https://kanko-itoshima.jp/spot/raizansennyoji/",
+            "excerpt": "成務天皇48年（178年）…清賀上人の開創と伝えられています。現在の大悲王院は、宝暦3年（1753年）に黒田継高公が建立しました"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/s033/010/020/010/050/010/bunkazai1.html",
+            "excerpt": "（木造千手観音立像）指定年月日：明治37年2月18日 内容：鎌倉時代、像高464センチメートル"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/s033/010/020/010/010/090/20180620110513.html",
+            "excerpt": "千手観音像は通常千手を略して48手とする場合が多いのですが、本像は実際に千の手を持つ像として造られています"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/s033/010/020/010/050/050/bunkazai5.html",
+            "excerpt": "大悲王院の楓（だいひおういんのかえで） 指定主体：県 員数：3本 指定年月日：昭和36年1月14日"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "白糸の滝→駐車場 routed-foot 363m→5分。白糸の滝の駐車場→千如寺の駐車場 13.33km 961.8秒（16.03分）→ ceil+5＝22分。駐車場→千如寺 routed-foot 102m 1.36分→2分"
+          }
+        ]
+      },
+      {
+        "name": "伊都国歴史博物館",
+        "time": "15:52",
+        "stayDurationMin": 60,
+        "memo": "雷山千如寺から車でおよそ14分（駐車場までの歩きを含めて、あわせておよそ16分）、伊都国歴史博物館に着きます。館には、平成18年（2006）に国宝に指定された平原遺跡の出土品が展示されています。平原遺跡の1号墓からは40面の銅鏡が見つかり、そのうち直径46.5cmの内行花文鏡5面は、国内で最大の大きさとされます。発見されたときの墓の様子を、実物大で再現した模型もあります。館の一部は工事中のことがあり、休館日もあるので、公式の案内で確かめましょう。見学を終えたら、車でおよそ26分、博多駅へ戻り、車を返しましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 2,
+            "waypoint": {
+              "lat": 33.49524,
+              "lng": 130.229391,
+              "note": "千如寺の駐車場 OSM way303422733 の中心"
+            }
+          },
+          {
+            "mode": "car",
+            "min": 14
+          }
+        ],
+        "point": {
+          "lat": 33.536327,
+          "lng": 130.251445,
+          "source": {
+            "kind": "osm_node",
+            "id": "1423756367",
+            "note": "tourism=museum「伊都国歴史博物館」（OSM に駐車場の形なし。市のページ「50台（無料）」）"
+          }
+        },
+        "photos": [],
+        "marks": [
+          "rental_return"
+        ],
+        "hours": {
+          "note": "9:00〜17:00（入館16:30まで）。休み 月曜（祝日は次の平日）・12/29〜1/3。旧館は工事中で新館のみ",
+          "sourceUrl": "https://www.city.itoshima.lg.jp/m043/010/040/040/010/20190911144351.html"
+        },
+        "citations": [
+          {
+            "url": "https://www.city.itoshima.lg.jp/m043/010/040/040/010/20190911144351.html",
+            "excerpt": "平成18年6月に国宝に指定された国史跡平原遺跡出土品は必見です"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/s033/010/020/010/010/240/20180620110227.html",
+            "excerpt": "平原遺跡1号墓からは40面の銅鏡…直径46.5センチメートルの内行花文鏡5面が含まれており、これは日本最大を誇ります"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/m043/010/040/040/070/3kaitenji.html",
+            "excerpt": "平原王墓の発見当時の状況を原寸大で復原した模型"
+          },
+          {
+            "url": "https://www.city.itoshima.lg.jp/m043/010/040/030/010/itohaku-rinji.html",
+            "excerpt": "新館のみ開館しております…工事中の旧館には立ち入りできません"
+          },
+          {
+            "url": "https://router.project-osrm.org/",
+            "excerpt": "千如寺→駐車場 routed-foot 102m→2分。千如寺の駐車場→伊都国歴史博物館 7.41km 496.7秒（8.28分）→ ceil+5＝14分。伊都国歴史博物館→博多駅 21.34km 1250秒（20.83分）→ 約26分"
+          }
+        ]
+      }
+    ]
+  ]
+}

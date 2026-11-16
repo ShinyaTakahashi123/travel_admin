@@ -14,6 +14,7 @@
  *   isMemorial: true … お墓・慰霊の場所（一覧のほかのお墓と同じ扱い。法務2 11/16）
  *   fixMasterPoint: "<一覧のID>" … 一覧の同じ名前の行き先の点が違うとき、その行き先の点だけを、しおりの点に直してから結び付ける（企画運営の指示があるときだけ使う）
  *
+ * 確かめた日（verifiedAt）は日本時間の今日の日付（法務2・企画運営 11/17。UTC だと日本時間の0時〜9時に前の日になる）
  * 使い方(admin-site): npm run prod -- npx tsx prisma/link-place-master.ts <設定ファイル> [--commit]
  * 確認モード（--commit なし）では、足す・結び付ける・止める の一覧を出すだけで、何も書き込まない
  */
@@ -77,7 +78,7 @@ async function run() {
     });
     plans.push({
       kind: "create", spotId: sp.id, label, aliases: c.aliases || [],
-      data: { name: placeName, lat: s6(sp.lat), lng: s6(sp.lng), prefectureAreaId: pref.id, category: c.category, isWideArea: !!c.isWideArea, isMemorial: !!c.isMemorial, source: "ai_collected", positionSource: c.positionSource || "nominatim", verifiedAt: new Date(new Date().toISOString().slice(0, 10)) },
+      data: { name: placeName, lat: s6(sp.lat), lng: s6(sp.lng), prefectureAreaId: pref.id, category: c.category, isWideArea: !!c.isWideArea, isMemorial: !!c.isMemorial, source: "ai_collected", positionSource: c.positionSource || "nominatim", verifiedAt: new Date(new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10)) },
       note: `新しく足す「${placeName}」${pt} ${cfg.prefecture} ${c.category ?? "種類なし"}${c.isWideArea ? " 広い場所" : ""}${c.isMemorial ? " 慰霊・お墓(isMemorial)" : ""}${c.aliases?.length ? ` 別名:${c.aliases.join("・")}` : ""}` + (near.length ? `　※近く(約200m以内)に一覧の行き先: ${near.map((n) => `${n.name} ${s6(n.lat)},${s6(n.lng)}`).join(" / ")}` : ""),
     });
   }
