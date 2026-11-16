@@ -1,0 +1,327 @@
+{
+  "title": "和歌山城と絶景の和歌浦をめぐる和歌山1泊2日",
+  "description": "紀州徳川家の居城・和歌山城と、岩橋千塚古墳群が広がる紀伊風土記の丘を訪ね、2日目は国指定名勝「和歌の浦」の社寺と、西国三十三所第2番の紀三井寺をめぐる和歌山1泊2日です。",
+  "nights": 1,
+  "seasons": ["spring", "summer", "autumn", "winter"],
+  "tagNames": ["定番観光"],
+  "purposeNames": ["城・史跡", "神社", "お寺"],
+  "prefectureName": "和歌山県",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "Wakayama Castle, Tenshu and Ohashi-rouka.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Wakayama_Castle,_Tenshu_and_Ohashi-rouka.jpg",
+    "author": "Saigen Jiro",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "citations": [
+    { "url": "https://wakayamajo.jp/history/", "excerpt": "天正13年(1585)、紀州を平定した羽柴秀吉は、弟の秀長に命じて紀ノ川河口部の「岡山」(現在の虎伏山)に城を築かせました。これが和歌山城の始まりです。" },
+    { "url": "https://tamatsushimajinja.jp/tamatsushima/history/", "excerpt": "2010年(平成22年)8月 玉津島神社とその周辺約90㎡が国指定名勝「和歌の浦」に指定。" },
+    { "url": "https://www.kimiidera.com/history/", "excerpt": "紀三井寺は、今からおよそ1250年前昔、奈良朝時代、光仁天皇の宝亀元年(ＡＤ770)、唐僧・為光上人によって開基された霊刹です。" }
+  ],
+  "days": [
+    [
+      {
+        "name": "和歌山城",
+        "time": "11:22",
+        "stayDurationMin": 75,
+        "memo": "南海和歌山市駅に11時ごろ着いたら、歩いておよそ22分で和歌山城に着きます。羽柴秀吉が紀州を平定した天正13年(1585)、弟の秀長に命じて紀ノ川の河口にあった「岡山」(今の虎伏山)に築かせた城が、和歌山城のもとになったと伝わります。元和5年(1619)には徳川家康の10男・頼宣が55万5千石を拝領して紀州藩が成立し、以来、尾張・水戸とともに「御三家」と呼ばれる紀州徳川家の居城となりました。8代将軍・吉宗、14代将軍・家茂もこの家から出ています。昭和6年(1931)には史跡に指定されました。開く・閉まる時刻や休みは、公式の案内で確かめましょう。この後は、歩いておよそ9分、西之丸庭園(紅葉渓庭園)へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 34.227647,
+          "lng": 135.171506,
+          "source": { "kind": "osm_node", "id": "402167963", "note": "和歌山城(historic=castle)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "天守閣9:00-17:30(入館は17:00まで)。休みは12月29日から12月31日", "sourceUrl": "https://wakayamajo.jp/riyou/" },
+        "citations": [
+          { "url": "https://wakayamajo.jp/history/", "excerpt": "天正13年(1585)、紀州を平定した羽柴秀吉は、弟の秀長に命じて紀ノ川河口部の「岡山」(現在の虎伏山)に城を築かせました。これが和歌山城の始まりです。" },
+          { "url": "https://wakayamajo.jp/history/", "excerpt": "元和5年(1619)、徳川家康の10男頼宣が55万5千石を拝領し、紀州藩が成立しました。" },
+          { "url": "https://wakayamajo.jp/history/", "excerpt": "紀州徳川家は、尾張・水戸とともに「御三家」と呼ばれ、8代将軍吉宗、14代将軍家茂を輩出しました。" }
+        ]
+      },
+      {
+        "name": "西之丸庭園(紅葉渓庭園)",
+        "time": "12:46",
+        "stayDurationMin": 35,
+        "memo": "和歌山城から歩いておよそ9分、西之丸庭園(紅葉渓庭園)に着きます。城郭内にある江戸初期の大名庭園で、紅葉が見事なことから「紅葉渓庭園」とも呼ばれています。昭和48年(1973)に庭園を整備し、昭和60年(1985)に「西之丸庭園」として国の名勝に指定されました。開く・閉まる時刻や休みは、公式の案内で確かめましょう。この後は、歩いておよそ7分、和歌山城前のあたりへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 9 }],
+        "point": {
+          "lat": 34.228759,
+          "lng": 135.170753,
+          "source": { "kind": "osm_node", "id": "4533762011", "note": "紅葉渓庭園(leisure=garden)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "9:00-17:00(入園は16:45まで)。入園無料。休みは12月29日から12月31日", "sourceUrl": "https://wakayamajo.jp/riyou/" },
+        "citations": [
+          { "url": "https://wakayamajo.jp/kouzou/", "excerpt": "和歌山城西之丸庭園は、城郭内にある江戸初期の大名庭園です。" },
+          { "url": "https://wakayamajo.jp/kouzou/", "excerpt": "紅葉が見事で「紅葉渓庭園」とも呼ばれています。" },
+          { "url": "https://wakayamajo.jp/kouzou/", "excerpt": "昭和48年(1973)に庭園を整備し、同60年に「西之丸庭園」として国の名勝に指定されました。" }
+        ]
+      },
+      {
+        "name": "和歌山城前のあたりで昼食",
+        "time": "13:28",
+        "stayDurationMin": 35,
+        "memo": "西之丸庭園から歩いておよそ7分、和歌山城前のあたりに着きます。このあたりで昼食にしましょう。この後は、歩いておよそ6分、岡口門へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 7 }],
+        "point": {
+          "lat": 34.229732,
+          "lng": 135.174128,
+          "source": { "kind": "osm_node", "id": "2277101623", "note": "バス停「和歌山城前」。昼食の点はお店でない名前の点を使う(7章)" }
+        },
+        "photos": [],
+        "marks": ["lunch"],
+        "hours": { "note": "バス停のため区分なし", "sourceUrl": "https://wakayamajo.jp/" },
+        "citations": [
+          { "url": "https://wakayamajo.jp/riyou/", "excerpt": "大人(一般) 410円 / 小人(小・中学生) 200円" }
+        ]
+      },
+      {
+        "name": "岡口門",
+        "time": "14:09",
+        "stayDurationMin": 15,
+        "memo": "和歌山城前のあたりから歩いておよそ6分、岡口門に着きます。江戸時代の元和7年(1621)ごろの建築とされ、昭和32年(1957)に国の重要文化財に指定されました。開く・閉まる時刻や休みは、公式の案内で確かめましょう。この後は、歩いておよそ9分、県立博物館へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 6 }],
+        "point": {
+          "lat": 34.226708,
+          "lng": 135.174282,
+          "source": { "kind": "osm_way", "id": "449637489", "note": "岡口門(building=roof)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "史跡公園の一部にあり、見学時間の記載は見当たりません", "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html" },
+        "citations": [
+          { "url": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html", "excerpt": "指定年月日:昭和32年6月18日 / 名称:和歌山城岡口門 / 員数:1棟 / 所在地:和歌山市一番丁 / 所有者:和歌山市 / 時代:江戸時代(元和7年)" }
+        ]
+      },
+      {
+        "name": "県立博物館",
+        "time": "14:33",
+        "stayDurationMin": 55,
+        "memo": "岡口門から歩いておよそ9分、和歌山県立博物館に着きます。和歌山県の歴史を、原始・古代から近現代までの3万年にわたって紹介する常設展を中心に、屋外展示やギャラリー展示も行っています。近世の文人画作品や、紀州3大窯とされる窯で焼かれた陶磁器のコレクションでも知られています。開館と閉館の時間、休館日は公式の案内で確かめましょう。この後は、歩いておよそ2分、近代美術館へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 9 }],
+        "point": {
+          "lat": 34.224412,
+          "lng": 135.171595,
+          "source": { "kind": "osm_way", "id": "400050141", "note": "和歌山県立博物館(tourism=museum)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "9:30-17:00(入館は16:30まで)。休館は月曜(祝日の場合は翌平日)・年末年始・展示替え期間", "sourceUrl": "https://hakubutu.wakayama.jp/" },
+        "citations": [
+          { "url": "https://hakubutu.wakayama.jp/", "excerpt": "県立博物館では、和歌山県における原始・古代から近現代までの3万年の歴史を紹介する「常設展」をはじめ「屋外展示」「ギャラリー展示」を行っており、特に近世文人画の作品や紀州3大窯にかかわる陶磁器は大きなコレクションとなっています。" }
+        ]
+      },
+      {
+        "name": "近代美術館",
+        "time": "15:30",
+        "stayDurationMin": 60,
+        "memo": "県立博物館から歩いておよそ2分、和歌山県立近代美術館に着きます。昭和45年(1970)に和歌山県民文化会館の中で開館し、平成6年(1994)に、建築家・黒川紀章の設計による今の建物に移りました。郷土ゆかりの作家の作品や、近代・現代の版画を中心に、日本画・油彩画・彫刻など1万点を超える作品を収蔵しています。開館と閉館の時間、休館日は公式の案内で確かめましょう。この夜は、JR和歌山駅のまわりの宿に泊まりましょう。",
+        "legs": [{ "mode": "walk", "min": 2 }],
+        "point": {
+          "lat": 34.225057,
+          "lng": 135.171423,
+          "source": { "kind": "osm_way", "id": "400050143", "note": "和歌山県立近代美術館(tourism=museum)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "9:30-17:00(入場は16:30まで)。休館は月曜(祝日の場合は翌日)", "sourceUrl": "https://www.momaw.jp/" },
+        "citations": [
+          { "url": "https://www.momaw.jp/exhibit/architecture_design/", "excerpt": "周辺計画を含む建築設計は、建築家 黒川紀章(くろかわ きしょう 1934〜2007)によるものです。" },
+          { "url": "https://www.momaw.jp/outline/summary/", "excerpt": "1970(昭和45)年、和歌山県民文化会館1階に開館しました。" },
+          { "url": "https://www.momaw.jp/outline/summary/", "excerpt": "ここで23年間の活動を続けたあと、1994(平成6)年7月、現在の場所に新築移転しました。" },
+          { "url": "https://www.momaw.jp/collection/collection_outline/", "excerpt": "当館では1970年の開館以来、和歌山県ゆかりの作家の展覧会を開催しながら、郷土作家コレクションを充実させてきました。" },
+          { "url": "https://www.momaw.jp/collection/collection_outline/", "excerpt": "1980年頃から近代･現代版画の収集・紹介に力を入れ、現在では国内でも屈指のコレクションを誇っています。" },
+          { "url": "https://www.momaw.jp/collection/collection_outline/", "excerpt": "明治時代から現代にいたる日本画、油彩画、彫刻、版画など、一万点を越すコレクション" }
+        ]
+      }
+    ],
+    [
+      {
+        "name": "紀伊風土記の丘",
+        "time": "09:05",
+        "stayDurationMin": 55,
+        "memo": "前の晩の宿(JR和歌山駅のまわり)から、歩いておよそ5分、JR和歌山駅東口のバスのりばへ。和歌山バスで「紀伊風土記の丘」行きにおよそ20分乗ると、終点で紀伊風土記の丘に着きます(本数が少ないので、時刻は公式の案内で確かめましょう)。特別史跡に指定された岩橋千塚古墳群を守り伝えるため、昭和46年(1971)に開館した県立の施設です。丘陵の斜面を中心に広がる約67haの園内には、大小およそ500基の古墳が点在し、麓には古い民家を移築した集落や、万葉集にゆかりの植物を集めた植物園もあります。古墳のまわりでは、静かに過ごしましょう。丘を歩く道は足もとが悪いところもあるので、気をつけて歩きましょう。資料館(建物)は休館中のことがあるので、公式の案内で確かめましょう。この後は、バスでおよそ25分の和歌山駅に戻り、バスでおよそ14分の玉津島神社前へ向かいましょう(本数が少ないので、時刻は公式の案内で確かめましょう)。",
+        "legs": [],
+        "point": {
+          "lat": 34.229159,
+          "lng": 135.229479,
+          "source": { "kind": "osm_node", "id": "1003305947", "note": "紀伊風土記の丘(leisure=park)。バス終点で最初に入る入口の点として使用。tourism=museumの点(1423056737)は休館中の資料館の建物の点のため使わない(内容確認2・法務2のOK)" }
+        },
+        "photos": [],
+        "marks": ["kofun"],
+        "hours": { "note": "園内9:00-16:30。休園は毎週月曜(祝日の場合は翌平日)・年末年始。資料館(建物)は休館中のことがあります", "sourceUrl": "https://www.kiifudoki.wakayama-c.ed.jp/riyou/index.html" },
+        "citations": [
+          { "url": "https://www.kiifudoki.wakayama-c.ed.jp/", "excerpt": "国の特別史跡「岩橋(いわせ)千塚古墳群」の保全と公開を目的として1971年8月に開館した、考古資料・民俗資料を中心とした県立の博物館施設(登録博物館)です。" },
+          { "url": "https://www.kiifudoki.wakayama-c.ed.jp/", "excerpt": "園内は約67haの広さがあり、標高150ｍの丘陵から北斜面一帯に、大小およそ500基の古墳が点在しています。" },
+          { "url": "https://www.kiifudoki.wakayama-c.ed.jp/", "excerpt": "麓には国・県指定の移築民家集落や万葉植物園があり" },
+          { "url": "https://www.kiifudoki.wakayama-c.ed.jp/riyou/index.html", "excerpt": "資料館は現在臨時休館中です。" }
+        ]
+      },
+      {
+        "name": "玉津島神社",
+        "time": "10:39",
+        "stayDurationMin": 55,
+        "memo": "紀伊風土記の丘から、バスでおよそ25分のJR和歌山駅に戻り、バスでおよそ14分乗ると、玉津島神社前に着きます(本数が少ないので、時刻は公式の案内で確かめましょう)。稚日女尊(わかひるめのみこと)・息長足姫尊(おきながたらしひめのみこと、神功皇后)・衣通姫尊(そとおりひめのみこと)・明光浦霊(あかのうらのみたま)を祀る神社です。社伝では、玉津島の神は「上つ世」より鎮まり坐るとされ、文献の上では神亀元年(724)に聖武天皇が玉津島に行幸したことが『続日本紀』に記されています。境内の奠供山(てんぐやま)は、聖武天皇が登って詔を発せられた旧蹟と伝わり、玉津島六山の一つに数えられる鏡山は、結晶片岩が海蝕を受けてできた岩肌が見どころです。境内社の鹽竃神社は、安産・子授け・不老長寿の神様として親しまれています。平成22年(2010)には、境内とその周辺が国指定名勝「和歌の浦」に指定されました。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ18分、和歌浦天満宮へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "bus",
+            "min": 25,
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://www.kiifudoki.wakayama-c.ed.jp/riyou/index.html",
+              "note": "公式の所要時間(JR和歌山駅東口⑤番乗り場より『紀伊風土記の丘』行き、約20分)の逆向き。待ち5分を含む。本数が少ないため時刻表はJavaScriptのため未確認。企画運営OK 11/17"
+            }
+          },
+          {
+            "mode": "bus",
+            "min": 14,
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://tamatsushimajinja.jp/access/",
+              "note": "公式のアクセス案内(南海和歌山市駅・JR和歌山駅から『新和歌浦行』で『玉津島神社前』下車)。乗車の分はOSRMの車の経路で見積もり(8.21分→9分)。待ち5分を含む。時刻表はJavaScriptのため未確認。企画運営OK 11/17"
+            }
+          }
+        ],
+        "point": {
+          "lat": 34.187923,
+          "lng": 135.171903,
+          "source": { "kind": "osm_node", "id": "10958611494", "note": "玉津島神社(place_of_worship)" }
+        },
+        "photos": [
+          {
+            "commonsFile": "Tamatsushima-jinja haiden.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tamatsushima-jinja_haiden.jpg",
+            "author": "KENPEI",
+            "license": "CC BY-SA 3.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+          }
+        ],
+        "marks": ["shrine"],
+        "hours": { "note": "参拝時間の記載は見当たりません。社務所の時間は現地の案内で確かめましょう", "sourceUrl": "https://tamatsushimajinja.jp/guide/" },
+        "citations": [
+          { "url": "https://tamatsushimajinja.jp/tamatsushima/", "excerpt": "社傳によれば、「玉津島の神は、〝上つ世〟より鎮まり坐る」とあります。" },
+          { "url": "https://tamatsushimajinja.jp/tamatsushima/history/", "excerpt": "神亀(じんき)元年(724)の聖武天皇の玉津島行幸" },
+          { "url": "https://tamatsushimajinja.jp/tamatsushima/show/", "excerpt": "奠供山は今から1300年前、聖武天皇が玉津島行幸の際に登られ、詔を発せられた旧蹟。山称の奠・供ともにお供えの意である。" },
+          { "url": "https://tamatsushimajinja.jp/tamatsushima/show/", "excerpt": "玉津島六山の一つ。奠供山と同じく、結晶片岩が絶えず海蝕を受けたことにより、今日の奇抜な岩石美を成すに至る。" },
+          { "url": "https://tamatsushimajinja.jp/tamatsushima/show/", "excerpt": "安産・子授け・不老長寿の神様をお祀りし、「しおがまさん」の愛称で親しまれている。" },
+          { "url": "https://tamatsushimajinja.jp/tamatsushima/history/", "excerpt": "2010年(平成22年)8月 玉津島神社とその周辺約90㎡が国指定名勝「和歌の浦」に指定。" }
+        ]
+      },
+      {
+        "name": "和歌浦天満宮",
+        "time": "11:52",
+        "stayDurationMin": 45,
+        "memo": "玉津島神社から歩いておよそ18分、和歌浦天満宮に着きます。文化財としての名称は「天満神社」で、本殿は桃山時代の慶長11年(1606)の建築とされ、大正5年(1916)5月24日に国の重要文化財に指定されました。楼門は慶長10年(1605)の建築で、昭和10年(1935)5月13日に指定されています。末社の多賀神社本殿・天照皇太神宮豊受大神宮本殿(2棟)は桃山時代の慶長年間の建築で、昭和49年(1974)5月21日に指定されました。境内は、国指定名勝「和歌の浦」の一部でもあります。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ5分、紀州東照宮のあたりへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 18 }],
+        "point": {
+          "lat": 34.191240,
+          "lng": 135.164302,
+          "source": { "kind": "osm_way", "id": "722829941", "note": "和歌浦天満宮(place_of_worship)。近くの案内板・記念碑のnodeは使わない(法務2の調べ)" }
+        },
+        "photos": [],
+        "marks": ["shrine"],
+        "hours": { "note": "参拝時間の記載が見当たりません。開く・閉まる時刻は現地の案内で確かめましょう", "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html" },
+        "citations": [
+          { "url": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html", "excerpt": "天満神社本殿: 指定年月日「大正5年5月24日」/ 員数「1棟」/ 所在地「和歌山市和歌浦西」/ 所有者「天満神社」/ 時代「桃山時代(慶長11年)」" },
+          { "url": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html", "excerpt": "天満神社楼門: 指定年月日「昭和10年5月13日」/ 時代「桃山時代(慶長10年)」" },
+          { "url": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html", "excerpt": "天満神社末社多賀神社本殿・末社天照皇太神宮豊受大神宮本殿: 指定年月日「昭和49年5月21日」/ 員数「2棟」/ 時代「桃山時代(慶長年間)」" },
+          { "url": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/kunikinenbutsu.html", "excerpt": "区分:名勝 / 指定年月日:平成22年8月5日、平成26年10月6日追加指定 / 名称:和歌の浦 / 所在地:和歌山市和歌浦中ほか" }
+        ]
+      },
+      {
+        "name": "紀州東照宮のあたりで昼食",
+        "time": "12:42",
+        "stayDurationMin": 40,
+        "memo": "和歌浦天満宮から歩いておよそ5分、紀州東照宮のあたりに着きます。このあたりで昼食にしましょう。この後は、歩いておよそ6分、紀州東照宮へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 5 }],
+        "point": {
+          "lat": 34.189086,
+          "lng": 135.165523,
+          "source": { "kind": "osm_way", "id": "139631122", "note": "新和歌浦線(highway=secondary)のNominatim中心。まわりにOSMのバス停なし。案内板(境内案内図)は神社の境内の中のため使わず、名前のある通りの線を使用(7章、法務2・内容確認2のOK)" }
+        },
+        "photos": [],
+        "marks": ["lunch"],
+        "hours": { "note": "道のため区分なし", "sourceUrl": "https://tamatsushimajinja.jp/access/" },
+        "citations": [
+          { "url": "https://tamatsushimajinja.jp/access/", "excerpt": "和歌山バス新和歌浦行で「玉津島神社前又は不老橋」バス停下車、すぐ" }
+        ]
+      },
+      {
+        "name": "紀州東照宮",
+        "time": "13:28",
+        "stayDurationMin": 45,
+        "memo": "紀州東照宮のあたりから歩いておよそ6分、紀州東照宮に着きます。元和7年(1621)の造営とされ、本殿・石の間・拝殿・唐門・東西瑞垣(2棟)・楼門・東西回廊(2棟)の7棟が、大正5年(1916)5月24日に国の重要文化財に指定されています。所有者は宗教法人東照宮です。境内は、国指定名勝「和歌の浦」の一部でもあります。長い石段があるので、足もとに気をつけて上りましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ15分の玉津島神社前バス停へ。バスでおよそ14分のJR和歌山駅から、電車でおよそ13分の紀三井寺駅へ。そこから歩いておよそ10分で紀三井寺へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 6 }],
+        "point": {
+          "lat": 34.191880,
+          "lng": 135.165998,
+          "source": { "kind": "osm_way", "id": "722829947", "note": "紀州東照宮(place_of_worship)。近くの案内板・記念碑・「縣社 東照宮」のnodeは使わない(法務2の調べ)" }
+        },
+        "photos": [],
+        "marks": ["shrine"],
+        "hours": { "note": "参拝時間の記載が見当たりません。開く・閉まる時刻は現地の案内で確かめましょう", "sourceUrl": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html" },
+        "citations": [
+          { "url": "https://www.pref.wakayama.lg.jp/prefg/500700/mokuroku/d00155261.html", "excerpt": "指定年月日:大正5年5月24日 / 名称:東照宮 本殿・石の間・拝殿 / 唐門 / 東西瑞垣(2棟) / 楼門 / 東西回廊(2棟) / 員数:7棟 / 所在地:和歌山市和歌浦西 / 所有者:東照宮 / 時代:江戸時代(元和7年)" }
+        ]
+      },
+      {
+        "name": "紀三井寺",
+        "time": "15:05",
+        "stayDurationMin": 85,
+        "memo": "紀州東照宮から歩いておよそ15分、玉津島神社前バス停へ。バスでおよそ14分のJR和歌山駅から、電車でおよそ13分の紀三井寺駅から、歩いておよそ10分で紀三井寺に着きます(バスは本数が少ないので、時刻は公式の案内で確かめましょう)。奈良時代の光仁天皇の宝亀元年(770)、唐僧・為光上人によって開かれたと伝わる寺院で、十一面観世音菩薩像を本尊とします。西国三十三所観音霊場の第2番札所として知られています。楼門から上には231段の石段があり、結縁坂と呼ばれています。長い石段ですので、足もとに気をつけて上りましょう。仏殿には3階の展望回廊があります。開く・閉まる時刻や休みは、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。見学を終えたら、歩いておよそ10分の紀三井寺駅から、帰路につきましょう。",
+        "legs": [
+          { "mode": "walk", "min": 15 },
+          {
+            "mode": "bus",
+            "min": 14,
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://tamatsushimajinja.jp/access/",
+              "note": "公式のアクセス案内に書かれた『新和歌浦行』の逆向き。乗車の分はOSRMの車の経路で見積もり(8.21分→9分)。待ち5分を含む。時刻表はJavaScriptのため未確認。企画運営OK 11/17"
+            }
+          },
+          {
+            "mode": "train",
+            "min": 13,
+            "line": "JR紀勢本線",
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://www.kimiidera.com/history/",
+              "note": "公式の案内「和歌山駅より紀勢本線(きのくに線)乗り継ぎ、普通電車南方面へ…2駅目紀三井寺駅下車」で経路は確認済み。乗車の分は駅間の距離からの見積もり(およそ8分)に待ち5分を含む。時刻表の正確な分数は確認できず"
+            }
+          },
+          { "mode": "walk", "min": 10 }
+        ],
+        "point": {
+          "lat": 34.184437,
+          "lng": 135.189070,
+          "source": { "kind": "osm_way", "id": "399985191", "note": "楼門(building=gatehouse)。広い境内の入口の点として使用(7章389行、内容確認2・法務2のOK)" }
+        },
+        "photos": [
+          {
+            "commonsFile": "Kimiidera01.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kimiidera01.jpg",
+            "author": "Dokudami",
+            "license": "CC BY-SA 3.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+          }
+        ],
+        "marks": ["temple"],
+        "hours": { "note": "本堂受付(納経)8:00-17:00。仏殿3階展望回廊・ケーブル運行8:30-16:30。休み記載なし", "sourceUrl": "https://www.kimiidera.com/worship/" },
+        "citations": [
+          { "url": "https://www.kimiidera.com/history/", "excerpt": "紀三井寺は、今からおよそ1250年前昔、奈良朝時代、光仁天皇の宝亀元年(ＡＤ770)、唐僧・為光上人によって開基された霊刹です。" },
+          { "url": "https://www.kimiidera.com/history/", "excerpt": "西国三十三ヶ所観音霊場第2番目の札所である当寺は" },
+          { "url": "https://www.kimiidera.com/history/", "excerpt": "紀三井寺の楼門から上に、231段の急な石段があります。…この坂は、結縁坂(けちえんざか)と呼ばれ" },
+          { "url": "https://www.kimiidera.com/precinct_yard/", "excerpt": "231の石段を上り来たった御参詣者のみが得るご褒美です。" },
+          { "url": "https://www.kimiidera.com/worship/", "excerpt": "本堂受付所での納経(御朱印)受付時間:8時~17時" },
+          { "url": "https://www.kimiidera.com/worship/", "excerpt": "仏殿での3階展望回廊登楼時間:8時30分~16時30分" },
+          { "url": "https://www.kimiidera.com/", "excerpt": "和歌山駅より紀勢本線(きのくに線)乗り継ぎ、普通電車南方面へ…2駅目紀三井寺駅下車。徒歩10分" }
+        ]
+      }
+    ]
+  ]
+}

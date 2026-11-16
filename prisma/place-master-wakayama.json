@@ -1,0 +1,16 @@
+{
+  "itineraryId": "e1d8a79a-3c56-4eda-b220-0aeb5e7d5451",
+  "prefecture": "和歌山県",
+  "spots": [
+    { "name": "和歌山城", "category": "castle" },
+    { "name": "西之丸庭園(紅葉渓庭園)", "category": "park" },
+    { "name": "岡口門", "category": null },
+    { "name": "県立博物館", "category": "museum" },
+    { "name": "近代美術館", "category": "museum" },
+    { "name": "紀伊風土記の丘", "category": null, "isMemorial": false },
+    { "name": "玉津島神社", "category": "shrine" },
+    { "name": "和歌浦天満宮", "category": "shrine" },
+    { "name": "紀州東照宮", "category": "shrine" },
+    { "name": "紀三井寺", "category": "temple" }
+  ]
+}
