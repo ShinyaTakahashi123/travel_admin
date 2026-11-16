@@ -1,0 +1,364 @@
+{
+  "title": "聖徳太子ゆかりの法隆寺と、城下町・大和郡山をめぐる奈良1泊2日",
+  "description": "聖徳太子が建立したと伝わる法隆寺や中宮寺、守り続けられてきた藤ノ木古墳をたずねる斑鳩の1日目。2日目は、茶道石州流ゆかりの慈光院から、豊臣秀長が整えたとされる郡山城、金魚の町として知られる大和郡山をめぐります。",
+  "nights": 1,
+  "seasons": ["spring", "summer", "autumn", "winter"],
+  "tagNames": ["定番観光"],
+  "purposeNames": ["お寺", "城・史跡", "神社"],
+  "prefectureName": "奈良県",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "Tatsuta-taisha, torii.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tatsuta-taisha,_torii.jpg",
+    "author": "Saigen Jiro",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+  },
+  "citations": [
+    { "url": "https://www.horyuji.or.jp/garan/", "excerpt": "太子は中国の優れた政治や文化、とりわけ仏教を積極的に取り入れ…推古天皇15年（607）ごろに完成したのが法隆寺です" },
+    { "url": "https://online.bunka.go.jp/heritages/detail/550298", "excerpt": "天正１３年（１５８５）に豊臣秀長が入城し畿内統治の拠点として大規模に整備が行われ、関ヶ原の戦い以後は譜代大名が城主となった" },
+    { "url": "https://www.pref.nara.lg.jp/documents/7693/narakennnokinngyonituite.pdf", "excerpt": "享保9年(1724)、柳沢吉里が甲斐国から大和郡山に移封された際に金魚を持参し、養殖したのが始まりと伝えられている" }
+  ],
+  "days": [
+    [
+      {
+        "name": "法隆寺参道のあたりで昼食",
+        "time": "11:32",
+        "stayDurationMin": 40,
+        "memo": "法隆寺駅から歩いておよそ22分、法隆寺参道のあたりに着きます。このあたりで昼食にしましょう。この後は、歩いておよそ5分、法隆寺へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 34.609827,
+          "lng": 135.735219,
+          "source": { "kind": "osm_node", "id": "11176798962", "note": "バス停「法隆寺参道」。昼食の点はお店でない名前の点を使う(7章)" }
+        },
+        "photos": [],
+        "marks": ["lunch"],
+        "hours": { "note": "バス停のため区分なし", "sourceUrl": "https://www.town.ikaruga.nara.jp/" },
+        "citations": [
+          { "url": "https://www.kintetsu.co.jp/nara/chikai/course6.html", "excerpt": "法隆寺エリアの参道周辺の案内" }
+        ]
+      },
+      {
+        "name": "法隆寺",
+        "time": "12:17",
+        "stayDurationMin": 90,
+        "memo": "法隆寺参道のあたりから歩いておよそ5分、法隆寺の南大門に着きます。推古天皇9年(601)、聖徳太子はこの地に斑鳩宮を構え、ほどなく父・用明天皇をしのんで寺の建立を思い立ち、推古天皇15年(607)ごろに完成したのが法隆寺と伝わります。『日本書紀』には天智天皇9年(670)に伽藍が焼けたと記されていますが、奈良時代の初めごろまでには飛鳥時代の様式をとどめる姿で建て直されました。これが、今に残る世界最古の木造建築群とされる西院伽藍です。東院伽藍の中心である夢殿は、荒れ果てていた斑鳩宮の跡地に、奈良時代の僧・行信僧都が太子をしのんで建てたと伝わります。開く・閉まる時刻や休みは、公式の案内で確かめましょう。境内では写真の撮影ができませんので、カメラはしまって、ゆっくり歩きましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、法隆寺の夢殿から歩いておよそ4分、中宮寺へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 5 }],
+        "point": {
+          "lat": 34.612704,
+          "lng": 135.734531,
+          "source": { "kind": "osm_way", "id": "43549763", "note": "南大門(building=gatehouse)。広い境内の入口の点として使用(7章389行、東大寺南大門と同様の扱い。企画運営OK 11/16)。次の行き先(中宮寺)への歩きは、本文に出る場所として書いた東院伽藍・夢殿(way43549800、34.614363,135.738948)から測り、263m/3.51分(routed-foot)→4分とした(次のスポットのlegにbasisで記録)" }
+        },
+        "photos": [],
+        "marks": ["temple"],
+        "hours": { "note": "8:00-17:00(2/22-11/3)/8:00-16:30(11/4-2/21)、受付は終了30分前まで。休み記載なし。境内は写真・動画撮影および写生が禁止", "sourceUrl": "https://www.horyuji.or.jp/annai/" },
+        "citations": [
+          { "url": "https://www.horyuji.or.jp/garan/", "excerpt": "推古天皇9年（601）…推古天皇15年（607）ごろに完成したのが法隆寺です" },
+          { "url": "https://www.horyuji.or.jp/garan/", "excerpt": "天智天皇9年（670）、一屋余す事無く焼失したと記されています…やがて旧にも増した寺観が整えられたのが、世界最古の木造建築群として知られる現在の西院伽藍です" },
+          { "url": "https://www.horyuji.or.jp/garan/", "excerpt": "行信僧都が、天平11年（739）ごろに太子の菩提を願って宮跡に建立されたのが夢殿で" },
+          { "url": "https://www.horyuji.or.jp/annai/", "excerpt": "境内における禁止事項について…写生および写真・動画等の撮影" }
+        ]
+      },
+      {
+        "name": "中宮寺",
+        "time": "13:51",
+        "stayDurationMin": 30,
+        "memo": "法隆寺の夢殿から歩いておよそ4分、中宮寺に着きます。聖徳太子ゆかりの尼寺で、飛鳥時代、現在地より約500m東方に創建されたと伝わります。出土する瓦が法隆寺の若草伽藍のものと同じ型とされ、法隆寺と僧寺・尼寺の関係にあったと考えられています。本尊の菩薩半跏像(伝如意輪観音)は国宝で、飛鳥時代の傑作のひとつとされ、ほほえみをたたえた表情から世界三大微笑像のひとつともいわれます。本堂には、日本最古の刺繍遺品とされる天寿国繡帳の複製も安置され、実物は奈良国立博物館に寄託されています。開く・閉まる時刻や休みは、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ17分、藤ノ木古墳へ向かいましょう。",
+        "legs": [
+          {
+            "mode": "walk",
+            "min": 4,
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://www.horyuji.or.jp/garan/",
+              "note": "7章389行（広い境内）。出る場所の夢殿 way43549800 から routed-foot 263m 3.51分→4分。企画運営OK 11/16。本文に『法隆寺の夢殿から歩いて』と出る場所を書いている。法隆寺の着く点は南大門 way43549763"
+            }
+          }
+        ],
+        "point": {
+          "lat": 34.614988,
+          "lng": 135.739837,
+          "source": { "kind": "osm_way", "id": "43549785", "note": "中宮寺(amenity=place_of_worship)" }
+        },
+        "photos": [],
+        "marks": ["temple"],
+        "hours": { "note": "9:00-16:00(10/1-3/20)/9:00-16:30(3/21-9/30)、受付は終了15分前まで。休み記載なし", "sourceUrl": "https://www.chuguji.jp/" },
+        "citations": [
+          { "url": "https://www.chuguji.jp/history/", "excerpt": "中宮寺は飛鳥時代、現在地より約500m東方に創建されました。…若草伽藍と同笵の瓦も出土し" },
+          { "url": "https://www.chuguji.jp/archaic-smile/", "excerpt": "国宝 菩薩半跏像（伝如意輪観音）…世界の三つの微笑像" },
+          { "url": "https://www.chuguji.jp/oldest-embroidery/", "excerpt": "日本最古の刺繍遺品として知られる『天寿国曼荼羅繍帳』は…現在、本堂に安置されているものは複製で、実物は奈良国立博物館に寄託されています" }
+        ]
+      },
+      {
+        "name": "藤ノ木古墳",
+        "time": "14:38",
+        "stayDurationMin": 15,
+        "memo": "中宮寺から歩いておよそ17分、藤ノ木古墳に着きます。6世紀後半に造られたとされる直径約50メートル、高さ約9メートルの円墳です。石室は通常非公開で、春と秋に特別公開が行われています。出土した金銅製の馬具などは国宝に指定され、出土品の一部は、橿原市の奈良県立橿原考古学研究所附属博物館で展示されています。ふだんは外から墳丘のかたちを眺める形になります。藤ノ木古墳のまわりでは、静かに過ごしましょう。この後は、歩いておよそ5分、斑鳩文化財センターへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 17 }],
+        "point": {
+          "lat": 34.611822,
+          "lng": 135.729474,
+          "source": { "kind": "osm_node", "id": "11397849396", "note": "藤ノ木古墳そのものの点(historic/archaeological_site)" }
+        },
+        "photos": [
+          {
+            "commonsFile": "Fujinoki-kofun Ikaruga Nara Pref01bs5s3840.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fujinoki-kofun_Ikaruga_Nara_Pref01bs5s3840.jpg",
+            "author": "663highland",
+            "license": "CC BY 2.5",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.5/"
+          }
+        ],
+        "marks": ["kofun"],
+        "hours": { "note": "石室は通常非公開。春・秋に特別公開(時期は年により変わる)", "sourceUrl": "https://www.town.ikaruga.nara.jp/0000000045.html" },
+        "citations": [
+          { "url": "https://www.town.ikaruga.nara.jp/0000000045.html", "excerpt": "藤ノ木古墳は法隆寺西2丁目に所在する6世紀後半に造営された直径約50m、高さ約9mの円墳です" },
+          { "url": "https://www.town.ikaruga.nara.jp/0000000045.html", "excerpt": "主な出土遺物の一部は「奈良県立橿原考古学研究所附属博物館」（橿原市）で展示" }
+        ]
+      },
+      {
+        "name": "斑鳩文化財センター",
+        "time": "14:58",
+        "stayDurationMin": 30,
+        "memo": "藤ノ木古墳から歩いておよそ5分、斑鳩文化財センターに着きます。正式名称は斑鳩町文化財活用センターといい、藤ノ木古墳から出土した国宝の主な副葬品60点の精巧なレプリカを中心に展示しています。紹介の映像で、藤ノ木古墳や斑鳩の歴史について学ぶこともできます。開館と閉館の時間、休館日は公式の案内で確かめましょう。この後は、歩いておよそ3分の斑鳩町役場バス停へ。バスでおよそ14分の王寺駅から、電車でおよそ10分の三郷駅へ。そこから歩いておよそ8分の龍田大社へ向かいましょう。バス・電車の時刻は公式の案内で確かめましょう。",
+        "legs": [{ "mode": "walk", "min": 5 }],
+        "point": {
+          "lat": 34.610104,
+          "lng": 135.730881,
+          "source": { "kind": "gsi", "reason": "OSMに施設の地物なし(案内板のみ)。地理院の番地検索で、公式の住所「斑鳩町法隆寺西一丁目11番14号」まで一致した点(企画運営の判断、7章の順どおりの扱い)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "9:00-17:00(入館は16:30まで)。休み記載あり(詳細は公式で確認)", "sourceUrl": "https://www.town.ikaruga.nara.jp/0000000145.html" },
+        "citations": [
+          { "url": "https://www.town.ikaruga.nara.jp/0000000145.html", "excerpt": "常設展は、国宝藤ノ木古墳出土品の主なもの60点の精巧なレプリカ（複製品）を中心に展示をしています" }
+        ]
+      },
+      {
+        "name": "龍田大社",
+        "time": "16:03",
+        "stayDurationMin": 40,
+        "memo": "斑鳩文化財センターから歩いておよそ3分、斑鳩町役場バス停へ。バスでおよそ14分の王寺駅から、電車でおよそ10分の三郷駅に着いたら、そこから歩いておよそ8分で龍田大社に着きます。バス・電車の時刻は公式の案内で確かめましょう。天御柱大神・国御柱大神の二柱を祀り、風の神として信仰を集めてきました。社伝によれば、第10代・崇神天皇の時代に国内で凶作や疫病が広がった際、天皇の夢に大神が現れたお告げのとおりに社を造営したところ、作物は実り疫病もおさまったと伝えられ、これが創建の由来とされています。境内には、白龍神社・龍田恵美須神社・三室稲荷神社などの摂社も祀られています。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この夜は、大和郡山の宿に泊まりましょう。",
+        "legs": [
+          { "mode": "walk", "min": 3 },
+          {
+            "mode": "bus",
+            "min": 14,
+            "basis": {
+              "kind": "official",
+              "sourceUrl": "https://www.town.ikaruga.nara.jp/0000000145.html",
+              "note": "町の公式の行き方の案内（王寺駅→斑鳩町役場、約9分）。逆向きの便も同じ路線で走る前提。時刻表はJavaScriptのため未確認。待ち5分を含む。区間が最大4つのため待ちをバスの分に含めた。企画運営OK 11/16"
+            }
+          },
+          { "mode": "train", "min": 10, "line": "JR大和路線" },
+          { "mode": "walk", "min": 8 }
+        ],
+        "point": {
+          "lat": 34.593384,
+          "lng": 135.687934,
+          "source": {
+            "kind": "osm_way",
+            "id": "1145634604",
+            "note": "OSM上の名称は「龍田本宮」(amenity=place_of_worship、religion=shinto)。境内周辺でplace_of_worshipのタグを持つのはこの地物のみ。「龍田大社」の名前を持つ他のnode(石碑memorial=stele・鳥居ceremonial_gate)は施設そのものの点でないため使用しない。住所(地理院の番地検索34.593224,135.687683)・周辺に公式サイト記載どおりの摂社(白龍神社・龍田恵美須神社・三室稲荷神社)のノードが集まっていることから、龍田大社の本殿の点と判断(内容確認2のOKあり)"
+          }
+        },
+        "photos": [
+          {
+            "commonsFile": "Tatsuta-taisha, torii.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tatsuta-taisha,_torii.jpg",
+            "author": "Saigen Jiro",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+          }
+        ],
+        "marks": ["shrine"],
+        "hours": { "note": "境内自由。社務所・祈祷受付は9:00-17:00ごろ(祈祷受付は16:00まで)。休み記載なし", "sourceUrl": "https://tatsutataisha.jp/faq.php" },
+        "citations": [
+          { "url": "https://tatsutataisha.jp/about.php", "excerpt": "天御柱大神（あめのみはしらのおおかみ）…国御柱大神（くにのみはしらのおおかみ）" },
+          { "url": "https://tatsutataisha.jp/about.php", "excerpt": "第十代天皇・崇神天皇の時代…天皇の御夢に大神が現れ、そのお告げ通りに社を造営すると作物は豊作、疫病は退散した" },
+          { "url": "https://tatsutataisha.jp/about.php", "excerpt": "龍田恵美須神社（福徳円満・商売繁盛）、三室稲荷神社" },
+          { "url": "https://tatsutataisha.jp/keidai.php", "excerpt": "末社 白龍神社" },
+          { "url": "https://www.town.ikaruga.nara.jp/0000000145.html", "excerpt": "JR王寺駅から奈良交通バス…乗車時間約9分…「斑鳩町役場」下車、北へ徒歩約3分" }
+        ]
+      }
+    ],
+    [
+      {
+        "name": "慈光院",
+        "time": "09:00",
+        "stayDurationMin": 60,
+        "memo": "前の晩の宿(大和郡山)から、JR大和路線でおよそ5分、ひと駅先の大和小泉駅へ。そこから歩いておよそ20分、慈光院に着きます。寛文3年(1663)、大和小泉藩主・片桐貞昌によって建立されたと伝わる寺院です。貞昌は茶道石州流の開祖としても知られます。庭園は国の史跡・名勝に指定され、書院や茶室、手水鉢なども国の重要文化財です。拝観にはお抹茶の接待が付きます。開く・閉まる時刻や休みは、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ20分の大和小泉駅へ。そこからJR大和路線でおよそ10分、ひと駅先の郡山駅まで。そこから歩いておよそ19分の郡山城跡へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 34.631558,
+          "lng": 135.758749,
+          "source": { "kind": "osm_way", "id": "381190346", "note": "慈光院(amenity=place_of_worship)" }
+        },
+        "photos": [
+          {
+            "commonsFile": "130518 Jiko-in Yamatokoriyama Nara pref Japan19b6s3.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:130518_Jiko-in_Yamatokoriyama_Nara_pref_Japan19b6s3.jpg",
+            "author": "663highland",
+            "license": "CC BY 2.5",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.5/"
+          }
+        ],
+        "marks": ["temple"],
+        "hours": { "note": "拝観は9:00-17:00ごろ", "sourceUrl": "https://www.yk-kankou.jp/spotDetail29.html" },
+        "citations": [
+          { "url": "https://www.yk-kankou.jp/spotDetail29.html", "excerpt": "小泉藩城主片桐貞昌が１６６３年に創建。…庭園は、茶道石州流々祖であるだけにわび・さびの境地を表現する日本の名園の１つで国指定史跡・名勝。書院、茶室、手水鉢等も国重要文化財" }
+        ]
+      },
+      {
+        "name": "郡山城跡",
+        "time": "10:49",
+        "stayDurationMin": 90,
+        "memo": "慈光院から、歩いておよそ20分の大和小泉駅へ。そこからJR大和路線でおよそ10分、ひと駅先の郡山駅に着いたら、そこから歩いておよそ19分で郡山城跡に着きます。天正13年(1585)に豊臣秀長がこの地に入城し、畿内統治の拠点として大規模に整備したとされ、関ヶ原の戦い以後は譜代大名が城主となりました。本丸・毘沙門曲輪などの曲輪群と、内堀・鷺堀などからなり、令和4年(2022)11月に国の史跡に指定されています。曲輪のまわりの石垣には、寺院の礎石や石仏などを転用した石材が多く用いられ、天守台の石垣に逆さまに積まれた地蔵石仏は、その名残のひとつとされています。天守は現存しませんが、天守台からは城下町を一望できるとされます。この後は、歩いておよそ1分、柳澤神社へ向かいましょう。",
+        "legs": [
+          { "mode": "walk", "min": 20 },
+          { "mode": "train", "min": 10, "line": "JR大和路線" },
+          { "mode": "walk", "min": 19 }
+        ],
+        "point": {
+          "lat": 34.651883,
+          "lng": 135.779022,
+          "source": { "kind": "osm_node", "id": "1497143083", "note": "郡山城跡(historic=castle)" }
+        },
+        "photos": [
+          {
+            "commonsFile": "Koriyama Castle (Yamato), Otte-mon and Otte-Mukai-yagura.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Koriyama_Castle_(Yamato),_Otte-mon_and_Otte-Mukai-yagura.jpg",
+            "author": "Saigen Jiro",
+            "license": "CC0 1.0",
+            "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/"
+          }
+        ],
+        "marks": [],
+        "hours": { "note": "史跡公園として常時公開。定休日なし", "sourceUrl": "https://www.yk-kankou.jp/spotDetail1.html" },
+        "citations": [
+          { "url": "https://online.bunka.go.jp/heritages/detail/550298", "excerpt": "天正１３年（１５８５）に豊臣秀長が入城し畿内統治の拠点として大規模に整備が行われ、関ヶ原の戦い以後は譜代大名が城主となった" },
+          { "url": "https://online.bunka.go.jp/heritages/detail/550298", "excerpt": "天守台のある本丸を中心に、毘沙門曲輪などの曲輪群、内堀、鷺堀などからなる…曲輪の周囲は石垣で築かれ、転用石材が多く用いられている" },
+          { "url": "https://www.yk-kankou.jp/spotDetail1.html", "excerpt": "令和４年１１月１０日、本丸・常盤曲輪・毘沙門曲輪・玄武曲輪・陣甫曲輪・厩・緑曲輪・麒麟曲輪・薪蔵と内堀・中堀が国の史跡に指定" },
+          { "url": "https://www.kintetsu.co.jp/life/area/yamato-koriyama.html", "excerpt": "天守台展望施設からは街を一望できる" }
+        ]
+      },
+      {
+        "name": "柳澤神社",
+        "time": "12:20",
+        "stayDurationMin": 25,
+        "memo": "郡山城跡から歩いておよそ1分、本丸跡にある柳澤神社に着きます。江戸幕府5代将軍・徳川綱吉の側用人を務めた柳澤吉保を祭神とし、旧藩士らの手によって明治13年(1880)に創建されたと伝わります。開く・閉まる時刻や休みは、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ2分、柳沢文庫へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 1 }],
+        "point": {
+          "lat": 34.651608,
+          "lng": 135.779323,
+          "source": { "kind": "osm_way", "id": "437406564", "note": "柳澤神社(amenity=place_of_worship)" }
+        },
+        "photos": [],
+        "marks": ["shrine"],
+        "hours": { "note": "境内自由(夏期は19:00まで、冬期は18:00までとの案内あり)。定休日なし", "sourceUrl": "https://www.yk-kankou.jp/spotDetail2.html" },
+        "citations": [
+          { "url": "https://www.yk-kankou.jp/spotDetail2.html", "excerpt": "本丸跡にあり、祭神は五代将軍綱吉の側用人柳澤吉保。…旧藩士等の手によって明治13年創立。" }
+        ]
+      },
+      {
+        "name": "柳沢文庫",
+        "time": "12:47",
+        "stayDurationMin": 30,
+        "memo": "柳澤神社から歩いておよそ2分、柳沢文庫に着きます。郡山城跡の毘沙門曲輪にあるこの文庫は、昭和35年(1960)、郡山城史跡・柳沢文庫保存会として発足しました。柳澤家に伝わる歴代藩主の書画や藩政資料、数万点におよぶ古文書などを保存し、展示会などを通じて公開しています。開館と閉館の時間、休館日は公式の案内で確かめましょう。この後は、歩いておよそ9分、近鉄郡山駅のあたりへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 2 }],
+        "point": {
+          "lat": 34.650977,
+          "lng": 135.780364,
+          "source": { "kind": "osm_way", "id": "437406554", "note": "柳澤文庫(amenity=library)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "9:00-17:00(入館は16:30まで)。休み記載あり(詳細は公式で確認)", "sourceUrl": "https://www.yk-kankou.jp/spotDetail3.html" },
+        "citations": [
+          { "url": "https://www.yk-kankou.jp/spotDetail3.html", "excerpt": "昭和35年郡山城跡が県の史跡指定になったのを機縁として財団法人郡山城史跡・柳沢文庫保存会として発足" }
+        ]
+      },
+      {
+        "name": "近鉄郡山駅のあたりで昼食",
+        "time": "13:26",
+        "stayDurationMin": 40,
+        "memo": "柳沢文庫から歩いておよそ9分、近鉄郡山駅のあたりに着きます。このあたりで昼食にしましょう。駅前の柳町商店街は「金魚ストリート」とも呼ばれ、金魚が泳ぐ改札機や自動販売機など、ユニークな展示が話題になっています。この後は、歩いておよそ8分、春岳院へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 9 }],
+        "point": {
+          "lat": 34.647578,
+          "lng": 135.781808,
+          "source": { "kind": "osm_node", "id": "11494104581", "note": "近鉄郡山駅。昼食の点はお店でない名前の点を使う(7章)" }
+        },
+        "photos": [],
+        "marks": ["lunch"],
+        "hours": { "note": "駅のため営業時間の区分なし", "sourceUrl": "https://www.kintetsu.co.jp/life/area/yamato-koriyama.html" },
+        "citations": [
+          { "url": "https://www.kintetsu.co.jp/life/area/yamato-koriyama.html", "excerpt": "「金魚ストリート」とも呼ばれ、金魚が泳ぐ改札機や自動販売機などユニークな展示が話題に" }
+        ]
+      },
+      {
+        "name": "春岳院",
+        "time": "14:14",
+        "stayDurationMin": 45,
+        "memo": "近鉄郡山駅のあたりから歩いておよそ8分、春岳院に着きます。豊臣秀長の菩提寺とされる寺院で、秀長の肖像画(大和郡山市指定文化財)のほか、御朱印箱や箱本制度に関わる史料が伝わります。郡山城をおさめた秀長とのゆかりを今に伝える寺院のひとつです。開く・閉まる時刻や休みは、公式の案内で確かめましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ9分、町家物語館へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 8 }],
+        "point": {
+          "lat": 34.650768,
+          "lng": 135.784149,
+          "source": { "kind": "gsi", "reason": "OSMに地物なし。公式の住所「大和郡山市新中町2」の番地まで一致した地理院の点(7章)" }
+        },
+        "photos": [],
+        "marks": ["temple"],
+        "hours": { "note": "9:00-16:30。休みは年末年始", "sourceUrl": "https://www.yk-kankou.jp/spotDetail4.html" },
+        "citations": [
+          { "url": "https://www.yk-kankou.jp/spotDetail4.html", "excerpt": "大納言豊臣秀長の菩提寺。…秀長の肖像画（市指定文化財）や御朱印箱及び箱本制度史料が伝わる" }
+        ]
+      },
+      {
+        "name": "町家物語館",
+        "time": "15:08",
+        "stayDurationMin": 35,
+        "memo": "春岳院から歩いておよそ9分、町家物語館に着きます。大正13年(1924)に建てられた木造三階建ての町家です。各部屋や廊下の窓にさまざまな趣向が凝らされ、木造三階建ての建築として貴重な遺構とされています。国の登録有形文化財に登録され、平成30年(2018年)から一般公開されています。開館と閉館の時間、休館日は公式の案内で確かめましょう。この後は、歩いておよそ4分、箱本館「紺屋」へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 9 }],
+        "point": {
+          "lat": 34.646365,
+          "lng": 135.784711,
+          "source": { "kind": "osm_way", "id": "407203191", "note": "旧川本家住宅(建物の名前が完全一致)" }
+        },
+        "photos": [],
+        "marks": [],
+        "hours": { "note": "9:00-17:00(入館は16:30まで)。休館は月曜(祝日の場合は開館し翌平日休館)・祝日の翌日・年末年始", "sourceUrl": "https://www.yk-kankou.jp/spotDetail47.html" },
+        "citations": [
+          { "url": "https://www.yk-kankou.jp/spotDetail47.html", "excerpt": "大正13年に建てられた。各部屋や廊下の窓にいろいろ趣向を凝らし、木造三階建の建築遺構として貴重なもの。登録有形文化財（平成２６年１０月７日指定）。平成３０年１月１０日（水）から一般公開されています。" }
+        ]
+      },
+      {
+        "name": "箱本館「紺屋」",
+        "time": "15:47",
+        "stayDurationMin": 50,
+        "memo": "町家物語館から歩いておよそ4分、箱本館「紺屋」に着きます。享保13年(1728)ごろから代々染物屋(紺屋)を営んできた町家を、大和郡山市が整備し直して公開している施設です。藍染めの歴史資料や、金魚の町ならではの金魚にまつわる品々の展示のほか、旅の締めくくりに、藍染めの体験もできます。開館と閉館の時間、休館日は公式の案内で確かめましょう。見学を終えたら、歩いておよそ6分の近鉄郡山駅から、帰路につきましょう。",
+        "legs": [{ "mode": "walk", "min": 4 }],
+        "point": {
+          "lat": 34.647723,
+          "lng": 135.785210,
+          "source": { "kind": "osm_node", "id": "5802905257", "note": "「箱本館紺屋」と名前が完全に一致する点(tourismタグはviewpointだが、建物のwayが別に無く、名前・位置が一致するためこの点を使用。内容確認2のOKあり)" }
+        },
+        "photos": [
+          {
+            "commonsFile": "Hakomotokan konya01s1600.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hakomotokan_konya01s1600.jpg",
+            "author": "663highland",
+            "license": "CC BY 2.5",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.5/"
+          }
+        ],
+        "marks": [],
+        "hours": { "note": "9:00-17:00。休み記載あり(詳細は公式で確認)", "sourceUrl": "https://www.yk-kankou.jp/spotDetail51.html" },
+        "citations": [
+          { "url": "https://www.yk-kankou.jp/spotDetail51.html", "excerpt": "享保13年頃から代々染物屋を営んだ紺屋で、代々の奥野氏が廃業後に市が箱本館「紺屋」として再生した" }
+        ]
+      }
+    ]
+  ]
+}

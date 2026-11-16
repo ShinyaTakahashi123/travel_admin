@@ -23,7 +23,7 @@ import { prisma } from "../src/lib/prisma";
 type Cfg = {
   itineraryId: string;
   prefecture: string;
-  spots: { name: string; placeName?: string; category: string | null; isWideArea?: boolean; isMemorial?: boolean; aliases?: string[]; fixMasterPoint?: string }[];
+  spots: { name: string; placeName?: string; category: string | null; isWideArea?: boolean; isMemorial?: boolean; aliases?: string[]; fixMasterPoint?: string; positionSource?: string }[];
 };
 const CATS = new Set(["castle", "temple", "shrine", "mountain", "water", "beach", "onsen", "museum", "townscape", "park", "gourmet", "craft", "view", "sake_brewery", "other"]);
 const s6 = (v: unknown) => (v == null ? "" : Number(String(v)).toFixed(6));
@@ -77,7 +77,7 @@ async function run() {
     });
     plans.push({
       kind: "create", spotId: sp.id, label, aliases: c.aliases || [],
-      data: { name: placeName, lat: s6(sp.lat), lng: s6(sp.lng), prefectureAreaId: pref.id, category: c.category, isWideArea: !!c.isWideArea, isMemorial: !!c.isMemorial, source: "ai_collected", positionSource: "nominatim", verifiedAt: new Date(new Date().toISOString().slice(0, 10)) },
+      data: { name: placeName, lat: s6(sp.lat), lng: s6(sp.lng), prefectureAreaId: pref.id, category: c.category, isWideArea: !!c.isWideArea, isMemorial: !!c.isMemorial, source: "ai_collected", positionSource: c.positionSource || "nominatim", verifiedAt: new Date(new Date().toISOString().slice(0, 10)) },
       note: `新しく足す「${placeName}」${pt} ${cfg.prefecture} ${c.category ?? "種類なし"}${c.isWideArea ? " 広い場所" : ""}${c.isMemorial ? " 慰霊・お墓(isMemorial)" : ""}${c.aliases?.length ? ` 別名:${c.aliases.join("・")}` : ""}` + (near.length ? `　※近く(約200m以内)に一覧の行き先: ${near.map((n) => `${n.name} ${s6(n.lat)},${s6(n.lng)}`).join(" / ")}` : ""),
     });
   }

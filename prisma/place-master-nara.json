@@ -1,0 +1,18 @@
+{
+  "itineraryId": "b05b1752-53ae-44cb-b380-52695010f09d",
+  "prefecture": "奈良県",
+  "spots": [
+    { "name": "法隆寺", "category": "temple" },
+    { "name": "中宮寺", "category": "temple" },
+    { "name": "藤ノ木古墳", "category": null, "isMemorial": false },
+    { "name": "斑鳩文化財センター", "category": "museum", "positionSource": "gsi" },
+    { "name": "龍田大社", "category": "shrine" },
+    { "name": "慈光院", "category": "temple" },
+    { "name": "郡山城跡", "category": "castle" },
+    { "name": "柳澤神社", "category": "shrine" },
+    { "name": "柳沢文庫", "category": "museum" },
+    { "name": "春岳院", "category": "temple", "positionSource": "gsi" },
+    { "name": "町家物語館", "category": "townscape" },
+    { "name": "箱本館「紺屋」", "category": "craft" }
+  ]
+}
