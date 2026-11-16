@@ -1,0 +1,193 @@
+{
+  "title": "川崎大師と總持寺の初詣、仲見世通り・稲毛神社をめぐる日帰りプラン",
+  "description": "厄除けのお大師さまとして親しまれる川崎大師(平間寺)で初詣をし、仲見世通りの門前名物や中国庭園・瀋秀園の散策、古社・稲毛神社への参拝、曹洞宗の大本山・總持寺への参拝も楽しむ日帰りプラン。新年の始まりに、川崎・横浜で社寺めぐりをするコースです。",
+  "nights": 0,
+  "seasons": ["winter"],
+  "tagNames": ["定番観光"],
+  "purposeNames": ["お寺", "神社", "祈りの場めぐり"],
+  "prefectureName": "神奈川県",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "File:Daishi Temple @ Kawasaki (13695210984).jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Daishi_Temple_@_Kawasaki_(13695210984).jpg",
+    "author": "Guilhem Vellut",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+  },
+  "citations": [
+    {
+      "url": "https://www.kawasakidaishi.com/about/",
+      "excerpt": "大本山川崎大師平間寺は、京都東山七条の智積院を総本山とし、成田山新勝寺(千葉県成田市)、髙尾山薬王院(東京都八王子市)とともに、真言宗智山派の大本山の寺院のひとつです…大治3年(1128)一寺を建立…開基/創建功徳主 尊賢上人／平間兼乗氏…「厄除けのお大師さま」として一層広く知られる"
+    },
+    {
+      "url": "https://www.takemikatsuchi.net/about/",
+      "excerpt": "銀杏の樹齢が一千年と推定されるところから、当地の古社であることがわかります。"
+    },
+    {
+      "url": "https://www.sojiji.jp/about/",
+      "excerpt": "曹洞宗は大本山を二つもっています。福井県にある永平寺と、横浜市にある總持寺です。"
+    }
+  ],
+  "days": [
+    [
+      {
+        "name": "川崎大師(平間寺)",
+        "time": "09:30",
+        "stayDurationMin": 100,
+        "memo": "京急大師線の川崎大師駅から歩いて約9分のところにあります。厄除弘法大師を本尊とする真言宗智山派の大本山で、大治3年(1128)に尊賢上人と平間兼乗(ひらまかねのり)によって建立されたと伝わります。「厄除けのお大師さま」として親しまれています。静かに、敬意をもってお参りしましょう。参拝できる時間は、日や時期によって変わることがあるので、出かける前に公式の案内で確かめましょう。この後は、歩いておよそ9分、瀋秀園へ向かいます。",
+        "legs": [],
+        "point": {
+          "lat": 35.534252,
+          "lng": 139.729442,
+          "source": { "kind": "osm_way", "id": "29178625" }
+        },
+        "marks": ["temple", "worship"],
+        "hours": {
+          "note": "大本堂は6:00-17:30頃(4-9月は5:30-18:00頃、年末年始は日により変動)",
+          "sourceUrl": "https://rurubu.jp/andmore/spot/80013460"
+        },
+        "citations": [
+          {
+            "url": "https://www.kawasakidaishi.com/about/",
+            "excerpt": "大本山川崎大師平間寺は、京都東山七条の智積院を総本山とし、成田山新勝寺(千葉県成田市)、髙尾山薬王院(東京都八王子市)とともに、真言宗智山派の大本山の寺院のひとつです…大治3年(1128)一寺を建立…開基/創建功徳主 尊賢上人／平間兼乗氏…「厄除けのお大師さま」として一層広く知られる"
+          }
+        ],
+        "photos": [
+          {
+            "commonsFile": "File:Daishi Temple @ Kawasaki (13695210984).jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:Daishi_Temple_@_Kawasaki_(13695210984).jpg",
+            "author": "Guilhem Vellut",
+            "license": "CC BY 2.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+          }
+        ]
+      },
+      {
+        "name": "瀋秀園(大師公園)",
+        "time": "11:19",
+        "stayDurationMin": 60,
+        "memo": "川崎大師から歩いておよそ9分、瀋秀園に着きます。川崎市と中国・瀋陽市の姉妹都市提携5周年を記念し、瀋陽市の庭園の技術者の指導と協力で造られ、昭和62年(1987)に開園した中国庭園です。大師公園の中にあり、池のまわりを散策できます。休園日があるので、出かける前に公式の案内で確かめましょう。この後は、歩いておよそ8分、大師仲見世通りへ向かいます。",
+        "legs": [{ "mode": "walk", "min": 9 }],
+        "point": {
+          "lat": 35.531703,
+          "lng": 139.73246,
+          "source": { "kind": "osm_way", "id": "429556373" }
+        },
+        "hours": {
+          "note": "9:00-16:00頃(休園日: 月曜・祝日の翌日(1/2を含む)・12/29-31)",
+          "sourceUrl": "https://www.city.kawasaki.jp/templates/outline/cmsfiles/contents/0000002/2649/sinsyuenkanriuneiyoko.pdf"
+        },
+        "citations": [
+          {
+            "url": "https://www.city.kawasaki.jp/kawasaki/cmsfiles/contents/0000025/25622/10-23.pdf",
+            "excerpt": "中国・瀋陽市から、川崎市との姉妹都市提携5周年の友好記念物の交換交流として瀋陽市の庭園技術指導団の指導と協力のもとに造成が行われ 昭和62年(1987)に大師公園内に開園した"
+          }
+        ],
+        "photos": [
+          {
+            "commonsFile": "File:川崎・瀋秀園.jpg",
+            "sourceUrl": "https://commons.wikimedia.org/wiki/File:%E5%B7%9D%E5%B4%8E%E3%83%BB%E7%80%8B%E7%A7%80%E5%9C%92.jpg",
+            "author": "Hiroyuki0904",
+            "license": "CC0",
+            "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+          }
+        ]
+      },
+      {
+        "name": "川崎大師仲見世通り",
+        "time": "12:27",
+        "stayDurationMin": 45,
+        "memo": "瀋秀園から歩いておよそ8分、仲見世通りに着きます。くず餅や飴など、門前名物の店が並ぶ参道です。この近くで昼食にしましょう。この後は、川崎大師駅まで歩いておよそ11分、9分ほど待ってから大師線でおよそ6分、京急川崎駅から稲毛神社までは歩いておよそ9分(あわせておよそ35分)です。",
+        "legs": [{ "mode": "walk", "min": 8 }],
+        "point": {
+          "lat": 35.534519,
+          "lng": 139.731237,
+          "source": { "kind": "osm_way", "id": "29178613" }
+        },
+        "marks": ["lunch"],
+        "hours": {
+          "note": "店により異なる(参道そのものに通行時間の定めはなし)",
+          "sourceUrl": "https://www.jeepe.jp/ja/articles/kawasaki-daishi-nakamise-2776"
+        },
+        "citations": [
+          {
+            "url": "https://www.jeepe.jp/ja/articles/kawasaki-daishi-nakamise-2776",
+            "excerpt": "仲見世通りを、大山門へ向かう参拝動線として紹介します。とんとこ飴や久寿餅などを扱う店が連なり…"
+          }
+        ]
+      },
+      {
+        "name": "稲毛神社",
+        "time": "13:47",
+        "stayDurationMin": 50,
+        "memo": "大師仲見世通りから川崎大師駅まで歩いておよそ11分、9分ほど待ってから大師線でおよそ6分、京急川崎駅から稲毛神社までは歩いておよそ9分(あわせておよそ35分)で着きます。武甕槌神(たけみかづちのかみ)をまつる、この土地の古社とされる神社です。天皇軍の戦勝を祈る社として建てられたと伝わり、景行天皇が東国をめぐったおりに、この社で難を避けたという話も残ります。かつては河崎山王社などと呼ばれていました。御神木の大銀杏は樹齢およそ一千年と推定されています。静かに、敬意をもってお参りしましょう。この後は、京急川崎駅まで歩いておよそ9分、5分ほど待ってから京急本線でおよそ5分、京急鶴見駅から總持寺までは歩いておよそ16分(あわせておよそ35分)です。",
+        "legs": [
+          { "mode": "walk", "min": 11, "waypoint": { "lat": 35.5357943, "lng": 139.7260897 } },
+          { "mode": "other", "min": 9, "waypoint": { "lat": 35.5357943, "lng": 139.7260897 } },
+          { "mode": "train", "min": 6, "line": "大師線", "waypoint": { "lat": 35.53283, "lng": 139.7007815 } },
+          { "mode": "walk", "min": 9 }
+        ],
+        "point": {
+          "lat": 35.531018,
+          "lng": 139.704618,
+          "source": { "kind": "osm_node", "id": "1971580260" }
+        },
+        "marks": ["shrine", "worship"],
+        "hours": {
+          "note": "参拝の時間の案内なし(稲毛神社の公式)",
+          "sourceUrl": "https://www.takemikatsuchi.net/about/"
+        },
+        "citations": [
+          {
+            "url": "https://www.takemikatsuchi.net/about/",
+            "excerpt": "武甕槌神をまつり、天皇軍の戦勝を祈る社として建てられたと伝えられています。第十二代景行天皇が東国御巡遊のおり当神社に賊難を避けられたといい…以後「河崎山王社」「堀之内山王権現」「五社山王」「三社宮」などとよばれていました…銀杏の樹齢が一千年と推定されるところから、当地の古社であることがわかります。"
+          }
+        ]
+      },
+      {
+        "name": "總持寺",
+        "time": "15:12",
+        "stayDurationMin": 100,
+        "memo": "稲毛神社から京急川崎駅まで歩いておよそ9分、5分ほど待ってから京急本線でおよそ5分、京急鶴見駅から總持寺までは歩いておよそ16分(あわせておよそ35分)で着きます。曹洞宗は、福井県の永平寺と、ここ總持寺の2つを大本山としています。石川県にあった諸嶽寺を、1321年(元亨元年)に太祖瑩山禅師が諸嶽山總持寺と改めたのが始まりと伝わり、明治時代の焼失をきっかけに横浜市へ移ったとされます。三門をくぐり、静かに、敬意をもってお参りしましょう。この後は、歩いて約16分の京急鶴見駅から帰りましょう。",
+        "legs": [
+          { "mode": "walk", "min": 9, "waypoint": { "lat": 35.53283, "lng": 139.7007815 } },
+          { "mode": "other", "min": 5, "waypoint": { "lat": 35.53283, "lng": 139.7007815 } },
+          { "mode": "train", "min": 5, "line": "京急本線", "waypoint": { "lat": 35.507356, "lng": 139.678048 } },
+          { "mode": "walk", "min": 16 }
+        ],
+        "point": {
+          "lat": 35.50532,
+          "lng": 139.671877,
+          "source": { "kind": "osm_way", "id": "81089115" }
+        },
+        "marks": ["temple", "worship"],
+        "hours": {
+          "note": "境内は自由参拝(閉まる時刻の案内なし)",
+          "sourceUrl": "https://www.sojiji.jp/visit/"
+        },
+        "citations": [
+          {
+            "url": "https://www.sojiji.jp/about/",
+            "excerpt": "石川県にあった諸嶽寺を、1321(元亨元)年、太祖瑩山禅師が諸嶽山總持寺と改められたのが始まりです。"
+          },
+          {
+            "url": "https://www.sojiji.jp/about/",
+            "excerpt": "明治時代の焼失を機に横浜市に移転しました。"
+          },
+          {
+            "url": "https://www.sojiji.jp/about/",
+            "excerpt": "曹洞宗は大本山を二つもっています。福井県にある永平寺と、横浜市にある總持寺です。"
+          },
+          {
+            "url": "https://www.sojiji.jp/access/",
+            "excerpt": "京浜急行線「京急鶴見駅」より徒歩(約7分)"
+          },
+          {
+            "url": "https://www.sojiji.jp/visit/",
+            "excerpt": "境内は自由に参拝していただけます。"
+          }
+        ]
+      }
+    ]
+  ]
+}

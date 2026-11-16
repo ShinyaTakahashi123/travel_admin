@@ -1,0 +1,10 @@
+{
+  "itineraryId": "a640202e-80a7-47c7-94bd-728ab553da59",
+  "prefecture": "神奈川県",
+  "spots": [
+    { "name": "川崎大師(平間寺)", "placeName": "川崎大師", "category": "temple", "aliases": ["平間寺"], "positionSource": "osm" },
+    { "name": "瀋秀園(大師公園)", "placeName": "瀋秀園", "category": "park", "positionSource": "osm" },
+    { "name": "稲毛神社", "category": "shrine", "positionSource": "osm" },
+    { "name": "總持寺", "category": "temple", "isWideArea": true, "positionSource": "osm" }
+  ]
+}
