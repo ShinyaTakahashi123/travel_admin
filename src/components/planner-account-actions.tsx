@@ -23,7 +23,7 @@ export function PlannerAccountActions({
   function handleToggleCapability() {
     const next = !plannerSuspended;
     const message = next
-      ? "プランナーの機能(しおりの作成・編集・公開)だけを止めますか？会員としてのログイン等はそのまま使えます。"
+      ? "プランナーの機能(しおりの作成・編集・公開)だけを止めますか？停止の間、公開中のしおりとプランナーの公開ページは表示されなくなります(停止を解くと元に戻ります)。会員としてのログイン等はそのまま使えます。"
       : "プランナーの機能の停止を解除しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {

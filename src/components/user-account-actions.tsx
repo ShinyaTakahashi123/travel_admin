@@ -20,7 +20,10 @@ export function UserAccountActions({
 
   function handleToggleStatus() {
     const next = status === "active" ? "suspended" : "active";
-    const message = next === "suspended" ? "このユーザーを利用停止にしますか？" : "利用停止を解除しますか？";
+    const message =
+      next === "suspended"
+        ? "このユーザーを利用停止にしますか？停止の間、このユーザーが投稿したしおり・コメントは表示されなくなります(停止を解くと元に戻ります)。"
+        : "利用停止を解除しますか？";
     if (!confirm(message)) return;
     startTransition(async () => {
       const result = await setUserAccountStatus(userId, next);
