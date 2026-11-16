@@ -1,0 +1,278 @@
+{
+  "title": "旭山動物園と旭川の杜・文学館をめぐる、旭川1泊2日",
+  "description": "行動展示で知られる旭山動物園からはじまり、上川神社の頓宮や旭橋、北海道立旭川美術館がある旭川市中心部、三浦綾子記念文学館や旭川市博物館がある神楽の杜、そして駅前の平和通買物公園までを、バスと徒歩でめぐる1泊2日です。",
+  "nights": 1,
+  "seasons": ["spring", "summer", "autumn", "winter"],
+  "tagNames": ["定番観光"],
+  "purposeNames": ["動物園・水族館"],
+  "prefectureName": "北海道",
+  "areaNames": [],
+  "cover": {
+    "commonsFile": "Asahiyama polar bear.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Asahiyama_polar_bear.jpg",
+    "author": "Douglas Perkins",
+    "license": "CC BY 4.0"
+  },
+  "citations": [
+    { "url": "https://www.city.asahikawa.hokkaido.jp/asahiyamazoo/2200/d067177.html", "excerpt": "旭山動物園は当初の予定より一年遅れて1967年に北海道3番目の動物園として開園を迎えました。" },
+    { "url": "https://www.hyouten.com/", "excerpt": "三浦綾子記念文学館の開館日(1998年6月13日)についての記載" }
+  ],
+  "days": [
+    [
+      {
+        "name": "旭山動物園(正門)",
+        "address": "北海道旭川市東旭川町倉沼",
+        "time": "11:22",
+        "stayDurationMin": 73,
+        "memo": "旭川駅に10時半ごろ着いたら、旭山動物園線のバスでおよそ40分、旭山動物園の正門へ。動物園を作ろうという話は昭和30年代からありましたが、実際に開園したのは1967年、当初の予定より1年遅れてのことでした。開園のころは北海道で3番目の動物園でしたが、1996年には来園者が26万人まで落ち込んだこともあったといわれます。そこから、動物が持つ本来の能力や行動、感性を発揮できる環境をつくり、それを見せる展示の工夫が重ねられ、こうした展示方法はいつしか「行動展示」と呼ばれるようになったといわれます。2007年・2008年には年間の来園者数が300万人を超えました。あざらし館やぺんぎん館、ほっきょくぐま館など見どころの多い建物が並び、飼育スタッフが動物の話を直接聞かせてくれる時間も設けられています。開園の時期・時間は季節で変わるので、出かける前に公式の案内で確かめましょう。この後は、正門前のバス停で5分ほど待ってから、旭山動物園線のバスでおよそ47分(あわせておよそ52分)、旭川駅前へ戻りましょう。",
+        "legs": [],
+        "point": {
+          "lat": 43.768611,
+          "lng": 142.475949,
+          "source": { "kind": "osm_node", "id": "2465570395", "note": "正門(barrier=entrance)" }
+        },
+        "hours": {
+          "note": "開園時間は季節で変わる(例: 夏期9:30-17:15最終入館16:00、冬期10:30-15:30最終入館15:00)。本文には時刻を書かない",
+          "sourceUrl": "https://www.city.asahikawa.hokkaido.jp/asahiyamazoo/event/event.html"
+        },
+        "citations": [
+          { "url": "https://www.city.asahikawa.hokkaido.jp/asahiyamazoo/2200/d067177.html", "excerpt": "旭山動物園は当初の予定より一年遅れて1967年に北海道3番目の動物園として開園を迎えました。/1996年には来園者数も…26万人まで減り、廃園の噂も流れました。/2007年・2008年には年間入園者数300万人を突破しました。/こうした展示方法がいつしか『行動展示』と呼ばれるようになりました。/飼育スタッフが動物にまつわる話や解説を直接来園者の皆様に行う時間です。" },
+          { "url": "https://www.asahikawa-denkikidou.jp/manage/wp-content/uploads/2026/10/zootime_2026w.pdf", "excerpt": "旭川駅⑥発10:40・旭山動物園着11:22(41番)。旭山動物園発12:40・旭川駅着13:27(41番)。" }
+        ]
+      },
+      {
+        "name": "旭川駅のあたりで昼食",
+        "time": "13:27",
+        "stayDurationMin": 40,
+        "memo": "正門前のバス停で5分ほど待ってから、旭山動物園線のバスでおよそ47分(あわせておよそ52分)、旭川駅前へ戻りましょう。このあたりで昼食にしましょう。この後は、歩いておよそ24分、上川神社(頓宮)へ向かいましょう。",
+        "marks": ["lunch"],
+        "legs": [{ "mode": "other", "min": 5, "waypoint": { "lat": 43.768611, "lng": 142.475949, "note": "旭山動物園正門前のバス停(動物園正門と同地点)" } }, { "mode": "bus", "min": 47, "line": "旭山動物園線" }],
+        "point": {
+          "lat": 43.762750,
+          "lng": 142.357926,
+          "source": { "kind": "osm_node", "id": "264430273", "note": "JR旭川駅" }
+        },
+        "hours": {
+          "note": "店の時間は確かめず、駅のあたりという場所の案内のみ",
+          "sourceUrl": "https://www.asahikawa-denkikidou.jp/manage/wp-content/uploads/2026/10/zootime_2026w.pdf"
+        },
+        "citations": [
+          { "url": "https://www.asahikawa-denkikidou.jp/manage/wp-content/uploads/2026/10/zootime_2026w.pdf", "excerpt": "旭山動物園発12:40・旭川駅着13:27(41番、所要47分)" }
+        ]
+      },
+      {
+        "name": "上川神社(頓宮)",
+        "address": "北海道旭川市常磐公園内",
+        "time": "14:31",
+        "stayDurationMin": 30,
+        "memo": "昼食を終えたら、歩いておよそ24分、常磐公園にある上川神社の頓宮(とうぐう)へ向かいましょう。頓宮とは、お祭りのときに神社の神輿がひと休みする仮の宮のことです。上川神社は1893年に開拓に携わる人たちを守る神社として創建され、1924年に神楽岡へ遷座したと伝えられ、天照皇大神をまつります。例大祭では、神楽岡の本殿から神輿が市内をめぐり、この常磐公園の頓宮でひと休みすることが知られています。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ9分、旭橋へ向かいましょう。",
+        "marks": ["shrine"],
+        "legs": [{ "mode": "walk", "min": 24 }],
+        "point": {
+          "lat": 43.775262,
+          "lng": 142.359134,
+          "source": { "kind": "osm_node", "id": "192105120", "note": "amenity=place_of_worship" }
+        },
+        "hours": {
+          "note": "境内は常時立ち入り可能とみられるが、正式な時間は社務所等の公式案内で確かめる",
+          "sourceUrl": "https://www.hokkaido-np.co.jp/article/1339806/"
+        },
+        "citations": [
+          { "url": "https://www.hokkaido-np.co.jp/article/1339806/", "excerpt": "同神社の神輿（みこし）が市内を巡る際に一時的に休ませる「頓宮」がある常磐公園では…" },
+          { "url": "https://www.visit-hokkaido.jp/spot/detail_13186.html", "excerpt": "創建は1893年／1924年に神楽岡へ遷座／右座には岩村通俊ら北海道開拓に功のあった人物が合祀" }
+        ]
+      },
+      {
+        "name": "旭橋",
+        "address": "北海道旭川市常盤通",
+        "time": "15:10",
+        "stayDurationMin": 15,
+        "memo": "頓宮から歩いておよそ9分、石狩川に架かる旭橋へ。今の旭橋は1932年11月に完成したもので、北海道庁の技師たちの設計による、北海道で初めてのブレースト・リブ・バランスド・タイド・アーチという形式の橋だといわれます。橋の長さはおよそ226メートルで、完成から90年以上たった今も、旭川の幹線道路として多くの車や人を支えています。この後は、歩いておよそ11分、北海道立旭川美術館へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 9 }],
+        "point": {
+          "lat": 43.778459,
+          "lng": 142.360170,
+          "source": { "kind": "osm_way", "id": "904645256", "note": "今の旭橋。OSMの別の履歴にある1904年の記載は最初の橋のもの" }
+        },
+        "photos": [
+          { "commonsFile": "Asahi Bridge20220211.jpg", "sourceUrl": "https://commons.wikimedia.org/wiki/File:Asahi_Bridge20220211.jpg", "author": "Nryate", "license": "CC BY-SA 4.0" }
+        ],
+        "hours": {
+          "note": "橋そのものは常時通行可能",
+          "sourceUrl": "https://committees.jsce.or.jp/heritage/node/208"
+        },
+        "citations": [
+          { "url": "https://committees.jsce.or.jp/heritage/node/208", "excerpt": "竣工は1932（昭和7）年11月であった／実際の設計者は北海道庁の塩塚重蔵技師，北川昇技師，樋浦大三技手である／ブレースト・リブ・バランスド・タイド・アーチ／橋長226.0 m（中央支間長91.4 m）／北海道初のブレーストリブ・バランスト・タイドアーチ橋" }
+        ]
+      },
+      {
+        "name": "北海道立旭川美術館",
+        "address": "北海道旭川市常磐公園内",
+        "time": "15:36",
+        "stayDurationMin": 70,
+        "memo": "旭橋から歩いておよそ11分、常磐公園の中にある北海道立旭川美術館へ。道北の美術と、木を使った造形の2つを柱に、地域に根ざしながら国際的にも通じる作品を集めているといわれる美術館です。見学の時間・休みの日は公式の案内で確かめましょう。この夜は、旭川駅周辺の宿に泊まりましょう。",
+        "legs": [{ "mode": "walk", "min": 11 }],
+        "point": {
+          "lat": 43.774135,
+          "lng": 142.355423,
+          "source": { "kind": "osm_node", "id": "5654851226" }
+        },
+        "hours": {
+          "note": "休館日(月曜等)・展示替え期間は本文に書かない",
+          "sourceUrl": "https://artmuseum.pref.hokkaido.lg.jp/"
+        },
+        "citations": [
+          { "url": "https://artmuseum.pref.hokkaido.lg.jp/uploads/files/abj/about/bid/旭川美術館運営方針.pdf", "excerpt": "『道北の美術』及び『木の造形』を収集の柱とし、地域性と国際性を兼ね備えた系統的なコレクションの形成を目指します。" }
+        ]
+      }
+    ],
+    [
+      {
+        "name": "三浦綾子記念文学館(見本林)",
+        "address": "北海道旭川市神楽7条8丁目",
+        "time": "09:00",
+        "stayDurationMin": 65,
+        "memo": "旭川駅の近くの宿から歩いておよそ21分、見本林の中にある三浦綾子記念文学館へ。小説家・三浦綾子は、1964年に朝日新聞社の懸賞小説に応募した「氷点」が当選して作家デビューしました。その後も「道ありき」「塩狩峠」「母」「銃口」など、数多くの作品を残しました。この文学館は、「氷点」の舞台になった見本林に、多くの市民や読者の力によって1998年に建てられたといわれます。見本林そのものは、外国の樹木を試験的に植えて育ち方を見る林として設けられた一帯で、今は気軽に歩ける散策路になっています。開館の時間・休みの日は公式の案内で確かめましょう。この後は、歩いておよそ14分、旭川市博物館へ向かいましょう。",
+        "legs": [],
+        "point": {
+          "lat": 43.753606,
+          "lng": 142.347975,
+          "source": { "kind": "osm_node", "id": "1551726284" }
+        },
+        "photos": [
+          { "commonsFile": "Mihonrin 0001.jpg", "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mihonrin_0001.jpg", "author": "Shoyuramen", "license": "CC BY-SA 3.0" }
+        ],
+        "hours": {
+          "note": "開館9:00-17:00(最終入館16:30)とみられるが一次資料で確認できず、本文には書かない",
+          "sourceUrl": "https://www.hyouten.com/"
+        },
+        "citations": [
+          { "url": "https://www.hyouten.com/", "excerpt": "三浦綾子記念文学館は…1998年6月13日に開館しました。" },
+          { "url": "https://www.museum.or.jp/museum/469", "excerpt": "三浦綾子は、1964年朝日新聞社の1000万円懸賞小説に応募した小説「氷点」が当選し、以後「道ありき」「塩狩峠」「母」「銃口」など…多くの市民と愛読者の力により1998年「氷点」の舞台である「見本林」に文学館は建てられました。" },
+          { "url": "https://www.rinya.maff.go.jp/hokkaido/policy/system/rekumori/sizen_kyuuyourin/arasiyama_kamui/index.html", "excerpt": "見本林地区は、外国樹種見本林との研究のほか、「三浦綾子記念文学館」があり、多くの市民や観光客が訪れています。" }
+        ]
+      },
+      {
+        "name": "旭川市博物館",
+        "address": "北海道旭川市神楽3条7丁目(大雪クリスタルホール内)",
+        "time": "10:19",
+        "stayDurationMin": 75,
+        "memo": "文学館から歩いておよそ14分、大雪クリスタルホールの中にある旭川市博物館へ。1階の展示室では、大陸や日本などと活発な交易を重ねながら社会を築いてきたアイヌの歴史と、数多くの民族資料、そして文化の伝承と創造に取り組む今日の上川アイヌの姿を紹介しています。こうした文化は、今も受け継がれているものとして紹介されています。地階の展示室では、上川盆地に人が暮らし始めたころから現在までの歩みや、上川盆地の地質・地形、道北の多様な生きものの様子を見ることができます。見学の時間・休みの日は公式の案内で確かめましょう。この後は、歩いておよそ15分、旭川駅のあたりへ戻り、そこで昼食にしましょう。",
+        "legs": [{ "mode": "walk", "min": 14 }],
+        "point": {
+          "lat": 43.759417,
+          "lng": 142.350660,
+          "source": { "kind": "osm_way", "id": "141790891" }
+        },
+        "hours": {
+          "note": "9:00-17:00(最終入館16:30)。休館日(第2・4月曜等)・改修期間は本文に書かない",
+          "sourceUrl": "https://www.city.asahikawa.hokkaido.jp/hakubutukan/index.html"
+        },
+        "citations": [
+          { "url": "https://www.city.asahikawa.hokkaido.jp/hakubutukan/kenkyuu/p005138_d/fil/kanpo2021.pdf", "excerpt": "平成20年11月にリニューアルした１階展示室では、大陸や日本などと活発な交易を行い、複雑な社会を生み出してきたアイヌの歴史と多くの民族資料、さらに文化の伝承と創造に取り組む今日の上川アイヌの姿を紹介している。地階展示室では、上川盆地の２万年前から現在における人々の歩みを多くの資料によって振り返るとともに、上川盆地の地質や地形など自然、さらに道北の多様な生態系を展示している。" }
+        ]
+      },
+      {
+        "name": "旭川駅のあたりで昼食",
+        "time": "11:49",
+        "stayDurationMin": 40,
+        "memo": "博物館から歩いておよそ15分、旭川駅のあたりへ戻り、このあたりで昼食にしましょう。この後は、歩いておよそ21分、旭川市科学館(サイパル)へ向かいましょう。",
+        "marks": ["lunch"],
+        "legs": [{ "mode": "walk", "min": 15 }],
+        "point": {
+          "lat": 43.762750,
+          "lng": 142.357926,
+          "source": { "kind": "osm_node", "id": "264430273", "note": "JR旭川駅" }
+        },
+        "hours": {
+          "note": "店の時間は確かめず、駅のあたりという場所の案内のみ",
+          "sourceUrl": "https://www.city.asahikawa.hokkaido.jp/hakubutukan/index.html"
+        },
+        "citations": [
+          { "url": "https://www.city.asahikawa.hokkaido.jp/hakubutukan/index.html", "excerpt": "旭川市博物館の所在地(大雪クリスタルホール内、神楽3条7丁目)" }
+        ]
+      },
+      {
+        "name": "旭川市科学館(サイパル)",
+        "address": "北海道旭川市宮前1条3丁目",
+        "time": "12:50",
+        "stayDurationMin": 85,
+        "memo": "昼食を終えたら、歩いておよそ21分、旭川市科学館(サイパル)へ。プラネタリウムがあり、星空の投影のほか、季節に合わせた特別な番組が上映されることもあります。館内には低温実験室があり、決まった時間に、北国ならではの寒さを実際に体感できるしくみになっています。見学の時間・休みの日は公式の案内で確かめましょう。この後は、歩いておよそ20分、旭川市彫刻美術館のステーションギャラリーへ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 21 }],
+        "point": {
+          "lat": 43.756342,
+          "lng": 142.370414,
+          "source": { "kind": "osm_way", "id": "141913039" }
+        },
+        "hours": {
+          "note": "9:30-17:00(最終入館16:30)",
+          "sourceUrl": "https://www.city.asahikawa.hokkaido.jp/science/index.html"
+        },
+        "citations": [
+          { "url": "https://www.city.asahikawa.hokkaido.jp/science/index.html", "excerpt": "11月23日は特別番組「プラ寝たリウム」を投影します。/低温実験室の体験は…11:00と14:30の2回とさせていただきます。" }
+        ]
+      },
+      {
+        "name": "旭川市彫刻美術館ステーションギャラリー",
+        "address": "北海道旭川市宮下通(JR旭川駅構内)",
+        "time": "14:35",
+        "stayDurationMin": 30,
+        "memo": "科学館から歩いておよそ20分、JR旭川駅の東口にある旭川市彫刻美術館のステーションギャラリーへ。中原悌二郎記念旭川市彫刻美術館の分館として、2012年に開設されました。彫刻家・砂澤ビッキの大型作品をはじめ、旭川や北海道にゆかりのある彫刻家の作品を中心に紹介しています。この後は、歩いておよそ12分、平和通買物公園へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 20 }],
+        "point": {
+          "lat": 43.762370,
+          "lng": 142.359269,
+          "source": { "kind": "osm_node", "id": "2968450739", "note": "amenity=arts_centre" }
+        },
+        "hours": {
+          "note": "観覧料・休館日は本文に書かない",
+          "sourceUrl": "https://www.city.asahikawa.hokkaido.jp/sculpture/200/p000410.html"
+        },
+        "citations": [
+          { "url": "https://www.city.asahikawa.hokkaido.jp/sculpture/200/p000410.html", "excerpt": "彫刻美術館ステーションギャラリーは、中原悌二郎記念旭川市彫刻美術館の分館として、平成24年4月21日に開設されました。「彫刻のまち旭川」の玄関口である旭川駅舎内の東口に位置し…ステーションギャラリーでは、砂澤ビッキの大型作品を始めとする旭川と北海道ゆかりの彫刻家の作品を中心に紹介する…" }
+        ]
+      },
+      {
+        "name": "平和通買物公園",
+        "address": "北海道旭川市1条〜8条通",
+        "time": "15:17",
+        "stayDurationMin": 45,
+        "memo": "ステーションギャラリーから歩いておよそ12分、平和通買物公園へ。JR旭川駅から北へおよそ1キロメートル続くこの通りは、1972年に生まれた、車の通らない歩行者専用の道で、日本で初めての恒久的な歩行者天国とされています。買い物や散策を楽しむ人たちの憩いの場になっています。この後は、歩いておよそ18分、真宗大谷派旭川別院へ向かいましょう。",
+        "legs": [{ "mode": "walk", "min": 12 }],
+        "point": {
+          "lat": 43.768879,
+          "lng": 142.361033,
+          "source": { "kind": "osm_way", "id": "484164726" }
+        },
+        "hours": {
+          "note": "通りそのものは常時通行可能",
+          "sourceUrl": "https://www.city.asahikawa.hokkaido.jp/kurashi/112/furusato/p007929_d/fil/14matinaka.pdf"
+        },
+        "citations": [
+          { "url": "https://www.city.asahikawa.hokkaido.jp/kurashi/112/furusato/p007929_d/fil/14matinaka.pdf", "excerpt": "日本初の恒久的な歩行者天国（歩行者専用道路）があります。日本初の恒久的歩行者専用道路である「平和通買物公園」は1972年に誕生し、JR旭川駅から北に約1㎞続くメインストリートであり…" }
+        ]
+      },
+      {
+        "name": "真宗大谷派旭川別院",
+        "address": "北海道旭川市宮下通2丁目",
+        "time": "16:20",
+        "stayDurationMin": 35,
+        "memo": "買物公園から歩いておよそ18分、真宗大谷派の旭川別院へ。真宗大谷派は、京都にある東本願寺を本山とする宗派です。冬は歩道が雪や凍結で滑りやすくなっていることがあるので、足もとに気をつけましょう。お参りできる時間は、現地の案内に従いましょう。今も祈りが続く場所ですので、静かに、敬意をもってお参りしましょう。この後は、歩いておよそ10分で旭川駅へ。旭川駅から帰りましょう。",
+        "marks": ["temple"],
+        "legs": [{ "mode": "walk", "min": 18 }],
+        "point": {
+          "lat": 43.766191,
+          "lng": 142.350694,
+          "source": { "kind": "osm_way", "id": "496612518", "note": "amenity=place_of_worship" }
+        },
+        "hours": {
+          "note": "境内に入れる時間・お参りできる時間は、公式の案内で確かめる(独自の公式サイトは見つからず)",
+          "sourceUrl": "https://www.higashihonganji.or.jp/about/higashihonganji/"
+        },
+        "citations": [
+          { "url": "https://www.higashihonganji.or.jp/about/higashihonganji/", "excerpt": "浄土真宗「真宗大谷派」の本山で「真宗本廟」といい、一般に「東本願寺」と呼ばれています。" }
+        ]
+      }
+    ]
+  ]
+}
