@@ -626,6 +626,8 @@ model Spot {
   lat             Decimal?  @db.Decimal(9, 6)
   lng             Decimal?  @db.Decimal(9, 6)
   visitTime       DateTime? @map("visit_time") @db.Time
+  // 時刻を手で入れた(自動計算の対象から外す)印。nullはfalse扱い(仕様書K節)
+  visitTimeManual Boolean?  @map("visit_time_manual")
   memo            String?
   stayDurationMin Int?      @map("stay_duration_min")
   websiteUrl      String?   @map("website_url")
