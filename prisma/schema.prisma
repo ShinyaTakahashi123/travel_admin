@@ -398,6 +398,8 @@ model Itinerary {
   nights             Int       @default(0) // 0 = 日帰り
   status             String    @default("draft") // draft|pending|published|rejected|private|deleted
   thumbnailUrl       String?   @map("thumbnail_url")
+  // しおりごとの主な移動手段(walk|train|car)。未設定はnull(仕様書L節。公式は対象外)
+  mainTransitMode    String?   @map("main_transit_mode")
   viewCount          BigInt    @default(0) @map("view_count")
   likeCount          BigInt    @default(0) @map("like_count") // ログイン不要の「いいね」カウンタ（お気に入りFavoriteとは別概念）
   primaryAreaId      String?   @map("primary_area_id") @db.Uuid // 主な都道府県（複数県にまたがる場合も1つ選択。都道府県レベルのArea.idを指す）
